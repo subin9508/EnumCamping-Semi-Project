@@ -3,11 +3,11 @@
     xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.itwill</groupId>
-    <artifactId>spring2</artifactId>
+    <artifactId>semiproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Spring Legacy 2</name>
-    <description>Spring Legacy Project</description>
+    <name>ENUM</name>
+    <description>Enum Semi Project</description>
 
     <!-- XML 파일에서 사용할 속성(변수) 선언 -->
     <properties>
