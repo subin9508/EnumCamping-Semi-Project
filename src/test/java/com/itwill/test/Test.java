@@ -7,6 +7,7 @@ public class Test {
 		// develop에서 연습
 		// 푸시푸시 
 		//피처 투에서 씀
+		// 업데이트 1
 
 	}
 
