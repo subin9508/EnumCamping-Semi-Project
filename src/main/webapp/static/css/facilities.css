@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.img {
+    width: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.img:hover {
+    transform: scale(1.1);
+    opacity: 0.8; /*  이미지 클릭 시 밝기 조절 */
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0; top: 0;
+    height: 100%; width: 100%;
+    overflow: auto; /* 스크롤 허용 auto */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* 모달창 이미지 */
+.modal_content {
+    margin: auto;
+    display: block;
+    width: 50%; height: auto;
+    border-radius: 10px;
+    animation-name: zoom;
+    animation-duration: 0.8s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+/* 닫기 버튼 꾸미기 */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
