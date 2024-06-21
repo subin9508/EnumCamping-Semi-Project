@@ -17,79 +17,124 @@
 <body>
     <div class="container-fluid">
         <c:set var="pageTitle" value="Home" scope="page" />
-        </div>
-        <header>
-            <div class="logo">Camping Site</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="facilities.html">Facilities</a></li>
-                    <li><a href="activities.html">Activities</a></li>
-                    <li><a href="reservation.html">Reservation</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-    
-        <main>
-            <section class="banner">
-                <h1>ENUM 캠핑장 소개</h1>
-                <p>Enjoy Nature Under Moonlight</p>
-            </section>
-            <section class="facility-section">
-                <div class="facility">
-                    <img
-                        src="https://img.freepik.com/premium-photo/multi-colored-tents-against-cloudy-sky-during-sunny-day_1048944-1271265.jpg?w=996"
-                        width="500" height="400" />
+    </div>
+    <header>
+        <div class="logo">Camping Site</div>
+       
+    </header>
+
+    <main>
+        <section class="banner">
+            <h1>ENUM 캠핑장 소개</h1>
+            <p>Enjoy Nature Under Moonlight</p>
+        </section>
+        <section class="facility-section">
+            <div class="slider">
+                <div class="slides">    
+                    <div class="slide">
+                        <img src="https://img.freepik.com/premium-photo/multi-colored-tents-against-cloudy-sky-during-sunny-day_1048944-1271265.jpg?w=996" alt="Image 1" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://img.freepik.com/premium-photo/scenic-view-of-tents-in-forest-against-lake_1048944-11878042.jpg?w=740" alt="Image 2" />
+                    </div>
+                    <div class="slide">
+                        <img src="https://cdn.pixabay.com/photo/2017/07/17/16/44/besides-the-cancer-time-to-nearby-lodging-2513008_1280.jpg" alt="Image 3" />
+                    </div>
                 </div>
-            </section>
+            </div>
+           
+            
 
             <style>
+.banner {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f8f8;
+            height: 20vh; /* 배너 섹션 높이 설정 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+.slider {
+            width: 100%;
+            height: 50vh; /* 슬라이더 섹션 높이 설정 */
+            overflow: hidden;
+            position: relative;
+        }
+.slides {
+            display: flex;
+            width: 300%; /* 각 슬라이드가 33.33% 너비를 가질 것이므로 전체 너비는 300% */
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
 
-.mycontainer {
-  width:100%;
-  overflow:auto;
-}
+.slide {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.mycontainer div {
-  width:33%;
-  float: none;
-}
+.slide img {
+            max-width: 80%;
+            height: auto;
+            object-fit: cover;
+            cursor: pointer; /* 이미지 클릭 가능하도록 포인터 커서 설정 */
+        }
+
 </style>
-          
-                
-                    <div
-                        style="background-color: #FFF4A3;">
-                        <span>
-                            <h2>Cabins</h2>
-                            <p>왜 세로로 안나오고</p>
-                            
-                        </span>
 
-                        
-                    </div>
-               
-                
-                    <div class="mycontainer"
-                        style="background-color: #FFC0C7;">
-                        <h2>Restrooms & Showers</h2>
-                        <p>자꾸 가로로 나오는거야</p>
-                    </div>
-               
-              
-                    <div class="mycontainer"
-                        style="background-color: #D9EEE1;">
-                        <h2>Convenience Store</h2>
-                        <p>돌아버리겠네</p>
-                    </div>
-              
-          
+        </section>
 
-        </main>
+        <body>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+
+            <div class="container">
+                <div class="box"><h3>1. 자연친화적</h3>
+                <h4>ENUM 캠핑장은 산도 있고 물도 있고~ 나무도 가득하고~
+                    공기도 좋고~ 다 좋아요^_^
+                </h4>
+                </div>
+                <div class="box"><h3>2. 프라이빗한 공간</h3>
+                <h4>전 구역 데크존으로 편리하고, 프라이빗하게
+                자연을 즐기세요~
+                </h4></div>
+                <div class="box"><h3>3. 힐링</h3>
+                <h4>지친 일상을 벗어나 ENUM 캠핑장에서 자연이 주는 
+                힐링을 느끼시길 바랍니다~
+                </h4></div>
+            </div>
+
+            <style>
+ .container {
+            display: flex;
+            justify-content: center; /* 수평으로 중앙 정렬 */
+            align-items: center; /* 수직으로 중앙 정렬 */
+            height: 30vh; /* 화면 높이의 30%를 차지하도록 설정 */
+            padding: 0 20px; /* 좌우 패딩을 추가하여 끝부분에서 벗어나지 않도록 설정 */
+            box-sizing: border-box; /* 패딩과 테두리를 포함하여 박스 크기 계산 */
+        }
+
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            border: 1px solid #ccc;
+            flex: 1; /* 모든 div가 동일한 너비를 갖도록 설정 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            max-width: 300px; /* 최대 너비를 설정하여 너무 넓어지지 않도록 설정 */
+            margin: 10px; /* 상하좌우에 일정 간격을 두도록 설정 */
+            box-sizing: border-box; /* 패딩과 테두리를 포함하여 박스 크기 계산 */
+        }
+</style>
+        </body>
+
+
+
+    </main>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
