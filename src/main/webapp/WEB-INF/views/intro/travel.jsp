@@ -23,14 +23,6 @@
         </div>
 
         <div class="container-fluid">
-            <c:set value="소개" var="sidebarTitle" scope="page" />
-            <c:set value="캠핑장 소개" var="page1" scope="page" />
-            <c:set value="시설배치도" var="page2" scope="page" />
-            <c:set value="편의시설" var="page3" scope="page" />
-            <c:set value="주변 여행지" var="page4" scope="page" />
-            <c:set value="캠핑장위치" var="page5" scope="page" />
-            <c:set value="facilities" var="pageUrl3" scope="page" />
-            <c:set value="travel" var="pageUrl4" scope="page" />
             <%@ include file="../fragments/intro-sidebar.jspf"%>
         </div>
 
@@ -56,14 +48,21 @@
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <img alt="trail" src="${pageContext.request.contextPath}/static/images/intro2_trail.jpg" width="1000" height="300"/>
-                        <h5>산책로</h5>
+                        <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
+                            target="_blank">
+                            <img alt="trail" src="${pageContext.request.contextPath}/static/images/intro2_trail.jpg" width="1000" height="300"/>
+                        </a>
+                        <h5>수타사 생태숲공원</h5>
                         <div style="display: flex; align-items: center;">
-                            <img
+                            <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
+                                target="_blank"> 
+                                <img
                                 src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
                                 width="20" height="20"
-                                style="margin-right: 5px;"/>
-                            <h6 style="margin: 0;">걸어서 5분거리, 248m</h6>
+                                style="margin-right: 5px;" 
+                                class="img" />
+                            </a>
+                            <h6 style="margin: 0;">걸어서 2분거리, 143m</h6>
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">

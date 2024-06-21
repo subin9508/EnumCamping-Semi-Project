@@ -78,7 +78,7 @@
                             <div class="mt-2 col-4 card text-center">
                                 <h6>매점</h6>
                                 <img alt="store"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_store.jpg"
                                     width="500" height="400" class="img"
                                     id="stroreImage" />
                             </div>
