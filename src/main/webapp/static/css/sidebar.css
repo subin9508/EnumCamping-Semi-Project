@@ -26,6 +26,11 @@ aside {
             /* 다른 스타일링 추가 가능 */
         }
         
+.content {
+            margin-left: 270px; /* 사이드바 너비 + 여백 */
+            /* 다른 스타일링 추가 가능 */
+        }
+        
 .sidebar-menu {
         padding: 0px; /* 리스트 패딩 제거 */
     }
