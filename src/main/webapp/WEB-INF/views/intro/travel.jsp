@@ -31,7 +31,7 @@
             <c:set value="캠핑장위치" var="page5" scope="page" />
             <c:set value="facilities" var="pageUrl3" scope="page" />
             <c:set value="travel" var="pageUrl4" scope="page" />
-            <%@ include file="../fragments/sidebar.jspf"%>
+            <%@ include file="../fragments/intro-sidebar.jspf"%>
         </div>
 
         <main>

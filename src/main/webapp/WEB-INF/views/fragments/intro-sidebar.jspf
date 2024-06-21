@@ -6,22 +6,22 @@
 </head>
 
 <aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
-    <h3 id="title">${sidebarTitle}</h3>
+    <h3 id="title">소개</h3>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="${pageUrl1}">${page1}</a>           
+            <a href="${pageUrl1}">캠핑장 소개</a>           
         </li>
         <li>
-            <a href="${pageUrl2}">${page2}</a>
+            <a href="${pageUrl2}">시설배치도</a>
         </li>
         <li>
-           <a href="${pageUrl3}">${page3}</a> 
+           <a href="facilities">편의시설</a> 
         </li>
         <li>
-            <a href="${pageUrl4}">${page4}</a>
+            <a href="travel">주변 여행지</a>
         </li>
         <li>
-            <a href="${pageUrl5}">${page5}</a>           
+            <a href="${pageUrl5}">캠핑장 위치</a>           
         </li>
     </ul>
 </aside>
