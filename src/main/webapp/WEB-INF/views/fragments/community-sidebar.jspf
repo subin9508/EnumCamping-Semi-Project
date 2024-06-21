@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/sidebar.css">
 </head>
 
-<aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
+<aside class="sidebar">
     <h3 id="title">커뮤니티</h3>
     <ul class="sidebar-menu">
         <li id="firstmenu">
