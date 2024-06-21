@@ -8,7 +8,7 @@
 }
 
 .img:hover {
-    opacity: 0.8; /*  이미지 클릭 시 밝기 조절 */
+    opacity: 0.5; /*  이미지 클릭 시 밝기 조절 */
 }
 
 /* 모달 스타일 */
@@ -37,6 +37,12 @@
     from {transform: scale(0)}
     to {transform: scale(1)}
 }
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+}
+
 
 /* 닫기 버튼 꾸미기 */
 .close {
