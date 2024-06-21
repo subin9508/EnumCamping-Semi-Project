@@ -37,14 +37,20 @@
                 </div> 
                 <div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <img alt="valley" src="${pageContext.request.contextPath}/static/images/intro2_valley.jpg" width="1000" height="300"/>
-                        <h5>계곡</h5>
+                        <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
+                            target="_blank">
+                            <img alt="valley" src="${pageContext.request.contextPath}/static/images/intro2_valley.jpg" width="1000" height="300"/>
+                        </a>
+                        <h5>수타사 계곡</h5>
                         <div style="display: flex; align-items: center;">
-                            <img
+                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
+                                target="_blank"> 
+                                <img
                                 src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
                                 width="20" height="20"
-                                style="margin-right: 5px;" />
-                            <h6 style="margin: 0;">걸어서 10분거리, 468m</h6>
+                                style="margin-right: 5px;" class="img" />
+                            </a>
+                            <h6 style="margin: 0;">걸어서 1분거리, 50m</h6>
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
@@ -87,15 +93,15 @@
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <a href="https://map.naver.com/p/entry/place/11710952?lng=127.7828902&lat=37.9029889&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
+                        <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
                             target="_blank">
                             <img alt="noodle"
                                 src="${pageContext.request.contextPath}/static/images/intro2_noodle.jpg"
                                 width="1000" height="300"/>
                         </a>
-                        <h5>감자골막국수</h5>
+                        <h5>홍천강막국수</h5>
                         <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
+                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
                                 target="_blank"> 
                                 <img
                                 src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
