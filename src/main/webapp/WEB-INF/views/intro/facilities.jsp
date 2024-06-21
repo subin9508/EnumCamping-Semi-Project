@@ -17,65 +17,91 @@
 </head>
 <body>
     <div class="container-fluid">
-        <header class="mt-2 p-4 bg-primary text-white text-center">
-            <h1>Enum Camping</h1>
-        </header>
-        
-        <main>
-            <div class="mt-2 card">
-                <div class="card-header text-center ">
-                    <h3>소개</h3>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h4>FACILITIES</h4>
-                        <h6>Enum 캠핑장은 모두가 편안하게 즐기실 수 있는 부대시설을 갖추고 있습니다.</h6>
-                    </div>
-                    <div class="row">
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>바베큐장</h6>
-                            <img alt="barbecue" src="${pageContext.request.contextPath}/static/images/intro2_barbecue.jpg" width="500" height="400"
-                                class="img" id="barbecueImage"/>
-                        </div>
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>샤워실</h6>
-                            <img alt="shower" src="${pageContext.request.contextPath}/static/images/intro2_shower.jpg" width="500" height="400"
-                                class="img" id="showerImage"/>
-                        </div>
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>화장실</h6>
-                            <img alt="toilet" src="${pageContext.request.contextPath}/static/images/intro2_toilet.jpg" width="500" height="400"
-                                class="img" id="toiletImage"/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>개수대</h6>
-                            <img alt="sink" src="${pageContext.request.contextPath}/static/images/intro2_sink.jpg" width="500" height="400"
-                                class="img" id="sinkImage"/>
-                        </div>
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>수영장</h6>
-                            <img alt="pool" src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg" width="500" height="400"
-                                class="img" id="poolImage"/>
-                        </div>
-                        <div class="mt-2 col-4 card text-center">
-                            <h6>매점</h6>
-                            <img alt="store" src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg" width="500" height="400"
-                                class="img" id="stroreImage"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        <div class="container-fluid">
+            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
+            <%@ include file="../fragments/header.jspf"%>
+        </div>
 
-     <!-- Modal Structure -->
+        <div class="container-fluid">
+            <c:set value="소개" var="sidebarTitle" scope="page" />
+            <c:set value="캠핑장 소개" var="page1" scope="page" />
+            <c:set value="시설배치도" var="page2" scope="page" />
+            <c:set value="편의시설" var="page3" scope="page" />
+            <c:set value="주변 여행지" var="page4" scope="page" />
+            <c:set value="캠핑장위치" var="page5" scope="page" />
+            <c:set value="facilities" var="pageUrl3" scope="page" />
+            <c:set value="travel" var="pageUrl4" scope="page" />
+            <%@ include file="../fragments/sidebar.jspf"%>
+        </div>
+
+            <main>
+                <div class="mt-2 card">
+                    <div class="card-header text-center ">
+                        <h3>소개</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h4>FACILITIES</h4>
+                            <h6>Enum 캠핑장은 모두가 편안하게 즐기실 수 있는 부대시설을
+                                갖추고 있습니다.</h6>
+                        </div>
+                        <div class="row">
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>바베큐장</h6>
+                                <img alt="barbecue"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_barbecue.jpg"
+                                    width="500" height="400" class="img"
+                                    id="barbecueImage" />
+                            </div>
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>샤워실</h6>
+                                <img alt="shower"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_shower.jpg"
+                                    width="500" height="400" class="img"
+                                    id="showerImage" />
+                            </div>
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>화장실</h6>
+                                <img alt="toilet"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_toilet.jpg"
+                                    width="500" height="400" class="img"
+                                    id="toiletImage" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>개수대</h6>
+                                <img alt="sink"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_sink.jpg"
+                                    width="500" height="400" class="img"
+                                    id="sinkImage" />
+                            </div>
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>수영장</h6>
+                                <img alt="pool"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg"
+                                    width="500" height="400" class="img"
+                                    id="poolImage" />
+                            </div>
+                            <div class="mt-2 col-4 card text-center">
+                                <h6>매점</h6>
+                                <img alt="store"
+                                    src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg"
+                                    width="500" height="400" class="img"
+                                    id="stroreImage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    <!-- Modal Structure -->
     <div class="modal" id="imageModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Image Slider</h5>
+                    <h5 class="modal-title">편의시설</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

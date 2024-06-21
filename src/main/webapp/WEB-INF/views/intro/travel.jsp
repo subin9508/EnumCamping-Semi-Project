@@ -17,10 +17,23 @@
 </head>
 <body>
     <div class="container-fluid">
-        <header class="mt-2 p-4 bg-primary text-white text-center">
-            <h1>Enum Camping</h1>
-        </header>
-        
+        <div class="container-fluid">
+            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
+            <%@ include file="../fragments/header.jspf"%>
+        </div>
+
+        <div class="container-fluid">
+            <c:set value="소개" var="sidebarTitle" scope="page" />
+            <c:set value="캠핑장 소개" var="page1" scope="page" />
+            <c:set value="시설배치도" var="page2" scope="page" />
+            <c:set value="편의시설" var="page3" scope="page" />
+            <c:set value="주변 여행지" var="page4" scope="page" />
+            <c:set value="캠핑장위치" var="page5" scope="page" />
+            <c:set value="facilities" var="pageUrl3" scope="page" />
+            <c:set value="travel" var="pageUrl4" scope="page" />
+            <%@ include file="../fragments/sidebar.jspf"%>
+        </div>
+
         <main>
             <div class="mt-2 card">
                 <div class="card-header text-center">

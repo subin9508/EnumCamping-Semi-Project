@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/sidebar.css">
+</head>
+
+<aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
+    <h3 id="title">${sidebarTitle}</h3>
+    <ul class="sidebar-menu">
+        <li id="firstmenu">
+            <a href="${pageUrl1}">${page1}</a>           
+        </li>
+        <li>
+            <a href="${pageUrl2}">${page2}</a>
+        </li>
+        <li>
+           <a href="${pageUrl3}">${page3}</a> 
+        </li>
+        <li>
+            <a href="${pageUrl4}">${page4}</a>
+        </li>
+        <li>
+            <a href="${pageUrl5}">${page5}</a>           
+        </li>
+    </ul>
+</aside>
