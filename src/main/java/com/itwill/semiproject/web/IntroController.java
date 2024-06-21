@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/intro")
-public class FacilitiesController {
+public class IntroController {
 
 	@GetMapping("/facilities")
 	public String facilities() {
@@ -17,4 +17,14 @@ public class FacilitiesController {
 		
 		return "/intro/facilities"; // 뷰(JSP 파일) 이름.
 	}
+	
+	@GetMapping("/travel")
+	public String around() {
+		log.debug("around()");
+		
+		return "/intro/travel"; // 뷰 이름.
+	}
+	
 }
+
+	
