@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+footer a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+footer a:hover {
+    text-decoration: underline; /* 링크 호버 시 밑줄 추가 */
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40; /* 부트스트랩 bg-dark 색상 */
+    color: white;
+    padding: 10px 0;
+    box-sizing: border-box; /* 패딩 포함하여 크기 계산 */
+    
+}
+
+.footer-bottom {
+    font-size: 0.75rem; /* 작은 글자 크기 */
+    color: #aaaaaa; /* 연한 색상 */
+    text-align: center;
+    width: 100%; /* 전체 너비 차지 */
+    margin-top: 10px; /* 상단 마진 추가 */
+}
+
+.container {
+    padding-bottom: 40px; /* 푸터 내용이 푸터 영역 내에 있도록 패딩 추가 */
+}
+
+
+.image-container img {
+        width: 100%; /* 부모 요소의 너비에 맞추어 이미지 크기 조절 */
+        height: auto; /* 높이 자동으로 조절 */
+    }

@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<head>
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<aside class="sidebar">
+    <h3 id="title">소개</h3>
+    <ul class="sidebar-menu">
+        <li id="firstmenu">
+            <a href="intro">캠핑장 소개</a>           
+        </li>
+        <li>
+            <a href="facilityLayout">시설배치도</a>
+        </li>
+        <li>
+           <a href="facilities">편의시설</a> 
+        </li>
+        <li>
+            <a href="travel">주변 여행지</a>
+        </li>
+        <li>
+            <a href="${pageUrl5}">캠핑장 위치</a>           
+        </li>
+    </ul>
+</aside>
