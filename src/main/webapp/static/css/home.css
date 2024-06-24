@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #f7f2e7;
+	background-color: #212529;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -13,20 +13,14 @@ body {
 .rounded-content {
 	border-radius: 20px;
 	padding: 10px;
-	background-color: #fcf8f8;
+	background-color: #223822;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.home {
-	text-align: center;
-}
 
-.home h2 {
-	background-color: #e0e0e0;
-	border-radius: 10px;
-	padding: 15px;
-	margin-bottom: 20px;
-	display: inline-block;
+.no-padding {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .contact form {

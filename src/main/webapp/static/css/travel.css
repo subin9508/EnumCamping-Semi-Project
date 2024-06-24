@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.responsive-image {
+    width: 100%;
+    height: auto;
+    max-width: 1000px; 
+}
+
+.img:hover {
+    transform: scale(2);
+}
+
+#photo:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}

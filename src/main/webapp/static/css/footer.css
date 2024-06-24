@@ -22,11 +22,11 @@ html, body{
     height: 100%;
     
 }
-
+/*
 .main-content {
     flex: 1;
 }
-
+*/
 footer {
     /*bottom: 0;*/
     width: 100%;
@@ -44,15 +44,15 @@ footer {
     text-align: center;
     width: 100%; /* 전체 너비 차지 */
 }
-
+/*
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-bottom: 15px; /* 푸터 내용이 푸터 영역 내에 있도록 패딩 추가 */
+    padding-bottom: 15px; /* 푸터 내용이 푸터 영역 내에 있도록 패딩 추가 
     padding-top: 15px;
 }
-
+*/
 .column {
     margin-bottom: 20px; /* 아래 여백 추가 */
 }

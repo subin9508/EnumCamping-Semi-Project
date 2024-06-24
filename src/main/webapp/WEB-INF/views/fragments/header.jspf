@@ -16,7 +16,7 @@
 
         <div class="col-6 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
-                <img alt="logo" src="images/logo_horizontal.jpg"
+                <img alt="logo" src="images/main/logo_horizontal.jpg"
                     style="height: 60px; width: 200px;">
             </a>
         </div>
@@ -71,37 +71,54 @@
                 <a class="nav-link menu" aria-current="page" href="${introPage}">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li>
-                            <c:url value="/intro/" var="introPage1" />
+                            <c:url value="/intro/intro" var="introPage1" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage1}">장점</a>
                         </li>
                         <li>
-                            <c:url value="/intro" var="introPage2" />
+                            <c:url value="/intro/facilities" var="introPage2" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage2}">편의시설</a>
                         </li>
                         <li>
-                            <c:url value="/intro" var="introPage3" />
+                            <c:url value="/intro/facilityLayout" var="introPage3" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage3}">시설배치도</a>
                         </li>
+                        <li>
+                            <c:url value="/intro/travel" var="introPage4" />
+                            <a class="nav-link" aria-current="page"
+                            href="${introPage4}">주변볼거리</a>
+                        </li>
+                        <li>
+                            <c:url value="/intro/map" var="introPage5" />
+                            <a class="nav-link" aria-current="page"
+                            href="${introPage5}">지도</a>
+                        </li>
                     </ul>
                     </li>
-                <li class="nav-item"><c:url value="/info"
-                        var="infoPage" /> <a class="nav-link  menu"
-                    href="${infoPage}">이용안내</a>
+    
+                    
+                    
+                  <li class="nav-item">
+                   <c:url value="/info/infoTime" var="infoPage" /> 
+                   <a class="nav-link  menu" href="${infoPage}">이용안내</a>
                     <ul class="subMenu">
-                        <li><c:url value="/info/" var="infoPage1" />
-                            <a class="nav-link" aria-current="page"
-                            href="${infoPage1}">이용시간</a></li>
-                        <li><c:url value="/info" var="infoPage2" />
-                            <a class="nav-link" aria-current="page"
-                            href="${infoPage2}">예약방법안내</a></li>
-                        <li><c:url value="/info" var="infoPage3" />
-                            <a class="nav-link" aria-current="page"
-                            href="${infoPage3}">판매/대여 물품</a></li>
-
-                    </ul></li>
+                        <li><c:url value="/info/infoTime" var="infoPage1" />
+                            <a class="nav-link" aria-current="page" href="${infoPage1}">이용시간 및 요금</a></li>
+                        <li><c:url value="/info/infoRefound" var="infoPage2" />
+                            <a class="nav-link" aria-current="page" href="${infoPage2}">환불규정</a></li>
+                        <li><c:url value="/info/infoBooking" var="infoPage3" />
+                            <a class="nav-link" aria-current="page" href="${infoPage3}">예약방법</a></li>
+                        <li><c:url value="/info/infoRules" var="infoPage4" />
+                            <a class="nav-link" aria-current="page" href="${infoPage4}">이용준수사항</a></li>
+                        <li><c:url value="/info/infoSale" var="infoPage5" />
+                            <a class="nav-link" aria-current="page" href="${infoPage5}">물품 판매 리스트</a></li>
+                        <li><c:url value="/info/infoRental" var="infoPage6" />
+                            <a class="nav-link" aria-current="page" href="${infoPage6}">물품 대여 리스트</a></li>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item"><c:url value="/reservation"
                         var="reservationPage" /> <a
                     class="nav-link  menu" href="${reservationPage}">예약</a></li>
