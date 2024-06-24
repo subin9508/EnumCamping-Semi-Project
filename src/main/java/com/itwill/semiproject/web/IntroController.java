@@ -20,10 +20,32 @@ public class IntroController {
 	
 	@GetMapping("/travel")
 	public String around() {
-		log.debug("travel()");
+		log.debug("signin()");
 		
 		return "/intro/travel"; // 뷰 이름.
 	}
+	
+	@GetMapping("/map")
+	public String map() {
+		log.debug("map()");
+		return "/intro/map";
+	
+	}
+	@GetMapping("/intro")
+	public String intro() {
+		log.debug("intro()");
+		
+		return "/intro/intro";
+	}
+	
+	@GetMapping("/facilityLayout")
+	public String facilityLayout() {
+		log.debug("facilityLayout()");
+		
+		return "/intro/facilityLayout";
+	}
+	
+
 	
 }
 

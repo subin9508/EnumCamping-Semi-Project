@@ -1,56 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-    <c:url var="footerCSS" value="/css/footer.css" />
-    <link rel="stylesheet" href="${footerCSS}">
 
-</head>
-<body>
-    <div>
-        <footer class="bg-secondary text-dark mt-5">
-            <div class="container py-4">
-                <div class="row gx-5">
-                    <div class="col-md-1 image-container">
-                        <a><img src="images/logo.png"></a>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>주소</h5>
-                        <p>서울특별시 강남구 테헤란로 123</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>연락처</h5>
-                        <p>전화: 02-1234-5678</p>
-                        <p>팩스: 02-1234-5679</p>
-                    </div>
-                    
-                    <div class="col-md-2">
-                        <h5>대표</h5>
-                        <p>홍길동</p>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <h5>이메일</h5>
-                        <p>
-                            <a href="mailto:enumcamping@gmail.com"
-                                class="text-white">enumcamping@gmail.com</a>
-                        </p>
-                    </div>
-                <div class="footer-bottom text-center mt-3">
-                    <small>&copy; 2024 ENUM CAMPING. All rights reserved.</small>
-                </div>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="column image-container" style="flex: 0.5;">
+                <a><img src="images/main/logo.png"></a>
             </div>
-        </footer>
-    </div>
-
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+            <div class="column " style="flex: 0.5;"></div>
+            <div class="column " style="flex: 2.0;">
+                <h5>주소</h5>
+                <p class="footer-content">서울특별시 강남구 테헤란로 123</p>
+            </div>
+            <div class="column" style="flex: 1.5;">
+                <h5>연락처</h5>
+                <p class="footer-content">전화: 02-1234-5678</p>
+                <p class="footer-content">팩스: 02-1234-5679</p>
+            </div>
+            <div class="column" style="flex: 1;">
+                <h5>대표</h5>
+                <p class="footer-content">홍길동</p>
+            </div>
+            <div class="column" style="flex: 2;">
+                <h5>이메일</h5>
+                <p class="footer-content">
+                    <a href="mailto:enumcamping@gmail.com"
+                        class="text-white">enumcamping@gmail.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2024 ENUM CAMPING. All rights
+                reserved.</small>
+        </div>
+    </footer>
