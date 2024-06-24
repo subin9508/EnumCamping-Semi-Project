@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <head>
-    <link rel="stylesheet" href="css/sidebar.css">
+    <c:url var="sidebarCSS" value="/css/sidebar.css" />
+    <link rel="stylesheet" href="${sidebarCSS}">
 </head>
 
 <aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
