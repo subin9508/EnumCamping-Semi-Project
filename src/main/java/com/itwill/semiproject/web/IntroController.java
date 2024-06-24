@@ -20,7 +20,7 @@ public class IntroController {
 	
 	@GetMapping("/travel")
 	public String around() {
-		log.debug("signin()");
+		log.debug("travel()");
 		
 		return "/intro/travel"; // 뷰 이름.
 	}

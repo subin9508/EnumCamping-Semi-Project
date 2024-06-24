@@ -17,7 +17,7 @@
         crossorigin="anonymous" />
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid wrapper">
         <div class="container-fluid">
             <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
