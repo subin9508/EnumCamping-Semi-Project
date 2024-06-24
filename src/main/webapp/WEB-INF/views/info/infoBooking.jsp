@@ -29,7 +29,7 @@
 			<%@ include file="../fragments/info-sidebar.jspf"%>
 		</div>
 		
-        <div class="content">
+        <div class="footer-main-content content">
             <main class="main-content">
             <br>
                 <h1><strong>[예약방법]</strong></h1>
