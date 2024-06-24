@@ -46,7 +46,7 @@ main {
 }
 
 .box {
-    border: 5px solid #A5D8FA;
+    border: 5px solid #000000;
     padding: 20px;
     flex: none;
     text-align: center;

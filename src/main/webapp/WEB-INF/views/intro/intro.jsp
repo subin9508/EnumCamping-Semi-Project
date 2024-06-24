@@ -19,6 +19,7 @@ body, html {
     margin: 0;
     display: flex;
     flex-direction: column;
+   
 }
 
 .container-fluid {
@@ -114,7 +115,7 @@ ul.imgs li img {
 .bullets label {
     display: inline-block;
     border-radius: 50%;
-    background-color: #A5D8FA;
+    background-color: #f7f2e7;
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -143,7 +144,7 @@ ul.imgs li img {
 }
 
 .box1 {
-    border: 5px solid #A5D8FA;
+    border: 5px solid #000000;
     padding: 20px;
     flex: none;
     text-align: center;
@@ -158,7 +159,7 @@ ul.imgs li img {
 }
 
 .box2 {
-    border: 5px solid #A5D8FA;
+    border: 5px solid #000000;
     padding: 20px;
     flex: none;
     text-align: center;
@@ -173,7 +174,7 @@ ul.imgs li img {
 }
 
 .box3 {
-    border: 5px solid #A5D8FA;
+    border: 5px solid #000000;
     padding: 20px;
     flex: none;
     text-align: center;
