@@ -1,14 +1,8 @@
-@charset "UTF-8";
-
 /* styles.css */
 
-body {
-    background-color: #f8f9fa; /* 배경색 추가 */
-}
-
 header {
-    background-color: #007bff; /* Bootstrap primary 색상 */
-    padding: 20px 0; /* 상하 여백 추가 */
+    background-color: #001522 ; /* 로고 배경색상 */
+    padding:0 20; /* 상하 여백 추가 */
 }
 
 header a {
@@ -18,18 +12,41 @@ header a {
 }
 
 #top {
-    color:black;
+    height: 100px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 
-.navbar-nav .nav-item {
-    margin-right: 80px; /* 각 메뉴 항목 사이의 오른쪽 마진을 설정*/
+#top .nav-link {
+    color: white;
+    font-size: 1.2rem;
+    margin-right: 30px;
 }
 
-/*
-.navbar-nav .nav-item:first-child {
-    margin-left: 250px; /* 첫번째 메뉴 항목의 왼쪽 마진을 250으로 설정하여 끝 메뉴 항목의 간격 조정
+#top .nav-link:last-child {
+    color: white;
+    font-size: 1.2rem;
+    margin-right: 0px;
 }
-*/
+
+#top .nav-link:hover {
+    color: red;
+}
+
+.main {
+    height: 80px; /* 네비게이션 바의 높이 */
+    padding: 20px 0;
+}
+.main .nav-link {
+    font-size: 1.2rem; /* 네비게이션 바 링크의 폰트 크기 */
+    padding: 10px 20px; /* 네비게이션 바 링크의 패딩 */
+    margin-right: 50px;
+}
+
+
 .navbar-nav .subMenu {
     display: none; /* 서브 메뉴 초기에는 숨김 */
     position: absolute;
@@ -42,13 +59,14 @@ header a {
 
 .navbar-nav .nav-item:hover .subMenu { /* nav-item을 빼면 음.. 전체 보이기가 되긴 하는데,,*/
     display: block; /* 부모 요소에 호버 시 서브 메뉴 표시 */
-    background-color : #e3f2fd;
+    color : red;
 }
-/*
-.navbar-nav .nav-item:hover > .menu { 
-    background-color :  rgb(128, 128, 255);
+
+.navbar-nav .nav-link:hover {  
+    color : red;  /*메인메뉴들도 빨간색으로*/
 }
-*/
+
+
 .navbar-nav .subMenu li {
     width: 200px; /* 서브 메뉴 너비 */
 }
@@ -61,7 +79,7 @@ header a {
 }
 
 .navbar-nav .subMenu a:hover {
-    background-color: #e6e6fa; /* 링크 호버 시 배경색 변경 */
-    color: rgb(0, 0, 0);/* 링크 호버 시 텍스트 색상 변경 */
+    /*background-color: #e6e6fa; 링크 호버 시 배경색 변경 */
+    color:red;/* 링크 호버 시 텍스트 색상 변경 */
 }
 

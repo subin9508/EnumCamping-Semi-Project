@@ -4,6 +4,12 @@
 <head>
     <c:url var="sidebarCSS" value="/css/sidebar.css" />
     <link rel="stylesheet" href="${sidebarCSS}">
+    
+    <c:url value="/css/header.css" var="headerCSS" />
+    <link rel="stylesheet" href="${headerCSS}" />
+    
+    <c:url value="/css/footer.css" var="footerCSS" />
+    <link rel="stylesheet" href="${footerCSS}" />
 </head>
 <!DOCTYPE html>
 <html>

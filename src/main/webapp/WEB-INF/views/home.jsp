@@ -15,37 +15,38 @@
 	crossorigin="anonymous">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
 	rel="stylesheet">
-
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
 	rel="stylesheet">
-<style>
-/* Custom CSS for removing padding from container */
-.no-padding {
-	padding-left: 0;
-	padding-right: 0;
-}
-</style>
+<link rel="icon" href="images/favicon.ico" />
+<link rel="apple-touch-icon" href="images/favicon.ico" />
 </head>
 <body>
+	<!-- 
 	<div class="container-fluid">
 		<c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
 		<%@ include file="./fragments/header.jspf"%>
 	</div>
+ 	-->
+	<!-- 
 	<div class="container-fluid" id="wrap">
 		<%@ include file="./fragments/footer.jspf"%>
 	</div>
+	-->
 
-	<!-- Gallery Section with Carousel -->
+
 	<section id="gallery" class="gallery">
 		<div class="container-fluid no-padding">
 			<div id="carouselExampleIndicators"
-				class="carousel slide carousel-fade" data-bs-ride="carousel">
+				class="carousel slide carousel-fade" data-bs-pause="false"
+				data-bs-ride="carousel">
 				<div class="carousel-indicators">
 					<button type="button" data-bs-target="#carouselExampleIndicators"
 						data-bs-slide-to="0" class="active" aria-current="true"
@@ -59,26 +60,41 @@
 					<button type="button" data-bs-target="#carouselExampleIndicators"
 						data-bs-slide-to="4" aria-label="Slide 5"></button>
 				</div>
-				<div class="carousel-inner">
+				<div class="carousel-inner jua-regular">
 					<div class="carousel-item active">
 						<img src="images/camp1.jpg" class="d-block w-100"
 							alt="Camping site 1">
+						<div class="carousel-caption d-md-black my-5">
+							<h1>캠핑장 전경</h1>
+						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="images/camp2.jpg" class="d-block w-100"
 							alt="Camping site 2">
+						<div class="carousel-caption d-md-black my-5">
+							<h1>캠핑장 전경2</h1>
+						</div>
 					</div>
 					<div class="carousel-item">
-						<img src="images/camp3.jpg" class="d-block w-100"
+						<img src="images/camp3.jpg" class="d-block w-100 "
 							alt="Camping site 3">
+						<div class="carousel-caption d-md-black my-5">
+							<h1>바베큐</h1>
+						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="images/camp4.jpg" class="d-block w-100"
 							alt="Camping site 4">
+						<div class="carousel-caption d-md-black my-5">
+							<h1>계곡 전경</h1>
+						</div>
 					</div>
 					<div class="carousel-item">
 						<img src="images/camp5.jpg" class="d-block w-100"
 							alt="Camping site 5">
+						<div class="carousel-caption d-md-black my-5">
+							<h1>별</h1>
+						</div>
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"
@@ -97,7 +113,8 @@
 
 	<!-- 캠핑장 간단소개 -->
 	<section class="content">
-		<div style="padding-top: 200px; padding-bottom: 200px;">
+		<div
+			style="padding-top: 200px; padding-bottom: 200px; padding-left: 50px; padding-right: 50px">
 			<div class="row">
 				<div class="col-md-5">
 					<img src="images/main-camp.jpg" class="img-fluid"
@@ -124,7 +141,7 @@
 	<section id="camp-layout" class="section">
 		<div style="padding-top: 200px; margin-left: 100px;"
 			class="jua-regular">
-			<h2 style="padding-bottom: 50px;">캠핑장 배치도</h2>
+			<h2 style="padding-bottom: 50px; color: white;">캠핑장 배치도</h2>
 			<div class="camp-map " style="margin-top: 100px; text-align: center;">
 				<img src="images/camp-layout.jpg" alt="Camping Layout">
 			</div>
@@ -134,7 +151,7 @@
 	<!-- Notice Section -->
 	<section id="notice" class="section"
 		style="padding-top: 200px; padding-bottom: 200px;">
-		<div class="container jua-regular">
+		<div class="container jua-regular" style="color: white;">
 			<h2>공지사항</h2>
 			<div class="row">
 				<div class="col-md-6">

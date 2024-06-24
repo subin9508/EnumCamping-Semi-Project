@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<c:url value="/css/header.css" var="headerCSS" />
+    <link rel="stylesheet" href="${headerCSS}" />
+    
+    <c:url value="/css/footer.css" var="footerCSS" />
+    <link rel="stylesheet" href="${footerCSS}" />
+    <c:url var="sidebarCSS" value="/css/sidebar.css" />
+    <link rel="stylesheet" href="${sidebarCSS}">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>캠핑장 소개</title>
@@ -150,7 +158,7 @@ ul.imgs li img {
     text-align: center;
     width: 250px;
     height: 200px;
-    margin: 10px;
+    margin: 5px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -192,6 +200,7 @@ ul.imgs li img {
 </head>
 
 <body>
+<div wrapper>
     <div class="container-fluid">
         <c:set value="ENUM CAMPING" var="pageTitle" scope="page"/> 
         <%@ include file="../fragments/header.jspf" %>
@@ -259,7 +268,7 @@ ul.imgs li img {
 		
 		
 	</footer>
-    
+    </div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
