@@ -69,13 +69,24 @@ main {
     
     .right-content {
         flex: 1; /* 오른쪽 콘텐츠도 가능한 최대 공간을 차지하도록 설정 */
-        /* 추가적인 스타일링을 원하는 경우 여기에 추가하세요 */
+        margin-left: 20px;
     }
     
+.item3 {
+	margin-bottom: 10px;
+}    
+
+.item4 {
+	margin-top: 40px;
+	}
+    
 img {
-	position: relative;
-	left: 50px;
-}
+
+    position: relative;
+    left: -80px; /* 기본 위치는 0으로 설정 */
+    display: block;
+    margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+
   
     </style>
 
@@ -102,7 +113,7 @@ img {
 			<div>
 				<img
 					src="https://lh3.googleusercontent.com/proxy/ihHd_M-wsSuOaBajAJ34kuoZEF7eUVB-X7ccHVw0IKrrxmQxI0-0VzlXdot4WL72_CKpfBPWoQfM7-NbGfTQyhqiICCMK6WAWFXWYFMaK17mwKuc9PtXPBEOssmdUjDtmDgJ7W3d"
-					alt="시설배치도" width="1100" height="1100">
+					alt="시설배치도" width="900" height="900">
 			</div>
 
 			<div class="box">
@@ -121,9 +132,18 @@ img {
 					
 				</div>
 				<div class="right-content">
+					<div class="item3">
 					<h4>로뎀동, 카이로스동(관리동)</h4>
 					<h5>- 화장실, 샤워실, 식수대, 주차장 구비</h5>
 					<h5>- 자체 매점 운영으로 식재료 및 필요 용품 즉시 구매 가능</h5>
+					</div>
+					
+					<div class="item4">
+					<h4>무료 수영장</h4>
+					<h5>- 추가 요금 없이 수영장 이용 가능</h5>
+					<h6>*운영시간: 오전 11시 ~ 오후 4시*</h6>
+					</div>
+					
 				</div>
 			</div>
 
@@ -134,12 +154,12 @@ img {
         </section>
     </main>
 
-   <!--  <footer>
+     <footer>
         <div class="container-fluid" id="wrap">
             <%@ include file="../fragments/footer.jspf" %>
         </div>
     </footer>
--->
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
