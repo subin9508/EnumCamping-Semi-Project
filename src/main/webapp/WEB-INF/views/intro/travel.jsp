@@ -129,7 +129,9 @@
                 </div>        
             </div>
         </main>
-    
+        <div class="container-fluid">
+                <%@ include file="../fragments/footer.jspf"%>
+        </div>
     </div>
     
     

@@ -93,6 +93,9 @@
                     </div>
                 </div>
             </main>
+            <div class="container-fluid">
+                <%@ include file="../fragments/footer.jspf"%>
+            </div>
         </div>
 
     <!-- Modal Structure -->
@@ -148,7 +151,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
     <!-- JavaScript 코드 -->
-    <c:url var="facilities_js" value="/static/js/facilities.js" />
+    <c:url var="facilities_js" value="/js/facilities.js" />
     <script src="${facilities_js}"></script>
     
     <!-- JavaScript for Modal Image Slider -->
