@@ -5,7 +5,8 @@
 <html>
 <head>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/travel.css" />
+    <c:url value="/css/travel.css" var="travelCSS" />
+    <link rel="stylesheet" href="${travelCSS}" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,16 +38,20 @@
                 </div> 
                 <div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
-                            target="_blank">
-                            <img alt="valley" src="${pageContext.request.contextPath}/static/images/intro2_valley.jpg" width="1000" height="300"/>
-                        </a>
+                        <div class="responsive-image">
+                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
+                                target="_blank">                            
+                                <c:url value="/images/intro2_valley.jpg" var="intro2_valley" />
+                                <img alt="valley" src="${intro2_valley}" width="1000" height="300"/>
+                            </a>
+                        </div>
                         <h5>수타사 계곡</h5>
                         <div style="display: flex; align-items: center;">
                             <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
                                 target="_blank"> 
+                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
                                 <img
-                                src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
+                                src="${intro2_locationicon}"
                                 width="20" height="20"
                                 style="margin-right: 5px;" class="img" />
                             </a>
@@ -54,60 +59,69 @@
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
-                            target="_blank">
-                            <img alt="trail" src="${pageContext.request.contextPath}/static/images/intro2_trail.jpg" width="1000" height="300"/>
-                        </a>
+                        <div class="responsive-image">
+                            <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
+                                target="_blank">
+                                <c:url value="/images/intro2_trail.jpg" var="intro2_trail"/>
+                                <img alt="trail" src="${intro2_trail}" width="1000" height="300"/>
+                            </a>
+                        </div>
                         <h5>수타사 생태숲공원</h5>
                         <div style="display: flex; align-items: center;">
                             <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
                                 target="_blank"> 
+                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
                                 <img
-                                src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
+                                src="${intro2_locationicon}"
                                 width="20" height="20"
-                                style="margin-right: 5px;" 
-                                class="img" />
+                                style="margin-right: 5px;" class="img" />
                             </a>
                             <h6 style="margin: 0;">걸어서 2분거리, 143m</h6>
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
-                            target="_blank"> 
-                            <img alt="chicken"
-                                src="${pageContext.request.contextPath}/static/images/intro2_chicken.jpg"
-                                width="1000" height="300" />
-                        </a>
+                        <div class="responsive-image">
+                            <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
+                                target="_blank">
+                                <c:url value="/images/intro2_chicken.jpg" var="intro2_chicken"/> 
+                                <img alt="chicken"
+                                    src="${intro2_chicken}"
+                                    width="1000" height="300" />
+                            </a>
+                        </div>
                         <h5>황토숯불닭갈비</h5>
                         <div style="display: flex; align-items: center;">
                             <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
                                 target="_blank"> 
+                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
                                 <img
-                                src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
+                                src="${intro2_locationicon}"
                                 width="20" height="20"
-                                style="margin-right: 5px;" 
-                                class="img"/>
+                                style="margin-right: 5px;" class="img" />
                             </a>
                             <h6 style="margin: 0;">차로 5분거리, 2.2km</h6>
 
                         </div>
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
-                            target="_blank">
-                            <img alt="noodle"
-                                src="${pageContext.request.contextPath}/static/images/intro2_noodle.jpg"
-                                width="1000" height="300"/>
-                        </a>
+                        <div class="responsive-image">
+                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
+                                target="_blank">
+                                <c:url value="/images/intro2_noodle.jpg" var="intro2_noodle"/>
+                                <img alt="noodle"
+                                    src="${intro2_noodle}"
+                                    width="1000" height="300"/>
+                            </a>
+                        </div>
                         <h5>홍천강막국수</h5>
                         <div style="display: flex; align-items: center;">
                             <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
                                 target="_blank"> 
+                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
                                 <img
-                                src="${pageContext.request.contextPath}/static/images/intro2_locationicon.png"
+                                src="${intro2_locationicon}"
                                 width="20" height="20"
-                                style="margin-right: 5px;" 
-                                class="img"/>
+                                style="margin-right: 5px;" class="img" />
                             </a>
                             <h6 style="margin: 0;">차로 10분거리, 5.5km</h6>
                         </div>

@@ -5,7 +5,8 @@
 <html>
 <head>
     
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/facilities.css" />
+    <c:url value="/css/facilities.css" var="facilitiesCSS" />
+    <link rel="stylesheet" href="${facilitiesCSS}" />
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,22 +41,25 @@
                         <div class="row">
                             <div class="mt-2 col-4 card text-center">
                                 <h6>바베큐장</h6>
+                                <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
                                 <img alt="barbecue"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_barbecue.jpg"
+                                    src="${intro2_barbecue}"
                                     width="500" height="400" class="img"
                                     id="barbecueImage" />
                             </div>
                             <div class="mt-2 col-4 card text-center">
                                 <h6>샤워실</h6>
+                                <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
                                 <img alt="shower"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_shower.jpg"
+                                    src="${intro2_shower}"
                                     width="500" height="400" class="img"
                                     id="showerImage" />
                             </div>
                             <div class="mt-2 col-4 card text-center">
                                 <h6>화장실</h6>
+                                <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
                                 <img alt="toilet"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_toilet.jpg"
+                                    src="${intro2_toilet}"
                                     width="500" height="400" class="img"
                                     id="toiletImage" />
                             </div>
@@ -63,22 +67,25 @@
                         <div class="row">
                             <div class="mt-2 col-4 card text-center">
                                 <h6>개수대</h6>
+                                <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
                                 <img alt="sink"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_sink.jpg"
+                                    src="${intro2_sink}"
                                     width="500" height="400" class="img"
                                     id="sinkImage" />
                             </div>
                             <div class="mt-2 col-4 card text-center">
                                 <h6>수영장</h6>
+                                <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
                                 <img alt="pool"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg"
+                                    src="${intro2_pool}"
                                     width="500" height="400" class="img"
                                     id="poolImage" />
                             </div>
                             <div class="mt-2 col-4 card text-center">
                                 <h6>매점</h6>
+                                <c:url value="/images/intro2_store.png" var="intro2_store"/>
                                 <img alt="store"
-                                    src="${pageContext.request.contextPath}/static/images/intro2_store.jpg"
+                                    src="${intro2_store}"
                                     width="500" height="400" class="img"
                                     id="stroreImage" />
                             </div>
@@ -100,22 +107,28 @@
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_barbecue.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
+                                <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
+                                <img src="${intro2_barbecue}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
                             </div>
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_shower.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
+                                <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
+                                <img src="${intro2_shower}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
                             </div>
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_toilet.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
+                                <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
+                                <img src="${intro2_toilet}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
                             </div>
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_sink.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
+                                <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
+                                <img src="${intro2_sink}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
                             </div>
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_pool.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
+                                <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
+                                <img src="${intro2_pool}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
                             </div>
                             <div class="carousel-item">
-                                <img src="${pageContext.request.contextPath}/static/images/intro2_store.jpg" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Store">
+                                <c:url value="/images/intro2_store.png" var="intro2_store"/>
+                                <img src="${intro2_store}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Store">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

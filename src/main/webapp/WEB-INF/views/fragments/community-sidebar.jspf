@@ -2,7 +2,8 @@
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/sidebar.css">
+    <c:url var="sidebarCSS" value="/css/sidebar.css" />
+    <link rel="stylesheet" href="${sidebarCSS}">
 </head>
 
 <aside class="sidebar">
