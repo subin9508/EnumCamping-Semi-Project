@@ -7,7 +7,9 @@
 </head>
 
 <aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
+    <div style="height: auto; width: 100%; border-bottom:1px solid black; margin: 5px; text-align: center;">
     <h3 id="title">마이페이지</h3>
+    </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
             <a href="">정보수정</a>           

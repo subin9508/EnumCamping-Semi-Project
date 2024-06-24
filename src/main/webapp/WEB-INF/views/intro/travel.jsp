@@ -81,17 +81,15 @@
                     </div>
                     <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
-                            <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
+                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/1629327313?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
                                 target="_blank">
-                                <c:url value="/images/intro2_chicken.jpg" var="intro2_chicken"/> 
-                                <img alt="chicken"
-                                    src="${intro2_chicken}"
-                                    width="1000" height="300" />
+                                <c:url value="/images/intro2_temple.jpg" var="intro2_temple"/>
+                                <img alt="trail" src="${intro2_temple}" width="1000" height="300"/>
                             </a>
                         </div>
-                        <h5>황토숯불닭갈비</h5>
+                        <h5>수타사</h5>
                         <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/entry/place/11554781?lng=127.7535566&lat=37.8765627&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh"
+                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/16222041?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
                                 target="_blank"> 
                                 <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
                                 <img
@@ -99,7 +97,30 @@
                                 width="20" height="20"
                                 style="margin-right: 5px;" class="img" />
                             </a>
-                            <h6 style="margin: 0;">차로 5분거리, 2.2km</h6>
+                            <h6 style="margin: 0;">걸어서 3분거리, 226m</h6>
+                        </div>
+                    </div>
+                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="responsive-image">
+                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+                                target="_blank">
+                                <c:url value="/images/intro2_beef.jpg" var="intro2_beef"/> 
+                                <img alt="beef"
+                                    src="${intro2_beef}"
+                                    width="1000" height="300" />
+                            </a>
+                        </div>
+                        <h5>홍천한우수라</h5>
+                        <div style="display: flex; align-items: center;">
+                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+                                target="_blank"> 
+                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
+                                <img
+                                src="${intro2_locationicon}"
+                                width="20" height="20"
+                                style="margin-right: 5px;" class="img" />
+                            </a>
+                            <h6 style="margin: 0;">차로 6분거리, 3.6km</h6>
 
                         </div>
                     </div>

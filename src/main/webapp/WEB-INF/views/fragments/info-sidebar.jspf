@@ -7,7 +7,9 @@
 </head>
 
 <aside class="sidebar">
+    <div style="height: auto; width: 100%; border-bottom:1px solid black; margin: 5px; text-align: center;">
     <h3 id="title">이용안내</h3>
+    </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
             <a href="">이용시간 및 요금</a>           

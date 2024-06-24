@@ -8,23 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/intro")
-public class IntroController {
+@RequestMapping("/user")
+public class UserController {
 
-	@GetMapping("/facilities")
-	public String facilities() {
-		log.debug("facilities()");
-		
-		return "/intro/facilities"; // 뷰(JSP 파일) 이름.
-	}
-	
-	@GetMapping("/travel")
+	@GetMapping("/signin")
 	public String around() {
 		log.debug("signin()");
 		
-		return "/intro/travel"; // 뷰 이름.
+		return "/user/signin"; // 뷰 이름.
 	}
 	
 }
-
-	
