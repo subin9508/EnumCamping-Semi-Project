@@ -59,17 +59,17 @@
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item"><c:url value="/intro"
                         var="introPage" /> <a class="nav-link menu"
-                    aria-current="page" href="intro">ENUM 캠핑장</a>
+                    aria-current="page" href="${introPage}">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li><c:url value="/intro/" var="introPage1" />
                             <a class="nav-link" aria-current="page"
-                            href="intro">캠핑장 소개</a></li>
+                            href="${introPage1}">장점</a></li>
                         <li><c:url value="/intro" var="introPage2" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage2}">편의시설</a></li>
                         <li><c:url value="/intro" var="introPage3" />
                             <a class="nav-link" aria-current="page"
-                            href="facilityLayout">시설배치도</a></li>
+                            href="${introPage3}">시설배치도</a></li>
                         <li><a></a></li>
                     </ul></li>
                 <li class="nav-item"><c:url value="/info"
@@ -122,3 +122,4 @@
         </div>
     </div>
 </nav>
+

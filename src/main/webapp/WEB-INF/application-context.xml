@@ -16,8 +16,8 @@
         <!-- hikariConfig.setDriverClassName(new OracleDriver()); -->
         <!-- TODO: DB 주소 바꾸기 -->
         <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
-        <property name="username" value="enum" />
-        <property name="password" value="enum" />
+        <property name="username" value="jspstudy" />
+        <property name="password" value="jspstudy" />
     </bean>
     
     <!-- HikariDataSource 빈 생성을 위한 설정 -->
@@ -31,7 +31,8 @@
     -->
     <bean id="session" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="ds" />
-        <!-- <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
+        <!--  
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
         <property name="configLocation" value="classpath:mybatis-config.xml" />
         -->
     </bean>

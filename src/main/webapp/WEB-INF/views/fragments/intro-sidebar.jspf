@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="css/sidebar.css">
 </head>
 
-<aside class="sidebar">
+<aside class="main-sidebar sidebar-dark-primary elevartion-4 sidebar">
     <h3 id="title">소개</h3>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="intro">캠핑장 소개</a>           
+            <a href="${pageUrl1}">캠핑장 소개</a>           
         </li>
         <li>
-            <a href="facilityLayout">시설배치도</a>
+            <a href="${pageUrl2}">시설배치도</a>
         </li>
         <li>
            <a href="facilities">편의시설</a> 
