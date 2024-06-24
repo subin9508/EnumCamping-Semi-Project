@@ -10,11 +10,18 @@ import lombok.extern.slf4j.Slf4j;
 
 public class introController {
 	
-	@GetMapping("/")
+	@GetMapping("/intro")
 	public String intro() {
 		log.debug("intro()");
 		
 		return "intro/intro";
+	}
+	
+	@GetMapping("/facilityLayout")
+	public String facilityLayout() {
+		log.debug("facilityLayout()");
+		
+		return "intro/facilityLayout";
 	}
 	
 }
