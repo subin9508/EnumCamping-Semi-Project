@@ -12,7 +12,7 @@
 <style>
 .layerpopup {
 	display: flex;
-	position: fixed;
+	/*position: fixed;*/
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -47,6 +47,20 @@
 
 .layerpopup img {
 	margin-bottom: 20px;
+}
+
+#popup1{
+    position: absolute;
+    top: 50%;
+    left:25%;
+    transform: translate(-50%,-50%);
+}
+
+#popup2{
+    position: absolute;
+    top: 50%;
+    left:65%;
+    transform: translate(-50%,-50%);
 }
 
 #close {
