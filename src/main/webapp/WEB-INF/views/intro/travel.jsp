@@ -40,7 +40,7 @@
                 </div>
                 <div>
                     <div class="row">
-                        <div class="mt-2 text-center col-6"
+                        <div class="mt-10 text-center col-6"
                             style="display: flex; flex-direction: column; align-items: center;">
                             <div class="responsive-image">
                                 <a

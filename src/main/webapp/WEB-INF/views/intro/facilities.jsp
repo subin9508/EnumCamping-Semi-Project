@@ -13,70 +13,74 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
-        crossorigin="anonymous" />
-        
+        crossorigin="anonymous" />       
     <c:url value="../css/header.css" var="headerCss"/>
     <link rel="stylesheet" href="${headerCss}">
     <c:url value="../css/footer.css" var="footerCss"/>
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid wrapper">
+    <div class="container-fluid">
         <div class="container-fluid">
             <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
         </div>
-
         <div class="container-fluid">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
         </div>
 
             <main>
-                <section>
-                <div>
-                    <div>
-                        <div>
+                <section class="m-5">
+                <div class="mt-2">
+                    <div class="card-body">
+                        <div class="m-5">
                             <h3>편의시설</h3>
                         </div>
                         <div class="row">
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h6>바베큐장</h6>
+                                <div class="card">
+                                    <h5>바베큐장</h5>
+                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
                                     <img alt="barbecue"
                                         src="${intro2_barbecue}"
                                         class="img"
                                         height=400px width=500px
                                         id="barbecueImage" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h6>샤워실</h6>
+                                <div class="card">
+                                    <h5>샤워실</h5>
+                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
                                     <img alt="shower"
                                         src="${intro2_shower}"
                                         class="img"
                                         height=400px width=500px
                                         id="showerImage" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h6>화장실</h6>
+                                <div class="card">
+                                    <h5>화장실</h5>
+                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
                                     <img alt="toilet"
                                         src="${intro2_toilet}"
                                         class="img"
                                         height=400px width=500px
                                         id="toiletImage"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row m-2">
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
-                                    <h6>개수대</h6>
+                                    <h5>개수대</h5>
                                     <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
                                     <img alt="sink"
                                         src="${intro2_sink}"
@@ -87,7 +91,7 @@
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
-                                    <h6>수영장</h6>
+                                    <h5>수영장</h5>
                                     <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
                                     <img alt="pool"
                                         src="${intro2_pool}"
@@ -98,7 +102,7 @@
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
-                                    <h6>매점</h6>
+                                    <h5>매점</h5>
                                     <c:url value="/images/intro2_store.png" var="intro2_store"/>
                                     <img alt="store"
                                         src="${intro2_store}"

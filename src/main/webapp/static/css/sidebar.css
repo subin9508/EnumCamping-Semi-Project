@@ -7,6 +7,10 @@ body, ul, li {
     list-style: none;   /* list앞에 기호 제거*/
 }
 
+ul {
+    text-align: center;
+}
+
 a {
     color: black; 
     text-decoration: none; /* 밑줄 제거 */

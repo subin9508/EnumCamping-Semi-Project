@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 .img:hover {
     opacity: 0.5; /*  이미지 클릭 시 밝기 조절 */
 }
@@ -96,19 +95,3 @@
   bottom: -10px;
 }
 
-.facility-section {
-    display: flex;
-    justify-content: center; /* 부모 요소가 가운데 정렬되도록 설정 */
-    align-items: flex-start; /* 자식 요소들이 상단에 정렬되도록 설정 */
-    padding: 20px;
-}
-
-.slider {
-    width: 1200px;
-    height: 1500px;;
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-    align-items: left;
-    justify-content: left;
-}
