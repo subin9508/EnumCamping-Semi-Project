@@ -67,12 +67,12 @@
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item">
                 <c:url value="/intro" var="introPage" />
-                <a class="nav-link menu" aria-current="page" href="${introPage}">캠핑장 소개</a>
+                <a class="nav-link menu" aria-current="page" href="introduce">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li>
                             <c:url value="/intro/" var="introPage1" />
                             <a class="nav-link" aria-current="page"
-                            href="${introPage1}">장점</a>
+                            href="introduce">장점</a>
                         </li>
                         <li>
                             <c:url value="/intro" var="introPage2" />
@@ -82,7 +82,7 @@
                         <li>
                             <c:url value="/intro" var="introPage3" />
                             <a class="nav-link" aria-current="page"
-                            href="${introPage3}">시설배치도</a>
+                            href="facilityLayout">시설배치도</a>
                         </li>
                     </ul>
                     </li>

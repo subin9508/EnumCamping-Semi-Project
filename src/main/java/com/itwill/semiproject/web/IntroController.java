@@ -1,3 +1,4 @@
+
 package com.itwill.semiproject.web;
 
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,28 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequestMapping("/intro")
+public class IntroController {
 
-public class introController {
+	@GetMapping("/facilities")
+	public String facilities() {
+		log.debug("facilities()");
+		
+		return "/intro/facilities"; // 뷰(JSP 파일) 이름.
+	}
 	
+	@GetMapping("/travel")
+	public String around() {
+		log.debug("signin()");
+		
+		return "/intro/travel"; // 뷰 이름.
+	}
+	
+	@GetMapping("/map")
+	public String map() {
+		log.debug("map()");
+		return "/intro/map";
+	
+	}
 	@GetMapping("/introduce")
 	public String intro() {
 		log.debug("intro()");
@@ -26,4 +46,8 @@ public class introController {
 		return "/intro/facilityLayout";
 	}
 	
+
+	
 }
+
+	

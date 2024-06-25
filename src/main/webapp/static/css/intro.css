@@ -1,80 +1,211 @@
-body {
-    font-family: Arial, sans-serif;
+@charset "UTF-8";
+body, html {
+    height: 100%;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+ .intro-sidebar {
+       display: flex;
+        flex: 0 0 200px; /* 사이드바의 너비를 고정으로 설정 */
+        margin-right: 20px; /* 사이드바와 슬라이더 사이의 간격을 설정 */
+    }
+
+.container-fluid {
     padding: 0;
 }
 
-header {
-    background: #4CAF50;
-    color: white;
+main {
+    flex: 1;
+}
+
+/*
+.heading-3 {
+    width: 150px;
+    height: 29px;
+    position: absolute;
+    left: 420px;
+    top: 170px;
+}
+
+.div {
+    color: #000000;
+    text-align: left;
+    font-family: "NotoSansKr-DemiLight", sans-serif;
+    font-size: 18px; 
+    letter-spacing: -0.8px;
+    font-weight: 400;
+    position: absolute;
+    left: 0;
+    top: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    align-items: center; 
+   
 }
+*/
 
-header .logo {
-    font-size: 1.5rem;
+/*
+.horizontal-divider {
+  background: #ebebeb;
+  width: 700px;
+  height: 1px;
+  position: absolute;
+  left: 0px;
+  bottom: -10px;
 }
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+.horizontal-divider2 {
+  background: #111111;
+  width: 200%;
+  height: 1px;
+  position: absolute;
+  right: 0%;
+  left: 0%;
+  bottom: -10px;
 }
-
-nav li {
-    margin-left: 1rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem;
-}
-
-.banner {
-    background: url('facilities_banner.jpg') no-repeat center center;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    padding: 5rem 1rem;
-}
-
-.banner h1 {
-    margin: 0;
-}
-
+*/
 .facility-section {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    padding: 2rem;
+    align-items: flex-start;
+    padding: 20px;
 }
 
-.facility {
-    width: 45%;
-    margin: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.slider-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
-.facility img {
+.slider {
+    width: 720px;
+    height: 480px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.slider input[type=radio] {
+    display: none;
+}
+
+ul.imgs {
+    padding: 0;
+    margin: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-left: -200px;
 }
 
-.facility-info {
-    padding: 1rem;
+ul.imgs li {
+    position: absolute;
+    opacity: 0;
+    list-style: none;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s;
 }
 
-.facility h2 {
-    margin-top: 0;
+ul.imgs li img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 6px 20px rgba(0,0,0,0.1);
 }
 
-footer {
-    background: #333;
-    color: white;
+ul.imgs li .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #000000;
+    text-align: left;
+    font-family: "NotoSansKr-DemiLight", sans-serif;
+    font-size: 20px; /* 수정된 글자 크기 */
+    letter-spacing: -0.8px;
+    font-weight: 400;
+    padding: 10px;
+    z-index: 10;
+    display: flex; /* 수평 정렬을 위한 flexbox 설정 */
+    align-items: center;
+}
+
+.bullets {
+    position: absolute;
+    left: 35%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 2;
+}
+
+.bullets label {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #f7f2e7;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1),
+.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2),
+.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3) {
+    background-color: #fff;
+}
+
+.slider input[type=radio]:nth-child(1):checked~ul.imgs>li:nth-child(1),
+.slider input[type=radio]:nth-child(2):checked~ul.imgs>li:nth-child(2),
+.slider input[type=radio]:nth-child(3):checked~ul.imgs>li:nth-child(3) {
+    opacity: 1;
+    z-index: 1;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* flex-wrap을 사용하여 박스가 줄바꿈되도록 설정 */
+    height: 30vh;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* 푸터와의 간격 추가 */
+}
+
+.box {
+    border: 5px solid #000000;
+    padding: 20px;
     text-align: center;
-    padding: 1rem;
+    width: 250px;
+    height: 200px;
+    margin: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    flex: 1 1 calc(33.333% - 40px); /* flexbox 레이아웃을 위한 기본 설정 */
+}
+
+@media (max-width: 768px) {
+    .box {
+        flex: 1 1 calc(50% - 40px); /* 창이 줄어들 때 두 개씩 배치 */
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        flex: 1 1 100%; /* 작은 창에서는 한 개씩 배치 */
+    }
 }

@@ -7,6 +7,10 @@ body, ul, li {
     list-style: none;   /* list앞에 기호 제거*/
 }
 
+ul {
+    text-align: center;
+}
+
 a {
     color: black; 
     text-decoration: none; /* 밑줄 제거 */
@@ -15,7 +19,7 @@ a {
 
 /* 사이트의 높이를 5000px로 만듬 */
 aside {
-    height: 500px;
+    height: 100%;
     width: 100px;
     background-color: ligth-gray;
 }
@@ -31,7 +35,7 @@ aside {
     }
 
 .sidebar-menu li {
-    margin-bottom: 10px; /* 각 리스트 아이템 사이에 10px의 아래 마진 추가 */
+    margin-bottom: 30px; /* 각 리스트 아이템 사이에 10px의 아래 마진 추가 */
     }
     
 .sidebar-menu li:hover {

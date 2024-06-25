@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${footerCSS}">
 </head>
     <footer>
-        <div class="container">
+        <div class="footer-container">
             <div class="column image-container" style="flex: 0.5;">
                 <a><img src="images/logo.png"></a>
             </div>
