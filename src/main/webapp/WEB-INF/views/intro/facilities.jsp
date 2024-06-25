@@ -33,12 +33,16 @@
                 <section class="m-5">
                 <div class="mt-2">
                     <div class="card-body">
-                        <div class="m-5">
-                            <h3>편의시설</h3>
-                        </div>
+                     <div class="card-body" style="margin-bottom: 50px;">
+                    <h4 style="margin: 50px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편의시설</h4>
+                    <div class="horizontal-divider"></div>
+                    <div class="horizontal-divider2"></div>
+                    </div>
                         <div class="row">
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div class="card">
+                                <div>
                                     <h5>바베큐장</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
@@ -51,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div class="card">
+                                <div>
                                     <h5>샤워실</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
@@ -64,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div class="card">
+                                <div>
                                     <h5>화장실</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
                                     <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>

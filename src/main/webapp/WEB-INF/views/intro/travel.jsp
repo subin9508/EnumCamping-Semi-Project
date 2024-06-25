@@ -33,8 +33,10 @@
 
         <main>
             <div class="mt-2">
-                <div class="card-body">
-                    <h4 style="margin: 50px;">주변 여행지</h4>
+                <div class="card-body" style="margin-bottom: 50px;">
+                    <h4 style="margin: 50px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변 여행지</h4>
                     <div class="horizontal-divider"></div>
                     <div class="horizontal-divider2"></div>
                 </div>
