@@ -15,6 +15,10 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
     <div class="container-fluid">
@@ -28,16 +32,12 @@
         </div>
 
         <main>
-            <div class="mt-2 card">
-                <div class="card-header text-center">
-                    <h3>소개</h3>
-                </div>   
+            <div class="mt-2">
                 <div class="card-body text-center">
-                    <h4>TRAVEL</h4>
-                    <h6>주변 여행지/먹거리</h6>
+                    <h4 style="margin: 50px;">주변 여행지</h4>
                 </div> 
                 <div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
                             <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
                                 target="_blank">                            
@@ -58,7 +58,7 @@
                             <h6 style="margin: 0;">걸어서 1분거리, 50m</h6>
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
                             <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
                                 target="_blank">
@@ -79,7 +79,7 @@
                             <h6 style="margin: 0;">걸어서 2분거리, 143m</h6>
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
                             <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/1629327313?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
                                 target="_blank">
@@ -100,7 +100,7 @@
                             <h6 style="margin: 0;">걸어서 3분거리, 226m</h6>
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
                             <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
                                 target="_blank">
@@ -124,7 +124,7 @@
 
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
                             <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
                                 target="_blank">

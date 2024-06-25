@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-.img {
-    width: auto;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
 
 .img:hover {
     opacity: 0.5; /*  이미지 클릭 시 밝기 조절 */

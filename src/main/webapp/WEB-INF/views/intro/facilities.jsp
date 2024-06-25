@@ -15,13 +15,14 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+        
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-<<<<<<< HEAD
     <div class="container-fluid wrapper">
-=======
-    <div class="container-fluid">
->>>>>>> refs/heads/feature2
         <div class="container-fluid">
             <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
@@ -32,18 +33,13 @@
         </div>
 
             <main>
-                <div class="mt-2 card">
-                    <div class="card-header text-center ">
-                        <h3>소개</h3>
-                    </div>
-                    <div class="card-body">
+                <div class="mt-2">
+                    <div>
                         <div class="text-center">
-                            <h4>FACILITIES</h4>
-                            <h6>Enum 캠핑장은 모두가 편안하게 즐기실 수 있는 부대시설을
-                                갖추고 있습니다.</h6>
+                            <h4 style="margin: 50px;">편의시설</h4>
                         </div>
                         <div class="row">
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>바베큐장</h6>
                                 <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
                                 <img alt="barbecue"
@@ -51,7 +47,7 @@
                                     width="500" height="400" class="img"
                                     id="barbecueImage" />
                             </div>
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>샤워실</h6>
                                 <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
                                 <img alt="shower"
@@ -59,7 +55,7 @@
                                     width="500" height="400" class="img"
                                     id="showerImage" />
                             </div>
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>화장실</h6>
                                 <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
                                 <img alt="toilet"
@@ -69,7 +65,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>개수대</h6>
                                 <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
                                 <img alt="sink"
@@ -77,7 +73,7 @@
                                     width="500" height="400" class="img"
                                     id="sinkImage" />
                             </div>
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>수영장</h6>
                                 <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
                                 <img alt="pool"
@@ -85,7 +81,7 @@
                                     width="500" height="400" class="img"
                                     id="poolImage" />
                             </div>
-                            <div class="mt-2 col-4 card text-center">
+                            <div class="mt-2 col-4 text-center">
                                 <h6>매점</h6>
                                 <c:url value="/images/intro2_store.png" var="intro2_store"/>
                                 <img alt="store"

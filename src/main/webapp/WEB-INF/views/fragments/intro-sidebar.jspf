@@ -12,21 +12,6 @@
     </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-<<<<<<< HEAD
-            <a href="${pageUrl1}">캠핑장 소개</a>           
-        </li>
-        <li>
-            <a href="${pageUrl2}">시설배치도</a>
-        </li>
-        <li>
-           <a href="facilities">편의시설</a> 
-        </li>
-        <li>
-            <a href="travel">주변 여행지</a>
-        </li>
-        <li>
-            <a href="${pageUrl5}">캠핑장 위치</a>           
-=======
             <a href="intro">캠핑장 소개</a>           
         </li>
         <li>
@@ -40,7 +25,6 @@
         </li>
         <li>
             <a href="map">캠핑장 위치</a>           
->>>>>>> refs/heads/feature2
         </li>
     </ul>
 </aside>
