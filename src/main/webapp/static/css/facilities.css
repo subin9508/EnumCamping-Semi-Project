@@ -54,3 +54,61 @@
     text-decoration: none;
     cursor: pointer;
 }
+.heading-3 {
+  width: 100px;
+  height: 29px;
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+.div {
+  color: #000000;
+  text-align: left;
+  font-family: "NotoSansKr-DemiLight", sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.8px;
+  font-weight: 400;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 200px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.horizontal-divider {
+  background: #ebebeb;
+  width: 1100px;
+  height: 1px;
+  position: absolute;
+  left: 0px;
+  bottom: -10px;
+}
+.horizontal-divider2 {
+  background: #111111;
+  width: 200%;
+  height: 1px;
+  position: absolute;
+  right: 0%;
+  left: 0%;
+  bottom: -10px;
+}
+
+.facility-section {
+    display: flex;
+    justify-content: center; /* 부모 요소가 가운데 정렬되도록 설정 */
+    align-items: flex-start; /* 자식 요소들이 상단에 정렬되도록 설정 */
+    padding: 20px;
+}
+
+.slider {
+    width: 1200px;
+    height: 1500px;;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}

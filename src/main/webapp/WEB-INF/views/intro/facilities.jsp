@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
     <c:url value="/css/facilities.css" var="facilitiesCSS" />
     <link rel="stylesheet" href="${facilitiesCSS}" />
     
@@ -33,69 +32,91 @@
         </div>
 
             <main>
-                <div class="mt-2">
+                <section>
+                <div>
                     <div>
-                        <div class="text-center">
-                            <h4 style="margin: 50px;">편의시설</h4>
+                        <div>
+                            <h3>편의시설</h3>
                         </div>
                         <div class="row">
-                            <div class="mt-2 col-4 text-center">
-                                <h6>바베큐장</h6>
-                                <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
-                                <img alt="barbecue"
-                                    src="${intro2_barbecue}"
-                                    width="500" height="400" class="img"
-                                    id="barbecueImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>바베큐장</h6>
+                                    <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
+                                    <img alt="barbecue"
+                                        src="${intro2_barbecue}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="barbecueImage" />
+                                </div>
                             </div>
-                            <div class="mt-2 col-4 text-center">
-                                <h6>샤워실</h6>
-                                <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
-                                <img alt="shower"
-                                    src="${intro2_shower}"
-                                    width="500" height="400" class="img"
-                                    id="showerImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>샤워실</h6>
+                                    <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
+                                    <img alt="shower"
+                                        src="${intro2_shower}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="showerImage" />
+                                </div>
                             </div>
-                            <div class="mt-2 col-4 text-center">
-                                <h6>화장실</h6>
-                                <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
-                                <img alt="toilet"
-                                    src="${intro2_toilet}"
-                                    width="500" height="400" class="img"
-                                    id="toiletImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>화장실</h6>
+                                    <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
+                                    <img alt="toilet"
+                                        src="${intro2_toilet}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="toiletImage"/>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="mt-2 col-4 text-center">
-                                <h6>개수대</h6>
-                                <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
-                                <img alt="sink"
-                                    src="${intro2_sink}"
-                                    width="500" height="400" class="img"
-                                    id="sinkImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>개수대</h6>
+                                    <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
+                                    <img alt="sink"
+                                        src="${intro2_sink}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="sinkImage" />
+                                </div>
                             </div>
-                            <div class="mt-2 col-4 text-center">
-                                <h6>수영장</h6>
-                                <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
-                                <img alt="pool"
-                                    src="${intro2_pool}"
-                                    width="500" height="400" class="img"
-                                    id="poolImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>수영장</h6>
+                                    <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
+                                    <img alt="pool"
+                                        src="${intro2_pool}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="poolImage" />
+                                    </div>
                             </div>
-                            <div class="mt-2 col-4 text-center">
-                                <h6>매점</h6>
-                                <c:url value="/images/intro2_store.png" var="intro2_store"/>
-                                <img alt="store"
-                                    src="${intro2_store}"
-                                    width="500" height="400" class="img"
-                                    id="stroreImage" />
+                            <div class="mt-2 col-12 col-md-4 text-center img-container">
+                                <div>
+                                    <h6>매점</h6>
+                                    <c:url value="/images/intro2_store.png" var="intro2_store"/>
+                                    <img alt="store"
+                                        src="${intro2_store}"
+                                        class="img"
+                                        height=400px width=500px
+                                        id="storeImage" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
+                </section>
+
             <div class="container-fluid">
                 <%@ include file="../fragments/footer.jspf"%>
             </div>
+        </main>
+
         </div>
 
     <!-- Modal Structure -->
@@ -103,33 +124,33 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">편의시설</h5>
+                    <h5 class="modal-title" id="modalTitle">편의시설</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            <div class="carousel-item active" data-title="바베큐장">
                                 <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
                                 <img src="${intro2_barbecue}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-title="샤워실">
                                 <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
                                 <img src="${intro2_shower}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-title="화장실">
                                 <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
                                 <img src="${intro2_toilet}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-title="개수대">
                                 <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
                                 <img src="${intro2_sink}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-title="수영장">
                                 <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
                                 <img src="${intro2_pool}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
                             </div>
-                            <div class="carousel-item">
+                            <div class="carousel-item" data-title="매점">
                                 <c:url value="/images/intro2_store.png" var="intro2_store"/>
                                 <img src="${intro2_store}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Store">
                             </div>
@@ -154,12 +175,12 @@
     <c:url var="facilities_js" value="/js/facilities.js" />
     <script src="${facilities_js}"></script>
     
-    <!-- JavaScript for Modal Image Slider -->
-    <script>
+    <!-- JavaScript to handle image clicks and update modal title on slide change -->
+<script>
     document.addEventListener('DOMContentLoaded', (event) => {
         // 모든 이미지 요소를 가져오기
         const images = document.querySelectorAll('.img');
-
+        
         // 이미지 클릭 이벤트 핸들러 추가
         images.forEach((image, index) => {
             image.addEventListener('click', (event) => {
@@ -167,7 +188,8 @@
                 const imgIndex = index;
 
                 // Bootstrap Carousel 인스턴스 가져오기
-                const carousel = new bootstrap.Carousel(document.getElementById('carouselExampleControls'));
+                const carouselElement = document.getElementById('carouselExampleControls');
+                const carousel = new bootstrap.Carousel(carouselElement);
 
                 // 슬라이더를 클릭된 이미지로 이동
                 carousel.to(imgIndex);
@@ -175,9 +197,23 @@
                 // 모달 띄우기
                 const modal = new bootstrap.Modal(document.getElementById('imageModal'));
                 modal.show();
+
+                // 초기 modal-title 설정
+                const activeItem = carouselElement.querySelector('.carousel-item.active');
+                const newTitle = activeItem.getAttribute('data-title');
+                document.getElementById('modalTitle').textContent = newTitle;
             });
         });
+
+        // Carousel 슬라이드 변경 시 modal-title 업데이트
+        var carouselElement = document.getElementById('carouselExampleControls');
+        carouselElement.addEventListener('slid.bs.carousel', function (e) {  // 'slid.bs.carousel' 이벤트로 변경
+            var activeItem = e.relatedTarget;
+            var newTitle = activeItem.getAttribute('data-title');
+            document.getElementById('modalTitle').textContent = newTitle;
+        });
     });
-    </script>
+</script>
+
 </body>
 </html>
