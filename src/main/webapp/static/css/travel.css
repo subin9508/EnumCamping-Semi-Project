@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.fixed-size {
+            width: 500px;
+            height: 300px;
+            object-fit: cover;
+        }
+
 .responsive-image {
     width: 100%;
     height: auto;
@@ -13,4 +19,24 @@
 #photo:hover {
     transform: scale(1.1);
     opacity: 0.8;
+}
+
+.horizontal-divider {
+  background: #ebebeb;
+  width: 950px;
+  height: 1px;
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%);
+  top: 40%;
+}
+
+.horizontal-divider2 {
+  background: #111111;
+  width: 200px;
+  height: 1px;
+  position: absolute;
+  left: 30%;
+  transform: translateX(-50%);
+  top: 40%;
 }

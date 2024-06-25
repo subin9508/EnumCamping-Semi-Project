@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-.img {
-    width: auto;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
 .img:hover {
     opacity: 0.5; /*  이미지 클릭 시 밝기 조절 */
 }
@@ -59,4 +52,47 @@
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+.heading-3 {
+  width: 100px;
+  height: 29px;
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+.div {
+  color: #000000;
+  text-align: left;
+  font-family: "NotoSansKr-DemiLight", sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.8px;
+  font-weight: 400;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 200px;
+  height: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.horizontal-divider {
+  background: #ebebeb;
+  width: 950px;
+  height: 1px;
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%);
+  top: 40%;
+}
+
+.horizontal-divider2 {
+  background: #111111;
+  width: 200px;
+  height: 1px;
+  position: absolute;
+  left: 30%;
+  transform: translateX(-50%);
+  top: 40%;
 }

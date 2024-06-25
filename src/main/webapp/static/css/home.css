@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #212529;
+	/*background-color: #212529;*/
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -13,15 +13,10 @@ body {
 .rounded-content {
 	border-radius: 20px;
 	padding: 10px;
-	background-color: #223822;
+	/*background-color: #212529;*/
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
-.no-padding {
-	padding-left: 0;
-	padding-right: 0;
-}
 
 .contact form {
 	display: flex;
@@ -44,6 +39,11 @@ body {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.container {
+  width: 1500px;
+  object-fit: cover;
 }
 
 .with-background {

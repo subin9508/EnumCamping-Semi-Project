@@ -31,11 +31,11 @@ public class IntroController {
 		return "/intro/map";
 	
 	}
-	@GetMapping("/intro")
+	@GetMapping("/introduce")
 	public String intro() {
 		log.debug("intro()");
 		
-		return "/intro/intro";
+		return "/intro/introduce";
 	}
 	
 	@GetMapping("/facilityLayout")

@@ -15,6 +15,10 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
     <div class="container-fluid">
@@ -28,126 +32,141 @@
         </div>
 
         <main>
-            <div class="mt-2 card">
-                <div class="card-header text-center">
-                    <h3>소개</h3>
-                </div>   
-                <div class="card-body text-center">
-                    <h4>TRAVEL</h4>
-                    <h6>주변 여행지/먹거리</h6>
-                </div> 
+            <div class="mt-2">
+                <div class="card-body" style="margin-bottom: 50px;">
+                    <h4 style="margin: 50px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변 여행지</h4>
+                    <div class="horizontal-divider"></div>
+                    <div class="horizontal-divider2"></div>
+                </div>
                 <div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <div class="responsive-image">
-                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
-                                target="_blank">                            
-                                <c:url value="/images/intro2_valley.jpg" var="intro2_valley" />
-                                <img alt="valley" src="${intro2_valley}" width="1000" height="300"/>
-                            </a>
+                    <div class="row">
+                        <div class="mt-10 text-center col-6"
+                            style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="responsive-image">
+                                <a
+                                    href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
+                                    target="_blank"> <c:url
+                                        value="/images/intro2_valley.jpg"
+                                        var="intro2_valley" /> <img
+                                    alt="valley" src="${intro2_valley}"
+                                    width="600" height="400" />
+                                </a>
+                            </div>
+                            <div class="mt-2">
+                                <h5>수타사 계곡</h5>
+                            </div>
+                            <div
+                                style="display: flex; align-items: center;">
+                                <a
+                                    href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
+                                    target="_blank"> <c:url
+                                        value="/images/intro2_locationicon.png"
+                                        var="intro2_locationicon" /> <img
+                                    src="${intro2_locationicon}"
+                                    width="20" height="20"
+                                    style="margin-right: 5px;"
+                                    class="img" />
+                                </a>
+                                <h6 style="margin: 0;">걸어서 1분거리,
+                                    50m</h6>
+                            </div>
                         </div>
-                        <h5>수타사 계곡</h5>
-                        <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC%EA%B3%84%EA%B3%A1?c=15.00,0,0,0,dh"
-                                target="_blank"> 
-                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
-                                <img
-                                src="${intro2_locationicon}"
-                                width="20" height="20"
-                                style="margin-right: 5px;" class="img" />
-                            </a>
-                            <h6 style="margin: 0;">걸어서 1분거리, 50m</h6>
+                        <div class="mt-2 text-center col-6"
+                            style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="responsive-image">
+                                <a
+                                    href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/1629327313?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
+                                    target="_blank"> 
+                                    <c:url
+                                        value="/images/intro2_temple.jpg"
+                                        var="intro2_temple" /> 
+                                    <img
+                                    alt="trail" src="${intro2_temple}"
+                                    width="600" height="400" />
+                                </a>
+                            </div>
+                            <div class="mt-2">
+                                <h5>수타사</h5>
+                            </div>
+                            <div
+                                style="display: flex; align-items: center;">
+                                <a
+                                    href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/16222041?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
+                                    target="_blank"> <c:url
+                                        value="/images/intro2_locationicon.png"
+                                        var="intro2_locationicon" /> <img
+                                    src="${intro2_locationicon}"
+                                    width="20" height="20"
+                                    style="margin-right: 5px;"
+                                    class="img" />
+                                </a>
+                                <h6 style="margin: 0;">걸어서 3분거리,
+                                    226m</h6>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="row m-5">
+                    <div class="mt-2 text-center col-6"
+                        style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
-                            <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
-                                target="_blank">
-                                <c:url value="/images/intro2_trail.jpg" var="intro2_trail"/>
-                                <img alt="trail" src="${intro2_trail}" width="1000" height="300"/>
+                            <a
+                                href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+                                target="_blank"> <c:url
+                                    value="/images/intro2_beef.jpg"
+                                    var="intro2_beef" /> <img
+                                alt="beef" src="${intro2_beef}"
+                                width="600" height="400" />
                             </a>
                         </div>
-                        <h5>수타사 생태숲공원</h5>
+                        <div class="mt-2">
+                            <h5>홍천한우수라</h5>
+                        </div>
                         <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/entry/place/389404515?c=17.12,0,0,0,dh"
-                                target="_blank"> 
-                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
-                                <img
-                                src="${intro2_locationicon}"
-                                width="20" height="20"
-                                style="margin-right: 5px;" class="img" />
-                            </a>
-                            <h6 style="margin: 0;">걸어서 2분거리, 143m</h6>
-                        </div>
-                    </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <div class="responsive-image">
-                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/1629327313?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
-                                target="_blank">
-                                <c:url value="/images/intro2_temple.jpg" var="intro2_temple"/>
-                                <img alt="trail" src="${intro2_temple}" width="1000" height="300"/>
-                            </a>
-                        </div>
-                        <h5>수타사</h5>
-                        <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/search/%EC%88%98%ED%83%80%EC%82%AC/place/16222041?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place&c=15.00,0,0,0,dh"
-                                target="_blank"> 
-                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
-                                <img
-                                src="${intro2_locationicon}"
-                                width="20" height="20"
-                                style="margin-right: 5px;" class="img" />
-                            </a>
-                            <h6 style="margin: 0;">걸어서 3분거리, 226m</h6>
-                        </div>
-                    </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
-                        <div class="responsive-image">
-                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
-                                target="_blank">
-                                <c:url value="/images/intro2_beef.jpg" var="intro2_beef"/> 
-                                <img alt="beef"
-                                    src="${intro2_beef}"
-                                    width="1000" height="300" />
-                            </a>
-                        </div>
-                        <h5>홍천한우수라</h5>
-                        <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
-                                target="_blank"> 
-                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
-                                <img
-                                src="${intro2_locationicon}"
-                                width="20" height="20"
-                                style="margin-right: 5px;" class="img" />
+                            <a
+                                href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%ED%95%9C%EC%9A%B0%EC%88%98%EB%9D%BC/place/1241815713?c=15.00,0,0,0,dh&isCorrectAnswer=true"
+                                target="_blank"> <c:url
+                                    value="/images/intro2_locationicon.png"
+                                    var="intro2_locationicon" /> <img
+                                src="${intro2_locationicon}" width="20"
+                                height="20" style="margin-right: 5px;"
+                                class="img" />
                             </a>
                             <h6 style="margin: 0;">차로 6분거리, 3.6km</h6>
 
                         </div>
                     </div>
-                    <div class="mt-2 card text-center" style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-2 text-center col-6"
+                        style="display: flex; flex-direction: column; align-items: center;">
                         <div class="responsive-image">
-                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
-                                target="_blank">
-                                <c:url value="/images/intro2_noodle.jpg" var="intro2_noodle"/>
-                                <img alt="noodle"
-                                    src="${intro2_noodle}"
-                                    width="1000" height="300"/>
+                            <a
+                                href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
+                                target="_blank"> <c:url
+                                    value="/images/intro2_noodle.jpg"
+                                    var="intro2_noodle" /> <img
+                                alt="noodle" src="${intro2_noodle}"
+                                width="600" height="400" />
                             </a>
                         </div>
-                        <h5>홍천강막국수</h5>
+                        <div class="mt-2">
+                            <h5>홍천강막국수</h5>
+                        </div>
                         <div style="display: flex; align-items: center;">
-                            <a href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
-                                target="_blank"> 
-                                <c:url value="/images/intro2_locationicon.png" var="intro2_locationicon"/>
-                                <img
-                                src="${intro2_locationicon}"
-                                width="20" height="20"
-                                style="margin-right: 5px;" class="img" />
+                            <a
+                                href="https://map.naver.com/p/search/%ED%99%8D%EC%B2%9C%EA%B0%95%EB%A7%89%EA%B5%AD%EC%88%98?c=15.00,0,0,0,dh"
+                                target="_blank"> <c:url
+                                    value="/images/intro2_locationicon.png"
+                                    var="intro2_locationicon" /> <img
+                                src="${intro2_locationicon}" width="20"
+                                height="20" style="margin-right: 5px;"
+                                class="img" />
                             </a>
                             <h6 style="margin: 0;">차로 10분거리, 5.5km</h6>
                         </div>
                     </div>
-                </div>        
+                    </div>
+                </div>
             </div>
         </main>
         <div class="container-fluid">
@@ -159,5 +178,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
+       	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>
