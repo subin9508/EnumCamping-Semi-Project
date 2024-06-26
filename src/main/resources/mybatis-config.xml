@@ -8,10 +8,10 @@
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
 
-    <!-- 매퍼 XML 파일에서 resultType 속성을 설정할 때 간단히 하기 위해서 -->
-    <typeAliases>
+    <!-- 매퍼 XML 파일에서 resultType 속성을 설정할 때 간단히 하기 위해서
         <typeAlias type="com.itwill.semiproject.repository.Post" alias="Post" />
-        <typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" />
+        <typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" /> -->
+    <typeAliases>
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
     </typeAliases>
 </configuration>
