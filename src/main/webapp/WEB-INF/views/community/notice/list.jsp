@@ -9,21 +9,59 @@
     <title>ENUM CAMPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
-
-<%@ include file="../../fragments/header.jspf" %>
+    <%@ include file="../../fragments/header.jspf" %>
     
-    <div class="card">
+    <%@ include file="../../fragments/intro-sidebar.jspf"%>
+<div class="wrapper">
+
+    <div class=" container-fluid">
         
+        <main>
+            <div>
+                <h1 class="align-center mt-2">공지사항</h1>
+            </div>
+        
+        
+        
+            <div class="mt-10 card">
+                <div class="card-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>수정시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="n" items="${notices}">
+                                <tr>
+                                    <td class="col-3">${n.id}</td>
+                                    <td class="col-6">
+                                        <c:url var="noticeDetailsPage" value="/notice/details">
+                                            <c:param name="id" value="${n.id}"></c:param>
+                                        </c:url>
+                                        <a href="${noticeDetailsPage}">${n.title}</a>
+                                    </td>
+                                    <td class="col-3">${n.modifiedTime}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
-        
-        
-        
-        
-        
+</div>   
     <%@ include file="../../fragments/footer.jspf" %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>

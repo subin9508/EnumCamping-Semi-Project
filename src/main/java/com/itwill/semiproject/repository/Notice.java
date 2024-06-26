@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data @Builder @AllArgsConstructor //@NoArgsConstructor
+@Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class Notice {
-	Integer postId;
-	String title;
-	String content;
-	LocalDateTime createdTime;
-	LocalDateTime modifiedTime;
+	Integer nPostId;
+	String nTitle;
+	String nContent;
+	LocalDateTime nCreatedTime;
+	LocalDateTime nModifiedTime;
 	Integer certify;
 }
