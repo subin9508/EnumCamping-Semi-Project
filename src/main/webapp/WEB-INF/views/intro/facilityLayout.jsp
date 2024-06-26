@@ -30,7 +30,7 @@
     </div>
     <main>
         <div class="heading-wrapper">
-            <h4 class="heading-3">시설배치도</h4>
+            <h4 class="fheading-3">시설배치도</h4>
         </div>
         <div class="image-sidebar-wrapper">
             <div class="intro-sidebar">

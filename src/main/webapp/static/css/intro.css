@@ -21,14 +21,15 @@ main {
     flex: 1;
 }
 
-/*
 .heading-3 {
     width: 150px;
     height: 29px;
     position: absolute;
     left: 420px;
     top: 170px;
+    position: center;
 }
+
 
 .div {
     color: #000000;
@@ -44,7 +45,7 @@ main {
     align-items: center; 
    
 }
-*/
+
 
 /*
 .horizontal-divider {

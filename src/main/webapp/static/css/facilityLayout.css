@@ -13,6 +13,16 @@ body, html {
     min-height: 100vh;
 }
 
+.fheading-3 {
+    width: 150px;
+    height: 29px;
+    position: absolute;
+    left: 420px;
+    top: 170px;
+    position: center;
+}
+
+
 .image-sidebar-wrapper {
     display: flex;
     justify-content: center;
