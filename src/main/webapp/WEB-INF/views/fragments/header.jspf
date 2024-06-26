@@ -15,7 +15,8 @@
 
         <div class="col-6 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
-                <img alt="logo" src="images/main/logo_horizontal.jpg"
+                <c:url value="/images/main/logo_horizontal.jpg" var="logo_horizontal"/>
+                <img alt="logo" src="${logo_horizontal}"
                     style="height: 60px; width: 200px;">
             </a>
         </div>

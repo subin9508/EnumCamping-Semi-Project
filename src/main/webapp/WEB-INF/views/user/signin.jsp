@@ -15,15 +15,21 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
+    
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
+    <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
-        </div>
+    <div class="container-fluid">
         <main>
-            <div class="card mt-2">
+            <div class="row">
+            <div class="col-4"></div>
+            <div class="mt-2 col-4 mb-5" style="border: 1px solid black">
                 <div class="card-header">
                     <h2>로그인</h2>                
                 </div>
@@ -47,19 +53,24 @@
                         <div class="mt-2">
                             <input class="form-control btn btn-outline-success" type="submit" value="로그인" /> 
                         </div>
-                        <div class="mt-2" style="display: inline-block; align-items: center;">
-                            <button id="btnDelete" class="btn">아이디 찾기</button>
-                            <button id="btnUpdate" class="btn">비밀번호 찾기</button>
+                        <div class="m-2 center" style="text-align: center;">
+                            <button id="btnDelete" class="btn" style="display: inline-block;">아이디 찾기</button>
+                            <button id="btnUpdate" class="btn" style="display: inline-block;">비밀번호 찾기</button>
                         </div>
-                        <div class="mt-2" style="display: flex; align-items: center;">
+                        <div class="mt-2" style="text-align: right;">
+                            <div class="m-3" style="display: inline-block;">
                             <h6>계정이 없으신가요?</h6>
-                            <button id="btnUpdate" class="btn btn-outline-success">회원가입</button>
+                            </div>
+                            <button id="btnUpdate" class="btn btn-outline-success signup" style="display: inline-block;">회원가입</button>
                         </div>
                     </form>
                 </div>
             </div>
+            </div>
         </main>
     </div>
+    
+    <%@ include file="../fragments/footer.jspf"%>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 

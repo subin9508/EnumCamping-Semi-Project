@@ -21,16 +21,11 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
+    <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
-        </div>
 
-        <div class="container-fluid">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
-        </div>
-
+    <div class="container-fluid">
         <main>
             <div class="mt-2">
                 <div class="card-body" style="margin-bottom: 50px;">
@@ -169,10 +164,11 @@
                 </div>
             </div>
         </main>
-        <div class="container-fluid">
-                <%@ include file="../fragments/footer.jspf"%>
-        </div>
+
+                
+
     </div>
+    <%@ include file="../fragments/footer.jspf"%>
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 

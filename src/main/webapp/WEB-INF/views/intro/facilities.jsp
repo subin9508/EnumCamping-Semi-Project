@@ -20,15 +20,12 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
-            <%@ include file="../fragments/header.jspf"%>
-        </div>
-        <div class="container-fluid">
-            <%@ include file="../fragments/intro-sidebar.jspf"%>
-        </div>
 
+    <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
+            <%@ include file="../fragments/header.jspf"%>
+
+            <%@ include file="../fragments/intro-sidebar.jspf"%>
+    <div class="container-fluid">
             <main>
                 <section class="m-5">
                 <div class="mt-2">
@@ -120,12 +117,13 @@
                 </div>
                 </section>
 
-            <div class="container-fluid">
-                <%@ include file="../fragments/footer.jspf"%>
-            </div>
+                
+
         </main>
 
         </div>
+        
+        <%@ include file="../fragments/footer.jspf"%>
 
     <!-- Modal Structure -->
     <div class="modal" id="imageModal" tabindex="-1">
