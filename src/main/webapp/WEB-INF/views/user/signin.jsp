@@ -34,37 +34,57 @@
                     <h2>로그인</h2>                
                 </div>
                 <div class="card-body">
-                    <c:if test="${not empty param.result && param.result eq 'f'}">
-                        <div class="text-danger">아이디와 패스워드를 확인하세요.</div>
-                    </c:if>
-                    <c:url var="signInPage" value="/user/signin"/>
-                    <form method="post" action="${ signInPage }">
-                        <div class="mt-2">
-                            <input type="text" name="userid" placeholder="아이디" 
-                                class="form-control" required autofocus/> 
+                            <form method="post">
+                                <c:if
+                                    test="${not empty param.result && param.result eq 'f'}">
+                                    <div class="text-danger">아이디와
+                                        패스워드를 확인하세요.</div>
+                                </c:if>
+
+                                <div class="mt-2">
+                                    <input type="text" name="userid"
+                                        placeholder="아이디"
+                                        class="form-control" id="userid"
+                                        required autofocus />
+                                </div>
+                                <div class="mt-2">
+                                    <input type="password"
+                                        name="password"
+                                        placeholder="비밀번호"
+                                        class="form-control"
+                                        id="password" required />
+                                </div>
+                                <div class="d-none">
+                                    <input name="target"
+                                        value="${param.target}" readonly />
+                                </div>
+                                <div class="mt-2">
+                                    <input
+                                        class="form-control btn btn-outline-success"
+                                        id="btnSignIn" type="submit"
+                                        value="로그인" />
+                                </div>
+                                <div class="m-2 center"
+                                    style="text-align: center;">
+                                    <button id="btnDelete" class="btn"
+                                        style="display: inline-block;">아이디
+                                        찾기</button>
+                                    <button id="btnUpdate" class="btn"
+                                        style="display: inline-block;">비밀번호
+                                        찾기</button>
+                                </div>
+                                <div class="mt-2"
+                                    style="text-align: right;">
+                                    <div class="m-3"
+                                        style="display: inline-block;">
+                                        <h6>계정이 없으신가요?</h6>
+                                    </div>
+                                    <button id="btnUpdate"
+                                        class="btn btn-outline-success signup"
+                                        style="display: inline-block;">회원가입</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="mt-2">
-                            <input type="password" name="password" placeholder="비밀번호" 
-                                class="form-control" required /> 
-                        </div>
-                        <div class="d-none">
-                            <input name="target" value="${param.target}" readonly />
-                        </div>
-                        <div class="mt-2">
-                            <input class="form-control btn btn-outline-success" type="submit" value="로그인" /> 
-                        </div>
-                        <div class="m-2 center" style="text-align: center;">
-                            <button id="btnDelete" class="btn" style="display: inline-block;">아이디 찾기</button>
-                            <button id="btnUpdate" class="btn" style="display: inline-block;">비밀번호 찾기</button>
-                        </div>
-                        <div class="mt-2" style="text-align: right;">
-                            <div class="m-3" style="display: inline-block;">
-                            <h6>계정이 없으신가요?</h6>
-                            </div>
-                            <button id="btnUpdate" class="btn btn-outline-success signup" style="display: inline-block;">회원가입</button>
-                        </div>
-                    </form>
-                </div>
             </div>
             </div>
         </main>
