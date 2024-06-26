@@ -26,12 +26,13 @@
         <div class="container-fluid">
         
         <main>
-            <div class="container-fluid">
-                <div class="my-2 card card-body">
+            <div class="container-fluid d-flex justify-content-center">
+                <div class="my-2 card card-body" style="width: 100%; max-width: 700px;">
                     <c:url var="signUpPage" value="/user/signup" />
                     <form action="${signUpPage}" method="post">
                         <div class="my-2 row">
-                            <div class="col-9">
+                            <div class="col-3 d-flex align-items-center">아이디</div>
+                            <div class="col-6">
                                 <input type="text" class="form-control"
                                     id="user_id" name="userId"
                                     placeholder="아이디" required autofocus />
@@ -45,42 +46,66 @@
                             
                             <!-- userid 중복 체크 결과 표시할 영역 -->
                             <div id="checkUseridResult"></div>
+                        </div>
 
-
-                            <div class="my-2">
+                            
+                            <div class="my-2 row">
+                                <div class="col-3 d-flex align-items-center">비밀번호</div>
+                                <div class="col-9">
                                 <input type="password"
                                     class="form-control"
                                     id="user_password"
                                     name="userPassword"
-                                    placeholder="비밀번호" required />
+                                    placeholder="영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합" 
+                                    required />
+                                </div>
                             </div>
+                            
+                            <!-- 비밀번호 조건 체크 결과 표시할 영역 -->
+                            <div id="passwordValidationMessage"></div>
 
-                            <div class="my-2">
+                            <div class="my-2 row">
+                                <div class="col-3 d-flex align-items-center">비밀번호 확인</div>
+                                <div class="col-9">
                                 <input type="password"
                                     class="form-control"
                                     id="user_confirmpassword"
                                     name="confirmpassword"
-                                    placeholder="비밀번호 확인" required />
+                                    placeholder="비밀번호확인" required />
+                                    </div> 
                             </div>
+                            
+                            <!-- userid 중복 체크 결과 표시할 영역 -->   
+                                <div id="passwordMatchMessage"></div>
 
-                            <div class="my-2">
+                            <div class="my-2 row">
+                                <div class="col-3 d-flex align-items-center">이름</div>
+                                <div class="col-9">
                                 <input type="text" class="form-control"
                                     id="user_name" name="userName"
                                     placeholder="이름" required />
+                                </div>
                             </div>
 
-                            <div class="my-2">
+                           <div class="my-2 row">
+                                <div class="col-3 d-flex align-items-center">핸드폰 번호</div>
+                                <div class="col-9">
                                 <input type="text" class="form-control"
                                     id="user_phone" name="userPhone"
                                     placeholder="핸드폰 번호" required />
+                                </div>
                             </div>
 
-                            <div class="my-2">
+                            <div class="my-2 row">
+                            <div class="col-3 d-flex align-items-center">이메일</div>
+                                <div class="col-9">
                                 <input type="email" class="form-control"
                                     id="user_email" name="userEmail"
                                     placeholder="이메일" required />
-
+                                </div>
+                                 <div id="checkUserEmailResult"></div>
                             </div>
+                           
                             <!--  <button id="btnsendemail" class="btn btn-outline-success" style="display: inline-block;">인증하기</button>-->
 
 
@@ -130,39 +155,8 @@
    <!--  우리가 만드는 JS 파일 -->
     <c:url var="userSignUpJS" value="/js/user_signup.js" />
     <script src="${userSignUpJS}"></script>
+   
     
-    <!--
-    <script>
-    document
-            .addEventListener(
-                    "DOMContentLoaded",
-                    function() {
-                        var submitBtn = document.getElementById("submitBtn");
-                        var nameInput = document.getElementById("user_name");
-                        var emailInput = document.getElementById("user_email");
-                        var messageContainer = document
-                                .getElementById("messageContainer");
-
-                        function validateInputs() {
-                            if (nameInput.value.trim() !== ""
-                                    && emailInput.value.trim() !== "") {
-                                submitBtn.disabled = false;
-                            } else {
-                                submitBtn.disabled = true;
-                            }
-                        }
-
-                        nameInput.addEventListener("input", validateInputs);
-                        emailInput.addEventListener("input", validateInputs);
-<%if (request.getAttribute("message") != null && request.getAttribute("userId") == null) {%>
-    messageContainer.innerHTML = "<div class='alert alert-danger'>${message}</div>";
-                        setTimeout(function() {
-                            messageContainer.innerHTML = "";
-                        }, 3000);
-<%}%>
-    });
-    
-    -->
 </script>
 </body>
 </html>

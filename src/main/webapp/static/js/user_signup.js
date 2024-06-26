@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkUseridButton.addEventListener('click', checkUserid);
     
-    
     const inputPassword = document.querySelector('input#user_password');
     inputPassword.addEventListener('change', checkPassword);
     
@@ -135,6 +134,33 @@ document.addEventListener('DOMContentLoaded', () => {
         changeButtonState(); // 버튼의 활성화/비활성화 상태를 변경
     }
     
+    // 이메일 입력 필드의 change 이벤트 리스너
+    // 중복 이메일 체크 Ajax 요청을 보내고, 응답을 받았을 때 처리.
+    function checkEmail(event) {
+    const email = inputEmail.value;
+    const uri = `./checkemail?userEmail=${email}`; // 이메일 중복 체크 REST API URI
+
+    axios
+        .get(uri)
+        .then((response) => {
+            const checkUserEmailResult = document.querySelector('div#checkUserEmailResult');
+            if (response.data === 'Y') {
+                emailChecked = true;
+                checkUserEmailResult.innerHTML = '사용 가능한 이메일입니다.';
+                checkUserEmailResult.classList.add('text-success');
+                checkUserEmailResult.classList.remove('text-danger');
+            } else {
+                emailChecked = false;
+                checkUserEmailResult.innerHTML = '이미 가입된 이메일입니다.';
+                checkUserEmailResult.classList.add('text-danger');
+                checkUserEmailResult.classList.remove('text-success');
+            }
+
+            changeButtonState(); // 회원 가입 버튼 활성화 여부를 변경
+        })
+        .catch((error) => console.log(error));
+}
+
     // 전화번호 입력 필드의 change 이벤트 리스너
     // input#phone 비어 있는 지를 체크
     function checkPhone(event) {
@@ -147,6 +173,76 @@ document.addEventListener('DOMContentLoaded', () => {
         changeButtonState(); // 버튼의 활성화/비활성화 상태를 변경
     }
     
-    
+    /* -------------------- 비밀번호 중복확인 -------------------- */
+    const passwordInput = document.getElementById('user_password');
+    const confirmPasswordInput = document.getElementById('user_confirmpassword');
+    const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+    const passwordValidationMessage = document.getElementById('passwordValidationMessage');
+
+
+    // 비밀번호 입력이 변경될 때마다 호출되는 함수
+        passwordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+
+            // 영문, 숫자, 특수문자(공백 제외)를 각각 최소 한 번 포함하는지 확인하는 함수
+            function hasValidCharacters(password) {
+                const regex = /^[a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/;
+                return regex.test(password);
+            }
+
+            // 최소 두 가지 이상의 조합을 갖추는지 확인하는 함수
+            function hasTwoOrMoreTypes(password) {
+                const digitRegex = /\d/;
+                const letterRegex = /[a-zA-Z]/;
+                const specialRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+
+                let typeCount = 0;
+                if (digitRegex.test(password)) typeCount++;
+                if (letterRegex.test(password)) typeCount++;
+                if (specialRegex.test(password)) typeCount++;
+
+                return typeCount >= 2;
+            }
+
+            // 조건을 만족하는지 검사하고 결과를 표시하는 함수
+            function validatePassword() {
+                if (password.length < 8) {
+                    return "최소 8자 이상이어야 합니다.";
+                } else if (!hasValidCharacters(password)) {
+                    return "영문, 숫자, 특수문자(공백 제외)만 허용됩니다.";
+                } else if (!hasTwoOrMoreTypes(password)) {
+                    return "최소 두 가지 이상의 조합이 필요합니다.";
+                } else {
+                    return "사용 가능합니다.";
+                }
+            }
+
+            // 검사 결과를 표시하는 부분 업데이트
+            const validationMessage = validatePassword();
+            passwordValidationMessage.textContent = validationMessage;
+            if (validationMessage === "사용 가능합니다.") {
+                passwordValidationMessage.style.color = "green";
+            } else {
+                passwordValidationMessage.style.color = "red";
+            }
+        });
+        
+    // 비밀번호 확인 함수 정의
+    function checkPasswordMatch() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        // 비밀번호와 확인 비밀번호가 같은지 확인합니다.
+        if (password === confirmPassword) {
+            passwordMatchMessage.textContent = "비밀번호 사용 가능합니다.";
+            passwordMatchMessage.style.color = "green";
+        } else {
+            passwordMatchMessage.textContent = "동일한 비밀번호를 입력하세요.";
+            passwordMatchMessage.style.color = "red";
+        }
+    }
+
+    // 비밀번호 확인 필드 값이 변경될 때마다 checkPasswordMatch 함수를 호출합니다.
+    confirmPasswordInput.addEventListener('input', checkPasswordMatch);
     
 });

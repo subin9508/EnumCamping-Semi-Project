@@ -59,5 +59,19 @@ public class UserController {
 	public void signIn() {
 		log.debug("GET signIn()");
 	}
+	
+	// 사용자 아이디 중복체크 REST 컨트롤러
+		@GetMapping("/checkemail")
+		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
+		public ResponseEntity<String> userEmail(@RequestParam(name = "userEmail") String userEmail) {
+			log.debug("checkId(user_id={})", userEmail);
+
+			boolean result = userService.checkUserid(userEmail);
+			if (result) {
+				return ResponseEntity.ok("Y");
+			} else {
+				return ResponseEntity.ok("N");
+			}
+		}
 
 }
