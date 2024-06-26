@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <c:url value="/css/userinfoupdate.css" var="userinfoupdateCSS" />
-    <link rel="stylesheet" href="${userinfoupdateCSS}" />
+    <c:url value="/css/myPage.css" var="myPageCSS" />
+    <link rel="stylesheet" href="${myPageCSS}" />
 
     <c:url value="/css/header.css" var="headerCSS" />
     <link rel="stylesheet" href="${headerCSS}" />
@@ -45,37 +45,40 @@
                     <div class="card-body">
                         <form>
                             <div class="mb-3 row">
+                                <label for="username" class="col-sm-2 col-form-label">이름</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="username" name="username" value="${user.username}" readonly >
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
                                 <label for="userid" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="userid" name="userid" value="${user.userid}" readonly>
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
+                                <label for="userpassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="password" name="password" value="${user.password}" readonly>
+                                    <input type="text" class="form-control" id="userpassword" value="${user.userpassword}">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="name" class="col-sm-2 col-form-label">이름</label>
+                                <label for="useremail" class="col-sm-2 col-form-label">이메일</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" value="${user.name}" readonly>
+                                    <input type="text" class="form-control" id="useremail" value="${user.useremail}" readonly>
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="phone" class="col-sm-2 col-form-label">핸드폰 번호</label>
+                                <label for="userphone" class="col-sm-2 col-form-label">전화번호</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="phone" value="${user.phone}" readonly>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="email" class="col-sm-2 col-form-label">이메일</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" name="email" value="${user.email}" readonly>
+                                    <input type="userphone" class="form-control" id="userphone" name="userphone" value="${user.userphone}" >
                                 </div>
                             </div>
                         </form>
+                        
+                        <button id="btnUpdate"class="btn btn-primary">수정하기</button>
                     </div>
+                    
                     <div class="card-footer"></div>
                 </div>
             </div>
@@ -86,8 +89,13 @@
         <%@ include file="../fragments/footer.jspf" %>
     </footer>
 </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
+    
+    <c:url var="user_update_js" value="/js/user_update.js" />
+    <script src="${user_update_js}"></script>
 </body>
 </html>

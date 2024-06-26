@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.spring2.repository.UserDao">
+
+    <!-- users 테이블에서 userid로 검색. 내 정보 상세보기. -->
+    <select id="selectByUserId" resultType="User">
+    	select * from users where user_id = #{userid}
+    	
+    </select>
+    
+    
+    
+    <!-- users 테이블에서 해당 userid의 정보 업데이트. -->
+    <update id="updateUser">
+    	update users
+    	set user_password = #{userpassword}, userphone = #{userphone}
+    	where user_id = #{userid}
+    </update>
+    
+
+</mapper>
