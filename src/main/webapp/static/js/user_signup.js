@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 중복 이메일 체크 Ajax 요청을 보내고, 응답을 받았을 때 처리.
     function checkEmail(event) {
     const email = inputEmail.value;
+    console.log(email);
     const uri = `./checkemail?userEmail=${email}`; // 이메일 중복 체크 REST API URI
 
     axios

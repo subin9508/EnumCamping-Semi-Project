@@ -64,9 +64,9 @@ public class UserController {
 		@GetMapping("/checkemail")
 		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
 		public ResponseEntity<String> userEmail(@RequestParam(name = "userEmail") String userEmail) {
-			log.debug("checkId(user_id={})", userEmail);
+			log.debug("checkEmail(checkEmail={})", userEmail);
 
-			boolean result = userService.checkUserid(userEmail);
+			boolean result = userService.checkEmail(userEmail);
 			if (result) {
 				return ResponseEntity.ok("Y");
 			} else {
