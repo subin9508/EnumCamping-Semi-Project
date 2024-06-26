@@ -33,16 +33,16 @@
                      <div class="card-body" style="margin-bottom: 50px;">
                     <h4 style="margin: 50px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편의시설</h4>
-                    <div class="horizontal-divider"></div>
-                    <div class="horizontal-divider2"></div>
+                    편의시설</h4>
+                    <!--  <div class="horizontal-divider"></div>
+                    <div class="horizontal-divider2"></div>  -->
                     </div>
                         <div class="row">
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
                                     <h5>바베큐장</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
+                                    <c:url value="/images/intro/intro2_barbecue.jpg" var="intro2_barbecue" />
                                     <img alt="barbecue"
                                         src="${intro2_barbecue}"
                                         class="img"
@@ -55,7 +55,7 @@
                                 <div>
                                     <h5>샤워실</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
+                                    <c:url value="/images/intro/intro2_shower.jpg" var="intro2_shower"/>
                                     <img alt="shower"
                                         src="${intro2_shower}"
                                         class="img"
@@ -68,7 +68,7 @@
                                 <div>
                                     <h5>화장실</h5>
                                     <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
+                                    <c:url value="/images/intro/intro2_toilet.jpg" var="intro2_toilet"/>
                                     <img alt="toilet"
                                         src="${intro2_toilet}"
                                         class="img"
@@ -82,7 +82,7 @@
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
                                     <h5>개수대</h5>
-                                    <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
+                                    <c:url value="/images/intro/intro2_sink.jpg" var="intro2_sink"/>
                                     <img alt="sink"
                                         src="${intro2_sink}"
                                         class="img"
@@ -93,7 +93,7 @@
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
                                     <h5>수영장</h5>
-                                    <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
+                                    <c:url value="/images/intro/intro2_pool.jpg" var="intro2_pool"/>
                                     <img alt="pool"
                                         src="${intro2_pool}"
                                         class="img"
@@ -104,7 +104,7 @@
                             <div class="mt-2 col-12 col-md-4 text-center img-container">
                                 <div>
                                     <h5>매점</h5>
-                                    <c:url value="/images/intro2_store.png" var="intro2_store"/>
+                                    <c:url value="/images/intro/intro2_store.png" var="intro2_store"/>
                                     <img alt="store"
                                         src="${intro2_store}"
                                         class="img"
@@ -137,27 +137,27 @@
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active" data-title="바베큐장">
-                                <c:url value="/images/intro2_barbecue.jpg" var="intro2_barbecue" />
+                                <c:url value="/images/intro/intro2_barbecue.jpg" var="intro2_barbecue" />
                                 <img src="${intro2_barbecue}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
                             </div>
                             <div class="carousel-item" data-title="샤워실">
-                                <c:url value="/images/intro2_shower.jpg" var="intro2_shower"/>
+                                <c:url value="/images/intro/intro2_shower.jpg" var="intro2_shower"/>
                                 <img src="${intro2_shower}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
                             </div>
                             <div class="carousel-item" data-title="화장실">
-                                <c:url value="/images/intro2_toilet.jpg" var="intro2_toilet"/>
+                                <c:url value="/images/intro/intro2_toilet.jpg" var="intro2_toilet"/>
                                 <img src="${intro2_toilet}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
                             </div>
                             <div class="carousel-item" data-title="개수대">
-                                <c:url value="/images/intro2_sink.jpg" var="intro2_sink"/>
+                                <c:url value="/images/intro/intro2_sink.jpg" var="intro2_sink"/>
                                 <img src="${intro2_sink}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
                             </div>
                             <div class="carousel-item" data-title="수영장">
-                                <c:url value="/images/intro2_pool.jpg" var="intro2_pool"/>
+                                <c:url value="/images/intro/intro2_pool.jpg" var="intro2_pool"/>
                                 <img src="${intro2_pool}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
                             </div>
                             <div class="carousel-item" data-title="매점">
-                                <c:url value="/images/intro2_store.png" var="intro2_store"/>
+                                <c:url value="/images/intro/intro2_store.png" var="intro2_store"/>
                                 <img src="${intro2_store}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Store">
                             </div>
                         </div>
@@ -220,6 +220,9 @@
         });
     });
 </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 
 </body>
 </html>
