@@ -30,7 +30,7 @@
             <div class="row">
             <div class="col-4"></div>
             <div class="mt-2 col-4 mb-5" style="border: 1px solid black">
-                <div class="card-header">
+                <div class="card-header text-center">
                     <h2>로그인</h2>                
                 </div>
                 <div class="card-body">
@@ -42,25 +42,23 @@
                                 </c:if>
 
                                 <div class="mt-2">
+                                    <label>아이디</label>
                                     <input type="text" name="userid"
                                         placeholder="아이디"
-                                        class="form-control" id="userid"
+                                        class="form-control write" 
+                                        id="userid"
                                         required autofocus />
                                 </div>
                                 <div class="mt-2">
                                     <input type="password"
                                         name="userpassword"
                                         placeholder="비밀번호"
-                                        class="form-control"
+                                        class="form-control write"
                                         id="userpassword" required />
-                                </div>
-                                <div class="d-none">
-                                    <input name="target"
-                                        value="${param.target}" readonly />
                                 </div>
                                 <div class="mt-2">
                                     <input
-                                        class="form-control btn btn-outline-success"
+                                        class="form-control btn"
                                         id="btnSignIn" type="submit"
                                         value="로그인" />
                                 </div>
@@ -80,7 +78,7 @@
                                         <h6>계정이 없으신가요?</h6>
                                     </div>
                                     <button id="btnUpdate"
-                                        class="btn btn-outline-success signup"
+                                        class="btn signup"
                                         style="display: inline-block;">회원가입</button>
                                 </div>
                             </form>

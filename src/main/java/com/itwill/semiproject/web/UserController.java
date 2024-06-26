@@ -49,6 +49,7 @@ public class UserController {
             
         } else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
             // 로그인 페이지로 이동
+        	log.debug("target({})", target);
             return "redirect:/user/signin?result=f&target=" 
                 + URLEncoder.encode(target, "UTF-8");
         }

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-.card-header {
-    background-color: white;
+input.write {
+    border-radius: 5px;
+    border-color: black;
 }
+
+
+
