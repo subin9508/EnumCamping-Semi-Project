@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
 
             <%@ include file="../fragments/intro-sidebar.jspf"%>
