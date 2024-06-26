@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="container-fluid">
+   <div class="container-fluid no-padding">
         <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
         <%@ include file="../fragments/header.jspf"%>
     </div>

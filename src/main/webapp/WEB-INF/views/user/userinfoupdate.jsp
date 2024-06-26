@@ -27,7 +27,7 @@
     <script src="${weatherJS}"></script>
 <body>
 <div class="wrapper">
-    <div class="container-fluid">
+    
         <c:set var="pageTitle" value="User Profile" scope="page" />
         <%@ include file="../fragments/header.jspf" %>
         
@@ -74,7 +74,6 @@
 				<%@ include file="../fragments/footer.jspf"%>
 			</div>
 		</footer>
-    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
