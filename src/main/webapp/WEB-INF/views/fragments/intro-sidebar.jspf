@@ -12,7 +12,7 @@
     </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="intro">캠핑장 소개</a>           
+            <a href="introduce">캠핑장 소개</a>           
         </li>
         <li>
             <a href="facilityLayout">시설배치도</a>

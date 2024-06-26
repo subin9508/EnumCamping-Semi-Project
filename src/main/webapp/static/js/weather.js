@@ -47,15 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
             //맑음(1), 구름많음(3), 흐림(4)
             const rainNow = findData('PTY');
             if (rainNow==0){
-                rain.innerHTML = "비X ";
+                rain.innerHTML = "비X, ";
             } else if (rainNow==1){
-                rain.innerHTML = "비";
+                rain.innerHTML = "비, ";
             } else if (rainNow==1){
-                rain.innerHTML = "비/눈";
+                rain.innerHTML = "비/눈, ";
             } else if (rainNow==1){
-                rain.innerHTML = "눈";
+                rain.innerHTML = "눈, ";
             } else {
-                rain.innerHTML = "소나기";
+                rain.innerHTML = "소나기, ";
             }
             //console.log(rainNow);
             //없음(0), 비(1), 비/눈(2), 눈(3), 소나기(4) 

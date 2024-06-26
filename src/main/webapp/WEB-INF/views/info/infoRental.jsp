@@ -56,7 +56,7 @@
                 
             <div class="info-section">
                 <div class="info-card">
-                    <c:url var="burnerset" value="/images/burnerset.png" />
+                    <c:url var="burnerset" value="/images/info/burnerset.png" />
                     <img alt = "그리들버너세트" src="${burnerset}"/>
                     <h3>그리들&버너 세트</h3>
                     <p>*이소가스 불포함</p>
