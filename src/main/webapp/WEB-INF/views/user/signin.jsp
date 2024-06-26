@@ -49,10 +49,10 @@
                                 </div>
                                 <div class="mt-2">
                                     <input type="password"
-                                        name="password"
+                                        name="userpassword"
                                         placeholder="비밀번호"
                                         class="form-control"
-                                        id="password" required />
+                                        id="userpassword" required />
                                 </div>
                                 <div class="d-none">
                                     <input name="target"

@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-public class UserSignInController {
+public class UserController {
 	
 	private final UserService userService;
 	
@@ -52,6 +52,20 @@ public class UserSignInController {
             return "redirect:/user/signin?result=f&target=" 
                 + URLEncoder.encode(target, "UTF-8");
         }
+    }
+	
+	@GetMapping("/signout")
+    public String signout(HttpSession session) {
+        log.debug("signout(session={})", session);
+        
+        // 세션에 저장된 "signedInUser" 정보를 삭제.
+        session.removeAttribute("signedInUser");
+        
+        // 세션을 만료시킴.
+        session.invalidate();
+        
+        // 로그아웃 이후 로그인 페이지로 이동
+        return "redirect:/user/signin";
     }
 	
 }
