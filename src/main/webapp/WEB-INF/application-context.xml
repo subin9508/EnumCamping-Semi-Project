@@ -16,8 +16,8 @@
         <!-- hikariConfig.setDriverClassName(new OracleDriver()); -->
         <!-- TODO: DB 주소 바꾸기 -->
         <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
-        <property name="username" value="jspstudy" />
-        <property name="password" value="jspstudy" />
+        <property name="username" value="enum" />
+        <property name="password" value="enum" />
     </bean>
     
     <!-- HikariDataSource 빈 생성을 위한 설정 -->
