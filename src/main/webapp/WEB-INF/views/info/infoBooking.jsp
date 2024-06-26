@@ -18,42 +18,12 @@
     <c:url value="../css/footer.css" var="footerCss"/>
     <link rel="stylesheet" href="${footerCss}">
     
-    <style>
-.horizontal-divider {
-  background: #ebebeb;
-  width: 1000px;
-  height: 1px;
-  left: 0px;
-  bottom: -10px;
-}
-.horizontal-divider2 {
-  background: #111111;
-  width: 200px;
-  height: 1px;
-  right: 0%;
-  left: 0%;
-  bottom: -10px;
-}
- .slider {
-    width: 1000px;   
-    margin: 0 auto;    
-    align-items: center;
-    justify-content: center;
-}
-</style>
 
 </head>
 <body>
-   <div class="container">
-      <div class="container-fluid">
-         <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
-         <%@ include file="../fragments/header.jspf"%>
-      </div>
-
-      <div class="container-fluid">
-         <%@ include file="../fragments/info-sidebar.jspf"%>
-      </div>
-      
+            <%@ include file="../fragments/header.jspf"%>
+            <%@ include file="../fragments/info-sidebar.jspf"%>
+        
         <div class="content">
             <main class="main-content">
             <div class="slider">
@@ -61,8 +31,6 @@
             <div class="content-1"> 
             <br>
                 <h1><strong>[예약방법]</strong></h1>
-                <div class="horizontal-divider" ></div>
-                <div class="horizontal-divider2"></div>
                 </div>
                         <div class="info-text">
                         <br>
@@ -79,13 +47,8 @@
               </div>
             </main>
         </div>
-    </div>
     
-    <footer>
-         <div class="container-fluid" id="wrap">
         <%@ include file="../fragments/footer.jspf" %>
-          </div> 
-    </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 

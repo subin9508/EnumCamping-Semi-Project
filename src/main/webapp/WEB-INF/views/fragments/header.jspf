@@ -69,11 +69,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item">
-                <c:url value="/intro" var="introPage" />
+                <c:url value="/intro/introduce" var="introPage" />
                 <a class="nav-link menu" aria-current="page" href="${introPage}">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li>
-                            <c:url value="/intro/intro" var="introPage1" />
+                            <c:url value="/intro/introduce" var="introPage1" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage1}">장점</a>
                         </li>
@@ -124,11 +124,11 @@
                 <li class="nav-item"><c:url value="/reservation"
                         var="reservationPage" /> <a
                     class="nav-link  menu" href="${reservationPage}">예약</a></li>
-                <li class="nav-item"><c:url value="/community"
+                <li class="nav-item"><c:url value="/community/notice/list"
                         var="communityPage" /> <a
                     class="nav-link  menu" href="${communityPage}">게시판</a>
                     <ul class="subMenu">
-                        <li><c:url value="/community/"
+                        <li><c:url value="/community/notice/list"
                                 var="communityPage1" /> <a
                             class="nav-link" aria-current="page"
                             href="${communityPage1}">공지사항</a></li>
