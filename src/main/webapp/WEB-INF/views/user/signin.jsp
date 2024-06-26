@@ -29,8 +29,8 @@
         <main>
             <div class="row">
             <div class="col-4"></div>
-            <div class="mt-2 col-4 mb-5" style="border: 1px solid black">
-                <div class="card-header text-center">
+            <div class="mt-2 col-3 mb-5" style="border: 1px solid black">
+                <div class="card-header text-center mt-3">
                     <h2>로그인</h2>                
                 </div>
                 <div class="card-body">
@@ -41,15 +41,16 @@
                                         패스워드를 확인하세요.</div>
                                 </c:if>
 
-                                <div class="mt-2">
-                                    <label>아이디</label>
+                                <div class="form-group mt-5 d-flex align-items-center">
+                                    <label for="userid"
+                                        class="form-label text-center">아이디</label>
                                     <input type="text" name="userid"
                                         placeholder="아이디"
-                                        class="form-control write" 
-                                        id="userid"
-                                        required autofocus />
+                                        class="form-control write"
+                                        id="userid" required autofocus />
                                 </div>
-                                <div class="mt-2">
+                                <div class="form-group mt-3 d-flex align-items-center">
+                                    <label for="password" class="form-label text-center">비밀번호</label>
                                     <input type="password"
                                         name="userpassword"
                                         placeholder="비밀번호"
@@ -58,18 +59,22 @@
                                 </div>
                                 <div class="mt-2">
                                     <input
-                                        class="form-control btn"
+                                        class="form-control btn btn-login"
                                         id="btnSignIn" type="submit"
                                         value="로그인" />
                                 </div>
-                                <div class="m-2 center"
-                                    style="text-align: center;">
-                                    <button id="btnDelete" class="btn"
-                                        style="display: inline-block;">아이디
-                                        찾기</button>
-                                    <button id="btnUpdate" class="btn"
-                                        style="display: inline-block;">비밀번호
-                                        찾기</button>
+                                <div class="mt-2 center" style="text-align: center;">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <button id="btnSearchId"
+                                            class="btn btn-search-id"
+                                            style="display: inline-block;">아이디
+                                            찾기</button>
+                                        <h3 style="margin: 0 10px;">|</h3>
+                                        <button id="btnSearchPassword"
+                                            class="btn btn-search-password"
+                                            style="display: inline-block;">비밀번호
+                                            찾기</button>
+                                    </div>
                                 </div>
                                 <div class="mt-2"
                                     style="text-align: right;">
