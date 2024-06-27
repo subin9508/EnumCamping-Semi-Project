@@ -11,28 +11,27 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
-     <c:url value="/css/header.css" var="headerCSS" />
-    <link rel="stylesheet" href="${headerCSS}" />
+        
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
     
-    <c:url value="/css/footer.css" var="footerCSS" />
-    <link rel="stylesheet" href="${footerCSS}" />
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
+    
+
 </head>
 <body>
-<div class="wrapper">
-	<div class="container">
-		<div class="container-fluid">
-			<c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
-			<%@ include file="../fragments/header.jspf"%>
-		</div>
-
-		<div class="container-fluid">
-			<%@ include file="../fragments/info-sidebar.jspf"%>
-		</div>
-		
-        <div class="footer-main-content content">
+            <%@ include file="../fragments/header.jspf"%>
+            <%@ include file="../fragments/info-sidebar.jspf"%>
+        
+        <div class="content">
             <main class="main-content">
+            <div class="slider">
+            
+            <div class="content-1"> 
             <br>
                 <h1><strong>[예약방법]</strong></h1>
+                </div>
                         <div class="info-text">
                         <br>
                             <h5>1. 매일 오전 10시에 한달 후의 구역이 활성됩니다</h5>
@@ -44,16 +43,19 @@
                             <h5>7. 양도, 양수, 교환, 매매행위 금지합니다</h5>
                             <h5>8. 예약자와 시설이용자는 동일인이여야 합니다</h5>
                         </div>
+                        <br><br>
+              </div>
             </main>
         </div>
-    </div>
     
-         
         <%@ include file="../fragments/footer.jspf" %>
-  		  </div> 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
+        
+           <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>

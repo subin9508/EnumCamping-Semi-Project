@@ -9,15 +9,16 @@
         <div class="col-3 d-flex justify-content-center">
             <div id="weather-info">
                 <p style="margin:0;">현재 날씨: <span id="sky"></span></p>
-                <p style="margin:0;">기온: <span id="temp"></span>°C</p>
+                <p style="margin:0;"><span id="rain"></span>기온: <span id="temp"></span>°C</p>
             </div>
         </div>
 
         <div class="col-6 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
-                <c:url value="/images/main/logo_horizontal.jpg" var="logo_horizontal"/>
-                <img alt="logo" src="${logo_horizontal}"
-                    style="height: 60px; width: 200px;">
+            	<img alt="logo"
+                src="<c:url value='/images/main/logo_horizontal.jpg'/>"
+                style="height: 60px; width: 200px;">
+                
             </a>
         </div>
         
@@ -67,11 +68,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item">
-                <c:url value="/intro" var="introPage" />
+                <c:url value="/intro/introduce" var="introPage" />
                 <a class="nav-link menu" aria-current="page" href="${introPage}">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li>
-                            <c:url value="/intro/intro" var="introPage1" />
+                            <c:url value="/intro/introduce" var="introPage1" />
                             <a class="nav-link" aria-current="page"
                             href="${introPage1}">장점</a>
                         </li>
@@ -122,11 +123,11 @@
                 <li class="nav-item"><c:url value="/reservation"
                         var="reservationPage" /> <a
                     class="nav-link  menu" href="${reservationPage}">예약</a></li>
-                <li class="nav-item"><c:url value="/community"
+                <li class="nav-item"><c:url value="/community/notice/list"
                         var="communityPage" /> <a
                     class="nav-link  menu" href="${communityPage}">게시판</a>
                     <ul class="subMenu">
-                        <li><c:url value="/community/"
+                        <li><c:url value="/community/notice/list"
                                 var="communityPage1" /> <a
                             class="nav-link" aria-current="page"
                             href="${communityPage1}">공지사항</a></li>

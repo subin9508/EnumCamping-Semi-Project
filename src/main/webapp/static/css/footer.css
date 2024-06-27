@@ -35,7 +35,7 @@ footer {
     padding: 10px 0;
     box-sizing: border-box; /* 패딩 포함하여 크기 계산 */
     /*position:relative;
-    transform:translateY(-100%)*/
+    transform:translateY(-100 %)*/
 }
 
 .footer-bottom {
@@ -49,12 +49,15 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-bottom: 15px; /* 푸터 내용이 푸터 영역 내에 있도록 패딩 추가 */
+    /*padding-bottom: 15px;  푸터 내용이 푸터 영역 내에 있도록 패딩 추가 */
     padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
 }
 
 .column {
-    margin-bottom: 20px; /* 아래 여백 추가 */
+    margin-bottom: 0px; /* 아래 여백 추가 */
 }
 
 .column h5 {

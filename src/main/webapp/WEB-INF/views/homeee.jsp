@@ -20,12 +20,12 @@
         <%@ include file="./fragments/header.jspf" %>
 
          
-    <div class="main-content">
+    <div class="footer-main-content">
     <p class="mt-50">중간 내용들</p>
     <p class="mt-50">중간 내용들</p>
     <p class="mt-50">중간 내용들</p>
     <p class="mt-50">중간 내용들</p>
-    <p>상단 및 하단바, 배너 구현(날씨 api)
+    <!-- <p>상단 및 하단바, 배너 구현(날씨 api)
 배경 및 바디 구현<br/>
 팝업창 구현<br/>
 캠핑장 설명 및 시설배치도<br/>
@@ -63,7 +63,7 @@ FAQ 페이지 구현<br/>
 데이터 베이스 생성 및 권한 부여<br/>
 외부 연동 확인<br/>
 서버 포트 설정</p>
-    
+     -->
     </div>    
         <%@ include file="./fragments/footer.jspf" %>
 </div>

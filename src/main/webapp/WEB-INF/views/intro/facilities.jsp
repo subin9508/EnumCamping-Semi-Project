@@ -19,7 +19,6 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />       
-    
 </head>
 <body>
 <div class="wrapper">
@@ -27,6 +26,7 @@
     <%@ include file="../fragments/header.jspf"%>
 <div class="footer-main-content">
     <%@ include file="../fragments/intro-sidebar.jspf"%>
+
 
     <div class="container">
         <h3 class="text-center mt-3">
@@ -43,6 +43,7 @@
                     <img alt="barbecue" src="${intro2_barbecue}"
                         class="img" height=400px width=500px
                         id="barbecueImage" />
+
                 </div>
             </div>
 
@@ -64,7 +65,9 @@
                     <img alt="toilet" src="${intro2_toilet}" class="img"
                         height=400px width=500px id="toiletImage" />
                 </div>
+
             </div>
+
         </div>
 
 
