@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkUserEmailResult = document.querySelector('div#checkUserEmailResult');
             if (response.data === 'Y') {
                 emailChecked = true;
-                checkUserEmailResult.innerHTML = '사용 가능한 이메일입니다.';
+                checkUserEmailResult.innerHTML = '';
                 checkUserEmailResult.classList.add('text-success');
                 checkUserEmailResult.classList.remove('text-danger');
             } else {
@@ -163,16 +163,31 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
     // 전화번호 입력 필드의 change 이벤트 리스너
-    // input#phone 비어 있는 지를 체크
+    // input#phone 비어 있는 지를 체크 및 정규식 검사
     function checkPhone(event) {
-        if (event.target.value === '') {
+        const phone = event.target.value;
+        const phoneRegex = /^01[016789]-\d{3,4}-\d{4}$/;
+        const checkUserPhoneResult = document.querySelector('div#checkUserPhoneResult');
+
+        if (phone === '') {
             phoneChecked = false;
-        } else {
+            checkUserPhoneResult.innerHTML = '';
+        } else if (phoneRegex.test(phone)) {
             phoneChecked = true;
+            checkUserPhoneResult.innerHTML = '사용 가능한 전화번호입니다.';
+            checkUserPhoneResult.classList.add('text-success');
+            checkUserPhoneResult.classList.remove('text-danger');
+        } else {
+            phoneChecked = false;
+            checkUserPhoneResult.innerHTML = '유효하지 않은 전화번호 형식입니다.';
+            checkUserPhoneResult.classList.add('text-danger');
+            checkUserPhoneResult.classList.remove('text-success');
         }
-        
+
         changeButtonState(); // 버튼의 활성화/비활성화 상태를 변경
     }
+    
+    
     
     /* -------------------- 비밀번호 중복확인 -------------------- */
     const passwordInput = document.getElementById('user_password');

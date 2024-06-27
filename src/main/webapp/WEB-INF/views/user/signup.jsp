@@ -18,6 +18,7 @@
 
         <c:url value="../css/footer.css" var="footerCss" />
         <link rel="stylesheet" href="${footerCss}">
+         
     </head>
 
     <body>
@@ -26,12 +27,14 @@
         <div class="container-fluid">
         
         <main>
+        <div class="container-fluid d-flex justify-content-center" style="margin-top: 3%;"><h1>ENUM</h1></div>
             <div class="container-fluid d-flex justify-content-center">
                 <div class="my-2 card card-body" style="width: 100%; max-width: 700px;">
                     <c:url var="signUpPage" value="/user/signup" />
                     <form action="${signUpPage}" method="post">
-                        <div class="my-2 row">
-                            <div class="col-3 d-flex align-items-center">아이디</div>
+                        <div class="container-fluid d-flex justify-content-left" style="margin-top: 2%;"><h2>회원가입</h2></div>
+                        <div class="my-2 row" style="margin-top: 2%;">
+                            <div class="col-3 d-flex align-items-center" >아이디</div>
                             <div class="col-6">
                                 <input type="text" class="form-control"
                                     id="user_id" name="userId"
@@ -62,7 +65,8 @@
                             </div>
                             
                             <!-- 비밀번호 조건 체크 결과 표시할 영역 -->
-                            <div id="passwordValidationMessage"></div>
+                            <div id="passwordValidationMessage"
+                            ></div>
 
                             <div class="my-2 row">
                                 <div class="col-3 d-flex align-items-center">비밀번호 확인</div>
@@ -92,8 +96,9 @@
                                 <div class="col-9">
                                 <input type="text" class="form-control"
                                     id="user_phone" name="userPhone"
-                                    placeholder="핸드폰 번호" required />
+                                    placeholder="01X-XXX(또는 XXXX)-XXXX 형식으로 입력하세요." required />
                                 </div>
+                                <div id="checkUserPhoneResult"> </div>
                             </div>
 
                             <div class="my-2 row">
@@ -133,11 +138,10 @@
                     </form>
                 </div>
             </div>
+            
         </main>
+        
     </div>
-        
-        
-    <%@ include file="../fragments/footer.jspf"%>
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
