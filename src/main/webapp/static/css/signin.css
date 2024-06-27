@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+.login-container {
+    display: flex;
+    justify-content: center; /*수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100vh; /* 뷰포트 높이 100% */
+}
+
+.fixed-size-form {
+    width: 400px; /* 고정 너비 설정 */
+    margin: 0 auto; /* 수평 중앙 정렬 */
+    padding: 10px;
+}
+
 input.write {
     border-radius: 5px;
     border-color: black;
@@ -14,18 +27,6 @@ input.write {
     margin-right: 10px; /* label과 input 사이의 간격 조정 */
     width: 20%;
     font-size: 12pt;
-}
-
-@media (max-width: 600px) {
-    .form-label {
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 400px) {
-    .form-label {
-        font-size: 8px;
-    }
 }
 
 .write {
@@ -79,4 +80,5 @@ button.signup:hover  {
 .justify-content-center {
     justify-content: center;
 }
+
 
