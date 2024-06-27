@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
 import com.itwill.semiproject.repository.Notice;
 import com.itwill.semiproject.repository.NoticeDao;
@@ -17,10 +18,25 @@ public class NoticeService {
 	
 	private NoticeDao dao;
 	
-	public List<NoticeListDto> selectAll(){
-		List<Notice> list = dao.selectAll();
+	public List<NoticeListDto> selectAllNotice(){
+		List<Notice> list = dao.selectAllNotice();
 		log.debug("list={}",list);
 		return list.stream().map(NoticeListDto::fromEntity).toList();
 	}
+	
+	public Notice selectNoticeById(int id){
+		log.debug("selectNoticeById");
+		Notice notice = dao.selectNoticeById(id);
+		log.debug("notice={}",notice);
+		return notice;
+	}
+	
+	public int insertNotice(Notice notice) {
+		int result = 0;
+		
+		
+		
+		return result;
+	};
 
 }

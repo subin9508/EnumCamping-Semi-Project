@@ -9,6 +9,8 @@
     <title>ENUM CAMPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
     <%@ include file="../../fragments/header.jspf" %>
@@ -19,54 +21,48 @@
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>포스트 상세보기</h2>
+                    <h2>공지사항 상세보기</h2>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="mt-2">
                             <label for="id" class="form-label">번호</label>
                             <input id="id" class="form-control"
-                                type="text" value="${post.id}" readonly />
+                                type="text" value="${notice.id}" readonly />
                         </div>
                         <div class="mt-2">
                             <label for="title" class="form-label">제목</label>
                             <input id="title" class="form-control"
-                                type="text" value="${post.title}"
+                                type="text" value="${notice.title}"
                                 readonly />
                         </div>
                         <div class="mt-2">
                             <label for="content" class="form-label">내용</label>
                             <textarea id="content" class="form-control"
-                                rows="5" readonly>${post.content}</textarea>
-                        </div>
-                        <div class="mt-2">
-                            <label for="author" class="form-label">작성자</label>
-                            <input id="author" class="form-control"
-                                type="text" value="${post.author}"
-                                readonly />
+                                rows="5" readonly>${notice.content}</textarea>
                         </div>
                         <div class="mt-2">
                             <label for="createdTime" class="form-label">작성
                                 시간</label> <input id="createdTime"
                                 class="form-control" type="text"
-                                value="${post.createdTime}" readonly />
+                                value="${notice.createdTime}" readonly />
                         </div>
                         <div class="mt-2">
                             <label for="modifiedTime" class="form-label">최종
                                 수정 시간</label> <input id="modifiedTime"
                                 class="form-control" type="text"
-                                value="${post.modifiedTime}" readonly />
+                                value="${notice.modifiedTime}" readonly />
                         </div>
                     </form>
                 </div>
-
+                <!-- signedUser 체크 
                 <div class="card-footer">
-                    <c:url var="postModifyPage" value="/post/modify">
-                        <c:param name="id" value="${post.id}" />
+                    <c:url var="noticeModifyPage" value="/notice/modify">
+                        <c:param name="id" value="${notice.id}" />
                     </c:url>
                     <a class="btn btn-outline-primary"
-                        href="${postModifyPage}">수정하기</a>
-                </div>
+                        href="${noticeModifyPage}">수정하기</a>
+                </div>-->
 
             </div>
         </main>

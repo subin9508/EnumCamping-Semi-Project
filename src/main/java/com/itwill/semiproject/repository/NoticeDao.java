@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface NoticeDao {
 	
-	List<Notice> selectAll();
+	List<Notice> selectAllNotice();
 	
-	Notice selectById(int id);
+	Notice selectNoticeById(int id);
 	
 	//int insertNotice(String title, String content);
 	int insertNotice(Notice notice);

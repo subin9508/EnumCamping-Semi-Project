@@ -5,11 +5,11 @@
 
 <mapper namespace="com.itwill.semiproject.repository.NoticeDao">
 
-    <select id="selectAll" resultType="Notice">
-        select * from notice order by n_post_id desc
+    <select id="selectAllNotice" resultType="Notice">
+        select * from notice where certify = 0 order by n_post_id desc
     </select>
 
-    <select id="selectByid" resultType="Notice">
+    <select id="selectNoticeById" resultType="Notice">
         select * from notice where n_post_id = #{id}
     </select>
 

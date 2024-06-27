@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
-    <%@ include file="../../fragments/header.jspf" %>
-    
-    <%@ include file="../../fragments/intro-sidebar.jspf"%>
 <div class="wrapper">
+    <%@ include file="../../fragments/header.jspf" %>
+<div class="footer-main-content">    
+    <%@ include file="../../fragments/community-sidebar.jspf"%>
 
     <div class=" container-fluid">
         
@@ -42,7 +42,7 @@
                                 <tr>
                                     <td class="col-3">${n.id}</td>
                                     <td class="col-6">
-                                        <c:url var="noticeDetailsPage" value="/notice/details">
+                                        <c:url var="noticeDetailsPage" value="/community/notice/details">
                                             <c:param name="id" value="${n.id}"></c:param>
                                         </c:url>
                                         <a href="${noticeDetailsPage}">${n.title}</a>
@@ -54,10 +54,23 @@
                     </table>
                 </div>
             </div>
+            
+        
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                <c:if test="${not empty signedInUser}">
+                <button type="button" onclick="location.href ='create'"
+                class="btn btn-info">공지사항 작성</button>
+                </c:if>
+            </div>
+            
+
+            
+            
         </main>
     </div>
 </div>   
     <%@ include file="../../fragments/footer.jspf" %>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
