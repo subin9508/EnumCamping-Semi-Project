@@ -32,9 +32,10 @@
                                 value="${signedInUser}"></c:param>
                         </c:url> <a class="nav-link" href="${myPage}">마이페이지</a></li>
                     <li class="nav-item"><c:url var="signOutPage"
-                            value="/user/signout" /> <a
-                        class="nav-link" href="${signOutPage}"><span>${signedInUser}</span>
-                            로그아웃</a></li>
+                            value="/user/signout" /> 
+                            <a class="nav-link" href="#" onclick="confirmLogout('${signOutPage}')"><span>${signedInUser}</span>
+                            로그아웃</a>
+                    </li>
                 </c:if>
 
                 <c:if test="${empty signedInUser}">
@@ -49,6 +50,13 @@
         </div>
     </nav>
 
+    <script>
+    function confirmLogout(signOutPage) {
+        if (confirm("정말 로그아웃 하시겠습니까?")) {
+            window.location.href = signOutPage;
+        }
+    }
+    </script>
 
 
 </header>
