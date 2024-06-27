@@ -16,16 +16,21 @@
             value="oracle.jdbc.OracleDriver" />
         <!-- hikariConfig.setDriverClassName(new OracleDriver()); -->
         <!-- TODO: DB 주소 바꾸기 -->
+
         <property name="jdbcUrl"
             value="jdbc:oracle:thin:@localhost:1521:xe" />
         <property name="username" value="semiproject" />
         <property name="password" value="semiproject" />
+
     </bean>
 
+
     <!-- HikariDataSource 빈 생성을 위한 설정 ds = new HikariDataSource(hikariConfig); -->
+
     <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
         <constructor-arg ref="hikariConfig" />
     </bean>
+
 
     <!-- SqlSessionFactoryBean 생성을 위한 설정: 데이터 소스를 이용해서 SQL 문장을 실행, 결과 처리해서 
         리턴할 수 있는 객체. -->

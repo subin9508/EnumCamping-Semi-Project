@@ -7,6 +7,11 @@
     <c:url value="/css/facilities.css" var="facilitiesCSS" />
     <link rel="stylesheet" href="${facilitiesCSS}" />
     
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Enum Semi-Project</title>
@@ -14,118 +19,90 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />       
-    <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
-            <%@ include file="../fragments/header.jspf"%>
-        </div>
-        <div class="container-fluid">
-            <%@ include file="../fragments/intro-sidebar.jspf"%>
-        </div>
+<div class="wrapper">
 
-            <main>
-                <section class="m-5">
-                <div class="mt-2">
-                    <div class="card-body">
-                     <div class="card-body" style="margin-bottom: 50px;">
-                    <h4 style="margin: 50px;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편의시설</h4>
-                    <div class="horizontal-divider"></div>
-                    <div class="horizontal-divider2"></div>
-                    </div>
-                        <div class="row">
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>바베큐장</h5>
-                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro/intro2_barbecue.jpg" var="intro2_barbecue" />
-                                    <img alt="barbecue"
-                                        src="${intro2_barbecue}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="barbecueImage" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>샤워실</h5>
-                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro/intro2_shower.jpg" var="intro2_shower"/>
-                                    <img alt="shower"
-                                        src="${intro2_shower}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="showerImage" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>화장실</h5>
-                                    <div class="image-wrapper" style="width: 100%; height: 100%; object-fit: cover;">
-                                    <c:url value="/images/intro/intro2_toilet.jpg" var="intro2_toilet"/>
-                                    <img alt="toilet"
-                                        src="${intro2_toilet}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="toiletImage"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-2">
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>개수대</h5>
-                                    <c:url value="/images/intro/intro2_sink.jpg" var="intro2_sink"/>
-                                    <img alt="sink"
-                                        src="${intro2_sink}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="sinkImage" />
-                                </div>
-                            </div>
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>수영장</h5>
-                                    <c:url value="/images/intro/intro2_pool.jpg" var="intro2_pool"/>
-                                    <img alt="pool"
-                                        src="${intro2_pool}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="poolImage" />
-                                    </div>
-                            </div>
-                            <div class="mt-2 col-12 col-md-4 text-center img-container">
-                                <div>
-                                    <h5>매점</h5>
-                                    <c:url value="/images/intro/intro2_store.png" var="intro2_store"/>
-                                    <img alt="store"
-                                        src="${intro2_store}"
-                                        class="img"
-                                        height=400px width=500px
-                                        id="storeImage" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <%@ include file="../fragments/header.jspf"%>
+<div class="footer-main-content">
+    <%@ include file="../fragments/intro-sidebar.jspf"%>
+
+
+    <div class="container">
+        <h3 class="text-center mt-3">
+            <strong>[편의시설]</strong>
+        </h3>
+
+        <div class="intro-section">
+        
+            <div class="intro-card">
+                <h5>바베큐장</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_barbecue.jpg"
+                        var="intro2_barbecue" />
+                    <img alt="barbecue" src="${intro2_barbecue}"
+                        class="img" height=400px width=500px
+                        id="barbecueImage" />
+
                 </div>
-                </section>
-
-            <div class="container-fluid">
-                <%@ include file="../fragments/footer.jspf"%>
             </div>
-        </main>
+
+
+            <div class="intro-card">
+                <h5>샤워실</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_shower.jpg"
+                        var="intro2_shower" />
+                    <img alt="shower" src="${intro2_shower}" class="img"
+                        height=400px width=500px id="showerImage" />
+                </div>
+            </div>
+            <div class="intro-card">
+                <h5>화장실</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_toilet.jpg"
+                        var="intro2_toilet" />
+                    <img alt="toilet" src="${intro2_toilet}" class="img"
+                        height=400px width=500px id="toiletImage" />
+                </div>
+
+            </div>
 
         </div>
+
+
+        <div class="intro-section">
+            <div class="intro-card">
+                <h5>개수대</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_sink.jpg"
+                        var="intro2_sink" />
+                    <img alt="sink" src="${intro2_sink}" class="img"
+                        height=400px width=500px id="sinkImage" />
+                </div>
+            </div>
+            <div class="intro-card">
+                <h5>수영장</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_pool.jpg"
+                        var="intro2_pool" />
+                    <img alt="pool" src="${intro2_pool}" class="img"
+                        height=400px width=500px id="poolImage" />
+                </div>
+            </div>
+            <div class="intro-card">
+                <h5>매점</h5>
+                <div class="img-container">
+                <c:url value="/images/intro/intro2_store.png"
+                    var="intro2_store" />
+                <img alt="store" src="${intro2_store}" class="img"
+                    height=400px width=500px id="storeImage" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 
     <!-- Modal Structure -->
     <div class="modal" id="imageModal" tabindex="-1">
@@ -176,6 +153,9 @@
             </div>
         </div>
     </div>
+</div>
+    <%@ include file="../fragments/footer.jspf"%>
+</div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
@@ -222,7 +202,7 @@
         });
     });
 </script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
 
