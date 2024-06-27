@@ -4,21 +4,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.semiproject.dto.QnACreateDto;
-import com.itwill.semiproject.dto.QnADetailsDto;
 import com.itwill.semiproject.dto.QnAListDto;
 import com.itwill.semiproject.dto.QnASearchDto;
 import com.itwill.semiproject.dto.QnAUpdateDto;
 import com.itwill.semiproject.repository.QnA;
 import com.itwill.semiproject.service.QnAService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,29 +33,36 @@ public class QnAController {
 		log.debug("list()");
 		
 		List<QnAListDto> list = qnaService.read();
+		log.debug("list()={}",list);
 		model.addAttribute("qnas",list);
 	}
 	
 	@GetMapping({"/qnaDetails", "/qnaModify"})
-	public void details(@RequestParam(name = "id") int id, Model model) {
-		log.debug("details(id={})", id);
+	public void details(@RequestParam(name = "qnaPostId") int qnaPostId, Model model) {
+		log.debug("details(qnaPostId={})", qnaPostId);
 		
-		QnA qna = qnaService.read(id);
 		
-		QnADetailsDto dto = QnADetailsDto.fromEntity(qna);
-		
-		model.addAttribute("qna", dto);
+		QnA qna = qnaService.read(qnaPostId);
+				
+		model.addAttribute("qna", qna);
 	}
 	
 	@GetMapping("/qnaCreate")
-	public void create() {
+	public String create(HttpSession session) {
 		log.debug("GET: create()");
+		if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
+		return "/community/qnaCreate";
 	}
 	
 	@PostMapping("/qnaCreate")
-	public String create(QnACreateDto dto) {
+	public String create(QnACreateDto dto, HttpSession session) {
 		log.debug("POST: create(dto={}), dto");
-		
+        
+		if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
 		qnaService.create(dto);
 		
 		return "redirect:/community/qnaList";
@@ -65,8 +70,11 @@ public class QnAController {
 
 	
 	@GetMapping("/qnaDelete")
-	public String delete(@RequestParam(name="id") int id) {
-		log.debug("delete(qPostId={})", id);
+	public String delete(@RequestParam(name="qnaPostId") int id, HttpSession session) {
+		log.debug("delete(qnaPostId={})", id);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
 		
 		qnaService.delete(id);
 		
@@ -74,12 +82,15 @@ public class QnAController {
 	}
 	
 	@PostMapping("/qnaUpdate")
-	public String update(QnAUpdateDto dto) {
+	public String update(QnAUpdateDto dto, HttpSession session) {
 		log.debug("update(dto={})", dto);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
 		
 		qnaService.update(dto);
-		
-		return "redirect:/community/qnaDetails?id=" + dto.getId();
+		log.debug("postid",dto.getQnaPostId());
+		return "redirect:/community/qnaDetails?qnaPostId=" + dto.getQnaPostId();
 	}
 	
 	@GetMapping("/qnaSearch")

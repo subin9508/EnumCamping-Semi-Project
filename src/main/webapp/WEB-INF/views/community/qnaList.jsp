@@ -62,20 +62,22 @@
                         <tbody>
                             <c:forEach var="qna" items="${qnas}">
                                 <tr>
-                                    <td>${qna.id}</td>
+                                    <td>${qna.qnaPostId}</td>
                                     <td>
                                         <c:url var="qnaDetailsPage" value="/community/qnaDetails">
-                                            <c:param name="id" value="${qna.id}"></c:param>
+                                            <c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
                                         </c:url>
-                                        <a href="${qnaDetailsPage}">${qna.title}</a>
+                                        <a href="${qnaDetailsPage}">${qna.qnaTitle}</a>
                                     </td>
-                                    <td>${qna.userId}</td>
-                                    <td>${qna.modifiedTime}</td>
+                                    <td>${qna.qnaUserId}</td>
+                                    <td>${qna.qnaModifiedTime}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                 </div>
+                    <c:url var="qnaCreatePage" value="/community/qnaCreate"></c:url>
+                    <a class="btn btn-outline-primary" href="${qnaCreatePage}">글쓰기</a>
             </div>
         </main>
     </div>

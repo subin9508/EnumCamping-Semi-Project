@@ -13,21 +13,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnADetailsDto {
 
-		private Integer id;
-		private String title;
-		private String content;
-		private String userId;
-		private LocalDateTime createdTime;
-		private LocalDateTime modifiedTime;
+		private Integer qnaPostId;
+		private String qnaTitle;
+		private String qnaContent;
+		private String qnaUserId;
+		private LocalDateTime qnaCreatedTime;
+		private LocalDateTime qnaModifiedTime;
 		
 		public static QnADetailsDto fromEntity(QnA qna) {
 			return QnADetailsDto.builder()
-					.id(qna.getQPostId())
-					.title(qna.getQTitle())
-					.content(qna.getQContent())
-					.userId(qna.getQUserId())
-					.createdTime(qna.getQcCreatedTime())
-					.modifiedTime(qna.getQcModifiedTime())
+					.qnaPostId(qna.getQnaPostId())
+					.qnaTitle(qna.getQnaTitle())
+					.qnaContent(qna.getQnaContent())
+					.qnaUserId(qna.getQnaUserId())
+					.qnaCreatedTime(qna.getQnaCreatedTime())
+					.qnaModifiedTime(qna.getQnaModifiedTime())
 					.build();
 		}
 	}

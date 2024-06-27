@@ -34,29 +34,29 @@
                     <div class="card-body">
                         <form id="modifyForm">
                             <div class="mt-2">
-                                <label for="id" class="form-label">번호</label>
-                                <input id="id" class="form-control" type="text"
-                                    name="id" value="${qna.id}" readonly />
+                                <label for="qnaPostId" class="form-label">번호</label>
+                                <input id="qnaPostId" class="form-control" type="text"
+                                    name="qnaPostId" value="${qna.qnaPostId}" readonly />
                             </div>
                             <div class="mt-2">
-                                <label for="title" class="form-label">제목</label>
-                                <input id="title" class="form-control" type="text"
-                                    name="title" value="${qna.title}" />
+                                <label for="qnaTitle" class="form-label">제목</label>
+                                <input id="qnaTitle" class="form-control" type="text"
+                                    name="qnaTitle" value="${qna.qnaTitle}" />
                             </div>
                             <div class="mt-2">
-                                <label for="content" class="form-label">내용</label>
-                                <textarea id="content" class="form-control"
-                                    name="content" rows="5">${qna.content}</textarea>
+                                <label for="qnaContent" class="form-label">내용</label>
+                                <textarea id="qnaContent" class="form-control"
+                                    name="qnaContent" rows="5">${qna.qnaContent}</textarea>
                     </div>
                             <div class="d-none">
-                                <label for="userId" class="form-label">작성자</label>
-                                <input id="userId" class="form-control" type="text"
-                                    value="${qna.userId}" readonly />
+                                <label for="qnaUserId" class="form-label">작성자</label>
+                                <input id="qnaUserId" class="form-control" type="text"
+                                    value="${qna.qnaUserId}" readonly />
                             </div>
                         </form>
                     </div>
                     <!-- 로그인 사용자 아이디와 글 작성자가 같은 경우에만 버튼을 보여줌. -->
-                     <c:if test="${signedInUser eq qna.qUserId}">
+                     <c:if test="${signedInUser eq qna.qnaUserId}">
                         <div class="card-footer">
                             <button id="btnDelete" class="btn btn-outline-danger">삭제</button>
                             <button id="btnUpdate" class="btn btn-outline-success">업데이트</button>

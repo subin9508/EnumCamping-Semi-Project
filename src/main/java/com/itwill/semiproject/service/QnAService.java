@@ -29,10 +29,10 @@ public class QnAService {
 		return list.stream().map(QnAListDto::fromEntity).toList(); 
 	}
 	
-	public QnA read(Integer id) {
-		log.debug("read(id{}", id);
+	public QnA read(Integer qnaPostId) {
+		log.debug("read(qnaPostId{}", qnaPostId);
 		
-		return qnaDao.selectByQnAPostId(id);
+		return qnaDao.selectByQnAPostId(qnaPostId);
 	}
 	
 	
@@ -45,10 +45,10 @@ public class QnAService {
 		return result;
 	}
 	
-	public int delete(int id) {
-		log.debug("delete(q_post_id={})", id);
+	public int delete(int qnaPostId) {
+		log.debug("delete(qnaPostId={})", qnaPostId);
 
-		int result = qnaDao.deleteQnA(id);
+		int result = qnaDao.deleteQnA(qnaPostId);
 		log.debug("delete 결과={}", result);
 		
 		return result;
@@ -64,9 +64,9 @@ public class QnAService {
 	}
 	
 	public List<QnAListDto> search(QnASearchDto dto) {
-		log.debug("search()");
+		log.debug("search({})",dto);
 		
-		List<QnA> list = qnaDao.search(dto);
+		List<QnA> list = qnaDao.searchQnA(dto);
 		
 		return list.stream().map(QnAListDto::fromEntity).toList();
 	}

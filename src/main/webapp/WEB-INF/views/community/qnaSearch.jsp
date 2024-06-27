@@ -33,7 +33,7 @@
                     <form method="get" action="${qnaSearchPage}">
                         <div class="row"> <!--  화면을 1:2:1로 나눔 (기본 12개) -->
                             <div class="col-3">
-                                <select class="form-control" name="qCategory">
+                                <select class="form-control" name="category">
                                     <option value="qt">제목</option>
                                     <option value="qc">내용</option>
                                     <option value="qtqc">제목+내용</option>
@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                             <div class="col-7">
-                                <input type="text" class="form-control" name="qKeyword" placeholder="검색어 입력" required />
+                                <input type="text" class="form-control" name="keyword" placeholder="검색어 입력" required />
                             </div>
                             <div class="col-2">
                                 <input type="submit" class="form-control btn btn-outline-secondary" value="검색" />
@@ -62,15 +62,15 @@
                         <tbody>
                             <c:forEach var="qna" items="${qnas}">
                                 <tr>
-                                    <td>${qna.qPostId}</td>
+                                    <td>${qna.qnaPostId}</td>
                                     <td>
                                         <c:url var="qnaDetailsPage" value="/community/qnaDetails">
-                                            <c:param name="qPostId" value="${qna.qPostId}"></c:param>
+                                            <c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
                                         </c:url>
-                                        <a href="${qnaDetailsPage}">${qna.qTitle}</a>
+                                        <a href="${qnaDetailsPage}">${qna.qnaTitle}</a>
                                     </td>
-                                    <td>${qna.qUserId}</td>
-                                    <td>${qna.qModifiedTime}</td>
+                                    <td>${qna.qnaUserId}</td>
+                                    <td>${qna.qnaModifiedTime}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>

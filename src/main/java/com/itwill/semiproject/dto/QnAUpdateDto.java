@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class QnAUpdateDto {
-	private int id;
-	private String title;
-	private String content;
+	private int qnaPostId;
+	private String qnaTitle;
+	private String qnaContent;
 	
 	public QnA toEntity() {
-		return QnA.builder().qPostId(id).qTitle(title).qContent(content).build();
+		return QnA.builder().qnaPostId(qnaPostId).qnaTitle(qnaTitle).qnaContent(qnaContent).build();
 	}
 }

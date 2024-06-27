@@ -13,14 +13,14 @@ import lombok.ToString;
 @Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnA {
-	private Integer qPostId;
-	private String qTitle;
-	private String qContent;
-	private String qUserId;
-	private LocalDateTime qCreatedTime;
-	private LocalDateTime qModifiedTime;
-	private Integer qState;
-	private Integer qLock;
+	private Integer qnaPostId;
+	private String qnaTitle;
+	private String qnaContent;
+	private String qnaUserId;
+	private LocalDateTime qnaCreatedTime;
+	private LocalDateTime qnaModifiedTime;
+	private Integer qnaState;
+	private Integer qnaLock;
 	private String qcText;
 	private LocalDateTime qcCreatedTime;
 	private LocalDateTime qcModifiedTime;

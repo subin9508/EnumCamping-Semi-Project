@@ -34,21 +34,21 @@
                     </div>
                     <div class="card-body">
                         <c:url var="qnaCreatePage" value="/community/qnaCreate" />
-                        <form method="qna" action="${qnaCreatePage}"> <!-- 같은주소는 action 안해도됨 -->
+                        <form method="post" action="${qnaCreatePage}"> <!-- 같은주소는 action 안해도됨 -->
                         <!-- form에서 action 속성 값을 설정하지 않으면 현재 요청 주소로 다시 요청을 보냄. -->
                         
                             <div class="mt-2">
                                 <input class="form-control" 
-                                type="text" name="title" placeholder="제목 입력" required autofocus/>
+                                type="text" name="qnaTitle" placeholder="제목 입력" required autofocus/>
                             </div>
                             <div class="mt-2">
                                 <textarea class="form-control" 
-                                rows="5" name="content" placeholder="내용 입력" required></textarea>
+                                rows="5" name="qnaContent" placeholder="내용 입력" required></textarea>
                             </div>
                         <div class="mt-2">
                             <!-- 로그인 사용자 아이디를 author 입력 필드에 설정. -->
                             <input class="d-none" 
-                                type="text" name="id" value="${signedInUser}" readonly required />
+                                type="text" name="qnaUserId" value="${signedInUser}" readonly required />
                         </div>
                         <div class="mt-2">
                             <input class="form-control btn btn-outline-success" type="submit" value="저장" />

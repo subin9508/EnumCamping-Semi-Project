@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnAListDto {
-	private Integer id;
-	private String title;
-	private String userId;
-	private LocalDateTime modifiedTime;
+	private Integer qnaPostId;
+	private String qnaTitle;
+	private String qnaUserId;
+	private LocalDateTime qnaModifiedTime;
 	
 	public static QnAListDto fromEntity(QnA qna) {
 		return QnAListDto.builder()
-				.id(qna.getQPostId())
-				.title(qna.getQTitle())
-				.userId(qna.getQUserId())
-				.modifiedTime(qna.getQcModifiedTime())
+				.qnaPostId(qna.getQnaPostId())
+				.qnaTitle(qna.getQnaTitle())
+				.qnaUserId(qna.getQnaUserId())
+				.qnaModifiedTime(qna.getQnaModifiedTime())
 				.build();
 	}
 }

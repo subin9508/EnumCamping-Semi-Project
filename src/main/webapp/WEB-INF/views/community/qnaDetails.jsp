@@ -35,46 +35,46 @@
                 <div class="card-body">
                     <form>
                         <div class="mt-2">
-                            <label for="id" class="form-label">번호</label>
-                            <input id="id" class="form-control"
-                                type="text" value="${qna.id}" readonly />
+                            <label for="qnaPostId" class="form-label">번호</label>
+                            <input id="qnaPostId" class="form-control"
+                                type="text" value="${qna.qnaPostId}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="title" class="form-label">제목</label>
-                            <input id="title" class="form-control"
-                                type="text" value="${qna.title}"
+                            <label for="qnaTitle" class="form-label">제목</label>
+                            <input id="qnaTitle" class="form-control"
+                                type="text" value="${qna.qnaTitle}"
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="content" class="form-label">내용</label>
-                            <textarea id="content" class="form-control"
-                                rows="5" readonly>${qna.content}</textarea>
+                            <label for="qnaContent" class="form-label">내용</label>
+                            <textarea id="qnaContent" class="form-control"
+                                rows="5" readonly>${qna.qnaContent}</textarea>
                         </div>
                         <div class="mt-2">
-                            <label for="userId" class="form-label">작성자</label>
-                            <input id="userId" class="form-control"
-                                type="text" value="${qna.userId}"
+                            <label for="qnaUserId" class="form-label">작성자</label>
+                            <input id="qnaUserId" class="form-control"
+                                type="text" value="${qna.qnaUserId}"
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="createdTime" class="form-label">작성
-                                시간</label> <input id="createdTime"
+                            <label for="qnaCreatedTime" class="form-label">작성
+                                시간</label> <input id="qnaCreatedTime"
                                 class="form-control" type="text"
-                                value="${qna.createdTime}" readonly />
+                                value="${qna.qnaCreatedTime}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="modifiedTime" class="form-label">최종
-                                수정 시간</label> <input id="modifiedTime"
+                            <label for="qnaModifiedTime" class="form-label">최종
+                                수정 시간</label> <input id="qnaModifiedTime"
                                 class="form-control" type="text"
-                                value="${qna.modifiedTime}" readonly />
+                                value="${qna.qnaModifiedTime}" readonly />
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
-                    <c:if test="${signedInUser eq qna.userId}">
+                    <c:if test="${signedInUser eq qna.qnaUserId}">
                     <c:url var="qnaModifyPage" value="/community/qnaModify">
-                        <c:param name="userId" value="${qna.userId}" />
+                        <c:param name="qnaPostId" value="${qna.qnaPostId}" />
                     </c:url>
                     <a class="btn btn-outline-primary"
                         href="${qnaModifyPage}">수정하기</a>
