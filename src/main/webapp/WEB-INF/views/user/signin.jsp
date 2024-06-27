@@ -61,6 +61,9 @@
                                         class="form-control write"
                                         id="userpassword" required />
                                 </div>
+                                <div>
+                                    <input name="target" value="${param.target}" readonly />
+                                </div>
                                 <div class="mt-2">
                                     <input
                                         class="form-control btn btn-login mt-2"
