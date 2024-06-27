@@ -26,16 +26,16 @@
                     <h2>새 글 작성</h2>
                 </div>
                 <div class="card-body">
-                    <c:url var="postCreatePage" value="/post/create" />
-                    <form method="post" action="${postCreatePage }">
+                    <c:url var="noticeCreatePage" value="/community/notice/create" />
+                    <form method="post" action="${noticeCreatePage }">
                         <!-- 같은 주소로 action 할 때는 생략 가능. -->
                         <!-- form에서 action 속성값일 설정하지 않으면 현재 요청 주소로 요청을 다시 보냄 -->
                         <div class="mt-2">
-                            <input class="form-control" type="text" name="title" placeholder="제목 입력"  required autofocus />
+                            <input class="form-control" type="text" name="notTitle" placeholder="제목 입력"  required autofocus />
                         </div>
                         <div class="mt-2">
                             <textarea class="form-control" rows="8"
-                                name="content" placeholder="내용 입력"
+                                name="notContent" placeholder="내용 입력"
                                 required="required"></textarea>
                         </div>
                         <div class="mt-2">

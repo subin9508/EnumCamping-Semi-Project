@@ -43,6 +43,8 @@ public class UserController {
         if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
             // 세션에 로그인 사용자 정보를 저장
             session.setAttribute("signedInUser", user.getUserId());
+            // 세션에 유저 role을 저장
+            session.setAttribute("userRole", user.getUserRole());
             
             // 타겟 페이지로 이동
             return (target.equals("")) ? "redirect:/" : "redirect:" + target;

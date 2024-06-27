@@ -6,19 +6,19 @@
 <mapper namespace="com.itwill.semiproject.repository.NoticeDao">
 
     <select id="selectAllNotice" resultType="Notice">
-        select * from notice where certify = 0 order by n_post_id desc
+        select * from notices where not_certify = 0 order by not_post_id desc
     </select>
 
     <select id="selectNoticeById" resultType="Notice">
-        select * from notice where n_post_id = #{id}
+        select * from notices where not_post_id = #{id}
     </select>
 
     <insert id="insertNotice">
-        insert into notice (n_title, n_content) values (#{title},#{content})
+        insert into notices (not_title, not_content) values (#{notTitle},#{notContent})
     </insert>
 
     <delete id="deleteNotice">
-        delete from posts where n_post_id = #{id}
+        delete from notices where not_post_id = #{id}
     </delete>
 
 </mapper>

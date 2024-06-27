@@ -1,22 +1,22 @@
 package com.itwill.semiproject.dto;
 
-import java.time.LocalDateTime;
 
 import com.itwill.semiproject.repository.Notice;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data @Builder @AllArgsConstructor
+@Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class NoticeCreateDto {
-	private String title;
-	private String content;
+	private String notTitle;
+	private String notContent;
 	
 	//Notice에서 필요한 내용 뽑아오기
-	public static NoticeCreateDto fromEntity(Notice notice) {
-		return NoticeCreateDto.builder()
-				.content(notice.getNTitle())
-				.title(notice.getNTitle()).build();
+	public Notice toEntity() {
+		return Notice.builder()
+				.notContent(notContent)
+				.notTitle(notTitle).build();
 	}
 }

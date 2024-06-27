@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
 import com.itwill.semiproject.repository.Notice;
@@ -31,10 +32,9 @@ public class NoticeService {
 		return notice;
 	}
 	
-	public int insertNotice(Notice notice) {
-		int result = 0;
-		
-		
+	public int insertNotice(NoticeCreateDto dto) {
+		log.debug("insertNotice");
+		int result = dao.insertNotice(dto.toEntity());
 		
 		return result;
 	};

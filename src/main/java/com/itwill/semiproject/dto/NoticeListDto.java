@@ -18,9 +18,9 @@ public class NoticeListDto {
 	
 	//Notice에서 필요한 내용 뽑아오기
 	public static NoticeListDto fromEntity(Notice notice) {
-		return NoticeListDto.builder().id(notice.getNPostId())
-				.modifiedTime(notice.getNModifiedTime())
-				.title(notice.getNTitle()).build();
+		return NoticeListDto.builder().id(notice.getNotPostId())
+				.modifiedTime(notice.getNotModifiedTime())
+				.title(notice.getNotTitle()).build();
 	}
 	
 	

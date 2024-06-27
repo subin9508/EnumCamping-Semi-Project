@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
 import com.itwill.semiproject.repository.Notice;
@@ -47,6 +49,16 @@ public class NoticeController {
 	public void noticeCreate(Notice notice) {
 		log.debug("GET: create");
 	}
+	
+	
+	@PostMapping("/create")
+	public String insertNotice(NoticeCreateDto dto) {
+		log.debug("POST: create(dto={})", dto);
+		noticeService.insertNotice(dto);
+		
+		return "redirect:/community/notice/list";
+	}
+	
 	
 	@GetMapping("/modify")
 	public void noticemodify(Notice notice) {

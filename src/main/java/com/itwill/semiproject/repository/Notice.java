@@ -11,20 +11,21 @@ import lombok.NoArgsConstructor;
 
 @Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class Notice {
-	Integer nPostId;
-	String nTitle;
-	String nContent;
-	LocalDateTime nCreatedTime;
-	LocalDateTime nModifiedTime;
-	Integer certify;
+	Integer notPostId;
+	String notTitle;
+	String notContent;
+	LocalDateTime notCreatedTime;
+	LocalDateTime notModifiedTime;
+	Integer notCertify;
+	
 	
 	public static Notice toEntity(NoticeDetailsDto  dto) {
 		return Notice.builder()
-				.nPostId(dto.getId())
-				.nTitle(dto.getTitle())
-				.nContent(dto.getContent())
-				.nCreatedTime(dto.getCreatedTime())
-				.nModifiedTime(dto.getModifiedTime())
+				.notPostId(dto.getId())
+				.notTitle(dto.getTitle())
+				.notContent(dto.getContent())
+				.notCreatedTime(dto.getCreatedTime())
+				.notModifiedTime(dto.getModifiedTime())
 				.build();
 	}
 }

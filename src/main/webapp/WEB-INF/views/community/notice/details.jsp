@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
-    <%@ include file="../../fragments/header.jspf" %>
-    
-    <%@ include file="../../fragments/intro-sidebar.jspf"%>
 <div class="wrapper">
+    <%@ include file="../../fragments/header.jspf" %>
+    <div class="footer-main-content">
+    <%@ include file="../../fragments/intro-sidebar.jspf"%>
 
         <main>
             <div class="mt-2 card">
@@ -55,20 +55,27 @@
                         </div>
                     </form>
                 </div>
-                <!-- signedUser 체크 
+
+        
+                
+                <!-- signedUser 체크 -->
                 <div class="card-footer">
-                    <c:url var="noticeModifyPage" value="/notice/modify">
+                    <c:if test="${userRole eq 'admin'}">
+                    <button type="button" class="btn delete">삭제하기</button>
+                    <c:url var="noticeModifyPage" value="/community/notice/modify">
                         <c:param name="id" value="${notice.id}" />
                     </c:url>
                     <a class="btn btn-outline-primary"
                         href="${noticeModifyPage}">수정하기</a>
-                </div>-->
+                    </c:if>
+                </div>
 
             </div>
         </main>
 </div>
 
     <%@ include file="../../fragments/footer.jspf" %>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -57,7 +57,7 @@
             
         
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
-                <c:if test="${not empty signedInUser}">
+                <c:if test="${userRole eq 'admin'}">
                 <button type="button" onclick="location.href ='create'"
                 class="btn btn-info">공지사항 작성</button>
                 </c:if>
