@@ -16,6 +16,18 @@ input.write {
     font-size: 12pt;
 }
 
+@media (max-width: 600px) {
+    .form-label {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .form-label {
+        font-size: 8px;
+    }
+}
+
 .write {
     flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
 }
