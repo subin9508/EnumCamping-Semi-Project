@@ -121,6 +121,8 @@
                        <button id="btncode" class="btn btn-outline-success" style="display: inline-block;">인증완료</button>
                     </div>
                     -->
+                            
+                            
                             <div class="my-2">
                                 <button id="btnSignUp"
                                     class="form-control btn btn-outline-success disabled">가입하기</button>
@@ -159,8 +161,7 @@
    <!--  우리가 만드는 JS 파일 -->
     <c:url var="userSignUpJS" value="/js/user_signup.js" />
     <script src="${userSignUpJS}"></script>
-   
-    
+        
 </script>
 </body>
 </html>
