@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
+<div class="wrapper">
     <div class="container-fluid">
         <c:set var="pageTitle" value="QnA Details" />
         <%@ include file="../fragments/header.jspf"%>
@@ -34,46 +35,46 @@
                 <div class="card-body">
                     <form>
                         <div class="mt-2">
-                            <label for="q_post_id" class="form-label">번호</label>
-                            <input id="q_post_id" class="form-control"
-                                type="text" value="${qna.q_post_id}" readonly />
+                            <label for="id" class="form-label">번호</label>
+                            <input id="id" class="form-control"
+                                type="text" value="${qna.id}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="q_title" class="form-label">제목</label>
-                            <input id="q_title" class="form-control"
-                                type="text" value="${qna.q_title}"
+                            <label for="title" class="form-label">제목</label>
+                            <input id="title" class="form-control"
+                                type="text" value="${qna.title}"
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="q_content" class="form-label">내용</label>
-                            <textarea id="q_content" class="form-control"
-                                rows="5" readonly>${qna.q_content}</textarea>
+                            <label for="content" class="form-label">내용</label>
+                            <textarea id="content" class="form-control"
+                                rows="5" readonly>${qna.content}</textarea>
                         </div>
                         <div class="mt-2">
-                            <label for="q_user_id" class="form-label">작성자</label>
-                            <input id="q_user_id" class="form-control"
-                                type="text" value="${qna.q_user_id}"
+                            <label for="userId" class="form-label">작성자</label>
+                            <input id="userId" class="form-control"
+                                type="text" value="${qna.userId}"
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="q_created_time" class="form-label">작성
-                                시간</label> <input id="q_created_time"
+                            <label for="createdTime" class="form-label">작성
+                                시간</label> <input id="createdTime"
                                 class="form-control" type="text"
-                                value="${qna.q_created_time}" readonly />
+                                value="${qna.createdTime}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="q_modified_time" class="form-label">최종
-                                수정 시간</label> <input id="q_modified_time"
+                            <label for="modifiedTime" class="form-label">최종
+                                수정 시간</label> <input id="modifiedTime"
                                 class="form-control" type="text"
-                                value="${qna.q_modified_time}" readonly />
+                                value="${qna.modifiedTime}" readonly />
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
-                    <c:if test="${signedInUser eq qna.q_user_id}">
+                    <c:if test="${signedInUser eq qna.userId}">
                     <c:url var="qnaModifyPage" value="/community/qnaModify">
-                        <c:param name="q_user_id" value="${qna.q_user_id}" />
+                        <c:param name="userId" value="${qna.userId}" />
                     </c:url>
                     <a class="btn btn-outline-primary"
                         href="${qnaModifyPage}">수정하기</a>
@@ -142,7 +143,7 @@
     </div>
 	
 	<%@ include file="../fragments/footer.jspf"%>
-	
+</div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

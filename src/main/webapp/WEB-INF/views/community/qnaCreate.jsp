@@ -20,6 +20,7 @@
     
 	</head>
 	<body>
+	<div class="wrapper">
         <div class="container-fluid">
             <c:set var="pageTitle" value="QnA Create" />
             <%@ include file="../fragments/header.jspf" %>
@@ -38,16 +39,16 @@
                         
                             <div class="mt-2">
                                 <input class="form-control" 
-                                type="text" name="q_title" placeholder="제목 입력" required autofocus/>
+                                type="text" name="title" placeholder="제목 입력" required autofocus/>
                             </div>
                             <div class="mt-2">
                                 <textarea class="form-control" 
-                                rows="5" name="q_content" placeholder="내용 입력" required></textarea>
+                                rows="5" name="content" placeholder="내용 입력" required></textarea>
                             </div>
                         <div class="mt-2">
                             <!-- 로그인 사용자 아이디를 author 입력 필드에 설정. -->
                             <input class="d-none" 
-                                type="text" name="q_user_id" value="${signedInUser}" readonly required />
+                                type="text" name="id" value="${signedInUser}" readonly required />
                         </div>
                         <div class="mt-2">
                             <input class="form-control btn btn-outline-success" type="submit" value="저장" />
@@ -60,7 +61,7 @@
         </div>
 
 		<%@ include file="../fragments/footer.jspf"%>
-		            
+		</div>        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>

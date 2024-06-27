@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class QnACreateDto {
-	private String q_title;
-	private String q_content;
-	private String q_user_id;
+	private String title;
+	private String content;
+	private String userId;
 	
 	public QnA toEntity() {
-		return QnA.builder().q_title(q_title).q_content(q_content).q_user_id(q_user_id).build();
+		return QnA.builder().qTitle(title).qContent(content).qUserId(userId).build();
 	}
 }

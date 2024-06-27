@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${footerCss}">
 	</head>
 	<body>
+	<div class="wrapper">
 		<div class="containere-fluid">
             <c:set var="pageTitle" value="QnA Modify" />
             <%@ include file="../fragments/header.jspf" %>
@@ -33,29 +34,29 @@
                     <div class="card-body">
                         <form id="modifyForm">
                             <div class="mt-2">
-                                <label for="q_post_id" class="form-label">번호</label>
-                                <input id="q_post_id" class="form-control" type="text"
-                                    name="q_post_id" value="${qna.q_post_id}" readonly />
+                                <label for="id" class="form-label">번호</label>
+                                <input id="id" class="form-control" type="text"
+                                    name="id" value="${qna.id}" readonly />
                             </div>
                             <div class="mt-2">
-                                <label for="q_title" class="form-label">제목</label>
-                                <input id="q_title" class="form-control" type="text"
-                                    name="q_title" value="${qna.q_title}" />
+                                <label for="title" class="form-label">제목</label>
+                                <input id="title" class="form-control" type="text"
+                                    name="title" value="${qna.title}" />
                             </div>
                             <div class="mt-2">
-                                <label for="q_content" class="form-label">내용</label>
-                                <textarea id="q_content" class="form-control"
-                                    name="q_content" rows="5">${qna.q_content}</textarea>
+                                <label for="content" class="form-label">내용</label>
+                                <textarea id="content" class="form-control"
+                                    name="content" rows="5">${qna.content}</textarea>
                     </div>
                             <div class="d-none">
-                                <label for="q_user_id" class="form-label">작성자</label>
-                                <input id="q_user_id" class="form-control" type="text"
-                                    value="${qna.q_user_id}" readonly />
+                                <label for="userId" class="form-label">작성자</label>
+                                <input id="userId" class="form-control" type="text"
+                                    value="${qna.userId}" readonly />
                             </div>
                         </form>
                     </div>
                     <!-- 로그인 사용자 아이디와 글 작성자가 같은 경우에만 버튼을 보여줌. -->
-                     <c:if test="${signedInUser eq qna.q_user_id}">
+                     <c:if test="${signedInUser eq qna.qUserId}">
                         <div class="card-footer">
                             <button id="btnDelete" class="btn btn-outline-danger">삭제</button>
                             <button id="btnUpdate" class="btn btn-outline-success">업데이트</button>
@@ -66,13 +67,13 @@
         </div>
         
         <%@ include file="../fragments/footer.jspf"%>
-        
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
         
-        <c:url var="qna_modify_js" value="/js/qna_modify.js" /> 
-        <script src="${qna_modify_js}"></script>
+        <c:url var="qnaModifyJs" value="/js/qna_modify.js" /> 
+        <script src="${qnaModifyJs}"></script>
         
                     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    	<c:url var="weatherJS" value="/js/weather.js" />

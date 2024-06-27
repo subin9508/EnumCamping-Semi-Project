@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
+<div class="wrapper">
     <div class="container-fluid">
         <c:set var="pageTitle" value="QnA List" />
         <%@ include file="../fragments/header.jspf" %>
@@ -32,7 +33,7 @@
                     <form method="get" action="${qnaSearchPage}">
                         <div class="row"> <!--  화면을 1:2:1로 나눔 (기본 12개) -->
                             <div class="col-3">
-                                <select class="form-control" name="category">
+                                <select class="form-control" name="qCategory">
                                     <option value="qt">제목</option>
                                     <option value="qc">내용</option>
                                     <option value="qtqc">제목+내용</option>
@@ -40,7 +41,7 @@
                                 </select>
                             </div>
                             <div class="col-7">
-                                <input type="text" class="form-control" name="q_keyword" placeholder="검색어 입력" required />
+                                <input type="text" class="form-control" name="qKeyword" placeholder="검색어 입력" required />
                             </div>
                             <div class="col-2">
                                 <input type="submit" class="form-control btn btn-outline-secondary" value="검색" />
@@ -61,15 +62,15 @@
                         <tbody>
                             <c:forEach var="qna" items="${qnas}">
                                 <tr>
-                                    <td>${p.id}</td>
+                                    <td>${qna.qPostId}</td>
                                     <td>
                                         <c:url var="qnaDetailsPage" value="/community/qnaDetails">
-                                            <c:param name="q_post_id" value="${qna.q_post_id}"></c:param>
+                                            <c:param name="qPostId" value="${qna.qPostId}"></c:param>
                                         </c:url>
-                                        <a href="${qnaDetailsPage}">${qna.q_title}</a>
+                                        <a href="${qnaDetailsPage}">${qna.qTitle}</a>
                                     </td>
-                                    <td>${qna.q_user_id}</td>
-                                    <td>${qna.q_modified_time}</td>
+                                    <td>${qna.qUserId}</td>
+                                    <td>${qna.qModifiedTime}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -80,7 +81,7 @@
     </div>
     
     		<%@ include file="../fragments/footer.jspf"%>
-    
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>

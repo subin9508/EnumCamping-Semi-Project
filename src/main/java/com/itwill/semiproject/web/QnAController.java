@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.semiproject.dto.QnACreateDto;
+import com.itwill.semiproject.dto.QnADetailsDto;
 import com.itwill.semiproject.dto.QnAListDto;
 import com.itwill.semiproject.dto.QnASearchDto;
 import com.itwill.semiproject.dto.QnAUpdateDto;
@@ -32,16 +35,18 @@ public class QnAController {
 		log.debug("list()");
 		
 		List<QnAListDto> list = qnaService.read();
-		model.addAttribute("QnA",list);
+		model.addAttribute("qnas",list);
 	}
 	
 	@GetMapping({"/qnaDetails", "/qnaModify"})
-	public void details(@RequestParam(name = "q_post_id") int q_post_id, Model model) {
-		log.debug("details(q_post_id={})", q_post_id);
+	public void details(@RequestParam(name = "id") int id, Model model) {
+		log.debug("details(id={})", id);
 		
-		QnA qna = qnaService.read(q_post_id);
+		QnA qna = qnaService.read(id);
 		
-		model.addAttribute("QnA", qna);
+		QnADetailsDto dto = QnADetailsDto.fromEntity(qna);
+		
+		model.addAttribute("qna", dto);
 	}
 	
 	@GetMapping("/qnaCreate")
@@ -57,12 +62,13 @@ public class QnAController {
 		
 		return "redirect:/community/qnaList";
 	}
+
 	
 	@GetMapping("/qnaDelete")
-	public String delete(@RequestParam(name="q_post_id") int q_post_id) {
-		log.debug("delete(id={})", q_post_id);
+	public String delete(@RequestParam(name="id") int id) {
+		log.debug("delete(qPostId={})", id);
 		
-		qnaService.delete(q_post_id);
+		qnaService.delete(id);
 		
 		return "redirect:/community/qnaList";
 	}
@@ -73,7 +79,7 @@ public class QnAController {
 		
 		qnaService.update(dto);
 		
-		return "redirect:/community/qnaDetails?q_post_id=" + dto.getQ_post_id();
+		return "redirect:/community/qnaDetails?id=" + dto.getId();
 	}
 	
 	@GetMapping("/qnaSearch")
@@ -81,6 +87,6 @@ public class QnAController {
 		log.debug("search(dto={}", dto);
 		
 		List<QnAListDto> list = qnaService.search(dto);
-		model.addAttribute("QnA", list);
+		model.addAttribute("qnas", list);
 	}
 }

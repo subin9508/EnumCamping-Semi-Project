@@ -1,6 +1,6 @@
 package com.itwill.semiproject.dto;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.itwill.semiproject.repository.QnA;
 
@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnAListDto {
-	private Integer q_post_id;
-	private String q_title;
-	private String q_user_id;
-	private Date q_modified_time;
+	private Integer id;
+	private String title;
+	private String userId;
+	private LocalDateTime modifiedTime;
 	
 	public static QnAListDto fromEntity(QnA qna) {
 		return QnAListDto.builder()
-				.q_post_id(qna.getQ_post_id())
-				.q_title(qna.getQ_title())
-				.q_user_id(qna.getQ_user_id())
-				.q_modified_time(qna.getQ_modified_time())
+				.id(qna.getQPostId())
+				.title(qna.getQTitle())
+				.userId(qna.getQUserId())
+				.modifiedTime(qna.getQcModifiedTime())
 				.build();
 	}
 }

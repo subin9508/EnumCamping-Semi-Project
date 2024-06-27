@@ -8,13 +8,13 @@ public interface QnADao {
 	
 	List<QnA> selectOrderByQnAPostIdDesc();
 	
-	QnA selectByQnAPostId(Integer q_post_id);
+	QnA selectByQnAPostId(Integer id);
 	
-	int insertQnA(QnA QnA);
+	int insertQnA(QnA qna);
 	
-	int updateQnA(QnA QnA);
+	int updateQnA(QnA qna);
 	
-	int deleteQnA(Integer q_post_id);
+	int deleteQnA(Integer id);
 	
 	List<QnA> search(QnASearchDto dto);
 }

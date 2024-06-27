@@ -29,10 +29,10 @@ public class QnAService {
 		return list.stream().map(QnAListDto::fromEntity).toList(); 
 	}
 	
-	public QnA read(Integer q_post_id) {
-		log.debug("read(q_user_id{}",q_post_id);
+	public QnA read(Integer id) {
+		log.debug("read(id{}", id);
 		
-		return qnaDao.selectByQnAPostId(q_post_id);
+		return qnaDao.selectByQnAPostId(id);
 	}
 	
 	
@@ -45,10 +45,10 @@ public class QnAService {
 		return result;
 	}
 	
-	public int delete(int q_post_id) {
-		log.debug("delete(q_post_id={})", q_post_id);
+	public int delete(int id) {
+		log.debug("delete(q_post_id={})", id);
 
-		int result = qnaDao.deleteQnA(q_post_id);
+		int result = qnaDao.deleteQnA(id);
 		log.debug("delete 결과={}", result);
 		
 		return result;
