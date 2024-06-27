@@ -13,20 +13,11 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="css/home.css">
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
-	rel="stylesheet">
-<link rel="icon" href="images/favicon.ico" />
-<link rel="apple-touch-icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    
+    <c:url value="/css/header.css" var="headerCSS"/>
+    <link rel="stylesheet" href="${headerCSS}">
+    <c:url value="/css/footer.css" var="footerCSS"/>
+    <link rel="stylesheet" href="${footerCSS}">
 </head>
 <body>
 <div class="wrapper">

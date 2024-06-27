@@ -21,24 +21,17 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="container-fluid">
-            <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
-        </div>
 
-        <div class="container-fluid">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
-        </div>
-
+    <div class="container-fluid">
         <main>
             <div class="mt-2">
                 <div class="card-body" style="margin-bottom: 50px;">
                     <h4 style="margin: 50px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주변 여행지</h4>
-                    <div class="horizontal-divider"></div>
-                    <div class="horizontal-divider2"></div>
+
                 </div>
                 <div>
                     <div class="row">
@@ -169,16 +162,16 @@
                 </div>
             </div>
         </main>
-        <div class="container-fluid">
-                <%@ include file="../fragments/footer.jspf"%>
-        </div>
+
+                
+
     </div>
-    
+    <%@ include file="../fragments/footer.jspf"%>    
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
-       	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
 </body>
