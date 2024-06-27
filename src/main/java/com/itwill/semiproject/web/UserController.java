@@ -66,7 +66,7 @@ public class UserController {
         session.invalidate();
         
         // 로그아웃 이후 로그인 페이지로 이동
-        return "redirect:/user/signin";
+        return "redirect:/";
     }
 	
 }

@@ -7,6 +7,11 @@
     <c:url value="/css/facilities.css" var="facilitiesCSS" />
     <link rel="stylesheet" href="${facilitiesCSS}" />
     
+    <c:url value="../css/header.css" var="headerCss"/>
+    <link rel="stylesheet" href="${headerCss}">
+    <c:url value="../css/footer.css" var="footerCss"/>
+    <link rel="stylesheet" href="${footerCss}">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Enum Semi-Project</title>
@@ -14,15 +19,13 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />       
-    <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
+    
 </head>
 <body>
+<div class="wrapper">
 
     <%@ include file="../fragments/header.jspf"%>
-
+<div class="footer-main-content">
     <%@ include file="../fragments/intro-sidebar.jspf"%>
 
     <div class="container">
@@ -34,7 +37,7 @@
         
             <div class="intro-card">
                 <h5>바베큐장</h5>
-                <div class="image-container">
+                <div class="img-container">
                     <c:url value="/images/intro/intro2_barbecue.jpg"
                         var="intro2_barbecue" />
                     <img alt="barbecue" src="${intro2_barbecue}"
@@ -46,7 +49,7 @@
 
             <div class="intro-card">
                 <h5>샤워실</h5>
-                <div class="image-container">
+                <div class="img-container">
                     <c:url value="/images/intro/intro2_shower.jpg"
                         var="intro2_shower" />
                     <img alt="shower" src="${intro2_shower}" class="img"
@@ -55,7 +58,7 @@
             </div>
             <div class="intro-card">
                 <h5>화장실</h5>
-                <div class="image-container">
+                <div class="img-container">
                     <c:url value="/images/intro/intro2_toilet.jpg"
                         var="intro2_toilet" />
                     <img alt="toilet" src="${intro2_toilet}" class="img"
@@ -68,7 +71,7 @@
         <div class="intro-section">
             <div class="intro-card">
                 <h5>개수대</h5>
-                <div class="image-container">
+                <div class="img-container">
                     <c:url value="/images/intro/intro2_sink.jpg"
                         var="intro2_sink" />
                     <img alt="sink" src="${intro2_sink}" class="img"
@@ -77,7 +80,7 @@
             </div>
             <div class="intro-card">
                 <h5>수영장</h5>
-                <div class="image-container">
+                <div class="img-container">
                     <c:url value="/images/intro/intro2_pool.jpg"
                         var="intro2_pool" />
                     <img alt="pool" src="${intro2_pool}" class="img"
@@ -86,7 +89,7 @@
             </div>
             <div class="intro-card">
                 <h5>매점</h5>
-                <div class="image-container">
+                <div class="img-container">
                 <c:url value="/images/intro/intro2_store.png"
                     var="intro2_store" />
                 <img alt="store" src="${intro2_store}" class="img"
@@ -96,7 +99,7 @@
         </div>
     </div>
 
-    <%@ include file="../fragments/footer.jspf"%>
+    
 
     <!-- Modal Structure -->
     <div class="modal" id="imageModal" tabindex="-1">
@@ -147,6 +150,9 @@
             </div>
         </div>
     </div>
+</div>
+    <%@ include file="../fragments/footer.jspf"%>
+</div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>

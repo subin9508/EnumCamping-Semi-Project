@@ -23,13 +23,13 @@
     <link rel="stylesheet" href="${footerCss}">
 </head>
 <body>
-    <div class="wrapper">
-            <%@ include file="../fragments/header.jspf"%>
-    <div class="container-fluid">
+<div class="wrapper">
+    <%@ include file="../fragments/header.jspf"%>
+    <div class="container-fluid footer-main-content">
         <main>
             <div class="row">
             <div class="col-4"></div>
-            <div class="mt-2 col-3 mb-5" style="border: 1px solid black">
+            <div class="col-4 mb-5" style="border: 1px solid black; padding: 10px; margin-top: 5%;">
                 <div class="card-header text-center mt-3">
                     <h2>로그인</h2>                
                 </div>
@@ -94,7 +94,7 @@
     </div>
     
     <%@ include file="../fragments/footer.jspf"%>
-    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
