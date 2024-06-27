@@ -33,9 +33,9 @@
             <strong>[편의시설]</strong>
         </h3>
 
-        <div class="intro-section">
+        <div class="facilities-section">
         
-            <div class="intro-card">
+            <div class="facilities-card">
                 <h5>바베큐장</h5>
                 <div class="img-container">
                     <c:url value="/images/intro/intro2_barbecue.jpg"
@@ -47,8 +47,7 @@
                 </div>
             </div>
 
-
-            <div class="intro-card">
+            <div class="facilities-card">
                 <h5>샤워실</h5>
                 <div class="img-container">
                     <c:url value="/images/intro/intro2_shower.jpg"
@@ -57,7 +56,7 @@
                         height=400px width=500px id="showerImage" />
                 </div>
             </div>
-            <div class="intro-card">
+            <div class="facilities-card">
                 <h5>화장실</h5>
                 <div class="img-container">
                     <c:url value="/images/intro/intro2_toilet.jpg"
@@ -71,8 +70,8 @@
         </div>
 
 
-        <div class="intro-section">
-            <div class="intro-card">
+        <div class="facilities-section">
+            <div class="facilities-card">
                 <h5>개수대</h5>
                 <div class="img-container">
                     <c:url value="/images/intro/intro2_sink.jpg"
@@ -81,7 +80,7 @@
                         height=400px width=500px id="sinkImage" />
                 </div>
             </div>
-            <div class="intro-card">
+            <div class="facilities-card">
                 <h5>수영장</h5>
                 <div class="img-container">
                     <c:url value="/images/intro/intro2_pool.jpg"
@@ -90,7 +89,7 @@
                         height=400px width=500px id="poolImage" />
                 </div>
             </div>
-            <div class="intro-card">
+            <div class="facilities-card">
                 <h5>매점</h5>
                 <div class="img-container">
                 <c:url value="/images/intro/intro2_store.png"
