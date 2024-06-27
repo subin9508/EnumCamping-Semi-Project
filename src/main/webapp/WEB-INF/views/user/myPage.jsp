@@ -43,7 +43,7 @@
                         <h2>내 정보 수정</h2>
                     </div>
                     <div class="card-body">
-                        <form action="/user/update" method="post">
+                        <form action="/user/user_update" method="post">
                          <input type="hidden" name="userid" value="${user.userid}" />
                             <div class="mb-3 row">
                                 <label for="username" class="col-sm-2 col-form-label">이름</label>

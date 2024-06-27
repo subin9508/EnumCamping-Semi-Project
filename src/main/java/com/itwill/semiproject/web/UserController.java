@@ -24,7 +24,7 @@ public class UserController {
 	
 	private final UserService userService; // 생성자에 의한 의존성 주입
 	
-	@GetMapping("/myPage")
+	@GetMapping("/myPage") 
 	public String myPage(@RequestParam(name = "userid") String userid, Model model) {
 		log.debug("myPage(userid={})", userid);
 		
@@ -35,12 +35,21 @@ public class UserController {
 		return "user/myPage";
 		
 	}
+	
+	@GetMapping("/user_update")
+	public String user_update(@RequestParam(name = "userid") String userid, Model model) {
+		log.debug("user_update(userid={})", userid);
+		
+		User user = userService.read(userid);
+		
+		model.addAttribute("user", user);
+		
+		return "user/user_update";
+	}
 
-	
-	
-	@PostMapping("/update")
-	public String update(UserUpdateDto dto) {
-		log.debug("update(dto={})", dto);
+	@PostMapping("/user_update")
+	public String user_update(UserUpdateDto dto) {
+		log.debug("user_update(dto={})", dto);
 		
 		userService.update(dto);
 		

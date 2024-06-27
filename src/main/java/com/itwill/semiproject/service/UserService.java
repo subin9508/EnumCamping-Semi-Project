@@ -15,17 +15,20 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class UserService {
 	
-	@Autowired
+	
 	private final UserDao userDao;
 	
 	
-	public int update(UserUpdateDto dto) {
+	public void update(UserUpdateDto dto) {
 		log.debug("update({})", dto);
 		
 		int result = userDao.updateUser(dto.toEntity());
 		log.debug("update 결과 = {}", result);
 		
-		return result;
+		if(result == 0) {
+			throw new RuntimeException("Update failed");
+		}
+		
 	}
 	
 	public User read(String userid) {

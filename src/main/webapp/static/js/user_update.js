@@ -2,6 +2,7 @@
  * /user/update.jsp에 포함.
  */
 
+ 
  const updateForm = document.querySelector('form#updateForm');
  const inputUserId = document.querySelector('input#userid');
  const inputUserPassword = document.querySelector('input#userpassword');
@@ -19,8 +20,10 @@
 	// 업데이트 내용 저장 확인:
 	const result = confirm('입력하신 내용으로 저장할까요?');
 	if(result) {
-		updateForm.action = '/update'; // 요청 주소
-		updateForm.method = 'POST' // 요청 방식
+		
+		console.log("제대로 되는 지 테스트");
+		updateForm.action = 'user_update'; // 요청 주소
+		updateForm.method = 'POST'; // 요청 방식
 		updateForm.submit(); // 폼 양식 데이터 제출(서버로 요청 보냄).
 	}
 	

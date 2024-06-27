@@ -13,9 +13,9 @@
     
     
     <!-- users 테이블에서 해당 userid의 정보 업데이트. -->
-    <update id="updateUser">
+    <update id="updateUser" parameterType="com.itwill.semiproject.repository.User">
     	update users
-    	set user_password = #{userpassword}, userphone = #{userphone}
+    	set user_password = #{userpassword}, user_phone = #{userphone}
     	where user_id = #{userid}
     </update>
     
