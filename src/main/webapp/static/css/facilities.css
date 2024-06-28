@@ -97,14 +97,14 @@
   top: 40%;
 }
 
-.intro-section {
+.facilities-section {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap; /* 줄 바꿈을 위해 추가 */
     margin-top: 20px;
 }
 
-.intro-card {
+.facilities-card {
     width: 30%;
     height: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -130,4 +130,3 @@
     left: 0;
     object-fit: contain; /* 이미지를 컨테이너에 맞추고 비율 유지 */
 }
-
