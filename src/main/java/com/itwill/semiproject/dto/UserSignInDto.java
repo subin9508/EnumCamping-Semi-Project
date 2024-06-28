@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class UserSignInDto {
-    private String userId;
-    private String userPassword;
-    
-    public User toEntity() {
-        return User.builder()
-                .userId(userId)
-                .userPassword(userPassword)
-                .build();
-    }
+	private String userid;
+	private String userpassword;
+	
+	public User toEntity() {
+		return User.builder()
+				.userId(userid)
+				.userPassword(userpassword)
+				.build();
+	}
 }

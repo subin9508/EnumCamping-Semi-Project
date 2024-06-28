@@ -17,13 +17,13 @@
     
     <!-- 로그인 -->
     <select id="selectByUseridAndPassword" resultType="User">
-        select * from users
-        where user_id = #{userId} and user_password = #{userPassword}
+        select * from users where user_id = #{userId} and user_password = #{userPassword}
     </select>
     
     <!-- 이메일 중복 체크 -->
     <select id="selectByUserEmail" resultType="User">
         select * from users where user_email = #{email}
     </select>
+
 
 </mapper>
