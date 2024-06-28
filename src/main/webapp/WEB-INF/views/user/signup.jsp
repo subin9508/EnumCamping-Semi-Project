@@ -27,12 +27,8 @@
         <%@ include file="../fragments/header.jspf"%>
         <div class="fo">
 
-            <main style="margin-bottom: 5%">
-                <div
-                    class="container-fluid d-flex justify-content-center"
-                    style="margin-top:3%;">
-                    <h1>ENUM</h1>
-                </div>
+            <main style="margin-bottom: 5%; margin-top: 5%" >
+                
                 <div
                     class="container-fluid d-flex justify-content-center">
                     <div class="my-2 card card-body"
@@ -40,12 +36,12 @@
                         <c:url var="signUpPage" value="/user/signup" />
                         <form action="${signUpPage}" method="post">
                             <div
-                                class="container-fluid d-flex justify-content-left"
-                                style="margin-top: 2%;">
-                                <h2>회원가입</h2>
+                                class="container-fluid d-flex justify-content-center"
+                                style="margin-top: 2%; margin-bottom: 5%;'">
+                                <h1>회원가입</h1>
                             </div>
                             <div class="my-2 row"
-                                style="margin-top: 2%;">
+                                style="margin-top: 5%;">
                                 <div
                                     class="col-3 d-flex align-items-center">아이디</div>
                                 <div class="col-6">
