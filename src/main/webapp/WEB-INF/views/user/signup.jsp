@@ -22,95 +22,121 @@
     </head>
 
     <body>
+    <div class="wrapper">
         <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
-            <%@ include file="../fragments/header.jspf"%>
-        <div class="container-fluid">
-        
-        <main>
-        <div class="container-fluid d-flex justify-content-center" style="margin-top: 3%;"><h1>ENUM</h1></div>
-            <div class="container-fluid d-flex justify-content-center">
-                <div class="my-2 card card-body" style="width: 100%; max-width: 700px;">
-                    <c:url var="signUpPage" value="/user/signup" />
-                    <form action="${signUpPage}" method="post">
-                        <div class="container-fluid d-flex justify-content-left" style="margin-top: 2%;"><h2>회원가입</h2></div>
-                        <div class="my-2 row" style="margin-top: 2%;">
-                            <div class="col-3 d-flex align-items-center" >아이디</div>
-                            <div class="col-6">
-                                <input type="text" class="form-control"
-                                    id="user_id" name="userId"
-                                    placeholder="아이디" required autofocus />
+        <%@ include file="../fragments/header.jspf"%>
+        <div class="fo">
+
+            <main style="margin-bottom: 5%">
+                <div
+                    class="container-fluid d-flex justify-content-center"
+                    style="margin-top:3%;">
+                    <h1>ENUM</h1>
+                </div>
+                <div
+                    class="container-fluid d-flex justify-content-center">
+                    <div class="my-2 card card-body"
+                        style="width: 100%; max-width: 700px;">
+                        <c:url var="signUpPage" value="/user/signup" />
+                        <form action="${signUpPage}" method="post">
+                            <div
+                                class="container-fluid d-flex justify-content-left"
+                                style="margin-top: 2%;">
+                                <h2>회원가입</h2>
+                            </div>
+                            <div class="my-2 row"
+                                style="margin-top: 2%;">
+                                <div
+                                    class="col-3 d-flex align-items-center">아이디</div>
+                                <div class="col-6">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="user_id" name="userId"
+                                        placeholder="아이디" required
+                                        autofocus />
+                                </div>
+
+                                <div class="col-3">
+                                    <button type="button"
+                                        id="checkUseridbutton"
+                                        class="form-control btn btn-outline-success">중복
+                                        확인</button>
+                                </div>
+
+                                <!-- userid 중복 체크 결과 표시할 영역 -->
+                                <div id="checkUseridResult"></div>
                             </div>
 
-                            <div class="col-3">
-                                <button type="button" id="checkUseridbutton"
-                                    class="form-control btn btn-outline-success">중복
-                                    확인</button>
-                            </div>
-                            
-                            <!-- userid 중복 체크 결과 표시할 영역 -->
-                            <div id="checkUseridResult"></div>
-                        </div>
 
-                            
                             <div class="my-2 row">
-                                <div class="col-3 d-flex align-items-center">비밀번호</div>
+                                <div
+                                    class="col-3 d-flex align-items-center">비밀번호</div>
                                 <div class="col-9">
-                                <input type="password"
-                                    class="form-control"
-                                    id="user_password"
-                                    name="userPassword"
-                                    placeholder="영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합" 
-                                    required />
+                                    <input type="password"
+                                        class="form-control"
+                                        id="user_password"
+                                        name="userPassword"
+                                        placeholder="영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합"
+                                        required />
                                 </div>
                             </div>
-                            
+
                             <!-- 비밀번호 조건 체크 결과 표시할 영역 -->
-                            <div id="passwordValidationMessage"
-                            ></div>
+                            <div id="passwordValidationMessage"></div>
 
                             <div class="my-2 row">
-                                <div class="col-3 d-flex align-items-center">비밀번호 확인</div>
+                                <div
+                                    class="col-3 d-flex align-items-center">비밀번호
+                                    확인</div>
                                 <div class="col-9">
-                                <input type="password"
-                                    class="form-control"
-                                    id="user_confirmpassword"
-                                    name="confirmpassword"
-                                    placeholder="비밀번호확인" required />
-                                    </div> 
-                            </div>
-                            
-                            <!-- userid 중복 체크 결과 표시할 영역 -->   
-                                <div id="passwordMatchMessage"></div>
-
-                            <div class="my-2 row">
-                                <div class="col-3 d-flex align-items-center">이름</div>
-                                <div class="col-9">
-                                <input type="text" class="form-control"
-                                    id="user_name" name="userName"
-                                    placeholder="이름" required />
+                                    <input type="password"
+                                        class="form-control"
+                                        id="user_confirmpassword"
+                                        name="confirmpassword"
+                                        placeholder="비밀번호확인" required />
                                 </div>
                             </div>
 
-                           <div class="my-2 row">
-                                <div class="col-3 d-flex align-items-center">핸드폰 번호</div>
+                            <!-- userid 중복 체크 결과 표시할 영역 -->
+                            <div id="passwordMatchMessage"></div>
+
+                            <div class="my-2 row">
+                                <div
+                                    class="col-3 d-flex align-items-center">이름</div>
                                 <div class="col-9">
-                                <input type="text" class="form-control"
-                                    id="user_phone" name="userPhone"
-                                    placeholder="01X-XXX(또는 XXXX)-XXXX 형식으로 입력하세요." required />
+                                    <input type="text"
+                                        class="form-control"
+                                        id="user_name" name="userName"
+                                        placeholder="이름" required />
                                 </div>
-                                <div id="checkUserPhoneResult"> </div>
                             </div>
 
                             <div class="my-2 row">
-                            <div class="col-3 d-flex align-items-center">이메일</div>
+                                <div
+                                    class="col-3 d-flex align-items-center">핸드폰
+                                    번호</div>
                                 <div class="col-9">
-                                <input type="email" class="form-control"
-                                    id="user_email" name="userEmail"
-                                    placeholder="이메일" required />
+                                    <input type="text"
+                                        class="form-control"
+                                        id="user_phone" name="phone"
+                                        placeholder="01X-XXX(또는 XXXX)-XXXX 형식으로 입력하세요."
+                                        required />
                                 </div>
-                                 <div id="checkUserEmailResult"></div>
+                                <div id="checkUserPhoneResult"></div>
                             </div>
-                           
+
+                            <div class="my-2 row">
+                                <div
+                                    class="col-3 d-flex align-items-center">이메일</div>
+                                <div class="col-9">
+                                    <input type="email"
+                                        class="form-control"
+                                        id="user_email" name="email"
+                                        placeholder="이메일" required />
+                                </div>
+                                <div id="checkUserEmailResult"></div>
+                            </div>
+
                             <!--  <button id="btnsendemail" class="btn btn-outline-success" style="display: inline-block;">인증하기</button>-->
 
 
@@ -121,8 +147,8 @@
                        <button id="btncode" class="btn btn-outline-success" style="display: inline-block;">인증완료</button>
                     </div>
                     -->
-                            
-                            
+
+
                             <div class="my-2">
                                 <button id="btnSignUp"
                                     class="form-control btn btn-outline-success disabled">가입하기</button>
@@ -137,14 +163,16 @@
                                     class="btn btn-outline-success"
                                     style="display: inline-block;">로그인</a>
                             </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            
-        </main>
-        
-    </div>
 
+            </main>
+            <div class="container-fluid" id="wrap">
+                <%@ include file="../fragments/footer.jspf"%>
+            </div>
+        </div>
+    </div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

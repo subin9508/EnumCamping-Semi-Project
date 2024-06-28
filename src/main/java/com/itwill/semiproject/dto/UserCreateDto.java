@@ -10,16 +10,16 @@ public class UserCreateDto {
 	private String userId;
 	private String userPassword;
 	private String userName;
-	private String userPhone;
-	private String userEmail;
+	private String phone;
+	private String email;
 
 	public User toEntity() {
 		return User.builder()
 				.userId(userId)
 				.userPassword(userPassword)
 				.userName(userName)
-				.userPhone(userPhone)
-				.userEmail(userEmail)
+				.phone(phone)
+				.email(email)
 				.build();
 	}
 }

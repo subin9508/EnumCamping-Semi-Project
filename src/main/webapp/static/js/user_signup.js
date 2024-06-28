@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkEmail(event) {
     const email = inputEmail.value;
     console.log(email);
-    const uri = `./checkemail?userEmail=${email}`; // 이메일 중복 체크 REST API URI
+    const uri = `./checkemail?email=${email}`; // 이메일 중복 체크 REST API URI
 
     axios
         .get(uri)

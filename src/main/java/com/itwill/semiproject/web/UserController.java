@@ -63,10 +63,10 @@ public class UserController {
 	// 사용자 아이디 중복체크 REST 컨트롤러
 		@GetMapping("/checkemail")
 		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
-		public ResponseEntity<String> userEmail(@RequestParam(name = "userEmail") String userEmail) {
-			log.debug("checkEmail(checkEmail={})", userEmail);
+		public ResponseEntity<String> email(@RequestParam(name = "email") String email) {
+			log.debug("checkEmail(email={})", email);
 
-			boolean result = userService.checkEmail(userEmail);
+			boolean result = userService.checkEmail(email);
 			if (result) {
 				return ResponseEntity.ok("Y");
 			} else {
