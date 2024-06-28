@@ -87,9 +87,10 @@
                                         style="display: inline-block;">
                                         <h6>계정이 없으신가요?</h6>
                                     </div>
-                                    <button id="btnUpdate"
+                                    <a href="signup" 
+                                        id="btnUpdate"
                                         class="btn signup"
-                                        style="display: inline-block;">회원가입</button>
+                                        style="display: inline-block;">회원가입</a>
                                 </div>
                             </form>
                         </div>

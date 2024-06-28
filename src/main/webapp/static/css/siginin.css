@@ -47,14 +47,14 @@ input.btn-login:hover {
     color: red;
 }
 
-button.signup {
+a.signup {
     border-radius: 5px;
     border-color: light-gray;
     background-color: #212529;
     color: white;
 }
 
-button.signup:hover  {
+a.signup:hover  {
     background-color: #333; /* hover 상태에서 약간 밝은 색상으로 변경 */
     border-color: lightgray;
     color: red;
