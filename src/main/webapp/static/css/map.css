@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 .facility-section {
-        display: flex;
         justify-content: center; /* 부모 요소가 가운데 정렬되도록 설정 */
         align-items: flex-start; /* 자식 요소들이 상단에 정렬되도록 설정 */
-        padding: 20px;
+        padding: 2px;
     }
     
       .intro-sidebar {
@@ -16,7 +15,7 @@
     .slider-container {
         flex:100%; /* 남은 공간을 슬라이더가 차지하도록 설정 */
         display: flex;
-        justify-content: left; /* 슬라이더를 수평으로 가운데 정렬 */
+        justify-content: left; /* 슬라이더를 수평으로 왼쪽 정렬 */
     }
     
     .slider {
@@ -84,16 +83,16 @@
   border-width: 1px 0px 0px 0px;
   height: 91px;
   position: absolute;
-  right: 410px;
+  right: 200px;
   left: 50px;
-  top: 800px;
+  top: 900px;
 }
 .term {
   width: 200px;
   height: 22px;
   position: absolute;
   left: 0px;
-  top: 31px;
+  top: 37px;
 }
 
 .div2 {
@@ -145,7 +144,7 @@
   position: absolute;
   right: 200px;
   left: 50px;
-  top: 900px;
+  top: 1000px;
 }
 
 .descriptions5 {
@@ -267,11 +266,11 @@
 }
 .background {
   background: #f8f9fa;
-  height: 550px;
+  height: 600px;
   position: absolute;
   right: 50px;
   left: 50px;
-  top: 228.98px;
+  top: 180px;
   overflow: hidden;
 }
 .background2 {
@@ -280,7 +279,8 @@
   position: absolute;
   right: 200px;
   left: 50px;
-  top: 668.98px;
+  top: 800px;
+  
 }
 .container1 {
   height: 38px;
@@ -305,6 +305,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  font-weight: bold;
 }
 .horizontal-border {
   border-style: solid;
@@ -314,7 +315,7 @@
   position: absolute;
   right: 200px;
   left: 50px;
-  top: 1100px;
+  top: 1200px;
 }
 
 .horizontal-border1 {
@@ -339,7 +340,7 @@
   height: 25px;
   position: absolute;
   left: 0px;
-  top: 30px;
+  top: 37px;
 }
 
 .div8 {

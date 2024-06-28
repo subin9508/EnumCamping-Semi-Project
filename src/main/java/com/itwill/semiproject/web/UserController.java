@@ -77,5 +77,49 @@ public class UserController {
         }
         return redirectUrl;
     }
+  
+  
+	@GetMapping("/signup") // GET 방식의 /user/signup 요청을 처리하는 컨트롤러 메서드
+	public void signUp() {
+		log.debug("GET signUp()");
+	}
+
+	@PostMapping("/signup") // POST 방식의 /user/signup 요청을 처리하는 컨트롤러 메서드
+	public String signUp(UserCreateDto dto) {
+		log.debug("POST signUp({})", dto);
+
+		userService.create(dto);
+
+		return "redirect:/user/signin"; // 로그인 페이지로 이동.
+	}
+
+	// 사용자 아이디 중복체크 REST 컨트롤러
+	@GetMapping("/checkid")
+	@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
+	public ResponseEntity<String> checkId(@RequestParam(name = "userId") String userId) {
+		log.debug("checkId(user_id={})", userId);
+
+		boolean result = userService.checkUserid(userId);
+		if (result) {
+			return ResponseEntity.ok("Y");
+		} else {
+			return ResponseEntity.ok("N");
+		}
+	}
+
+	
+	// 사용자 아이디 중복체크 REST 컨트롤러
+		@GetMapping("/checkemail")
+		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
+		public ResponseEntity<String> email(@RequestParam(name = "email") String email) {
+			log.debug("checkEmail(email={})", email);
+
+			boolean result = userService.checkEmail(email);
+			if (result) {
+				return ResponseEntity.ok("Y");
+			} else {
+				return ResponseEntity.ok("N");
+			}
+		}
 	
 }

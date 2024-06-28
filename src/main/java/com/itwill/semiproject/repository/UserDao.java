@@ -1,5 +1,9 @@
 package com.itwill.semiproject.repository;
 
 public interface UserDao {
-	User selectByUseridAndPassword(User user);
+	
+	User selectByUserid(String userId);
+    int insert(User user);
+    User selectByUseridAndPassword(User user);
+    User selectByUserEmail(String email);
 }
