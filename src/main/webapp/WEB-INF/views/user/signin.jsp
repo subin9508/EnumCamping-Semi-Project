@@ -46,20 +46,20 @@
                                     class="form-group mt-5 d-flex align-items-center">
                                     <label for="userid"
                                         class="form-label text-center">아이디</label>
-                                    <input type="text" name="userid"
+                                    <input type="text" name="userId"
                                         placeholder="아이디"
                                         class="form-control write"
-                                        id="userid" required autofocus />
+                                        id="userId" required autofocus />
                                 </div>
                                 <div
                                     class="form-group mt-3 d-flex align-items-center">
                                     <label for="password"
                                         class="form-label text-center">비밀번호</label>
                                     <input type="password"
-                                        name="userpassword"
+                                        name="userPassword"
                                         placeholder="비밀번호"
                                         class="form-control write"
-                                        id="userpassword" required />
+                                        id="userPassword" required />
                                 </div>                              
                                 <div class="mt-2">
                                     <input class="form-control btn btn-login mt-2"

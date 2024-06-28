@@ -32,6 +32,11 @@
         #login:hover {
             color: red;
         }
+        
+       
+        #btnSignUp:hover {
+            color: green;
+        }
     </style> 
     </head>
 
@@ -54,8 +59,7 @@
                                 style="margin-top: 2%; margin-bottom: 5%;'">
                                 <h1>회원가입</h1>
                             </div>
-                            <div class="my-2 row"
-                                style="margin-top: 5%;">
+                            <div class="my-2 row">
                                 <div
                                     class="col-3 d-flex align-items-center">아이디</div>
                                 <div class="col-6">
@@ -128,7 +132,7 @@
                                 <div class="col-9">
                                     <input type="text"
                                         class="form-control"
-                                        id="user_phone" name="phone"
+                                        id="user_phone" name="userPhone"
                                         placeholder="01X-XXX(또는 XXXX)-XXXX 형식으로 입력하세요."
                                         required />
                                 </div>
@@ -141,7 +145,7 @@
                                 <div class="col-9">
                                     <input type="email"
                                         class="form-control"
-                                        id="user_email" name="email"
+                                        id="user_email" name="userEmail"
                                         placeholder="이메일" required />
                                 </div>
                                 <div id="checkUserEmailResult"></div>
