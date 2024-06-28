@@ -1,7 +1,11 @@
 package com.itwill.semiproject.web;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
@@ -30,6 +36,8 @@ public class UserController {
 	
 	private final UserService userService; // 생성자에 의한 의존성 주입
 	
+	private final String uploadDirectory = "path/to/upload/directory"; // 실제 업로드 경로로 수정
+	
 	@GetMapping("/myPage") 
 	public String myPage(@RequestParam(name = "userId") String userId, Model model, HttpSession session) {
 		log.debug("myPage(userId={})", userId);
@@ -43,6 +51,39 @@ public class UserController {
 		return "user/myPage";
 		
 	}
+	
+	
+	@GetMapping("/password_check")
+	public String showPasswordCheckForm() {
+		return "user/password_check";
+	}
+	
+	@PostMapping("/password_check")
+	public String passwordCheck(@RequestParam("password") String password, HttpSession session, Model model) {
+	    User user = (User) session.getAttribute("user");
+	    if (user == null) {
+	        return "redirect:/user/signin";
+	    }
+	    
+	    UserSignInDto dto = new UserSignInDto();
+	    dto.setUserid(user.getUserId());
+	    dto.setUserpassword(password);
+	    
+	    User verifiedUser = userService.read(dto);
+	    if (verifiedUser != null) {
+	        // 비밀번호가 일치하는 경우 user_update 페이지로 리다이렉트
+	        return "redirect:/user/user_update";
+	    } else {
+	        // 비밀번호가 일치하지 않는 경우 에러 메시지와 함께 password_check 페이지로 돌아감
+	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	        return "user/password_check";
+	    }
+	}
+
+	
+	
+	
+	
 	
 	@GetMapping("/user_update")
 	public String user_update(HttpSession session, Model model) {
@@ -73,6 +114,60 @@ public class UserController {
 		
 		return "redirect:/user/myPage?userId=" + dto.getUserId();
 	}
+	
+	
+	 @PostMapping("/uploadProfilePicture")
+	    public String uploadProfilePicture(@RequestPart("profilePicture") MultipartFile file, HttpSession session) {
+	        User user = (User) session.getAttribute("user");
+	        if (user == null || file.isEmpty()) {
+	            return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
+	        }
+
+	        try {
+	            String fileName = user.getUserId() + "_" + file.getOriginalFilename();
+	            Path path = Paths.get(uploadDirectory, fileName);
+	            Files.write(path, file.getBytes());
+
+	            // 기존 프로필 사진 삭제 (if needed)
+	            if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
+	                Path oldPath = Paths.get(uploadDirectory, user.getProfilePictureUrl());
+	                Files.deleteIfExists(oldPath);
+	            }
+
+	            user.setProfilePictureUrl(fileName);
+	            userService.updateProfilePicture(user);
+
+	            session.setAttribute("user", user);
+	        } catch (IOException e) {
+	            log.error("Profile picture upload failed", e);
+	        }
+
+	        return "redirect:/user/user_update";
+	    }
+
+	    @PostMapping("/deleteProfilePicture")
+	    public String deleteProfilePicture(HttpSession session) {
+	        User user = (User) session.getAttribute("user");
+	        if (user == null) {
+	            return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
+	        }
+
+	        try {
+	            if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
+	                Path path = Paths.get(uploadDirectory, user.getProfilePictureUrl());
+	                Files.deleteIfExists(path);
+	            }
+
+	            user.setProfilePictureUrl(null);
+	            userService.updateProfilePicture(user);
+
+	            session.setAttribute("user", user);
+	        } catch (IOException e) {
+	            log.error("Profile picture delete failed", e);
+	        }
+
+	        return "redirect:/user/user_update";
+	    }
 
 	
 	

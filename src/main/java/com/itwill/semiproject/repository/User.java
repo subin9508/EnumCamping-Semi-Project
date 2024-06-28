@@ -16,5 +16,6 @@ public class User {
 	private String userEmail; //이메일
 	private String userPhone; //핸드폰
 	private String userRole; //일반유저인지 관리자인지
+	private String profilePictureUrl; // 프로필 사진 URL
 	
 }

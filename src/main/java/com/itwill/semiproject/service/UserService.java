@@ -48,5 +48,17 @@ public class UserService {
         
         return user;
     }
+	
+	// 프로필 사진 URL 업데이트 메서드 추가
+    public void updateProfilePicture(User user) {
+        log.debug("updateProfilePicture(user={})", user);
+        
+        int result = userDao.updateProfilePicture(user);
+        log.debug("프로필 사진 업데이트 결과 = {}", result);
+        
+        if (result == 0) {
+            throw new RuntimeException("Profile picture update failed");
+        }
+    }
 
 }

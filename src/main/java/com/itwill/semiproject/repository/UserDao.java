@@ -16,5 +16,7 @@ public interface UserDao {
 	@Select("select * from users where user_id = #{userId} and user_password = #{userPassword}")
 	User selectByUseridAndPassword(User user);
 	
+	@Update("UPDATE users SET profile_picture_url = #{profilePictureUrl} WHERE user_id = #{userId}")
+    int updateProfilePicture(User user);
 	
 }

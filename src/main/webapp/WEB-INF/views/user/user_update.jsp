@@ -43,9 +43,21 @@
                     <div class="card-header">
                         <h2>내 정보 수정</h2>
                     </div>
-                    <div class="card-body">
-                       <form id="updateForm" method="post">
-                         <%-- <input type="hidden" name="userId" value="${user.userId}" />--%>
+                    <div class="card-body text-center">
+                        <!-- Profile Picture Upload Section -->
+                        <div class="mb-3">
+                            <form id="profilePictureForm" action="${pageContext.request.contextPath}/user/uploadProfilePicture" method="post" enctype="multipart/form-data">
+            					<img id="profilePicture" src="${user.profilePictureUrl != null ? user.profilePictureUrl : '/path/to/default/profile.jpg'}" alt="프로필 사진" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+            						<input type="file" class="form-control-file" id="profilePictureUpload" name="profilePicture" accept="image/*">
+            							<button type="submit" class="btn btn-primary mt-2">업로드</button>
+        					</form>
+                            <form id="deleteProfilePictureForm" method="post" action="<c:url value='/user/deleteProfilePicture' />">
+                                <button type="submit" class="btn btn-danger mt-2">삭제</button>
+                            </form>
+                        </div>
+                        <!-- End of Profile Picture Upload Section -->
+                        <form id="updateForm" method="post" action="<c:url value='/user/user_update' />">
+                            <%-- <input type="hidden" name="userId" value="${user.userId}" />--%>
                             <div class="mb-3 row">
                                 <label for="userName" class="col-sm-2 col-form-label">이름</label>
                                 <div class="col-sm-10">
@@ -76,9 +88,8 @@
                                     <input id="userPhone" type="text" class="form-control" name="userPhone" value="${user.userPhone}" >
                                 </div>
                             </div>
+                            <button id="btnUpdate" class="btn btn-primary">수정하기</button>
                         </form>
-                        
-                        <button id="btnUpdate"class="btn btn-primary">수정하기</button>
                     </div>
                     
                     <div class="card-footer"></div>
@@ -92,12 +103,11 @@
     </footer>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
     
-    <c:url var="user_update_js" value="/js/user_update.js" />
-    <script src="${user_update_js}"></script>
+<c:url var="user_update_js" value="/js/user_update.js" />
+<script src="${user_update_js}"></script>
 </body>
 </html>
