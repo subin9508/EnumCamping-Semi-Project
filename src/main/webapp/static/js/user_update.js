@@ -4,9 +4,9 @@
 
  
  const updateForm = document.querySelector('form#updateForm');
- const inputUserId = document.querySelector('input#userid');
- const inputUserPassword = document.querySelector('input#userpassword');
- const inputUserPhone = document.querySelector('input#userphone');
+ const inputUserId = document.querySelector('input#userId');
+ const inputUserPassword = document.querySelector('input#userPassword');
+ const inputUserPhone = document.querySelector('input#userPhone');
  const btnUpdate = document.querySelector('button#btnUpdate');
  
  // 업데이트 버튼의 클릭 이벤트 리스너:
@@ -23,7 +23,7 @@
 		
 		console.log("제대로 되는 지 테스트");
 		updateForm.action = 'user_update'; // 요청 주소
-		updateForm.method = 'POST'; // 요청 방식
+		updateForm.method = 'post'; // 요청 방식
 		updateForm.submit(); // 폼 양식 데이터 제출(서버로 요청 보냄).
 	}
 	

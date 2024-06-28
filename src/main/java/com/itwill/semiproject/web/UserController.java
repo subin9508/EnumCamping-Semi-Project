@@ -1,17 +1,23 @@
 package com.itwill.semiproject.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,10 +31,12 @@ public class UserController {
 	private final UserService userService; // 생성자에 의한 의존성 주입
 	
 	@GetMapping("/myPage") 
-	public String myPage(@RequestParam(name = "userid") String userid, Model model) {
-		log.debug("myPage(userid={})", userid);
+	public String myPage(@RequestParam(name = "userId") String userId, Model model, HttpSession session) {
+		log.debug("myPage(userId={})", userId);
 		
-		User user = userService.read(userid);
+		User user = userService.read(userId);
+		
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
 		
 		model.addAttribute("user", user);
 		
@@ -37,10 +45,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/user_update")
-	public String user_update(@RequestParam(name = "userid") String userid, Model model) {
-		log.debug("user_update(userid={})", userid);
+	public String user_update(HttpSession session, Model model) {
+		log.debug("user_update");
+		User user = (User) session.getAttribute("user"); // 세션에서 사용자 정보 가져오기
+		log.debug("session user: {}", user);
 		
-		User user = userService.read(userid);
+		if (user == null) {
+			// 사용자 정보가 세션에 없는 경우 오류 처리
+			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
+		}
 		
 		model.addAttribute("user", user);
 		
@@ -48,13 +61,64 @@ public class UserController {
 	}
 
 	@PostMapping("/user_update")
-	public String user_update(UserUpdateDto dto) {
+	public String user_update(UserUpdateDto dto, HttpSession session) {
 		log.debug("user_update(dto={})", dto);
 		
 		userService.update(dto);
 		
-		return "redirect:/user/myPage?userid=" + dto.getUserid();
+		// 업데이트된 사용자 정보를 세션에 다시 저장
+		User updatedUser = userService.read(dto.getUserId());
+		log.info("updatedUser: {}", updatedUser);
+		session.setAttribute("user", updatedUser);
+		
+		return "redirect:/user/myPage?userId=" + dto.getUserId();
 	}
+
+	
+	
+	@GetMapping("/signin")
+	public void signin() {
+		log.debug("signin()");
+	}
+	
+	@PostMapping("/signin")
+    public String signin(@ModelAttribute UserSignInDto dto, 
+            HttpSession session,
+            @RequestParam(name = "target", defaultValue = "") String target) 
+                    throws UnsupportedEncodingException {
+        log.debug("POST - signin(dto={}, session={}, target={})", dto, session, target);
+        
+        // 서비스 메서드를 호출해서 아이디와 비밀번호가 일치하는 사용자가 있는 지 확인
+        User user = userService.read(dto);
+        if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
+            // 세션에 로그인 사용자 정보를 저장
+            session.setAttribute("signedInUser", user.getUserId());
+            log.debug("session Id = {}", user.getUserId());
+            // 타겟 페이지로 이동
+            log.debug("session={}", session.getAttribute("signedInUser"));
+            return (target.equals("")) ? "redirect:/" : "redirect:" + target;
+            
+        } else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
+            // 로그인 페이지로 이동
+        	log.debug("target({})", target);
+            return "redirect:/user/signin?result=f&target=" 
+                + URLEncoder.encode(target, "UTF-8");
+        }
+    }
+	
+	@GetMapping("/signout")
+    public String signout(HttpSession session) {
+        log.debug("signout(session={})", session);
+        
+        // 세션에 저장된 "signedInUser" 정보를 삭제.
+        session.removeAttribute("signedInUser");
+        
+        // 세션을 만료시킴.
+        session.invalidate();
+        
+        // 로그아웃 이후 로그인 페이지로 이동
+        return "redirect:/";
+    }
 	
 	
 	

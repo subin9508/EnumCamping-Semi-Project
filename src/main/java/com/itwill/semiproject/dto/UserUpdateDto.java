@@ -7,12 +7,13 @@ import lombok.Data;
 @Data
 public class UserUpdateDto {
 	
-	private String userid;
-	private String userpassword;
-	private String userphone;
+	private String userId;
+	private String userPassword;
+	private String userPhone;
+	
 	
 	public User toEntity() {
-		return User.builder().userid(userid).userpassword(userpassword).userphone(userphone).build();
+		return User.builder().userId(userId).userPassword(userPassword).userPhone(userPhone).build();
 	}
 
 }

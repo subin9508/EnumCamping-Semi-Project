@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,35 +45,35 @@
                     </div>
                     <div class="card-body">
                        <form id="updateForm" method="post">
-                         <!-- <input type="hidden" name="userid" value="${user.userid}" />-->
+                         <%-- <input type="hidden" name="userId" value="${user.userId}" />--%>
                             <div class="mb-3 row">
-                                <label for="username" class="col-sm-2 col-form-label">이름</label>
+                                <label for="userName" class="col-sm-2 col-form-label">이름</label>
                                 <div class="col-sm-10">
-                                    <input id="username" type="text" class="form-control" id="username" name="username" value="${user.username}" readonly >
+                                    <input id="userName" type="text" class="form-control" name="userName" value="${user.userName}" readonly >
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="userid" class="col-sm-2 col-form-label">아이디</label>
+                                <label for="userId" class="col-sm-2 col-form-label">아이디</label>
                                 <div class="col-sm-10">
-                                    <input id="userid" type="text" class="form-control" id="userid" name="userid" value="${user.userid}" readonly>
+                                    <input id="userId" type="text" class="form-control" name="userId" value="${user.userId}" readonly>
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="userpassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
                                 <div class="col-sm-10">
-                                    <input id="userpassword" type="text" class="form-control" id="userpassword" name="userpassword" value="${user.userpassword}">
+                                    <input id="userPassword" type="text" class="form-control" name="userPassword" value="${user.userPassword}">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="useremail" class="col-sm-2 col-form-label">이메일</label>
+                                <label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
                                 <div class="col-sm-10">
-                                    <input id="useremail" type="text" class="form-control" id="useremail" name="useremail"value="${user.useremail}" readonly>
+                                    <input id="userEmail" type="text" class="form-control" name="userEmail"value="${user.userEmail}" readonly>
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="userphone" class="col-sm-2 col-form-label">전화번호</label>
+                                <label for="userPhone" class="col-sm-2 col-form-label">전화번호</label>
                                 <div class="col-sm-10">
-                                    <input id="userphone" type="userphone" class="form-control" id="userphone" name="userphone" value="${user.userphone}" >
+                                    <input id="userPhone" type="text" class="form-control" name="userPhone" value="${user.userPhone}" >
                                 </div>
                             </div>
                         </form>

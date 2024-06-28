@@ -3,6 +3,7 @@ package com.itwill.semiproject.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
@@ -31,10 +32,21 @@ public class UserService {
 		
 	}
 	
-	public User read(String userid) {
-		log.debug("read(id={})", userid);
+	public User read(String userId) {
+		log.debug("read(id={})", userId);
 		
-		return userDao.selectByUserId(userid);
+		return userDao.selectByUserId(userId);
 	}
+	
+	
+	public User read(UserSignInDto dto) {
+        log.debug("read(dto={})", dto);
+        
+        // 리포지토리 메서드를 호출해서, 아이디와 비밀번호가 일치하는 사용자가 있는 지 검색
+        User user = userDao.selectByUseridAndPassword(dto.toEntity());
+        log.debug("로그인 사용자 = {}", user);
+        
+        return user;
+    }
 
 }

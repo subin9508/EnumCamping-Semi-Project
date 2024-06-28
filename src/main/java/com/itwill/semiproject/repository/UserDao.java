@@ -7,9 +7,14 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserDao {
 	
-	@Update("update users set user_password = #{userpassword}, user_phone = #{userphone} where user_id = #{userid}")	
+	@Update("update users set user_password = #{userPassword}, user_phone = #{userPhone} where user_id = #{userId}")	
 	int updateUser(User user);
 	
-	@Select("select * from users where user_id = #{userid}")
-	User selectByUserId(String userid);
+	@Select("select * from users where user_id = #{userId}")
+	User selectByUserId(String userId);
+	
+	@Select("select * from users where user_id = #{userId} and user_password = #{userPassword}")
+	User selectByUseridAndPassword(User user);
+	
+	
 }

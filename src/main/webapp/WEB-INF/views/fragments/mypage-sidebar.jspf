@@ -12,7 +12,7 @@
     </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="">정보수정</a>           
+            <a href="user_update">정보수정</a>           
         </li>
         <li>
             <a href="">예약내역</a>
