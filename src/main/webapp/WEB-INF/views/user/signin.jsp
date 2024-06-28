@@ -60,13 +60,9 @@
                                         placeholder="비밀번호"
                                         class="form-control write"
                                         id="userpassword" required />
-                                </div>
-                                <div>
-                                    <input name="target" value="${param.target}" readonly />
-                                </div>
+                                </div>                              
                                 <div class="mt-2">
-                                    <input
-                                        class="form-control btn btn-login mt-2"
+                                    <input class="form-control btn btn-login mt-2"
                                         id="btnSignIn" type="submit"
                                         value="로그인" />
                                 </div>

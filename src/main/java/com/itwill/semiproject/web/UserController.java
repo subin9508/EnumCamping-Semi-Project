@@ -1,6 +1,7 @@
 package com.itwill.semiproject.web;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import org.springframework.stereotype.Controller;
@@ -50,13 +51,17 @@ public class UserController {
         } else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
             // 로그인 페이지로 이동
         	log.debug("target({})", target);
-            return "redirect:/user/signin?result=f&target=" 
-                + URLEncoder.encode(target, "UTF-8");
+        	String redirectUrl = "redirect:/user/signin?result=f";
+        	if (!target.isEmpty()) {
+        		redirectUrl += "&target=" + URLEncoder.encode(target, "UTF-8"); 
+        	}
+            return redirectUrl;
         }
     }
 	
 	@GetMapping("/signout")
-    public String signout(HttpSession session) {
+    public String signout(HttpSession session, 
+    		@RequestParam(name = "target", defaultValue = "") String target) {
         log.debug("signout(session={})", session);
         
         // 세션에 저장된 "signedInUser" 정보를 삭제.
@@ -65,8 +70,12 @@ public class UserController {
         // 세션을 만료시킴.
         session.invalidate();
         
-        // 로그아웃 이후 로그인 페이지로 이동
-        return "redirect:/";
+        // 로그아웃 이후 타겟 페이지로 이동
+        String redirectUrl = "redirect:/";
+        if (!target.isEmpty()) {
+        	redirectUrl = "redirect:" + target;
+        }
+        return redirectUrl;
     }
 	
 }
