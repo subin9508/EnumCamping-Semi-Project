@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
+import com.itwill.semiproject.dto.NoticeUpdateDto;
 import com.itwill.semiproject.repository.Notice;
 import com.itwill.semiproject.repository.NoticeDao;
 
@@ -38,5 +39,17 @@ public class NoticeService {
 		
 		return result;
 	};
+	
+	public int deleteNotice(int id) {
+		log.debug("deleteNotice, id={}",id);
+		int result = dao.deleteNotice(id);
+		return result;
+	}
+	
+	public int updateNotice(NoticeUpdateDto dto) {
+		log.debug("updateNotice, {}",dto);
+		int result = dao.updateNotice(dto.toEntity());
+		return result;
+	}
 
 }

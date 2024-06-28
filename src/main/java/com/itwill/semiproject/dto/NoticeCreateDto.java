@@ -13,7 +13,7 @@ public class NoticeCreateDto {
 	private String notTitle;
 	private String notContent;
 	
-	//Notice에서 필요한 내용 뽑아오기
+	//Notice에 DTO 내용 넣기
 	public Notice toEntity() {
 		return Notice.builder()
 				.notContent(notContent)

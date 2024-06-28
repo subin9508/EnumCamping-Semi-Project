@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
+import com.itwill.semiproject.dto.NoticeUpdateDto;
 import com.itwill.semiproject.repository.Notice;
 import com.itwill.semiproject.service.NoticeService;
 
@@ -33,13 +34,12 @@ public class NoticeController {
 		log.debug("model={}",model);
 	}
 	
-	@GetMapping("/details")
+	@GetMapping({"/details","/modify"})
 	public void noticeDetails(Model model, @RequestParam(name = "id") int id) {
 		log.debug("GET : details");
 		Notice notice = noticeService.selectNoticeById(id);
 		
 		NoticeDetailsDto dto = NoticeDetailsDto.fromEntity(notice);
-		log.debug("뭐가문제일까");
 		model.addAttribute("notice", dto); 
 		log.debug("model에 추가 {}",dto);
 		//return "community/notice/details";
@@ -60,10 +60,27 @@ public class NoticeController {
 	}
 	
 	
-	@GetMapping("/modify")
-	public void noticemodify(Notice notice) {
-		log.debug("GET: modify");
+	
+	@GetMapping("/delete")
+	public String noticedelete(@RequestParam(name = "id") int id) {
+		log.debug("GET: delete");
+		noticeService.deleteNotice(id);
+		return "redirect:list";
 	}
 	
+	@GetMapping("/update")
+	public void noticeUpdate() {
+		log.debug("GET: update");
+	}
 	
+	@PostMapping("/update")
+	public String noticeUpdate(NoticeUpdateDto dto){
+		log.debug("POST: update");
+		log.debug("{}",dto);
+		noticeService.updateNotice(dto);
+	
+		return "redirect:list";
+	}
+	
+
 }    

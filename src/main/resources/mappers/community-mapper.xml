@@ -16,6 +16,11 @@
     <insert id="insertNotice">
         insert into notices (not_title, not_content) values (#{notTitle},#{notContent})
     </insert>
+    
+    <update id="updateNotice">
+        update notices set not_title = #{title}, not_content = #{content}, not_modified_time= sysdate where id = #{id}
+    </update>
+    
 
     <delete id="deleteNotice">
         delete from notices where not_post_id = #{id}

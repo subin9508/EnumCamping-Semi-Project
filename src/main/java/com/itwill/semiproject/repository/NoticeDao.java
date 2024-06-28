@@ -11,6 +11,8 @@ public interface NoticeDao {
 	//int insertNotice(String title, String content);
 	int insertNotice(Notice notice);
 	
-	int deleteNotice(Notice notice);
+	int deleteNotice(int id);
+	
+	int updateNotice(Notice notice);
 
 }

@@ -18,14 +18,14 @@ public class Notice {
 	LocalDateTime notModifiedTime;
 	Integer notCertify;
 	
-	
+	/*
 	public static Notice toEntity(NoticeDetailsDto  dto) {
 		return Notice.builder()
-				.notPostId(dto.getId())
-				.notTitle(dto.getTitle())
-				.notContent(dto.getContent())
-				.notCreatedTime(dto.getCreatedTime())
-				.notModifiedTime(dto.getModifiedTime())
+				.notPostId(dto.getNotPostId())
+				.notTitle(dto.getNotTitle())
+				.notContent(dto.getNotContent())
+				.notCreatedTime(dto.getNotCreatedTime())
+				.notModifiedTime(dto.getNotModifiedTime())
 				.build();
-	}
+	}*/
 }

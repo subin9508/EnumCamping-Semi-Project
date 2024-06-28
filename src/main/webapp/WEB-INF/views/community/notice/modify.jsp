@@ -25,34 +25,37 @@
                 <div class="card-header">
                     <h2>공지 수정</h2>
                 </div>
+                
                 <div class="card-body">
-                    <c:url var="postCreatePage" value="/post/create" />
-                    <form method="post" action="${postCreatePage }">
-                        <!-- 같은 주소로 action 할 때는 생략 가능. -->
-                        <!-- form에서 action 속성값일 설정하지 않으면 현재 요청 주소로 요청을 다시 보냄 -->
+                    <form id="modifyForm">
                         <div class="mt-2">
-                            <input class="form-control" type="text" name="title" placeholder="제목 입력"  required autofocus />
+                            <label for="id" class="form-label">번호</label>
+                            <input id="id" class="form-control" type="text"
+                                name="id" value="${notice.notPostId}" readonly />
                         </div>
                         <div class="mt-2">
-                            <textarea class="form-control" rows="8"
-                                name="content" placeholder="내용 입력"
-                                required="required"></textarea>
+                            <label for="title" class="form-label">제목</label>
+                            <input id="title" class="form-control" type="text"
+                                name="title" value="${notice.notTitle}" />
                         </div>
                         <div class="mt-2">
-                            <input
-                                class="form-control btn btn-outline-success"
-                                type="submit" value="저장" />
+                            <label for="content" class="form-label">내용</label>
+                            <textarea id="content" class="form-control" 
+                                name="content" rows="5">${notice.notContent}</textarea>
                         </div>
                     </form>
-
                 </div>
+
+                <div class="card-footer">
+                    <button id="btnUpdate" class="btn btn-outline-success">업데이트</button>
+                </div>
+
             </div>
-        </main>
-        </div>
-
-
-    <%@ include file="../../fragments/footer.jspf"%>
+         </main>
     </div>
+                
+    <%@ include file="../../fragments/footer.jspf"%>
+</div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -60,5 +63,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
+    <c:url var="notice_js" value="/js/notice_modify.js" />
+    <script src="${notice_js}"></script>
 </body>
 </html>

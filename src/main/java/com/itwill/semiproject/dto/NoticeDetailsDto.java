@@ -11,19 +11,19 @@ import lombok.Data;
 @Data  @Builder @AllArgsConstructor
 public class NoticeDetailsDto {
 
-	private Integer id;
-	private String title;
-	private String content;
-	private LocalDateTime createdTime;
-	private LocalDateTime modifiedTime;
+	private Integer notPostId;
+	private String notTitle;
+	private String notContent;
+	private LocalDateTime notCreatedTime;
+	private LocalDateTime notModifiedTime;
 	
 	//Notice에서 필요한 내용 뽑아오기
 	public static NoticeDetailsDto fromEntity(Notice notice) {
-		return NoticeDetailsDto.builder().id(notice.getNotPostId())
-				.modifiedTime(notice.getNotModifiedTime())
-				.createdTime(notice.getNotCreatedTime())
-				.content(notice.getNotContent())
-				.title(notice.getNotTitle()).build();
+		return NoticeDetailsDto.builder().notPostId(notice.getNotPostId())
+				.notModifiedTime(notice.getNotModifiedTime())
+				.notCreatedTime(notice.getNotCreatedTime())
+				.notContent(notice.getNotContent())
+				.notTitle(notice.getNotTitle()).build();
 	}
 	
 	
