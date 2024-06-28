@@ -28,6 +28,29 @@
         
         
             <div class="mt-10 card">
+                  <div class="card-header">
+                    <c:url var="noticeSearchPage" value="/notice/search" />
+                    <form action="${noticeSearchPage }">
+                        <div class="row">
+                            <div class="col-3">
+                                <select class="form-control" name= "category">
+                                    <option value="t">제목</option>
+                                    <option value="c">내용</option>
+                                    <option value="tc">제목+내용</option>
+                                    <option value="a">작성자</option>
+                                </select>
+                            </div>
+                            <div class="col-7">
+                                <input class="form-control" type="text" name="keyword" placeholder="검색어 입력" required/>
+                            </div>
+                            <div class="col-2">
+                                <input type="submit" class="form-control btn btn-secondary" value="검색"/>
+                            </div>
+                        
+                        </div>
+                    </form>
+                    
+                </div>
                 <div class="card-body">
                     <table class="table table-striped table-hover">
                         <thead>

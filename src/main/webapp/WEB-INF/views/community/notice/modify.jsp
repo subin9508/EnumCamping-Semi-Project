@@ -31,17 +31,17 @@
                         <div class="mt-2">
                             <label for="id" class="form-label">번호</label>
                             <input id="id" class="form-control" type="text"
-                                name="id" value="${notice.notPostId}" readonly />
+                                name="notPostId" value="${notice.notPostId}" readonly />
                         </div>
                         <div class="mt-2">
                             <label for="title" class="form-label">제목</label>
                             <input id="title" class="form-control" type="text"
-                                name="title" value="${notice.notTitle}" />
+                                name="notTitle" value="${notice.notTitle}" />
                         </div>
                         <div class="mt-2">
                             <label for="content" class="form-label">내용</label>
                             <textarea id="content" class="form-control" 
-                                name="content" rows="5">${notice.notContent}</textarea>
+                                name="notContent" rows="5">${notice.notContent}</textarea>
                         </div>
                     </form>
                 </div>

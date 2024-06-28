@@ -18,7 +18,7 @@
     </insert>
     
     <update id="updateNotice">
-        update notices set not_title = #{title}, not_content = #{content}, not_modified_time= sysdate where id = #{id}
+        update notices set not_title = #{notTitle}, not_content = #{notContent}, not_modified_time= sysdate where not_post_id = #{notPostId}
     </update>
     
 
