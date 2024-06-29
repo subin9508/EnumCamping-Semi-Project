@@ -18,7 +18,26 @@
 
         <c:url value="../css/footer.css" var="footerCss" />
         <link rel="stylesheet" href="${footerCss}">
-         
+        <style>
+        #checkUseridbutton, #login, #btnSignUp {
+            background-color: black;
+            color: white;
+            border: 1px solid black;
+        }
+
+        #checkUseridbutton:hover {
+            color: red;
+        }
+
+        #login:hover {
+            color: red;
+        }
+        
+       
+        #btnSignUp:hover {
+            color: green;
+        }
+    </style> 
     </head>
 
     <body>
@@ -40,8 +59,7 @@
                                 style="margin-top: 2%; margin-bottom: 5%;'">
                                 <h1>회원가입</h1>
                             </div>
-                            <div class="my-2 row"
-                                style="margin-top: 5%;">
+                            <div class="my-2 row">
                                 <div
                                     class="col-3 d-flex align-items-center">아이디</div>
                                 <div class="col-6">
@@ -55,7 +73,7 @@
                                 <div class="col-3">
                                     <button type="button"
                                         id="checkUseridbutton"
-                                        class="form-control btn btn-outline-success">중복
+                                        class="form-control">중복
                                         확인</button>
                                 </div>
 
@@ -114,7 +132,7 @@
                                 <div class="col-9">
                                     <input type="text"
                                         class="form-control"
-                                        id="user_phone" name="phone"
+                                        id="user_phone" name="userPhone"
                                         placeholder="01X-XXX(또는 XXXX)-XXXX 형식으로 입력하세요."
                                         required />
                                 </div>
@@ -127,7 +145,7 @@
                                 <div class="col-9">
                                     <input type="email"
                                         class="form-control"
-                                        id="user_email" name="email"
+                                        id="user_email" name="userEmail"
                                         placeholder="이메일" required />
                                 </div>
                                 <div id="checkUserEmailResult"></div>
@@ -155,8 +173,8 @@
                                     style="display: inline-block;">
                                     <h6>이미 계정이 있으신가요?</h6>
                                 </div>
-                                <a href="signin"
-                                    class="btn btn-outline-success"
+                                <a href="signin" 
+                                    id="login" class="btn"
                                     style="display: inline-block;">로그인</a>
                             </div>
                         </form>

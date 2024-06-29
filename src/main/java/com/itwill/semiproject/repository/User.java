@@ -13,7 +13,7 @@ public class User {
 	private String userName; // 회원 이름
 	private String userId; // 로그인 아이디
 	private String userPassword; // 로그인 비밀번호
-	private String email; // 이메일
-	private String phone; // 핸드폰
+	private String userEmail; // 이메일
+	private String userPhone; // 핸드폰
 	private String userRole; // 관리자 or 회원
 }

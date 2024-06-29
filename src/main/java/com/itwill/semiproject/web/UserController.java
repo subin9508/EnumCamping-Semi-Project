@@ -4,13 +4,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
@@ -111,10 +114,10 @@ public class UserController {
 	// 사용자 아이디 중복체크 REST 컨트롤러
 		@GetMapping("/checkemail")
 		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
-		public ResponseEntity<String> email(@RequestParam(name = "email") String email) {
-			log.debug("checkEmail(email={})", email);
+		public ResponseEntity<String> email(@RequestParam(name = "userEmail") String userEmail) {
+			log.debug("checkEmail(userEmail={})", userEmail);
 
-			boolean result = userService.checkEmail(email);
+			boolean result = userService.checkEmail(userEmail);
 			if (result) {
 				return ResponseEntity.ok("Y");
 			} else {
