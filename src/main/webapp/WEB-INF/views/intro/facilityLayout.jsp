@@ -24,26 +24,25 @@
 </head>
 <body>
 <div class="wrapper">
-   <div class="container-fluid no-padding">
+  
         <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
         <%@ include file="../fragments/header.jspf"%>
     </div>
     <main>
-        <div class="heading-wrapper">
-            <h4 class="fheading-3">시설배치도</h4>
-        </div>
-        <div class="image-sidebar-wrapper">
+       
+            <h5 class="fheading-3">시설배치도</h5>
+        
+       
             <div class="intro-sidebar">
                 <c:set var="pageTitle" value="Home" scope="page" />
                 <%@ include file="../fragments/intro-sidebar.jspf"%>
             </div>
-            <div class="image-wrapper">
-                <img
-                        src="https://lh3.googleusercontent.com/proxy/ihHd_M-wsSuOaBajAJ34kuoZEF7eUVB-X7ccHVw0IKrrxmQxI0-0VzlXdot4WL72_CKpfBPWoQfM7-NbGfTQyhqiICCMK6WAWFXWYFMaK17mwKuc9PtXPBEOssmdUjDtmDgJ7W3d"
-                        alt="Image4" width="900" height="900">
-            </div>
-        </div>
-        <section class="facility-section content-wrapper">
+
+		<img class="facility-image" src="../images/facilityLayout.jpg"
+			alt="캠핑장 시설배치도" width="600" height="600">
+
+
+		<section class="facility-section content-wrapper">
             <div class="box">
                 <div class="left-content">
                     <div class="item">
