@@ -4,9 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:url value="/css/map.css" var="mapCss"/>
-    <link rel="stylesheet" href="${mapCss}">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>캠핑 소개 페이지</title>
@@ -16,24 +13,27 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous">
     
+    <c:url value="/css/map.css" var="mapCss" />
+    <link rel="stylesheet" href="${mapCss}">
+    
     <c:url value="../css/header.css" var="headerCss"/>
     <link rel="stylesheet" href="${headerCss}">
+    
     <c:url value="../css/footer.css" var="footerCss"/>
     <link rel="stylesheet" href="${footerCss}">
 
 </head>
 
 <body>
-    <div class="container-fluid wrapper">
-        <div class="container-fluid">
+    
             <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
-        </div>
+      
 
         <div class="container-fluid">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
         </div>
-
+        
         <main>
             <section class="facility-section">
                 <div class="slider-container">
@@ -96,13 +96,11 @@
                 </div>
             </section>
 
-
             <div class="container-fluid" id="wrap">
                 <%@ include file="../fragments/footer.jspf"%>
             </div>
 
-        </main>
-    </div>
+        </main>   
 
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5f576fbc4bf2a712d8f138a0b208af6"></script>
@@ -140,5 +138,10 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
+
 </body>
 </html>
