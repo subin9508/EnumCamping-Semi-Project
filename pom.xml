@@ -192,7 +192,7 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version> <!-- 버전은 최신 버전으로 설정 -->
+			<version>${commons-fileupload-version}</version> <!-- 버전은 최신 버전으로 설정 -->
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>

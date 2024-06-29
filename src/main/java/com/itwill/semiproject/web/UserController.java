@@ -124,7 +124,7 @@ public class UserController {
 	        }
 
 	        try {
-	            String fileName = user.getUserId() + "_" + file.getOriginalFilename();
+	            String fileName = user.getUserId() + "_" + file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드
 	            Path path = Paths.get(uploadDirectory, fileName);
 	            Files.write(path, file.getBytes());
 
