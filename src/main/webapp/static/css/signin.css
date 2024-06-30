@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+.login-container {
+    display: flex;
+    justify-content: center; /*수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 100vh; /* 뷰포트 높이 100% */
+}
+
+.fixed-size-form {
+    width: 400px; /* 고정 너비 설정 */
+    margin: 0 auto; /* 수평 중앙 정렬 */
+    padding: 10px;
+}
+
 input.write {
     border-radius: 5px;
     border-color: black;
@@ -34,14 +47,14 @@ input.btn-login:hover {
     color: red;
 }
 
-button.signup {
+a.signup {
     border-radius: 5px;
     border-color: light-gray;
     background-color: #212529;
     color: white;
 }
 
-button.signup:hover  {
+a.signup:hover  {
     background-color: #333; /* hover 상태에서 약간 밝은 색상으로 변경 */
     border-color: lightgray;
     color: red;
@@ -67,3 +80,5 @@ button.signup:hover  {
 .justify-content-center {
     justify-content: center;
 }
+
+

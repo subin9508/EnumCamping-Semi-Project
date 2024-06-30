@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* styles.css */
 
 header {
@@ -13,7 +12,7 @@ header a {
 }
 
 #top {
-    height: 100px;
+    height: 150px;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -44,7 +43,7 @@ header a {
 .main .nav-link {
     font-size: 1.2rem; /* 네비게이션 바 링크의 폰트 크기 */
     padding: 10px 20px; /* 네비게이션 바 링크의 패딩 */
-    margin-right: 50px;
+    margin-right: 100px;
 }
 
 

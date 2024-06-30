@@ -1,25 +1,20 @@
 package com.itwill.semiproject.web;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
-import com.itwill.semiproject.dto.UserUpdateDto;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
 
@@ -28,148 +23,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor // final 필드들을 초기화하는 생성자
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
-	
-	private final UserService userService; // 생성자에 의한 의존성 주입
-	
-	private final String uploadDirectory = "path/to/upload/directory"; // 실제 업로드 경로로 수정
-	
-	@GetMapping("/myPage") 
-	public String myPage(@RequestParam(name = "userId") String userId, Model model, HttpSession session) {
-		log.debug("myPage(userId={})", userId);
-		
-		User user = userService.read(userId);
-		
-		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
-		
-		model.addAttribute("user", user);
-		
-		return "user/myPage";
-		
-	}
-	
-	
-	@GetMapping("/password_check")
-	public String showPasswordCheckForm() {
-		return "user/password_check";
-	}
-	
-	@PostMapping("/password_check")
-	public String passwordCheck(@RequestParam("password") String password, HttpSession session, Model model) {
-	    User user = (User) session.getAttribute("user");
-	    if (user == null) {
-	        return "redirect:/user/signin";
-	    }
-	    
-	    UserSignInDto dto = new UserSignInDto();
-	    dto.setUserid(user.getUserId());
-	    dto.setUserpassword(password);
-	    
-	    User verifiedUser = userService.read(dto);
-	    if (verifiedUser != null) {
-	        // 비밀번호가 일치하는 경우 user_update 페이지로 리다이렉트
-	        return "redirect:/user/user_update";
-	    } else {
-	        // 비밀번호가 일치하지 않는 경우 에러 메시지와 함께 password_check 페이지로 돌아감
-	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-	        return "user/password_check";
-	    }
-	}
-
-	
-	
-	
-	
-	
-	@GetMapping("/user_update")
-	public String user_update(HttpSession session, Model model) {
-		log.debug("user_update");
-		User user = (User) session.getAttribute("user"); // 세션에서 사용자 정보 가져오기
-		log.debug("session user: {}", user);
-		
-		if (user == null) {
-			// 사용자 정보가 세션에 없는 경우 오류 처리
-			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-		}
-		
-		model.addAttribute("user", user);
-		
-		return "user/user_update";
-	}
-
-	@PostMapping("/user_update")
-	public String user_update(UserUpdateDto dto, HttpSession session) {
-		log.debug("user_update(dto={})", dto);
-		
-		userService.update(dto);
-		
-		// 업데이트된 사용자 정보를 세션에 다시 저장
-		User updatedUser = userService.read(dto.getUserId());
-		log.info("updatedUser: {}", updatedUser);
-		session.setAttribute("user", updatedUser);
-		
-		return "redirect:/user/myPage?userId=" + dto.getUserId();
-	}
-	
-	
-	 @PostMapping("/uploadProfilePicture")
-	    public String uploadProfilePicture(@RequestPart("profilePicture") MultipartFile file, HttpSession session) {
-	        User user = (User) session.getAttribute("user");
-	        if (user == null || file.isEmpty()) {
-	            return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-	        }
-
-	        try {
-	            String fileName = user.getUserId() + "_" + file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드
-	            Path path = Paths.get(uploadDirectory, fileName);
-	            Files.write(path, file.getBytes());
-
-	            // 기존 프로필 사진 삭제 (if needed)
-	            if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
-	                Path oldPath = Paths.get(uploadDirectory, user.getProfilePictureUrl());
-	                Files.deleteIfExists(oldPath);
-	            }
-
-	            user.setProfilePictureUrl(fileName);
-	            userService.updateProfilePicture(user);
-
-	            session.setAttribute("user", user);
-	        } catch (IOException e) {
-	            log.error("Profile picture upload failed", e);
-	        }
-
-	        return "redirect:/user/user_update";
-	    }
-
-	    @PostMapping("/deleteProfilePicture")
-	    public String deleteProfilePicture(HttpSession session) {
-	        User user = (User) session.getAttribute("user");
-	        if (user == null) {
-	            return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-	        }
-
-	        try {
-	            if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
-	                Path path = Paths.get(uploadDirectory, user.getProfilePictureUrl());
-	                Files.deleteIfExists(path);
-	            }
-
-	            user.setProfilePictureUrl(null);
-	            userService.updateProfilePicture(user);
-
-	            session.setAttribute("user", user);
-	        } catch (IOException e) {
-	            log.error("Profile picture delete failed", e);
-	        }
-
-	        return "redirect:/user/user_update";
-	    }
-
-	
+	private final UserService userService;
 	
 	@GetMapping("/signin")
 	public void signin() {
@@ -188,21 +47,24 @@ public class UserController {
         if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
             // 세션에 로그인 사용자 정보를 저장
             session.setAttribute("signedInUser", user.getUserId());
-            log.debug("session Id = {}", user.getUserId());
+            
             // 타겟 페이지로 이동
-            log.debug("session={}", session.getAttribute("signedInUser"));
             return (target.equals("")) ? "redirect:/" : "redirect:" + target;
             
         } else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
             // 로그인 페이지로 이동
         	log.debug("target({})", target);
-            return "redirect:/user/signin?result=f&target=" 
-                + URLEncoder.encode(target, "UTF-8");
+        	String redirectUrl = "redirect:/user/signin?result=f";
+        	if (!target.isEmpty()) {
+        		redirectUrl += "&target=" + URLEncoder.encode(target, "UTF-8"); 
+        	}
+            return redirectUrl;
         }
     }
 	
 	@GetMapping("/signout")
-    public String signout(HttpSession session) {
+    public String signout(HttpSession session, 
+    		@RequestParam(name = "target", defaultValue = "") String target) {
         log.debug("signout(session={})", session);
         
         // 세션에 저장된 "signedInUser" 정보를 삭제.
@@ -211,10 +73,56 @@ public class UserController {
         // 세션을 만료시킴.
         session.invalidate();
         
-        // 로그아웃 이후 로그인 페이지로 이동
-        return "redirect:/";
+        // 로그아웃 이후 타겟 페이지로 이동
+        String redirectUrl = "redirect:/";
+        if (!target.isEmpty()) {
+        	redirectUrl = "redirect:" + target;
+        }
+        return redirectUrl;
     }
+  
+  
+	@GetMapping("/signup") // GET 방식의 /user/signup 요청을 처리하는 컨트롤러 메서드
+	public void signUp() {
+		log.debug("GET signUp()");
+	}
+
+	@PostMapping("/signup") // POST 방식의 /user/signup 요청을 처리하는 컨트롤러 메서드
+	public String signUp(UserCreateDto dto) {
+		log.debug("POST signUp({})", dto);
+
+		userService.create(dto);
+
+		return "redirect:/user/signin"; // 로그인 페이지로 이동.
+	}
+
+	// 사용자 아이디 중복체크 REST 컨트롤러
+	@GetMapping("/checkid")
+	@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
+	public ResponseEntity<String> checkId(@RequestParam(name = "userId") String userId) {
+		log.debug("checkId(user_id={})", userId);
+
+		boolean result = userService.checkUserid(userId);
+		if (result) {
+			return ResponseEntity.ok("Y");
+		} else {
+			return ResponseEntity.ok("N");
+		}
+	}
+
 	
-	
+	// 사용자 아이디 중복체크 REST 컨트롤러
+		@GetMapping("/checkemail")
+		@ResponseBody // 메서드 리턴 값이 클라이언트로 전달되는 데이터.
+		public ResponseEntity<String> email(@RequestParam(name = "userEmail") String userEmail) {
+			log.debug("checkEmail(userEmail={})", userEmail);
+
+			boolean result = userService.checkEmail(userEmail);
+			if (result) {
+				return ResponseEntity.ok("Y");
+			} else {
+				return ResponseEntity.ok("N");
+			}
+		}
 	
 }

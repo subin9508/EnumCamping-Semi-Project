@@ -2,25 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.spring2.repository.UserDao">
+<mapper namespace="com.itwill.semiproject.repository.UserDao">
 
-    <!-- users 테이블에서 userid로 검색. 내 정보 상세보기. -->
-    <select id="selectByUserId" resultType="User">
-    	select * from users where user_id = #{userId}
-    	
+    <!-- 아이디 중복 체크 -->
+    <select id="selectByUserid" resultType="User">
+        select * from users where user_id = #{userId}
     </select>
     
-     <!-- 로그인 -->
-    <select id="selectByUserIdAndPassword" resultType="User">
+    <!-- 회원 가입 -->
+    <insert id="insert">
+        insert into users (user_id, user_password, user_name, user_phone, user_email)
+        values (#{userId}, #{userPassword}, #{userName}, #{userPhone}, #{userEmail})
+    </insert>
+    
+    <!-- 로그인 -->
+    <select id="selectByUseridAndPassword" resultType="User">
         select * from users where user_id = #{userId} and user_password = #{userPassword}
     </select>
     
-    <!-- users 테이블에서 해당 userid의 정보 업데이트. -->
-    <update id="updateUser" parameterType="com.itwill.semiproject.repository.User">
-    	update users
-    	set user_password = #{userPassword}, user_phone = #{userPhone}
-    	where user_id = #{userId}
-    </update>
-    
+    <!-- 이메일 중복 체크 -->
+    <select id="selectByUserEmail" resultType="User">
+        select * from users where user_email = #{userEmail}
+    </select>
+
 
 </mapper>
