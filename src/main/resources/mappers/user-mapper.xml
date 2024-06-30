@@ -24,6 +24,8 @@
     <select id="selectByUserEmail" resultType="User">
         select * from users where user_email = #{userEmail}
     </select>
+    
+  
 
 
 </mapper>
