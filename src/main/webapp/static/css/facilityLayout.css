@@ -52,9 +52,10 @@ nav {
 }
 
 .facility-image {
-    margin-top: -40px;
+    margin-top: 20px;
     margin-bottom: 30px; /* 수정된 부분: 오타 수정 */
     padding: 20px; /* 이미지 주위에 여백 추가 */
+    margin-left:38px;
 }
 
 .box {
