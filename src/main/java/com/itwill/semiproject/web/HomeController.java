@@ -14,8 +14,4 @@ public class HomeController {
 		log.debug("home()");
 		return "home";
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/heads/develop

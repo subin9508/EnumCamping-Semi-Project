@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
+import com.itwill.semiproject.dto.UserUpdateDto;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
 
@@ -60,4 +61,37 @@ public class UserService {
             return false;
         }
     }
+    
+    public void update(UserUpdateDto dto) {
+		log.debug("update({})", dto);
+		
+		int result = userDao.updateUser(dto.toEntity());
+		log.debug("update 결과 = {}", result);
+		
+		if(result == 0) {
+			throw new RuntimeException("Update failed");
+		}
+		
+	}
+	
+	public User read(String userId) {
+		log.debug("read(id={})", userId);
+		
+		return userDao.selectByUserid(userId);
+	}
+	
+	
+	// 프로필 사진 URL 업데이트 메서드 추가
+    public void updateProfilePicture(User user) {
+        log.debug("updateProfilePicture(user={})", user);
+        
+        int result = userDao.updateProfilePicture(user);
+        log.debug("프로필 사진 업데이트 결과 = {}", result);
+        
+        if (result == 0) {
+            throw new RuntimeException("Profile picture update failed");
+        }
+    }
+    
+    
 }
