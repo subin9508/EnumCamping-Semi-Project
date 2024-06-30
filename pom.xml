@@ -23,6 +23,8 @@
         <lombok-version>1.18.32</lombok-version>
         <mybatis-version>3.5.16</mybatis-version>
         <mybatis-spring-version>3.0.3</mybatis-spring-version>
+        <commons-io-version>2.11.0</commons-io-version>
+        <commons-fileupload-version>1.4</commons-fileupload-version>
     </properties>
 
     <!-- 프로젝트에서 필요한 의존성(라이브러리)들을 설정 -->
@@ -121,28 +123,35 @@
             <version>${spring-version}</version>
         </dependency>
 
-        <!-- Spring TestContext Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-version}</version> <!-- 프로젝트에 맞는 Spring 버전으로 설정 -->
+		</dependency>
+
+
+		<!-- Spring TestContext Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
-        <!-- General data-binding functionality for Jackson: works on core
+		<!-- General data-binding functionality for Jackson: works on core
         streaming API -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-version}</version>
         </dependency>
-        <!-- Add-on module to support JSR-310 (Java 8 Date & Time API) data types -->
+		<!-- Add-on module to support JSR-310 (Java 8 Date & Time API) data types -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-version}</version>
         </dependency>
 
-        <!-- Spice up your java: Automatic Resource Management, automatic
+		<!-- Spice up your java: Automatic Resource Management, automatic
         generation of 
         getters, setters, equals, hashCode and toString, and more! -->
         <dependency>
@@ -152,37 +161,51 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Sping JDBC -->
+		<!-- Sping JDBC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
-        <!-- Spring Tx(Transaction) -->
+		<!-- Spring Tx(Transaction) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring-version}</version>
         </dependency>
 
-        <!-- MyBatis SQL mapper framework -->
+		<!-- MyBatis SQL mapper framework -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis-version}</version>
         </dependency>
 
-        <!-- An easy-to-use Spring bridge for MyBatis SQL mapper framework -->
+		<!-- An easy-to-use Spring bridge for MyBatis SQL mapper framework -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring-version}</version>
         </dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload-version}</version> <!-- 버전은 최신 버전으로 설정 -->
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io-version}</version> <!-- commons-io도 함께 추가 -->
+		</dependency>
+
+        
+
     </dependencies>
     
 
-    <!-- 빌드 툴(플러그인) 설정 -->
+	<!-- 빌드 툴(플러그인) 설정 -->
     <build>
         <plugins>
             <plugin>

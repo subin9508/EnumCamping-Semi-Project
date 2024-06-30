@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <c:url value="/css/myPage.css" var="myPageCSS" />
+    <link rel="stylesheet" href="${myPageCSS}" />
+
+    <c:url value="/css/header.css" var="headerCSS" />
+    <link rel="stylesheet" href="${headerCSS}" />
+
+    <c:url value="/css/footer.css" var="footerCSS" />
+    <link rel="stylesheet" href="${footerCSS}" />
+    
+    <c:url var="sidebarCSS" value="/css/sidebar.css" />
+    <link rel="stylesheet" href="${sidebarCSS}">
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>정보 수정 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="container-fluid no-padding">
+        <c:set var="pageTitle" value="User Profile" scope="page" />
+        <%@ include file="../fragments/header.jspf" %>
+    </div>
+
+    <main class="container-fluid no-padding content">
+        <div class="row">
+            <div class="col-md-3 mypage-sidebar">
+                <c:set var="pageTitle" value="Home" scope="page" />
+                <%@ include file="../fragments/mypage-sidebar.jspf" %>
+            </div>
+            <div class="col-md-9 main-content">
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h2>내 정보 수정</h2>
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Profile Picture Upload Section -->
+                        <div class="mb-3">
+                            <form id="profilePictureForm" action="${pageContext.request.contextPath}/user/uploadProfilePicture" method="post" enctype="multipart/form-data">
+            					<img id="profilePicture" src="${user.profilePictureUrl != null ? user.profilePictureUrl : '/path/to/default/profile.jpg'}" alt="프로필 사진" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+            						<input type="file" class="form-control-file" id="profilePictureUpload" name="profilePicture" accept="image/*">
+            							<button type="submit" class="btn btn-primary mt-2">업로드</button>
+        					</form>
+                            <form id="deleteProfilePictureForm" method="post" action="<c:url value='/user/deleteProfilePicture' />">
+                                <button type="submit" class="btn btn-danger mt-2">삭제</button>
+                            </form>
+                        </div>
+                        <!-- End of Profile Picture Upload Section -->
+                        <form id="updateForm" method="post" action="<c:url value='/user/user_update' />">
+                            <%-- <input type="hidden" name="userId" value="${user.userId}" />--%>
+                            <div class="mb-3 row">
+                                <label for="userName" class="col-sm-2 col-form-label">이름</label>
+                                <div class="col-sm-10">
+                                    <input id="userName" type="text" class="form-control" name="userName" value="${user.userName}" readonly >
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="userId" class="col-sm-2 col-form-label">아이디</label>
+                                <div class="col-sm-10">
+                                    <input id="userId" type="text" class="form-control" name="userId" value="${user.userId}" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
+                                <div class="col-sm-10">
+                                    <input id="userPassword" type="text" class="form-control" name="userPassword" value="${user.userPassword}">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
+                                <div class="col-sm-10">
+                                    <input id="userEmail" type="text" class="form-control" name="userEmail"value="${user.userEmail}" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="userPhone" class="col-sm-2 col-form-label">전화번호</label>
+                                <div class="col-sm-10">
+                                    <input id="userPhone" type="text" class="form-control" name="userPhone" value="${user.userPhone}" >
+                                </div>
+                            </div>
+                            <button id="btnUpdate" class="btn btn-primary">수정하기</button>
+                        </form>
+                    </div>
+                    
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="container-fluid no-padding" id="wrap">
+        <%@ include file="../fragments/footer.jspf" %>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous"></script>
+    
+<c:url var="user_update_js" value="/js/user_update.js" />
+<script src="${user_update_js}"></script>
+</body>
+</html>
