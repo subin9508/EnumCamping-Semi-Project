@@ -16,6 +16,12 @@
 
     <c:url value="../css/footer.css" var="footerCss" />
     <link rel="stylesheet" href="${footerCss}">
+    
+    <style>
+    a:hover {
+      font-weight: bold;
+    }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -23,7 +29,7 @@
         <div class="footer-main-content">
         <%@ include file="../fragments/mypage-sidebar.jspf"%>
         <main>
-            <div class="card mt-5">
+            <div class="card m-5">
                 <div class="card-body">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -36,7 +42,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                           
+                           <c:forEach items="${reservations}" var="r">
+                                <tr>
+                                    <td>
+                                    <c:url var="reservationListDetails" value="/user/reservation_details">
+                                    <c:param name="userId" value="${r.userId}"></c:param>
+                                    </c:url>
+                                    <a href="${reservationListDetails}">
+                                    ${r.resId}</a></td>
+                                    <td>${r.areaId}</td>
+                                    <td>${r.userName}</td>
+                                    <td>${r.resCheckIn}</td>
+                                    <td>
+                                        <c:if test="${r.resState == 0}">
+                                            예약완료
+                                        </c:if>
+                                        <c:if test="${r.resState == 1}">
+                                            예약취소
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         
                         </tbody>
                     </table>

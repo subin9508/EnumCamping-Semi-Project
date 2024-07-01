@@ -5,8 +5,20 @@
 <mapper namespace="com.itwill.semiproject.repository.ReservationMasterDao">
 
     <!-- 예약 내역 -->
-    <select id="selectByUserId" resultType="ReservationMaster">
-        select * from reservation_master where user_id = #{user_id}
+    <select id="selectByUserId" resultType="ReservationListDto">
+        select 
+            r.user_id,
+            r.res_id,
+            r.area_id,
+            r.res_check_in,
+            r.res_state,
+            u.user_name
+        from 
+            reservation_master r
+        join 
+            users u ON u.user_id = r.user_id
+        where 
+            r.user_id = #{userId}
     </select>
 
 </mapper>

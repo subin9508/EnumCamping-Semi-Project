@@ -1,5 +1,6 @@
 package com.itwill.semiproject.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
@@ -98,8 +100,9 @@ public class UserService {
         }
     }
     
-	public List<ReservationListDto> readReservationList(String userId) {
+    public List<ReservationListDto> readReservationList(String userId) {
 		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
+		log.debug("list({})", list);
 	
 		return list;
 	}

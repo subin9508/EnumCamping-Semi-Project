@@ -268,18 +268,26 @@ public class UserController {
 		        return "redirect:/user/user_update";
 		    }
 		    
-			@GetMapping("/reservation_list")
-			public String reservationList(@RequestParam(name="userId") String userId, User user, Model model, HttpSession session) {
+		    @GetMapping("/reservation_list")
+			public String reservationList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
 				log.debug("reservation_list(userId={})", userId);
 
-				user = userService.read(userId);
+				User user = userService.read(userId);
 				session.setAttribute("user", user); // 사용자 정보를 세션에 저장
 
-				 List<ReservationListDto> list = userService.readReservationList(userId);
+				 List<ReservationListDto> list = userService.readReservationList(user.getUserId());
+				 log.debug("list=({})", list);
 			     model.addAttribute("reservations", list);
+			     model.addAttribute("user", user); // 모델에 사용자 정보 추가
 				
-			     return "redirect:/user/myPage?userId=" + user.getUserId();
+			     return "/user/reservation_list"; // 반환할 뷰의 이름
 			}
+		    
+		    @GetMapping("/reservation_details")
+		    public void reservationDetails() {
+		    	log.debug("reservation_details()");
+		    }
+
 
 
 }
