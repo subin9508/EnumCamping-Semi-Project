@@ -15,7 +15,7 @@
             <a href="password_check">정보수정</a>           
         </li>
         <li>
-            <a href="">예약내역</a>
+            <a href="reservation_list">예약내역</a>
         </li>
         <li>
            <a href="">문의내역</a> 
