@@ -269,16 +269,16 @@ public class UserController {
 		    }
 		    
 			@GetMapping("/reservation_list")
-			public String reservationList(@RequestParam(name="userId", required=true) String userId, Model model, HttpSession session) {
+			public String reservationList(@RequestParam(name="userId") String userId, User user, Model model, HttpSession session) {
 				log.debug("reservation_list(userId={})", userId);
 
-				User user = userService.read(userId);
+				user = userService.read(userId);
 				session.setAttribute("user", user); // 사용자 정보를 세션에 저장
 
 				 List<ReservationListDto> list = userService.readReservationList(userId);
 			     model.addAttribute("reservations", list);
 				
-				return "/user/reservation_list";
+			     return "redirect:/user/myPage?userId=" + user.getUserId();
 			}
 
 
