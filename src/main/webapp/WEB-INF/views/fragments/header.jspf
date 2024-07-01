@@ -134,7 +134,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"><c:url value="/reservation"
+                <li class="nav-item"><c:url value="/reservation/calendar"
                         var="reservationPage" /> <a
                     class="nav-link  menu" href="${reservationPage}">예약</a></li>
                 <li class="nav-item"><c:url value="/community/notice/list"
