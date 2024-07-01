@@ -17,33 +17,38 @@
     <div class="wrapper">
     <%@ include file="../fragments/header.jspf"%>
     <div class="footer-main-content">
-    <%@ include file="../fragments/community-sidebar.jspf"%>
+
         
-<div class="cal-container">
+
+
+<div >
+    <table class="scriptCalendar">
+        <thead>
+            <tr>
+                <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
+                <td colspan="5">
+                    <span id="calYear">YYYY</span>년
+                    <span id="calMonth">MM</span>월
+                </td>
+                <td class="calendarBtn" id="nextNextCalendar">&#62;&#62;</td>
+            </tr>
+            <tr>
+                <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <div id="date"></div>
+    
+    <div>
+        <a href="/semiproject/reservation/item">버튼</a>
+    </div>
+</div>
 
 
     
 
-    
-    <div class="calendar-container">
-        <div class="calendar-header">
-        <button id="prevBtn"><<</button>
-        <h2 id="currentMonth"></h2>
-        <button id="nextBtn">>></button>
-    </div>
-    <div class="calendar-days">
-        <div class="day sunday">일</div>
-        <div class="day">월</div>
-        <div class="day">화</div>
-        <div class="day">수</div>
-        <div class="day">목</div>
-        <div class="day">금</div>
-        <div class="day saturday">토</div>
-    </div>
-    <div class="calendar-dates" id="calendarDates"></div>
-    </div>
-    
-   </div> 
 
     
     

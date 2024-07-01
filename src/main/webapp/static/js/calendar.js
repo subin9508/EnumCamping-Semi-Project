@@ -1,105 +1,199 @@
-/**
- * 예약 날짜 표시 캘린더
- */
-
-const calendarDates = document.getElementById("calendarDates");
-const currentMonthElement = document.getElementById("currentMonth");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-
-const today = new Date(); // 현재 날짜를 나타내는 Date 객체를 저장한다.
-let currentMonth = today.getMonth();
-/* 현재 월을 나타내는 값을 저장한다. getMonth() 메서드는 0부터 시작하는 월을 반환하므로
-1월이면 0, 2월이면 1을 반환한다. */
-let currentYear = today.getFullYear(); // 변수에 현재 연도를 나타내는 값을 저장한다.
-
-function renderCalendar() {
-  const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-  /* firstDayOfMonth 변수에 현재 월의 첫 번째 날짜를 나타내는 Date 객체를 저장한다.
-해당 월의 첫 번째 날짜에 대한 정보를 얻는다. */
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  /* daysInMonth 변수에 현재 월의 총 일 수를 나타내는 값을 저장한다. 
-  해당 월이 몇 일까지 있는지 알 수 있다. */
-  const startDayOfWeek = firstDayOfMonth.getDay();
-  /* 변수에 현재 월의 첫 번째 날짜의 요일을 나타내는 값을 저장한다.
-  해당 월의 첫 번째 날짜가 무슨 요일인지 알 수 있다. */
-  currentMonthElement.textContent = `${currentYear}년 ${currentMonth + 1}월`;
-  // 월을 나타내는 요소에 현재 월과 연도를 설정하여 표시한다.
-
-  calendarDates.innerHTML = ""; // 일자를 표시하는 그리드 컨테이너를 비운다.
-
-    //console.log(startDayOfWeek);
-
-
-
-  // 빈 날짜(이전 달)
-  for (let i = 0; i < startDayOfWeek; i++) {
-    const emptyDate = document.createElement("div");
-    //  빈 날짜를 나타내는 div 요소를 생성한다.
-    emptyDate.classList.add("date", "empty");
-    // 생성한 div 요소에 "date"와 "empty" 클래스를 추가한다.
-    calendarDates.appendChild(emptyDate);
-    // 생성한 빈 날짜 요소를 캘린더 그리드에 추가한다.
-  }
-
-  // 현재 달의 날짜
-  for (let i = 1; i <= daysInMonth; i++) {
-    //console.log("i=",i);
- 
-    if ((i%7+startDayOfWeek)%7==0){ // 토요일
-        const dateElement = document.createElement("div");
-        dateElement.classList.add("date", "saturday");
-        dateElement.textContent = i;
-        calendarDates.appendChild(dateElement);
-    } else if ((i%7+startDayOfWeek)%7==1){ //일요일
-        const dateElement = document.createElement("div");
-        dateElement.classList.add("date", "sunday");
-        dateElement.textContent = i;
-        calendarDates.appendChild(dateElement);
+ document.addEventListener("DOMContentLoaded", function() {
+        buildCalendar();
         
-    } else {
-        const dateElement = document.createElement("div");
-        dateElement.classList.add("date");
-        dateElement.textContent = i;
-        calendarDates.appendChild(dateElement);
+        document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
+            prevCalendar();
+        });
+        
+        document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
+            nextCalendar();
+        });
+    });
+
+    var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
+    var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
+    
+
+    function prevCalendar() {
+        this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
+        buildCalendar();    // @param 전월 캘린더 출력 요청
     }
-    //dateElement.textContent = i;
-    //calendarDates.appendChild(dateElement);
-  }
-  /* 
-  1. for 문을 이용하여 현재 월의 총 일 수만큼 반복하여 월의 날짜를 순서대로 표시한다.
-  2. const dateElement = document.createElement("div");를 통해 날짜를 나타내는 div 요소를 생성한다.
-  3. dateElement.classList.add("date");를 통해 생성한 div 요소에 "date" 클래스를 추가한다.
-  4. dateElement.textContent = i;를 통해 해당 날짜 값을 div 요소의 텍스트로 설정한다.
-  5. calendarDates.appendChild(dateElement);를 통해 생성한 날짜 요소를 캘린더 그리드에 추가한다.
-  */
-}
 
-renderCalendar();
-// 페이지가 로드되면 renderCalendar 함수를 실행하여 초기 캘린더를 표시한다.
 
-prevBtn.addEventListener("click", () => {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    currentYear--;
-  }
-  renderCalendar();
-});
-/* 
-1. 이전 버튼(prevBtn)을 클릭하면 현재 월을 이전 월로 변경하고, 연도가 바뀌어야 한다면 연도를 변경한다.
-2. 변경된 월과 연도를 바탕으로 renderCalendar 함수를 호출하여 이전 월의 캘린더를 표시한다.
-*/
+    function nextCalendar() {
+        this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() + 1, toDay.getDate());
+        buildCalendar();    // @param 명월 캘린더 출력 요청
+    }
 
-nextBtn.addEventListener("click", () => {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  }
-  renderCalendar();
-});
-/* 
-1. 다음 버튼(nextBtn)을 클릭하면 현재 월을 다음 월로 변경하고, 연도가 바뀌어야 한다면 연도를 변경한다.
-2. 변경된 월과 연도를 바탕으로 renderCalendar 함수를 호출하여 다음 월의 캘린더를 표시한다.
-*/
+
+    function buildCalendar() {
+
+        let doMonth = new Date(toDay.getFullYear(), toDay.getMonth(), 1);
+        let lastDate = new Date(toDay.getFullYear(), toDay.getMonth() + 1, 0);
+
+        let tbCalendar = document.querySelector(".scriptCalendar > tbody");
+
+        document.getElementById("calYear").innerText = toDay.getFullYear();                       // @param YYYY월
+        document.getElementById("calMonth").innerText = autoLeftPad((toDay.getMonth() + 1), 2);   // @param MM월
+        
+
+        // @details 이전 캘린더의 출력결과가 남아있다면, 이전 캘린더를 삭제한다.
+        while(tbCalendar.rows.length > 0) {
+            tbCalendar.deleteRow(tbCalendar.rows.length - 1);
+        }
+
+        // @param 첫번째 개행
+        let row = tbCalendar.insertRow();
+
+        // @param 날짜가 표기될 열의 증가값
+        let dom = 1;
+
+        // @details 시작일의 요일값( doMonth.getDay() ) + 해당월의 전체일( lastDate.getDate())을  더해준 값에서
+        //               7로 나눈값을 올림( Math.ceil() )하고 다시 시작일의 요일값( doMonth.getDay() )을 빼준다.
+        let daysLength = (Math.ceil((doMonth.getDay() + lastDate.getDate()) / 7) * 7) - doMonth.getDay();
+
+        // @param 달력 출력
+        // @details 시작값은 1일을 직접 지정하고 요일값( doMonth.getDay() )를 빼서 마이너스( - )로 for문을 시작한다.
+        for(let day = 1 - doMonth.getDay(); daysLength >= day; day++) {
+
+            let column = row.insertCell();
+
+            // @param 평일( 전월일과 익월일의 데이터 제외 )
+            if(Math.sign(day) == 1 && lastDate.getDate() >= day) {
+
+                // @param 평일 날짜 데이터 삽입
+                column.innerText = autoLeftPad(day, 2);
+
+                // @param 일요일인 경우
+                if(dom % 7 == 1) {
+                    column.style.color = "#FF4D4D";
+                }
+
+                // @param 토요일인 경우
+                if(dom % 7 == 0) {
+                    column.style.color = "#4D4DFF";
+                    row = tbCalendar.insertRow();   // @param 토요일이 지나면 다시 가로 행을 한줄 추가한다.
+                }
+
+            }
+
+            // @param 평일 전월일과 익월일의 데이터 날짜변경
+            else {
+                let exceptDay = new Date(doMonth.getFullYear(), doMonth.getMonth(), day);
+                column.innerText = autoLeftPad(exceptDay.getDate(), 2);
+                column.style.color = "#A9A9A9";
+            }
+
+            // @brief   전월, 명월 음영처리
+            // @details 현재년과 선택 년도가 같은경우
+            if(toDay.getFullYear() == nowDate.getFullYear()) {
+
+                // @details 현재월과 선택월이 같은경우
+                if(toDay.getMonth() == nowDate.getMonth()) {
+
+                    // @details 현재일보다 이전인 경우이면서 현재월에 포함되는 일인경우
+                    if(nowDate.getDate() > day && Math.sign(day) == 1) {
+                        column.style.backgroundColor = "#E5E5E5";
+                    }
+
+                    // @details 현재일보다 이후이면서 현재월에 포함되는 일인경우
+                    else if(nowDate.getDate() < day && lastDate.getDate() >= day) {
+                        column.style.backgroundColor = "#FFFFFF";
+                        column.style.cursor = "pointer";
+                        column.onclick = function(){ calendarChoiceDay(this); }
+                    }
+
+                    // @details 현재일인 경우
+                    else if(nowDate.getDate() == day) {
+                        column.style.backgroundColor = "#FFFFE6";
+                        column.style.cursor = "pointer";
+                        column.onclick = function(){ calendarChoiceDay(this); }
+                    }
+
+                // @details 현재월보다 이전인경우
+                } else if(toDay.getMonth() < nowDate.getMonth()) {
+                    if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                        column.style.backgroundColor = "#E5E5E5";
+                    }
+                }
+
+                // @details 현재월보다 이후인경우
+                else {
+                    if (toDay.getMonth() > nowDate.getMonth()+2){
+                        if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                        column.style.backgroundColor = "#E5E5E5";
+                        }
+                    } else {
+                        if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                            column.style.backgroundColor = "#FFFFFF";
+                            column.style.cursor = "pointer";
+                            column.onclick = function(){ calendarChoiceDay(this); }
+                        }
+                        
+                    }
+                }
+            }
+
+            // @details 선택한년도가 현재년도보다 작은경우
+            else if(toDay.getFullYear() < nowDate.getFullYear()) {
+                if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                    column.style.backgroundColor = "#E5E5E5";
+                }
+            }
+
+            // @details 선택한년도가 현재년도보다 큰경우
+            else {
+                if(Math.sign(day) == 1 && day <= lastDate.getDate()) {
+                    column.style.backgroundColor = "#FFFFFF";
+                    column.style.cursor = "pointer";
+                    column.onclick = function(){ calendarChoiceDay(this); }
+                }
+            }
+            dom++;
+        }
+    }
+
+    /**
+     * @brief   날짜 선택
+     * @details 사용자가 선택한 날짜에 체크표시를 남긴다.
+     */
+    function calendarChoiceDay(column) {
+
+        // @param 기존 선택일이 존재하는 경우 기존 선택일의 표시형식을 초기화 한다.
+        if(document.getElementsByClassName("choiceDay")[0]) {
+            
+            // @see 금일인 경우
+            if(document.getElementById("calMonth").innerText == autoLeftPad((nowDate.getMonth() + 1), 2) 
+                && document.getElementsByClassName("choiceDay")[0].innerText == autoLeftPad(toDay.getDate(), 2)) {
+                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFE6";  //오늘날짜
+            }
+            
+            // @see 금일이 아닌 경우
+            else {
+                document.getElementsByClassName("choiceDay")[0].style.backgroundColor = "#FFFFFF";
+            }
+            document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");
+        }
+
+        // @param 선택일 체크 표시
+        column.style.backgroundColor = "#FF9999";
+
+        // @param 선택일 클래스명 변경
+        column.classList.add("choiceDay");
+        
+        let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
+        document.getElementById('date').innerText = selectedDate;
+    }
+
+    /**
+     * @brief   숫자 두자릿수( 00 ) 변경
+     * @details 자릿수가 한자리인 ( 1, 2, 3등 )의 값을 10, 11, 12등과 같은 두자리수 형식으로 맞추기위해 0을 붙인다.
+     * @param   num     앞에 0을 붙일 숫자 값
+     * @param   digit   글자의 자릿수를 지정 ( 2자릿수인 경우 00, 3자릿수인 경우 000 … )
+     */
+    function autoLeftPad(num, digit) {
+        if(String(num).length < digit) {
+            num = new Array(digit - String(num).length + 1).join("0") + num;
+        }
+        return num;
+    }
