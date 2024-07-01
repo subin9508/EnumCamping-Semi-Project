@@ -203,6 +203,9 @@ public class UserController {
 		@PostMapping("/user_update")
 		public String user_update(UserUpdateDto dto, HttpSession session) {
 			log.debug("user_update(dto={})", dto);
+			
+			User user = (User) session.getAttribute("user");
+			
 
 			userService.update(dto);
 
