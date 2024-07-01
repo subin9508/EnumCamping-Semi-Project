@@ -264,6 +264,15 @@ public class UserController {
 
 		        return "redirect:/user/user_update";
 		    }
+		    
+//			@GetMapping("/reservation_list")
+//			public void reservationList(@RequestParam(name="userKey") int userKey, Model model) {
+//				log.debug("reservation_list()");
+//				
+//				List<ReservationListDto> list = ReservationMasterService.read(userKey);
+//				
+//				model.addAttribute("reservations", list);
+//			}
 
 
 }
