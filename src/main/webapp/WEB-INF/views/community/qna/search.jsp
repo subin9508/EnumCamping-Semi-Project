@@ -11,25 +11,21 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
-        
-            <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
 <div class="wrapper">
     <div class="container-fluid">
         <c:set var="pageTitle" value="QnA List" />
-        <%@ include file="../fragments/header.jspf" %>
+        <%@ include file="../../fragments/header.jspf" %>
         
-        <%@ include file="../fragments/community-sidebar.jspf"%>
+        <%@ include file="../../fragments/community-sidebar.jspf"%>
         
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                        <c:url var="qnaSearchPage" value="/community/qnaSearch" />
+                        <c:url var="qnaSearchPage" value="/community/qna/search" />
                     <form method="get" action="${qnaSearchPage}">
                         <div class="row"> <!--  화면을 1:2:1로 나눔 (기본 12개) -->
                             <div class="col-3">
@@ -64,7 +60,7 @@
                                 <tr>
                                     <td>${qna.qnaPostId}</td>
                                     <td>
-                                        <c:url var="qnaDetailsPage" value="/community/qnaDetails">
+                                        <c:url var="qnaDetailsPage" value="/community/qna/details">
                                             <c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
                                         </c:url>
                                         <a href="${qnaDetailsPage}">${qna.qnaTitle}</a>
@@ -80,7 +76,7 @@
         </main>
     </div>
     
-    		<%@ include file="../fragments/footer.jspf"%>
+    		<%@ include file="../../fragments/footer.jspf"%>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 

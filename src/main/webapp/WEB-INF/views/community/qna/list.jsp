@@ -11,25 +11,26 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" />
-        
-            <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
 <div class="wrapper">
-    <div class="container-fluid">
         <c:set var="pageTitle" value="QnA List" />
-        <%@ include file="../fragments/header.jspf" %>
+        <%@ include file="../../fragments/header.jspf" %>
+ <div class="footer-main-content">         
+        <%@ include file="../../fragments/community-sidebar.jspf"%>
         
-        <%@ include file="../fragments/community-sidebar.jspf"%>
-        
+    <div class="container-fluid">
         <main>
+            <div>
+                <h1 class="align-center mt-2">Q&A</h1>
+            </div>
+        
+        
             <div class="mt-2 card">
                 <div class="card-header">
-                        <c:url var="qnaSearchPage" value="/community/qnaSearch" />
+                        <c:url var="qnaSearchPage" value="/community/qna/search" />
                     <form method="get" action="${qnaSearchPage}">
                         <div class="row"> <!--  화면을 1:2:1로 나눔 (기본 12개) -->
                             <div class="col-3">
@@ -64,7 +65,7 @@
                                 <tr>
                                     <td>${qna.qnaPostId}</td>
                                     <td>
-                                        <c:url var="qnaDetailsPage" value="/community/qnaDetails">
+                                        <c:url var="qnaDetailsPage" value="/community/qna/details">
                                             <c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
                                         </c:url>
                                         <a href="${qnaDetailsPage}">${qna.qnaTitle}</a>
@@ -76,12 +77,13 @@
                         </tbody>
                     </table>
                 </div>
-                    <c:url var="qnaCreatePage" value="/community/qnaCreate"></c:url>
+                    <c:url var="qnaCreatePage" value="/community/qna/create"></c:url>
                     <a class="btn btn-outline-primary" href="${qnaCreatePage}">글쓰기</a>
             </div>
         </main>
     </div>
-    	<%@ include file="../fragments/footer.jspf"%>
+</div>
+    	<%@ include file="../../fragments/footer.jspf"%>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
