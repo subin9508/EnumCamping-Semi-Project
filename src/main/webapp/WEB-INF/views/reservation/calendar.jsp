@@ -27,18 +27,18 @@
     
     <div class="calendar-container">
         <div class="calendar-header">
-        <button id="prevBtn">이전</button>
+        <button id="prevBtn"><<</button>
         <h2 id="currentMonth"></h2>
-        <button id="nextBtn">다음</button>
+        <button id="nextBtn">>></button>
     </div>
     <div class="calendar-days">
-        <div class="day">일</div>
+        <div class="day sunday">일</div>
         <div class="day">월</div>
         <div class="day">화</div>
         <div class="day">수</div>
         <div class="day">목</div>
         <div class="day">금</div>
-        <div class="day">토</div>
+        <div class="day saturday">토</div>
     </div>
     <div class="calendar-dates" id="calendarDates"></div>
     </div>

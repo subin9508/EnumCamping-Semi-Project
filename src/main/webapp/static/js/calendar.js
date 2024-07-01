@@ -14,7 +14,6 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear(); // 변수에 현재 연도를 나타내는 값을 저장한다.
 
 function renderCalendar() {
-  /* renderCalendar 함수는 월별 캘랜더를 생성하고 표시하는 함수이다. */
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
   /* firstDayOfMonth 변수에 현재 월의 첫 번째 날짜를 나타내는 Date 객체를 저장한다.
 해당 월의 첫 번째 날짜에 대한 정보를 얻는다. */
@@ -29,6 +28,10 @@ function renderCalendar() {
 
   calendarDates.innerHTML = ""; // 일자를 표시하는 그리드 컨테이너를 비운다.
 
+    //console.log(startDayOfWeek);
+
+
+
   // 빈 날짜(이전 달)
   for (let i = 0; i < startDayOfWeek; i++) {
     const emptyDate = document.createElement("div");
@@ -41,10 +44,27 @@ function renderCalendar() {
 
   // 현재 달의 날짜
   for (let i = 1; i <= daysInMonth; i++) {
-    const dateElement = document.createElement("div");
-    dateElement.classList.add("date");
-    dateElement.textContent = i;
-    calendarDates.appendChild(dateElement);
+    //console.log("i=",i);
+ 
+    if ((i%7+startDayOfWeek)%7==0){ // 토요일
+        const dateElement = document.createElement("div");
+        dateElement.classList.add("date", "saturday");
+        dateElement.textContent = i;
+        calendarDates.appendChild(dateElement);
+    } else if ((i%7+startDayOfWeek)%7==1){ //일요일
+        const dateElement = document.createElement("div");
+        dateElement.classList.add("date", "sunday");
+        dateElement.textContent = i;
+        calendarDates.appendChild(dateElement);
+        
+    } else {
+        const dateElement = document.createElement("div");
+        dateElement.classList.add("date");
+        dateElement.textContent = i;
+        calendarDates.appendChild(dateElement);
+    }
+    //dateElement.textContent = i;
+    //calendarDates.appendChild(dateElement);
   }
   /* 
   1. for 문을 이용하여 현재 월의 총 일 수만큼 반복하여 월의 날짜를 순서대로 표시한다.
