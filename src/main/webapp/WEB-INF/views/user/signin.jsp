@@ -43,33 +43,7 @@
                                         패스워드를 확인하세요.</div>
                                 </c:if>
 
-
                                 <div class="form-group mt-5 d-flex align-items-center">
-                                    <label for="userid"
-                                        class="form-label text-center">아이디</label>
-                                    <input type="text" name="userid"
-                                        placeholder="아이디"
-                                        class="form-control write"
-                                        id="userid" required autofocus />
-                                </div>
-                                <div class="form-group mt-3 d-flex align-items-center">
-                                    <label for="password" class="form-label text-center">비밀번호</label>
-                                    <input type="password"
-                                        name="userpassword"
-                                        placeholder="비밀번호"
-                                        class="form-control write"
-                                        id="userpassword" required />
-                                </div>
-                                <div class="mt-2">
-                                    <input
-                                        class="form-control btn btn-login mt-2"
-                                        id="btnSignIn" type="submit"
-                                        value="로그인" />
-                                </div>
-                                <div class="mt-2 center" style="text-align: center;">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                <div
-                                    class="form-group mt-5 d-flex align-items-center">
                                     <label for="userid"
                                         class="form-label text-center">아이디</label>
                                     <input type="text" name="userId"
@@ -77,18 +51,17 @@
                                         class="form-control write"
                                         id="userId" required autofocus />
                                 </div>
-                                <div
-                                    class="form-group mt-3 d-flex align-items-center">
-                                    <label for="password"
-                                        class="form-label text-center">비밀번호</label>
+                                <div class="form-group mt-3 d-flex align-items-center">
+                                    <label for="password" class="form-label text-center">비밀번호</label>
                                     <input type="password"
                                         name="userPassword"
                                         placeholder="비밀번호"
                                         class="form-control write"
                                         id="userPassword" required />
-                                </div>                              
+                                </div>
                                 <div class="mt-2">
-                                    <input class="form-control btn btn-login mt-2"
+                                    <input
+                                        class="form-control btn btn-login mt-2"
                                         id="btnSignIn" type="submit"
                                         value="로그인" />
                                 </div>

@@ -12,21 +12,17 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
-    
-    <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
 </head>
 <body>
 <div class="wrapper">
-    <div class="container-fluid">
         <c:set var="pageTitle" value="QnA Details" />
-        <%@ include file="../fragments/header.jspf"%>
+        <%@ include file="../../fragments/header.jspf"%>
+ <div class="footer-main-content">         
+        <%@ include file="../../fragments/community-sidebar.jspf"%>
         
-        <%@ include file="../fragments/community-sidebar.jspf"%>
-        
+    <div class="container-fluid">
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
@@ -73,7 +69,7 @@
                 <div class="card-footer">
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
                     <c:if test="${signedInUser eq qna.qnaUserId}">
-                    <c:url var="qnaModifyPage" value="/community/qnaModify">
+                    <c:url var="qnaModifyPage" value="/community/qna/modify">
                         <c:param name="qnaPostId" value="${qna.qnaPostId}" />
                     </c:url>
                     <a class="btn btn-outline-primary"
@@ -141,8 +137,8 @@
         </div>
         
     </div>
-	
-	<%@ include file="../fragments/footer.jspf"%>
+	</div>
+	<%@ include file="../../fragments/footer.jspf"%>
 </div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

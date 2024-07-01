@@ -23,12 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/community")
+@RequestMapping("/community/qna")
 public class QnAController {
 	
 	private final QnAService qnaService;
 
-	@GetMapping("/qnaList")
+	@GetMapping("/list")
 	public void list(Model model) {
 		log.debug("list()");
 		
@@ -37,7 +37,7 @@ public class QnAController {
 		model.addAttribute("qnas",list);
 	}
 	
-	@GetMapping({"/qnaDetails", "/qnaModify"})
+	@GetMapping({"/details", "/modify"})
 	public void details(@RequestParam(name = "qnaPostId") int qnaPostId, Model model) {
 		log.debug("details(qnaPostId={})", qnaPostId);
 		
@@ -47,16 +47,16 @@ public class QnAController {
 		model.addAttribute("qna", qna);
 	}
 	
-	@GetMapping("/qnaCreate")
+	@GetMapping("/create")
 	public String create(HttpSession session) {
 		log.debug("GET: create()");
 		if (session.getAttribute("signedInUser") == null) {
             return "redirect:/user/signin";
         }
-		return "/community/qnaCreate";
+		return "/community/qna/create";
 	}
 	
-	@PostMapping("/qnaCreate")
+	@PostMapping("/create")
 	public String create(QnACreateDto dto, HttpSession session) {
 		log.debug("POST: create(dto={}), dto");
         
@@ -65,11 +65,11 @@ public class QnAController {
         }
 		qnaService.create(dto);
 		
-		return "redirect:/community/qnaList";
+		return "redirect:/community/qna/list";
 	}
 
 	
-	@GetMapping("/qnaDelete")
+	@GetMapping("/delete")
 	public String delete(@RequestParam(name="qnaPostId") int id, HttpSession session) {
 		log.debug("delete(qnaPostId={})", id);
         if (session.getAttribute("signedInUser") == null) {
@@ -78,10 +78,10 @@ public class QnAController {
 		
 		qnaService.delete(id);
 		
-		return "redirect:/community/qnaList";
+		return "redirect:/community/qna/list";
 	}
 	
-	@PostMapping("/qnaUpdate")
+	@PostMapping("/update")
 	public String update(QnAUpdateDto dto, HttpSession session) {
 		log.debug("update(dto={})", dto);
         if (session.getAttribute("signedInUser") == null) {
@@ -90,10 +90,10 @@ public class QnAController {
 		
 		qnaService.update(dto);
 		log.debug("postid",dto.getQnaPostId());
-		return "redirect:/community/qnaDetails?qnaPostId=" + dto.getQnaPostId();
+		return "redirect:/community/qna/details?qnaPostId=" + dto.getQnaPostId();
 	}
 	
-	@GetMapping("/qnaSearch")
+	@GetMapping("/search")
 	public void search(QnASearchDto dto, Model model) {
 		log.debug("search(dto={}", dto);
 		

@@ -11,21 +11,17 @@
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous" /> 
-        
-    <c:url value="../css/header.css" var="headerCss"/>
-    <link rel="stylesheet" href="${headerCss}">
-    
-    <c:url value="../css/footer.css" var="footerCss"/>
-    <link rel="stylesheet" href="${footerCss}">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
     
 	</head>
 	<body>
 	<div class="wrapper">
-        <div class="container-fluid">
             <c:set var="pageTitle" value="QnA Create" />
-            <%@ include file="../fragments/header.jspf" %>
-
-            <%@ include file="../fragments/community-sidebar.jspf"%>
+            <%@ include file="../../fragments/header.jspf" %>
+ <div class="footer-main-content"> 
+            <%@ include file="../../fragments/community-sidebar.jspf"%>
+        <div class="container-fluid">
             
             <main>
                 <div class="mt-2 card">
@@ -33,7 +29,7 @@
                         <h3>새 글 작성</h3>
                     </div>
                     <div class="card-body">
-                        <c:url var="qnaCreatePage" value="/community/qnaCreate" />
+                        <c:url var="qnaCreatePage" value="/community/qna/create" />
                         <form method="post" action="${qnaCreatePage}"> <!-- 같은주소는 action 안해도됨 -->
                         <!-- form에서 action 속성 값을 설정하지 않으면 현재 요청 주소로 다시 요청을 보냄. -->
                         
@@ -59,8 +55,8 @@
             </main>
        
         </div>
-
-		<%@ include file="../fragments/footer.jspf"%>
+    </div>
+		<%@ include file="../../fragments/footer.jspf"%>
 		</div>        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
