@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itwill.semiproject.repository.NoticeDao">
+
+    <select id="selectAllNotice" resultType="Notice">
+        select * from notices where not_certify = 0 order by not_post_id desc
+    </select>
+
+    <select id="selectNoticeById" resultType="Notice">
+        select * from notices where not_post_id = #{id}
+    </select>
+
+    <insert id="insertNotice">
+        insert into notices (not_title, not_content) values (#{notTitle},#{notContent})
+    </insert>
+    
+    <update id="updateNotice">
+        update notices set not_title = #{notTitle}, not_content = #{notContent}, not_modified_time= sysdate where not_post_id = #{notPostId}
+    </update>
+    
+
+    <delete id="deleteNotice">
+        delete from notices where not_post_id = #{id}
+    </delete>
+
+</mapper>
