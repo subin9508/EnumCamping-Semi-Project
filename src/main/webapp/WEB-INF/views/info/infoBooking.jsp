@@ -21,9 +21,10 @@
 
 </head>
 <body>
+<div class="wrapper">
             <%@ include file="../fragments/header.jspf"%>
             <%@ include file="../fragments/info-sidebar.jspf"%>
-        
+            
         <div class="content">
             <main class="main-content">
             <div class="slider">
@@ -49,6 +50,7 @@
         </div>
     
         <%@ include file="../fragments/footer.jspf" %>
+   </div> 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 

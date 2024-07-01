@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 //데이터베이스 테이블 users 테이블의 모델 객체 
 @Data
 @NoArgsConstructor @AllArgsConstructor @Builder

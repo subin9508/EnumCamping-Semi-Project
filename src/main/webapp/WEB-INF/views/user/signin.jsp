@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +43,7 @@
                                         패스워드를 확인하세요.</div>
                                 </c:if>
 
-                                <div
-                                    class="form-group mt-5 d-flex align-items-center">
+                                <div class="form-group mt-5 d-flex align-items-center">
                                     <label for="userid"
                                         class="form-label text-center">아이디</label>
                                     <input type="text" name="userId"
@@ -51,18 +51,17 @@
                                         class="form-control write"
                                         id="userId" required autofocus />
                                 </div>
-                                <div
-                                    class="form-group mt-3 d-flex align-items-center">
-                                    <label for="password"
-                                        class="form-label text-center">비밀번호</label>
+                                <div class="form-group mt-3 d-flex align-items-center">
+                                    <label for="password" class="form-label text-center">비밀번호</label>
                                     <input type="password"
                                         name="userPassword"
                                         placeholder="비밀번호"
                                         class="form-control write"
                                         id="userPassword" required />
-                                </div>                              
+                                </div>
                                 <div class="mt-2">
-                                    <input class="form-control btn btn-login mt-2"
+                                    <input
+                                        class="form-control btn btn-login mt-2"
                                         id="btnSignIn" type="submit"
                                         value="로그인" />
                                 </div>

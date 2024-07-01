@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
@@ -145,10 +146,10 @@
                                 var="communityPage1" /> <a
                             class="nav-link" aria-current="page"
                             href="${communityPage1}">공지사항</a></li>
-                        <li><c:url value="/community"
+                        <li><c:url value="/community/qna/list"
                                 var="communityPage2" /> <a
                             class="nav-link" aria-current="page"
-                            href="${communityPage2}">일대일문의</a></li>
+                            href="${communityPage2}">Q&A</a></li>
                         <li><c:url value="/community"
                                 var="communityPage3" /> <a
                             class="nav-link" aria-current="page"
