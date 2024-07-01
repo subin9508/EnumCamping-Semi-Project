@@ -19,7 +19,8 @@ a {
 
 /* 사이트의 높이를 5000px로 만듬 */
 aside {
-    height: 100%;
+
+    height: auto;
     width: 100px;
     background-color: ligth-gray;
 }
@@ -27,6 +28,7 @@ aside {
 .sidebar {
             float: left; /* 왼쪽으로 배치 */
             width: 200px; /* 사이드바 너비 설정 */
+            margin-right: 20px
             /* 다른 스타일링 추가 가능 */
         }
         
