@@ -1,5 +1,6 @@
 package com.itwill.semiproject.repository;
 
+
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -16,4 +17,3 @@ public interface UserDao {
 	@Update("UPDATE users SET profile_picture_url = #{profilePictureUrl} WHERE user_id = #{userId}")
     int updateProfilePicture(User user);
 }
-

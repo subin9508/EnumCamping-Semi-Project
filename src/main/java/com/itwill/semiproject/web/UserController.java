@@ -1,5 +1,6 @@
 package com.itwill.semiproject.web;
 
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -11,11 +12,13 @@ import java.nio.file.Paths;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,6 +59,7 @@ public class UserController {
         if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
             // 세션에 로그인 사용자 정보를 저장
             session.setAttribute("signedInUser", user.getUserId());
+
             // 세션에 유저 role을 저장
             session.setAttribute("userRole", user.getUserRole());
             

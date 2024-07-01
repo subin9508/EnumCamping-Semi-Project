@@ -145,7 +145,7 @@
                                 var="communityPage1" /> <a
                             class="nav-link" aria-current="page"
                             href="${communityPage1}">공지사항</a></li>
-                        <li><c:url value="/community"
+                        <li><c:url value="/community/qnalist"
                                 var="communityPage2" /> <a
                             class="nav-link" aria-current="page"
                             href="${communityPage2}">일대일문의</a></li>
