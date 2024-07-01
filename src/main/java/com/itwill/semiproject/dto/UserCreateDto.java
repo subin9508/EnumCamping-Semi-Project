@@ -14,12 +14,8 @@ public class UserCreateDto {
 	private String userEmail;
 
 	public User toEntity() {
-		return User.builder()
-				.userId(userId)
-				.userPassword(userPassword)
-				.userName(userName)
-				.userPhone(userPhone)
-				.userEmail(userEmail)
-				.build();
+		return User.builder().userId(userId).userPassword(userPassword).userName(userName).userPhone(userPhone)
+				.userEmail(userEmail).build();
 	}
+
 }
