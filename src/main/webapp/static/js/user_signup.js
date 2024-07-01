@@ -260,5 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 비밀번호 확인 필드 값이 변경될 때마다 checkPasswordMatch 함수를 호출합니다.
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
-    
+   
+
 });
