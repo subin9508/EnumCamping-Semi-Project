@@ -12,10 +12,10 @@
     </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="">공지사항</a>           
+            <a href="list">공지사항</a>           
         </li>
         <li>
-            <a href="">Q&A</a>
+            <a href="qnaList">Q&A</a>
         </li>
         <li>
            <a href="">FAQ</a> 
