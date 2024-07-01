@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
 
@@ -265,14 +268,18 @@ public class UserController {
 		        return "redirect:/user/user_update";
 		    }
 		    
-//			@GetMapping("/reservation_list")
-//			public void reservationList(@RequestParam(name="userKey") int userKey, Model model) {
-//				log.debug("reservation_list()");
-//				
-//				List<ReservationListDto> list = ReservationMasterService.read(userKey);
-//				
-//				model.addAttribute("reservations", list);
-//			}
+			@GetMapping("/reservation_list")
+			public String reservationList(@RequestParam(name="userId", required=true) String userId, Model model, HttpSession session) {
+				log.debug("reservation_list(userId={})", userId);
+
+				User user = userService.read(userId);
+				session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+				 List<ReservationListDto> list = userService.readReservationList(userId);
+			     model.addAttribute("reservations", list);
+				
+				return "/user/reservation_list";
+			}
 
 
 }

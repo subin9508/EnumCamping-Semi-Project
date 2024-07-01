@@ -1,10 +1,14 @@
 package com.itwill.semiproject.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
 
@@ -17,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserService {
 
     private final UserDao userDao;
+    private final ReservationMasterDao reservationMasterDao;
 
     // 아이디 중복 체크: true - 중복되지 않은 아이디(사용 가능한 아이디), false - 중복된 아이디.
     public boolean checkUserid(String userId) {
@@ -92,6 +97,10 @@ public class UserService {
             throw new RuntimeException("Profile picture update failed");
         }
     }
-
-
+    
+	public List<ReservationListDto> readReservationList(String userId) {
+		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
+	
+		return list;
+	}
 }
