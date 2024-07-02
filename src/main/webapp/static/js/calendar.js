@@ -206,7 +206,7 @@
     function updateRadioButtons(reservedAreas) {
         const totalAreas = 5; // 총 구역 수
         
-        for (let i = 1; i <= tatalAreas; i++) {
+        for (let i = 1; i <= totalAreas; i++) {
             const area = decument.getElementById(`area${i}`);
             const radio = area.querySelector('input[type="radio"]');
             
