@@ -16,6 +16,7 @@
         <typeAlias type="com.itwill.semiproject.dto.ReservationListDto" alias="ReservationListDto" />
         <typeAlias type="com.itwill.semiproject.repository.QnA" alias="QnA" />
         <typeAlias type="com.itwill.semiproject.repository.ReservationMaster" alias="ReservationMaster" />
+        <typeAlias type="com.itwill.semiproject.repository.ReservationArea" alias="ReservationArea" />
     <!-- 
         <typeAlias type="com.itwill.semiproject.repository.Post" alias="Post" />
         <typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" />

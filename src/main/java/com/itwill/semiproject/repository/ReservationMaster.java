@@ -1,5 +1,6 @@
 package com.itwill.semiproject.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -14,8 +15,8 @@ public class ReservationMaster {
 	private String userId;
 	private String requirement;
 	private Integer resState;
-	private LocalDateTime resCreatedTime;
-	private LocalDateTime resModifiedTime;
+	private LocalDate resCreatedTime;
+	private LocalDate resModifiedTime;
 	private LocalDateTime resCheckIn;
 	private Integer resNight;
 	private Integer areaId;

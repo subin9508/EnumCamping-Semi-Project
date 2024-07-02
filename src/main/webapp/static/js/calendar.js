@@ -183,6 +183,41 @@
         
         let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
         document.getElementById('date').innerText = selectedDate;
+        
+        // @details 선택한 날짜에 대한 예약 정보 가져오기
+        const year = document.getElementById("calYear").innerText;
+        const month = document.getElementById("calMonth").innerText;
+        const day = column.innerText;
+
+        getReservations(year, month, day);
+    }
+    
+    function getReservations(year, month, day) {
+        axios.post(`/semiproject/reservation?date=${year}-${month}-${day}`)
+            .then(response => {
+                const reservedAreas = response.data.reservedAreas;
+                updateRadioButtons(reservedAreas);
+            })
+            .catch(error => {
+                console.error("There was an error fetching the reservations!", error);
+            });
+    }
+    
+    function updateRadioButtons(reservedAreas) {
+        const totalAreas = 5; // 총 구역 수
+        
+        for (let i = 1; i <= tatalAreas; i++) {
+            const area = decument.getElementById(`area${i}`);
+            const radio = area.querySelector('input[type="radio"]');
+            
+            if (reservedAreas.includes(`구역${i}`)) {
+                area.style.display = "none";
+                radio.disabled = true;
+            } else {
+                area.style.display = "block";
+                radio.disabled = false;
+            }
+        }
     }
 
     /**
