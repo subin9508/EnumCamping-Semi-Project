@@ -28,7 +28,7 @@ table {
 th, td {
     border: 1px solid black;
     padding: 8px;
-    text-align: left;
+    text-align: center;
     width: 20%; /* 셀 너비를 20%로 설정하여 5개의 열이 동일한 너비를 갖도록 설정 */
 }
 
@@ -47,10 +47,11 @@ th, td {
         <div class="footer-main-content">
 
             <main style="margin-bottom: 5%; margin-top: 5%">
-                <div
-                    class="container-fluid d-flex justify-content-center">
+                <div class="container-fluid d-flex justify-content-center">
+                    <h1>대여 및 판매 물품</h1>
+                </div>
+                <div class="container-fluid d-flex justify-content-center">
                     <table>
-                        <caption>대여 및 판매 물품</caption>
                         <tbody>
                             <c:forEach var="i" items="${items}">
                                 <tr>
@@ -64,22 +65,26 @@ th, td {
                                         <h5>${i.itemName}</h5>
                                     </td>
                                     <td>${i.itemDesc}</td>
-                                    <td>${i.itemPrice}</td>
+                                    <td>${i.itemPrice}원</td>
                                     <td class="narrow">
                                         <div class="quantity-controls">
-                                            <button
-                                                onclick="decreaseQuantity('${i.itemId}')">-</button>
-                                            <span
-                                                id="quantity${i.itemId}">0</span>
-                                            <button
-                                                onclick="increaseQuantity('${i.itemId}')">+</button>
+                                            <button onclick="decreaseQuantity('${i.itemId}', ${i.itemPrice})">-</button>
+                                            <span id="quantity${i.itemId}">0</span>
+                                            <button onclick="increaseQuantity('${i.itemId}', ${i.itemPrice})">+</button>
+                                        </div>
+                                        <div>
+                                            총 가격: 
+                                            <span id="totalPrice${i.itemId}">0</span>
+                                            원
                                         </div>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
-
                     </table>
+                </div>
+                <div class="container-fluid d-flex justify-content-center mt-3">
+                    <h4>전체 총 가격: <span id="grandTotalPrice">0</span> 원</h4>
                 </div>
             </main>
 
@@ -98,23 +103,53 @@ th, td {
     <script src="${weatherJS}"></script>
 
     <script>
-			function decreaseQuantity(id) {
-			const quantityElement = document.querySelector('#quantity'+id);
-				let quantity = parseInt(quantityElement.textContent);
-				if (quantity > 0) {
-					quantityElement.textContent = --quantity;
-				}
-			}
+        // 가격 포맷팅 함수
+        function formatPrice(price) {
+            return price.toLocaleString();
+        }
 
-			function increaseQuantity(id) {
-				const quantityElement = document.querySelector('#quantity'+id);
-				let quantity = parseInt(quantityElement.textContent);
-				quantityElement.textContent = ++quantity;
-			}
-			
-			
-			
-	</script>
+        function decreaseQuantity(id, price) {
+            const quantityElement = document.querySelector('#quantity' + id);
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 0) {
+                quantityElement.textContent = --quantity;
+                updateTotalPrice(id, price, quantity);
+                updateGrandTotalPrice();
+            }
+        }
+
+        function increaseQuantity(id, price) {
+            const quantityElement = document.querySelector('#quantity' + id);
+            let quantity = parseInt(quantityElement.textContent);
+            quantityElement.textContent = ++quantity;
+            updateTotalPrice(id, price, quantity);
+            updateGrandTotalPrice();
+        }
+
+        function updateTotalPrice(id, price, quantity) {
+            const totalPriceElement = document.querySelector('#totalPrice' + id);
+            const totalPrice = price * quantity;
+            totalPriceElement.textContent = formatPrice(totalPrice);
+        }
+
+        function updateGrandTotalPrice() {
+            const totalPriceElements = document.querySelectorAll('[id^="totalPrice"]');
+            let grandTotal = 0;
+            totalPriceElements.forEach(function(element) {
+                grandTotal += parseInt(element.textContent.replace(/,/g, ''));
+            });
+            const grandTotalPriceElement = document.querySelector('#grandTotalPrice');
+            grandTotalPriceElement.textContent = formatPrice(grandTotal);
+        }
+
+        // 페이지 로드 시 초기 가격 포맷팅
+        document.addEventListener('DOMContentLoaded', function() {
+            const priceElements = document.querySelectorAll('[id^="price"]');
+            priceElements.forEach(function(element) {
+                element.textContent = formatPrice(parseInt(element.textContent));
+            });
+        });
+    </script>
 
 </body>
 </html>
