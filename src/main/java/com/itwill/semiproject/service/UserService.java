@@ -99,6 +99,7 @@ public class UserService {
         }
     }
     
+	// reservation_list read 메서드 추가
     public List<ReservationListDto> readReservationList(String userId) {
 		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
 		log.debug("list({})", list);
@@ -106,7 +107,15 @@ public class UserService {
 		return list;
 	}
 
-
+    // reservation_details read 메서드 추가
+    public ReservationMaster readReservationDetails(int resId) {
+    	log.debug("readReservationDetails({})", resId);
+    	
+    	ReservationMaster resMaster = reservationMasterDao.selectByResId(resId);
+    	log.debug("{}", resMaster);
+    	
+    	return resMaster;
+    }
 
 	public User searchPassword(User user) {
 		log.debug("searchPassword");

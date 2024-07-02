@@ -11,6 +11,13 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
+
+    <c:url value="../css/header.css" var="headerCss" />
+    <link rel="stylesheet" href="${headerCss}">
+
+    <c:url value="../css/footer.css" var="footerCss" />
+    <link rel="stylesheet" href="${footerCss}">
+
 </head>
 <body>
 <div class="wrapper">
@@ -21,54 +28,76 @@
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>공지사항 상세보기</h2>
+                    <h2>예약내역 상세보기</h2>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="mt-2">
-                            <label for="id" class="form-label">번호</label>
-                            <input id="id" class="form-control"
-                                type="text" value="${notice.notPostId}" readonly />
+                            <label for="resId" class="form-label">예약번호</label>
+                            <input id="resId" class="form-control"
+                                type="text" value="${resMaster.resId}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="title" class="form-label">제목</label>
-                            <input id="title" class="form-control"
-                                type="text" value="${notice.notTitle}"
+                            <label for="resCheckIn" class="form-label">체크인 날짜</label>
+                            <input id="resCheckIn" class="form-control"
+                                type="text" value="${resMaster.resCheckIn}"
+                                readonly />
+                        </div>
+                        <!-- TODO: resNight으로 계산해서  checkout 날짜 뜨게 -->
+                        <div class="mt-2">
+                            <label for="resCheckOut" class="form-label">체크아웃 날짜</label>
+                            <input id="resCheckOut" class="form-control"
+                                type="text" value="${resMaster.resNight}"
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="content" class="form-label">내용</label>
-                            <textarea id="content" class="form-control"
-                                rows="5" readonly>${notice.notContent}</textarea>
+                            <label for="areaId" class="form-label">구역</label>
+                            <input id="areaId" class="form-control"
+                                type="text" value="${resMaster.areaId}"
+                                readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="createdTime" class="form-label">작성
-                                시간</label> <input id="createdTime"
-                                class="form-control" type="text"
-                                value="${notice.notCreatedTime}" readonly />
+                            <label for="requirement" class="form-label">요청사항</label>
+                            <textarea id="requirement" class="form-control"
+                                rows="5" readonly>${resMaster.requirement}</textarea>
                         </div>
                         <div class="mt-2">
-                            <label for="modifiedTime" class="form-label">최종
-                                수정 시간</label> <input id="modifiedTime"
+                            <label for="resCreatedTime" class="form-label">최초 예약 시간</label> 
+                                <input id="resCreatedTime"
                                 class="form-control" type="text"
-                                value="${notice.notModifiedTime}" readonly />
+                                value="${resMaster.resCreatedTime}" readonly />
+                        </div>
+                        <div class="mt-2">
+                            <label for="resModifiedTime" class="form-label">최종 수정 시간</label> 
+                            <input id="resModifiedTime"
+                                class="form-control" type="text"
+                                value="${resMaster.resModifiedTime}" readonly />
+                        </div>
+                        <div class="mt-2">
+                            <label for="resTotalPrice" class="form-label">총 가격</label> 
+                            <input id="resTotalPrice"
+                                class="form-control" type="text"
+                                value="${resMaster.resTotalPrice}" readonly />
+                        </div>
+                        <div class="mt-2">
+                            <label for="resState" class="form-label">예약 상태</label> 
+                            <input id="resState"
+                                class="form-control" type="text"
+                                value="<c:choose>
+                                        <c:when test='${resMaster.resState == 0}'>예약완료</c:when>
+                                        <c:when test='${resMaster.resState == 1}'>예약취소</c:when>
+                                        <c:otherwise>알 수 없음</c:otherwise>
+                                        </c:choose>" readonly />
                         </div>
                     </form>
                 </div>
 
-        
-                
-                <!-- signedUser 체크 -->
-                <c:if test="${userRole eq 'admin'}">
-                    <div class="card-footer">
-                    <button id="btnDelete" type="button" class="btn btn-outline-danger">삭제하기</button>
-                    <c:url var="noticeModifyPage" value="/community/notice/modify">
-                        <c:param name="id" value="${notice.notPostId}" />
-                    </c:url>
-                    <a class="btn btn-outline-primary"
-                        href="${noticeModifyPage}">수정하기</a>
+                <div class="card-footer d-flex justify-content-end">
+                    <div>
+                        <button class="btn btn-primary">예약 수정</button>
+                        <button class="btn btn-danger">예약 취소</button>
                     </div>
-                </c:if>
+                </div>
 
             </div>
         </main>

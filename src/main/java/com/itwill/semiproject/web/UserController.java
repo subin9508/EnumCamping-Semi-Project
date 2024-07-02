@@ -27,6 +27,7 @@ import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
 
@@ -315,8 +316,13 @@ public class UserController {
 	}
     
     @GetMapping("/reservation_details")
-    public void reservationDetails() {
+    public void reservationDetails(@RequestParam(name="resId") int resId, Model model) {
     	log.debug("reservation_details()");
+    	
+    	ReservationMaster resMaster = userService.readReservationDetails(resId);
+    	
+    	model.addAttribute("resMaster", resMaster);
+    	
     }
 }
 

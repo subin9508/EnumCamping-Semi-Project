@@ -20,5 +20,10 @@
         where 
             r.user_id = #{userId}
     </select>
+    
+    <!-- 예약 상세 내역 -->
+    <select id="selectByResId" resultType="ReservationMaster">
+        select * from reservation_master where res_id = #{resId}
+    </select>
 
 </mapper>

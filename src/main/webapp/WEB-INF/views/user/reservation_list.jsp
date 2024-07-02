@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>
                                     <c:url var="reservationListDetails" value="/user/reservation_details">
-                                    <c:param name="userId" value="${r.userId}"></c:param>
+                                    <c:param name="resId" value="${r.resId}"></c:param>
                                     </c:url>
                                     <a href="${reservationListDetails}">
                                     ${r.resId}</a></td>

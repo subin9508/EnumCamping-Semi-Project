@@ -37,6 +37,7 @@
         <filter-name>authFilter</filter-name>
         <url-pattern>/user/myPage</url-pattern>
         <url-pattern>/user/reservation_list</url-pattern>
+        <url-pattern>/user/reservation_details</url-pattern>
         <url-pattern>/user/user_update</url-pattern>
         <!-- 
         <url-pattern>/post/modify</url-pattern>
