@@ -14,4 +14,6 @@ public class ItemsPrice {
 	private Integer itemId;
 	private String itemName;
 	private Integer itemPrice;
+	private String itemImg;
+	private String itemDesc;
 }

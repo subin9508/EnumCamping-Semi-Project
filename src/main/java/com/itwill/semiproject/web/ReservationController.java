@@ -22,12 +22,14 @@ public class ReservationController {
 	private final ReservationService reservationService;
 	
 	@GetMapping("/item")
-	public String item() {
-		log.debug("/item");
+	public String getItems(Model model) {
+		List<ItemsPrice> items = reservationService.getAllItems();
+		log.debug("itmes()", items);
 		
-		return "/reservation/item";			
+		model.addAttribute("items", items);
+		return "/reservation/item";
 	}
-	
+
 	@GetMapping("/sales")
 	public String sales() {
 		log.debug("/sales");
@@ -35,12 +37,6 @@ public class ReservationController {
 		return "/reservation/sales";
 	}
 	
-	@GetMapping("/items")
-    public String getItems(Model model) {
-        List<ItemsPrice> items = reservationService.getAllItems();
-        model.addAttribute("items", items);
-        return "items";
-    }
 	
 
 }

@@ -16,12 +16,16 @@ public class ItemsPriceDto {
 	private Integer itemId;
 	private String	itemName;
 	private Integer itemPrice;
+	private String itemImg;
+	private String itemDesc;
 	
 	public ItemsPrice toEntity() {
 		return ItemsPrice.builder()
 				.itemId(itemId)
 				.itemName(itemName)
 				.itemPrice(itemPrice)
+				.itemImg(itemImg)
+				.itemDesc(itemDesc)
 				.build();
 	}
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ItemsPriceDao {
 
-	ItemsPrice selectByItemsPrice(ItemsPrice itemsPrice);
+	ItemsPrice selectOrderByItemsId(ItemsPrice itemId);
 	
 	 List<ItemsPrice> selectAllItems();
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.itwill.semiproject.repository.ItemsPriceDao">
 
     <!-- 아이템 조회 -->
-    <select id="selectByItemsPrice" resultType="ItemsPrice">
+    <select id="selectByItemsId" resultType="ItemsPrice">
         SELECT * FROM items_price WHERE item_id = #{itemId} AND item_price = #{itemPrice}
     </select>
     

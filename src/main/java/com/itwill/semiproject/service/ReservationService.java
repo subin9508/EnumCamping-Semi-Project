@@ -21,7 +21,7 @@ public class ReservationService {
     public ItemsPrice read(ItemsPriceDto dto) {
         log.debug("read(dto={})", dto);
         
-        ItemsPrice itemsPrice = itemsPriceDao.selectByItemsPrice(dto.toEntity());
+        ItemsPrice itemsPrice = itemsPriceDao.selectOrderByItemsId(dto.toEntity());
         log.debug("상품 가격 ={}", itemsPrice);
         
         return itemsPrice;
