@@ -1,10 +1,16 @@
 package com.itwill.semiproject.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMaster;
+import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
 
@@ -16,7 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class UserService {
 
-	private final UserDao userDao;
+    private final UserDao userDao;
+    private final ReservationMasterDao reservationMasterDao;
+
 
 	// 아이디 중복 체크: true - 중복되지 않은 아이디(사용 가능한 아이디), false - 중복된 아이디.
 	public boolean checkUserid(String userId) {
@@ -86,11 +94,28 @@ public class UserService {
 
 		int result = userDao.updateProfilePicture(user);
 		log.debug("프로필 사진 업데이트 결과 = {}", result);
-
-		if (result == 0) {
-			throw new RuntimeException("Profile picture update failed");
-		}
+        if (result == 0) {
+            throw new RuntimeException("Profile picture update failed");
+        }
+    }
+    
+	// reservation_list read 메서드 추가
+    public List<ReservationListDto> readReservationList(String userId) {
+		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
+		log.debug("list({})", list);
+	
+		return list;
 	}
+
+    // reservation_details read 메서드 추가
+    public ReservationMaster readReservationDetails(int resId) {
+    	log.debug("readReservationDetails({})", resId);
+    	
+    	ReservationMaster resMaster = reservationMasterDao.selectByResId(resId);
+    	log.debug("{}", resMaster);
+    	
+    	return resMaster;
+    }
 
 	public User searchPassword(User user) {
 		log.debug("searchPassword");

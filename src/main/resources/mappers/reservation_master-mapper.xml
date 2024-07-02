@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.semiproject.repository.ReservationMasterDao">
+
+    <!-- 예약 내역 -->
+    <select id="selectByUserId" resultType="ReservationListDto">
+        select 
+            r.user_id,
+            r.res_id,
+            r.area_id,
+            r.res_check_in,
+            r.res_state,
+            u.user_name
+        from 
+            reservation_master r
+        join 
+            users u ON u.user_id = r.user_id
+        where 
+            r.user_id = #{userId}
+    </select>
+    
+    <!-- 예약 상세 내역 -->
+    <select id="selectByResId" resultType="ReservationMaster">
+        select * from reservation_master where res_id = #{resId}
+    </select>
+
+</mapper>

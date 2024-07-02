@@ -15,7 +15,10 @@
             <a href="password_check">정보수정</a>           
         </li>
         <li>
-            <a href="">예약내역</a>
+            <c:url var="reservationListUrl" value="/user/reservation_list">
+                <c:param name="userId" value="${user.userId}" />
+            </c:url>
+            <a href="${reservationListUrl}">예약내역</a>
         </li>
         <li>
            <a href="">문의내역</a> 

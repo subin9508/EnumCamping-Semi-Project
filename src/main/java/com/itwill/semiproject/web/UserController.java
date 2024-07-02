@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
 
@@ -296,4 +299,30 @@ public class UserController {
 			return "user/findpassword"; // 비밀번호 찾기 입력 폼으로 다시 이동
 		}
 	}
+	
+	@GetMapping("/reservation_list")
+	public String reservationList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
+		log.debug("reservation_list(userId={})", userId);
+
+		User user = userService.read(userId);
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+		 List<ReservationListDto> list = userService.readReservationList(user.getUserId());
+		 log.debug("list=({})", list);
+	     model.addAttribute("reservations", list);
+	     model.addAttribute("user", user); // 모델에 사용자 정보 추가
+		
+	     return "/user/reservation_list"; // 반환할 뷰의 이름
+	}
+    
+    @GetMapping("/reservation_details")
+    public void reservationDetails(@RequestParam(name="resId") int resId, Model model) {
+    	log.debug("reservation_details()");
+    	
+    	ReservationMaster resMaster = userService.readReservationDetails(resId);
+    	
+    	model.addAttribute("resMaster", resMaster);
+    	
+    }
 }
+
