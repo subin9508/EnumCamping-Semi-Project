@@ -2,11 +2,16 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.semiproject.repository.ItemsDao">
+<mapper namespace="com.itwill.semiproject.repository.ItemsPriceDao">
 
     <!-- 아이템 조회 -->
-    <select id="selectByItemId" resultType="Items">
-        SELECT * FROM items WHERE item_id = #{itemId} AND item_price = #{itemPrice}
+    <select id="selectByItemsPrice" resultType="ItemsPrice">
+        SELECT * FROM items_price WHERE item_id = #{itemId} AND item_price = #{itemPrice}
+    </select>
+    
+    <!-- 모든 아이템 조회 -->
+    <select id="selectAllItems" resultType="ItemsPrice">
+        SELECT * FROM items_price
     </select>
     
 </mapper>

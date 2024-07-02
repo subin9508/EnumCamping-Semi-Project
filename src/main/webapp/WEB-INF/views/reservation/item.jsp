@@ -24,7 +24,7 @@
         caption {
             caption-side: top;
             font-weight: bold;
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin-bottom: 10px;
         }
         th, td {
@@ -46,7 +46,7 @@
             height: 150px;
         }
         .wide {
-            width: 55%;
+            width: 60%;
         }
         .narrow {
             width: 20%;
@@ -76,8 +76,7 @@
                             <br />
                             이소가스 불포함
                             </td>
-                            <td>
-                            가격
+                            <td>${itemsPrice.itemPrice}
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -98,9 +97,6 @@
                             <h2>랜턴</h2>
                             <br />
                             다양한 랜턴이 있습니다
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -124,9 +120,6 @@
                             <h2>전기릴선</h2>
                             <br />
                             20m
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -152,9 +145,6 @@
                             <br />
                             기름 불포함
                             </td>
-                            <td>
-                            가격
-                            </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
                                     <button
@@ -178,9 +168,6 @@
                             <h2>전기장판</h2>
                             <br />
                             2인용
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -206,9 +193,6 @@
                             <br />
                             2캠핑계 에르** 캠핑 의자 입니다
                             </td>
-                            <td>
-                            가격
-                            </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
                                     <button
@@ -230,9 +214,6 @@
                             <h2>바베큐 세트</h2>
                             <br />
                             삼겹살(200g)+상추+버섯+파채+파채소스+쌈장+허브맛 솔트
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -258,9 +239,6 @@
                             <br />
                             고구마(200g)
                             </td>
-                            <td>
-                            가격
-                            </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
                                     <button
@@ -285,9 +263,6 @@
                             <br />
                             1봉지-10개입 + 꼬치 5개
                             </td>
-                            <td>
-                            가격
-                            </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
                                     <button
@@ -310,9 +285,6 @@
                             <h2>장작</h2>
                             <br />
                             1kg
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
@@ -337,9 +309,6 @@
                             <br />
                             1개
                             </td>
-                            <td>
-                            가격
-                            </td>
                             <td class="narrow">
                                 <div class="quantity-controls">
                                     <button
@@ -363,9 +332,6 @@
                             <h2>오로라 가루</h2>
                             <br />
                             불에 뿌리면 멋진 오로라를 볼 수 있어요(1개)
-                            </td>
-                            <td>
-                            가격
                             </td>
                             <td class="narrow">
                                 <div class="quantity-controls">

@@ -1,11 +1,12 @@
 package com.itwill.semiproject.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.itwill.semiproject.dto.ItemsDto;
-import com.itwill.semiproject.repository.Items;
-import com.itwill.semiproject.repository.ItemsDao;
+import com.itwill.semiproject.dto.ItemsPriceDto;
+import com.itwill.semiproject.repository.ItemsPrice;
+import com.itwill.semiproject.repository.ItemsPriceDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,17 +16,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ReservationService {
 
-    private final ItemsDao itemsDao;
+    private final ItemsPriceDao itemsPriceDao;
 
-    public ItemsDto selectItemById(Integer itemId) {
-        Items item = itemsDao.selectByItemId(itemId);
-        if (item != null) {
-            return ItemsDto.builder()
-                           .itemId(item.getItemId())
-                           .itemName(item.getItemName())
-                           .itemPrice(item.getItemPrice())
-                           .build();
-        }
-        return null;
+    public ItemsPrice read(ItemsPriceDto dto) {
+        log.debug("read(dto={})", dto);
+        
+        ItemsPrice itemsPrice = itemsPriceDao.selectByItemsPrice(dto.toEntity());
+        log.debug("상품 가격 ={}", itemsPrice);
+        
+        return itemsPrice;
     }
+    
+    public List<ItemsPrice> getAllItems() {
+        return itemsPriceDao.selectAllItems();
+    }
+    
 }
