@@ -1,6 +1,5 @@
 package com.itwill.semiproject.dto;
 
-import java.time.LocalDateTime;
 
 import com.itwill.semiproject.repository.Items;
 
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ItemsDto {
 
 	private Integer itemId;
-	private String	itemName;
+	private String	itemName;	
 	private Integer itemPrice;
 	private String itemImg;
 	private String itemDesc;
