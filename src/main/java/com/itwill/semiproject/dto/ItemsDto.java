@@ -2,7 +2,7 @@ package com.itwill.semiproject.dto;
 
 import java.time.LocalDateTime;
 
-import com.itwill.semiproject.repository.ItemsPrice;
+import com.itwill.semiproject.repository.Items;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor @Builder
-public class ItemsPriceDto {
+public class ItemsDto {
 
 	private Integer itemId;
 	private String	itemName;
@@ -19,8 +19,8 @@ public class ItemsPriceDto {
 	private String itemImg;
 	private String itemDesc;
 	
-	public ItemsPrice toEntity() {
-		return ItemsPrice.builder()
+	public Items toEntity() {
+		return Items.builder()
 				.itemId(itemId)
 				.itemName(itemName)
 				.itemPrice(itemPrice)

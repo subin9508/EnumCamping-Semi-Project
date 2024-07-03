@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.itwill.semiproject.dto.ItemsPriceDto;
-import com.itwill.semiproject.repository.ItemsPrice;
-import com.itwill.semiproject.repository.ItemsPriceDao;
+import com.itwill.semiproject.dto.ItemsDto;
+import com.itwill.semiproject.repository.Items;
+import com.itwill.semiproject.repository.ItemsDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,19 +16,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ReservationService {
 
-    private final ItemsPriceDao itemsPriceDao;
+    private final ItemsDao itemsDao;
 
-    public ItemsPrice read(ItemsPriceDto dto) {
+    public Items read(ItemsDto dto) {
         log.debug("read(dto={})", dto);
         
-        ItemsPrice itemsPrice = itemsPriceDao.selectOrderByItemsId(dto.toEntity());
-        log.debug("상품 가격 ={}", itemsPrice);
+        Items items = itemsDao.selectOrderByItemsId(dto.toEntity());
+        log.debug("상품 가격 ={}", items);
         
-        return itemsPrice;
+        return items;
     }
     
-    public List<ItemsPrice> getAllItems() {
-        return itemsPriceDao.selectAllItems();
+    public List<Items> getAllItems() {
+        return itemsDao.selectAllItems();
     }
     
 }

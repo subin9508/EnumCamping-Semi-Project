@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwill.semiproject.repository.ItemsPrice;
+import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.service.ReservationService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class ReservationController {
 	
 	@GetMapping("/item")
 	public String getItems(Model model) {
-		List<ItemsPrice> items = reservationService.getAllItems();
+		List<Items> items = reservationService.getAllItems();
 		log.debug("itmes()", items);
 		
 		model.addAttribute("items", items);
