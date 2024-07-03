@@ -86,6 +86,12 @@ th, td {
                 <div class="container-fluid d-flex justify-content-center mt-3">
                     <h4>전체 총 가격: <span id="grandTotalPrice">0</span> 원</h4>
                 </div>
+                <div
+                    class="container-fluid d-flex justify-content-center mt-3">
+                    <c:url value="/reservation/order" var="orderJsp" />
+                    <a href="${orderJsp}" class="btn btn-primary"
+                        role="button">다음 단계</a>
+                </div>
             </main>
 
             <div class="container-fluid" id="wrap">
@@ -149,7 +155,10 @@ th, td {
                 element.textContent = formatPrice(parseInt(element.textContent));
             });
         });
+        
+    
     </script>
+    
 
 </body>
 </html>

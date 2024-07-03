@@ -137,12 +137,8 @@
                 <li class="nav-item"><c:url value="/reservation/item"
                         var="reservationPage" /> <a
                     class="nav-link  menu" href="${reservationPage}">예약</a>
-                     <ul class="subMenu">
-                        <li><c:url value="/reservation/sales"
-                                var="sales" /> <a
-                            class="nav-link" aria-current="page"
-                            href="${sales}">물품 판매</a></li>
-                    </ul></li>
+                     
+                     </li>
                     
                 <li class="nav-item"><c:url value="/community/notice/list"
                         var="communityPage" /> <a

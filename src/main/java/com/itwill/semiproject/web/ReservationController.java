@@ -1,7 +1,6 @@
 package com.itwill.semiproject.web;
 
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,13 +29,12 @@ public class ReservationController {
 		return "/reservation/item";
 	}
 
-	@GetMapping("/sales")
-	public String sales() {
-		log.debug("/sales");
+
+	@GetMapping("/order")
+	public String order() {
+		log.debug("order()");
 		
-		return "/reservation/sales";
+		return "/reservation/order";
 	}
-	
-	
 
 }
