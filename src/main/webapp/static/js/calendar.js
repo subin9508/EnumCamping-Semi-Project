@@ -1,7 +1,9 @@
+ /**
+  *  /reservation/calendar.jsp에 포함
+  */
+ 
  document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
-        
-        addAreaRadioEventListeners();
         
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
             prevCalendar();
@@ -10,6 +12,8 @@
         document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
             nextCalendar();
         });
+        
+        addAreaRadioEventListeners();
     });
 
     var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
@@ -192,6 +196,22 @@
         const day = column.innerText;
 
         getReservations(year, month, day);
+        
+        // area 라디오 버튼 표시
+        const areaCards = document.querySelectorAll('.area-card');
+        areaCards.forEach(card => {
+            card.style.display = 'block';
+        });
+        
+        // 모든 라디오 버튼 체크 해제
+        const radios = document.querySelectorAll('.area-radio');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+        
+        // night 라디오 버튼 숨기기
+        const nightCard = document.getElementById('night-card');
+        nightCard.style.display = 'none';
     }
     
     function getReservations(year, month, day) {
@@ -232,6 +252,18 @@
                 }
             }
         }
+    }
+    
+    function addAreaRadioEventListeners() {
+        const radios = document.querySelectorAll('.area-radio');
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const nightCard = document.getElementById('night-card');
+                if (this.checked) {
+                    nightCard.style.display = 'block';
+                }
+            });
+        });
     }
 
     /**

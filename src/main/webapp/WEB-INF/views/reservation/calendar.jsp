@@ -44,7 +44,8 @@
                 <div id="date"></div>
                 
                 <!-- radio -->
-                <div class="card mt-2 p-2" id="area1" >
+                <div class="area-card" style="display:none;">
+                <div class="card mt-2 p-2" id="area1">
                     <label class="radio_label"> 
                         <input class="area-radio" type="radio" id="area1_radio" name="area" value="1"> 
                         <span class="radio_icon"></span> 
@@ -79,7 +80,8 @@
                         <span class="radio_text">구역5</span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2">
+                </div>
+                <div class="card mt-2 p-2" id="night-card" style="display:none;">
                     <label class="radio_label" id="night-radio-label"> 
                         <input class="night-radio" type="radio" name="night"> 
                         <span class="radio_icon"></span> 
