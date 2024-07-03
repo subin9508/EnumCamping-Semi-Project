@@ -44,47 +44,47 @@
                 <div id="date"></div>
                 
                 <!-- radio -->
-                <div class="card mt-2 p-2">
+                <div class="card mt-2 p-2" id="area1" >
                     <label class="radio_label"> 
-                        <input class="area-radio" type="radio" name="area" value="1"> 
+                        <input class="area-radio" type="radio" id="area1_radio" name="area" value="1"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">구역1</span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2">
+                <div class="card mt-2 p-2" id="area2">
                     <label class="radio_label"> 
-                        <input class="area-radio" type="radio" name="area" value="2">
+                        <input class="area-radio" type="radio" id="area2_radio" name="area" value="2">
                         <span class="radio_icon"></span> 
                         <span class="radio_text">구역2</span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2">
+                <div class="card mt-2 p-2" id="area3">
                     <label class="radio_label"> 
-                        <input class="area-radio" type="radio" name="area" value="3"> 
+                        <input class="area-radio" type="radio" id="area3_radio" name="area" value="3"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">구역3</span>
                     </label>
                 </div>
                 <div class="card mt-2 p-2">
-                    <label class="radio_label"> 
-                        <input class="area-radio" type="radio" name="area" value="4"> 
+                    <label class="radio_label" id="area4"> 
+                        <input class="area-radio" type="radio" id="area4_radio" name="area" value="4"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">구역4</span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2">
+                <div class="card mt-2 p-2" id="area5">
                     <label class="radio_label"> 
-                        <input class="area-radio" type="radio" name="area" value="5"> 
+                        <input class="area-radio" type="radio" id="area5_radio" name="area" value="5"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">구역5</span>
                     </label>
                 </div>
                 <div class="card mt-2 p-2">
-                    <label class="radio_label"> 
-                        <input class="" type="radio" name="group2"> 
+                    <label class="radio_label" id="night-radio-label"> 
+                        <input class="night-radio" type="radio" name="night"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">1박</span>
-                        <input class="" type="radio" name="group2"> 
+                        <input class="night-radio" type="radio" name="night"> 
                         <span class="radio_icon"></span> 
                         <span class="radio_text">2박</span>
                     </label>

@@ -1,6 +1,8 @@
  document.addEventListener("DOMContentLoaded", function() {
         buildCalendar();
         
+        addAreaRadioEventListeners();
+        
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
             prevCalendar();
         });
@@ -193,9 +195,13 @@
     }
     
     function getReservations(year, month, day) {
-        axios.post(`/semiproject/reservation?date=${year}-${month}-${day}`)
+        const date = `${year}-${month}-${day}`
+        const uri = `../reservation/calendar/${date}`;
+        
+        axios.get(uri)
             .then(response => {
-                const reservedAreas = response.data.reservedAreas;
+                console.log(response.data);
+                const reservedAreas = response.data || [];
                 updateRadioButtons(reservedAreas);
             })
             .catch(error => {
@@ -205,17 +211,25 @@
     
     function updateRadioButtons(reservedAreas) {
         const totalAreas = 5; // 총 구역 수
+        console.log(reservedAreas);
         
         for (let i = 1; i <= totalAreas; i++) {
-            const area = decument.getElementById(`area${i}`);
-            const radio = area.querySelector('input[type="radio"]');
-            
-            if (reservedAreas.includes(`구역${i}`)) {
-                area.style.display = "none";
-                radio.disabled = true;
-            } else {
-                area.style.display = "block";
-                radio.disabled = false;
+            console.log(`area${i} 처리 시작`)
+            const area = document.getElementById(`area${i}_radio`);
+            console.log(`area${i}`, area);
+
+            if (area) {
+                const card = document.getElementById(`area${i}`);
+                
+                console.log(`Processing Area ${i}`);
+                console.log(`card${i}=`, card);
+                
+                if (reservedAreas.includes(i)) {
+                    console.log(`Area ${i} is reserved`);
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
             }
         }
     }
