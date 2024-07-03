@@ -261,9 +261,17 @@
                 const nightCard = document.getElementById('night-card');
                 if (this.checked) {
                     nightCard.style.display = 'block';
+                    
+                    // 모든 라디오 버튼 체크 해제
+                    const nightRadio = document.querySelectorAll('.night-radio');
+                    nightRadio.forEach(radio => {
+                    radio.checked = false;
+                    });
                 }
             });
         });
+        
+        
     }
 
     /**

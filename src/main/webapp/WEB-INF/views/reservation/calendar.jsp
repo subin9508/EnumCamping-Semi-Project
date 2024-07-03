@@ -92,7 +92,7 @@
                     </label>
                 </div>
                 <!-- // radio -->
-                <a href="/semiproject/reservation/item">버튼</a>
+                <a href="/semiproject/reservation/item">다음 페이지</a>
             </div>
         </div>
 
