@@ -227,6 +227,7 @@
         }
     }
     
+    // date정보 uri로 전송
     function getReservations(year, month, day) {
         const date = `${year}-${month}-${day}`
         const uri = `../reservation/calendar/${date}`;
@@ -243,7 +244,7 @@
     }
     
     
-    
+    // 예약된 날짜 있으면 해당 구역 display = none;
     function updateRadioButtons(reservedAreas) {
         const totalAreas = 20; // 총 구역 수
         console.log(reservedAreas);
@@ -269,6 +270,8 @@
         }
     }
     
+    
+    // 구역 클릭 시 nightCard 뜨게 
     function addAreaRadioEventListeners() {
         const radios = document.querySelectorAll('.area-radio');
         radios.forEach(radio => {
@@ -303,14 +306,50 @@
         
     }
     
+    // 선택된 date, area 정보 uri로 전송
     function getReservationNight(year, month, day, selectedArea) {
         const date = `${year}-${month}-${day}`;
         const uri = `../reservation/calendar/${date}/${selectedArea}`;
 
         console.log('getReservationNight()', uri);
 
-        // 여기에서 추가적인 로직을 추가할 수 있습니다.
-        // 예: axios 요청을 통해 서버에서 데이터를 가져오기
+        axios.get(uri)
+            .then(response => {
+                console.log(response.data);
+                const checkedDateAndArea = response.data || [];
+                console.log(checkedDateAndArea);
+                
+                const nightCard = document.getElementById('night-card');
+                const nightRadioLabel = document.getElementById('night-radio-label');
+                
+                // nigthCard 초기화
+                nightRadioLabel.innerHTML = '';
+                
+                if (checkedDateAndArea.length === 0) {
+                    // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
+                    nightRadioLabel.innerHTML = `
+                        <input class="night-radio" type="radio" name="night" value="1">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">1박</span>
+                        <input class="night-radio" type="radio" name="night" value="2">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">2박</span>
+                    `;
+                } else {
+                    // 다음날 예약이 있는 경우 1박 옵션만 표시
+                    nightRadioLabel.innerHTML = `
+                        <input class="night-radio" type="radio" name="night" value="1">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">1박</span>
+                    `;
+                }
+                
+                // nightCard 표시
+                nightCard.style.display = 'block';
+            })
+            .catch(error => {
+                console.error("There was an error fetching the reservations!", error);
+            });
     }
 
     /**

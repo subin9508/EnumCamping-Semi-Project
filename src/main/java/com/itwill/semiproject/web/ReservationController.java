@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class ReservationController {
 	@GetMapping("/calendar/{date}")
 	@ResponseBody
 	public List<Integer> reservationCalendar(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-		log.debug("POST: calendar with date {}", date);
+		log.debug("GET: calendar with date {}", date);
 		
 		 // 해당 날짜에 예약된 구역 ID 목록을 가져옵니다.
         List<Integer> reservedAreaIds = reservationService.readReservedAreas(date);
@@ -45,9 +46,11 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/calendar/{date}/{area}")
-	public ResponseEntity<List<ReservationMaster>> reservationCalendar(@PathVariable String date, @PathVariable int area) {
+	public ResponseEntity<List<ReservationMaster>> reservationCalendar(@PathVariable("date") String date, @PathVariable("area") int area) {
 		LocalDate checkInDate = LocalDate.parse(date);
+		log.debug("GET: calendar with date and area {}, {}", date, area);
+		List<ReservationMaster> reservations = reservationService.readReservationMaster(checkInDate, area);
 		
-		return null;
+		return new ResponseEntity<>(reservations, HttpStatus.OK);
 	}
 }

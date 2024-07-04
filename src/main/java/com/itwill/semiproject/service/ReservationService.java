@@ -7,10 +7,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import oracle.sql.DATE;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,6 +27,11 @@ public class ReservationService {
 	     return reservationMasterDao.selectByResCheckIn(dateString);
 		
 //		return reservedArea;
+	}
+	
+	public List<ReservationMaster> readReservationMaster(LocalDate date, int area) {
+		String formattedDate = date.toString();
+		return reservationMasterDao.selectByItemIdAndResCheckIn(area, formattedDate);
 	}
 
 }

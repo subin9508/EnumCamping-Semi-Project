@@ -1,5 +1,6 @@
 package com.itwill.semiproject.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -10,4 +11,5 @@ public interface ReservationMasterDao {
 	List<ReservationListDto> selectByUserId (String userId);
 	ReservationMaster selectByResId(Integer resId);
 	List<Integer> selectByResCheckIn(@Param("resCheckIn") String resCheckIn);
+	List<ReservationMaster> selectByItemIdAndResCheckIn(@Param("itemId") int itemId, @Param("resCheckIn") String resCheckIn);
 }

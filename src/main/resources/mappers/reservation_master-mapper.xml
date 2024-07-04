@@ -34,12 +34,12 @@
     </select>
     
     <!-- 구역 선택 후 가능한 night 수 -->
-    <select id="selectByItemIdAndCheckIn" resultType="ReservationMaster">
+    <select id="selectByItemIdAndResCheckIn" resultType="ReservationMaster">
         select rm.*
         from reservation_master rm
         join reservation_detail rd on rm.res_id = rd.res_id
         where rd.item_id = #{itemId}
-            and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + INTERVAL '1' DAY;
+            and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + 1
     </select>
     
     
