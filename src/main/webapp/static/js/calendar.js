@@ -3,6 +3,7 @@
   */
  
  document.addEventListener("DOMContentLoaded", function() {
+        selectedDate = null;
         buildCalendar();
         
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
@@ -18,7 +19,8 @@
 
     var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
     var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
-    
+    var selectedDate = null;
+    var selectedArea= null;
 
     function prevCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
@@ -31,6 +33,7 @@
         buildCalendar();    // @param 명월 캘린더 출력 요청
     }
 
+    console.log('Initial selectedDate:', selectedDate);
 
     function buildCalendar() {
 
@@ -157,6 +160,7 @@
             }
             dom++;
         }
+        console.log('buildCalendar - current selectedDate:', selectedDate);
     }
 
     /**
@@ -187,14 +191,18 @@
         // @param 선택일 클래스명 변경
         column.classList.add("choiceDay");
         
-        let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
-        document.getElementById('date').innerText = selectedDate;
+        // let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
+        document.getElementById('date').innerText = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
         
         // @details 선택한 날짜에 대한 예약 정보 가져오기
         const year = document.getElementById("calYear").innerText;
         const month = document.getElementById("calMonth").innerText;
         const day = column.innerText;
-
+        selectedDate = `${year}-${autoLeftPad(month, 2)}-${autoLeftPad(day, 2)}`;
+        console.log('calendarChoiceDay - selectedDate=', selectedDate);
+        
+        
+        // 선택한 날짜에 대한 예약 정보 가져오기
         getReservations(year, month, day);
         
         // area 라디오 버튼 표시
@@ -212,6 +220,11 @@
         // night 라디오 버튼 숨기기
         const nightCard = document.getElementById('night-card');
         nightCard.style.display = 'none';
+        
+        // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
+        if (selectedDate && selectedArea) {
+            getReservationNight(year, month, day, selectedArea);
+        }
     }
     
     function getReservations(year, month, day) {
@@ -229,8 +242,10 @@
             });
     }
     
+    
+    
     function updateRadioButtons(reservedAreas) {
-        const totalAreas = 5; // 총 구역 수
+        const totalAreas = 20; // 총 구역 수
         console.log(reservedAreas);
         
         for (let i = 1; i <= totalAreas; i++) {
@@ -258,20 +273,44 @@
         const radios = document.querySelectorAll('.area-radio');
         radios.forEach(radio => {
             radio.addEventListener('change', function() {
-                const nightCard = document.getElementById('night-card');
+                
                 if (this.checked) {
+                    selectedArea = this.value;
+                    console.log('addAreaRadioEventListeners - selectedArea=', selectedArea);
+                    console.log('addAreaRadioEventListeners - selectedDate=', selectedDate);
+                    
+                    const nightCard = document.getElementById('night-card');
                     nightCard.style.display = 'block';
                     
                     // 모든 라디오 버튼 체크 해제
                     const nightRadio = document.querySelectorAll('.night-radio');
                     nightRadio.forEach(radio => {
-                    radio.checked = false;
+                        radio.checked = false;
                     });
+                    
+                    // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
+                    if (selectedDate && selectedArea) {
+                        const year = document.getElementById("calYear").innerText;
+                        const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
+                        const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
+                        console.log('year, month, day, selectedArea:', year, month, day, selectedArea);  // 로그 추가
+                        getReservationNight(year, month, day, selectedArea);
+                    }
                 }
             });
         });
         
         
+    }
+    
+    function getReservationNight(year, month, day, selectedArea) {
+        const date = `${year}-${month}-${day}`;
+        const uri = `../reservation/calendar/${date}/${selectedArea}`;
+
+        console.log('getReservationNight()', uri);
+
+        // 여기에서 추가적인 로직을 추가할 수 있습니다.
+        // 예: axios 요청을 통해 서버에서 데이터를 가져오기
     }
 
     /**
