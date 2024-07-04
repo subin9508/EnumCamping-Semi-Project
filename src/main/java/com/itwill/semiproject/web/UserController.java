@@ -296,4 +296,16 @@ public class UserController {
 			return "user/findpassword"; // 비밀번호 찾기 입력 폼으로 다시 이동
 		}
 	}
+	
+	@GetMapping("/personal_info")
+	public String personalInfo(HttpSession session, Model model) {
+	    User user = (User) session.getAttribute("user"); // 세션에서 사용자 정보 가져오기
+	    if (user == null) {
+	        // 사용자 정보가 세션에 없는 경우 오류 처리
+	        return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
+	    }
+	    
+	    model.addAttribute("user", user); // 사용자 정보를 모델에 추가
+	    return "user/personal_info"; // personal_info.jsp 페이지로 이동
+	}
 }

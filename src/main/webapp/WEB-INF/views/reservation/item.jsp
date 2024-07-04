@@ -46,7 +46,7 @@ th, td {
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
 
-            <main style="margin-bottom: 5%; margin-top: 5%">
+                        <main style="margin-bottom: 5%; margin-top: 5%">
                 <div class="container-fluid d-flex justify-content-center">
                     <h1>대여 및 판매 물품</h1>
                 </div>
@@ -57,10 +57,10 @@ th, td {
                                 <tr>
                                     <td class="img-container"><c:url
                                             value="${i.itemImg}"
-                                            var="burnerset" /> <img
-                                        alt="burnerset"
-                                        src="${burnerset}" class="img"
-                                        id="burnerset" /></td>
+                                            var="itemImgUrl" /> <img
+                                        alt="${i.itemName}"
+                                        src="${itemImgUrl}" class="img"
+                                        id="itemImg-${i.itemId}" /></td>
                                     <td>
                                         <h5>${i.itemName}</h5>
                                     </td>
@@ -68,15 +68,21 @@ th, td {
                                     <td>${i.itemPrice}원</td>
                                     <td class="narrow">
                                         <div class="quantity-controls">
-                                            <button onclick="decreaseQuantity('${i.itemId}', ${i.itemPrice})">-</button>
-                                            <span id="quantity${i.itemId}">0</span>
-                                            <button onclick="increaseQuantity('${i.itemId}', ${i.itemPrice})">+</button>
+                                            <button
+                                                onclick="decreaseQuantity('${i.itemId}', ${i.itemPrice})">-</button>
+                                            <span
+                                                id="quantity-${i.itemId}">0</span>
+                                            <button
+                                                onclick="increaseQuantity('${i.itemId}', ${i.itemPrice})">+</button>
                                         </div>
                                         <div>
-                                            총 가격: 
-                                            <span id="totalPrice${i.itemId}">0</span>
+                                            총 가격: <span
+                                                id="totalPrice-${i.itemId}">0</span>
                                             원
                                         </div>
+                                        <button
+                                            onclick="addToReservation('${i.itemId}', '${i.itemName}', ${i.itemPrice}, parseInt(document.getElementById('quantity-${i.itemId}').textContent))">
+                                            추가</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -115,7 +121,7 @@ th, td {
         }
 
         function decreaseQuantity(id, price) {
-            const quantityElement = document.querySelector('#quantity' + id);
+            const quantityElement = document.querySelector('#quantity-' + id);
             let quantity = parseInt(quantityElement.textContent);
             if (quantity > 0) {
                 quantityElement.textContent = --quantity;
@@ -125,7 +131,7 @@ th, td {
         }
 
         function increaseQuantity(id, price) {
-            const quantityElement = document.querySelector('#quantity' + id);
+            const quantityElement = document.querySelector('#quantity-' + id);
             let quantity = parseInt(quantityElement.textContent);
             quantityElement.textContent = ++quantity;
             updateTotalPrice(id, price, quantity);
@@ -133,7 +139,7 @@ th, td {
         }
 
         function updateTotalPrice(id, price, quantity) {
-            const totalPriceElement = document.querySelector('#totalPrice' + id);
+            const totalPriceElement = document.querySelector('#totalPrice-' + id);
             const totalPrice = price * quantity;
             totalPriceElement.textContent = formatPrice(totalPrice);
         }
@@ -148,6 +154,24 @@ th, td {
             grandTotalPriceElement.textContent = formatPrice(grandTotal);
         }
 
+        function addToReservation(itemId, itemName, itemPrice, itemQuantity) {
+            axios.post('/reservation-detail/add', {
+                itemId: itemId,
+                itemName: itemName,
+                itemPrice: itemPrice,
+                itemQuantity: itemQuantity
+            })
+            .then(function(response) {
+                // 성공적으로 서버에서 처리한 경우
+                alert('예약 상세 정보가 성공적으로 추가되었습니다.');
+            })
+            .catch(function(error) {
+                // 에러 발생 시 처리
+                console.error('예약 상세 정보 추가 중 에러:', error);
+                alert('예약 상세 정보 추가 중 에러가 발생했습니다.');
+            });
+        }
+
         // 페이지 로드 시 초기 가격 포맷팅
         document.addEventListener('DOMContentLoaded', function() {
             const priceElements = document.querySelectorAll('[id^="price"]');
@@ -155,10 +179,8 @@ th, td {
                 element.textContent = formatPrice(parseInt(element.textContent));
             });
         });
-        
     
     </script>
-    
 
 </body>
 </html>

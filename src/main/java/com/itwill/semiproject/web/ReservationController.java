@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.semiproject.repository.Items;
-import com.itwill.semiproject.service.ItemsService;
+import com.itwill.semiproject.service.ReservationService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/reservation")
-public class ItemsController {
+public class ReservationController {
 
-	private final ItemsService reservationService;
+	private final ReservationService reservationService;
 	
 	@GetMapping("/item")
 	public String getItems(Model model) {
@@ -35,6 +35,13 @@ public class ItemsController {
 		log.debug("order()");
 		
 		return "/reservation/order";
+	}
+	
+	@GetMapping("/reservationConfirm")
+	public String reservationConfirm() {
+		log.debug("reservationConfirm()");
+		
+		return "/reservation/reservationConfirm";
 	}
 
 }

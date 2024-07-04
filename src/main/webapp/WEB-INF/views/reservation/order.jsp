@@ -28,11 +28,28 @@
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
 
-            <main style="margin-bottom: 5%; margin-top: 5%">
+            <main
+                style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
                 <div
                     class="container-fluid d-flex justify-content-center">
                     <h1>예약 및 주문</h1>
                 </div>
+                <div class="form-group">
+                    <label for="userName">이름:</label> <input type="text"
+                        class="form-control" id="userName"
+                        value="${user.userName}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">이메일:</label> <input
+                        type="text" class="form-control" id="userEmail"
+                        value="${user.userEmail}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">휴대폰 번호:</label> <input
+                        type="text" class="form-control" id="userPhone"
+                        value="${user.userPhone}" readonly>
+                </div>
+
 
                 <div
                     class="container-fluid d-flex justify-content-center">
@@ -41,8 +58,7 @@
                             <h5 class="card-title">개인 정보 수집 동의</h5>
                             <p class="card-text">저희 사이트는 귀하의 개인 정보를
                                 수집합니다. 수집된 정보는 사용자 식별, 서비스 제공 등의 목적으로
-                                사용됩니다. 자세한 정보는 개인 정보 보호 정책을 참조하시기 바랍니다.
-                            </p>
+                                사용됩니다. 자세한 정보는 개인 정보 보호 정책을 참조하시기 바랍니다.</p>
                             <div class="form-check">
                                 <input class="form-check-input"
                                     type="checkbox" value=""
@@ -56,7 +72,7 @@
                 </div>
 
                 <div
-                    class="container-fluid d-flex justify-content-center mt-3">
+                    class="container-fluid d-flex justify-content-center">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">개인 정보 제공 동의</h5>
@@ -74,10 +90,15 @@
                         </div>
                     </div>
                 </div>
+
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
-                    <button id="paymentButton" class="btn btn-primary"
-                        disabled>결제하기</button>
+                    <form action="../reservation/reservationConfirm"
+                        method="get">
+                        <button id="paymentButton"
+                            class="btn btn-primary" type="submit"
+                            disabled>결제하기</button>
+                    </form>
                 </div>
             </main>
 
@@ -95,6 +116,12 @@
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
     <script>
+					
+					// 페이지 로딩 시 초기 버튼 상태 설정
+					document.addEventListener('DOMContentLoaded', function() {
+						checkAgreements(); // 초기 버튼 상태 설정을 위해 함수 호출
+					});
+
 					// 체크 박스 상태 변경 시 호출될 함수
 					function checkAgreements() {
 						const agreeCollect = document

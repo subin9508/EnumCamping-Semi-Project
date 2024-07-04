@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Order {
+public class ReservationDetail {
 	private Integer resId;
 	private Integer itemId;
 	private Integer itemQuantity;

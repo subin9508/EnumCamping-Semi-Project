@@ -20,6 +20,5 @@
      -->
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
         <typeAlias type="com.itwill.semiproject.repository.Items" alias="Items" />
-        <typeAlias type="com.itwill.semiproject.repository.Order" alias="Order" />
     </typeAliases>
 </configuration>
