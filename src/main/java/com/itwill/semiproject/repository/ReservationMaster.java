@@ -19,6 +19,5 @@ public class ReservationMaster {
 	private LocalDate resModifiedTime;
 	private LocalDateTime resCheckIn;
 	private Integer resNight;
-	private Integer areaId;
 	private Integer resTotalPrice;
 }

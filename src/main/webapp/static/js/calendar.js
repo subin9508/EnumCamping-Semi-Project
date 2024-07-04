@@ -246,9 +246,9 @@
                 
                 if (reservedAreas.includes(i)) {
                     console.log(`Area ${i} is reserved`);
-                    card.style.display = "block";
-                } else {
                     card.style.display = "none";
+                } else {
+                    card.style.display = "block";
                 }
             }
         }

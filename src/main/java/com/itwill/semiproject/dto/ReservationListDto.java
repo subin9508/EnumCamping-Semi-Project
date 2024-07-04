@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class ReservationListDto {
 	private String userId;
 	private Integer resId;
-	private Integer areaId;
 	private LocalDateTime resCheckIn;
 	private Integer resState;
 	private String userName;
@@ -23,7 +22,6 @@ public class ReservationListDto {
 		return ReservationListDto.builder()
 				.userId(reservationMaster.getUserId())
 				.resId(reservationMaster.getResId())
-				.areaId(reservationMaster.getAreaId())
 				.resCheckIn(reservationMaster.getResCheckIn())
 				.resState(reservationMaster.getResState())
 				.userName(userName)

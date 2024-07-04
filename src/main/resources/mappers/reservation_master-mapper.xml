@@ -9,7 +9,6 @@
         select 
             r.user_id,
             r.res_id,
-            r.area_id,
             r.res_check_in,
             r.res_state,
             u.user_name
@@ -25,5 +24,15 @@
     <select id="selectByResId" resultType="ReservationMaster">
         select * from reservation_master where res_id = #{resId}
     </select>
+    
+    <!-- 예약된 구역(아이템) -->
+    <select id="selectByResCheckIn" resultType="java.lang.Integer">
+        select rd.item_id
+        from reservation_master rm
+        join reservation_detail rd ON rm.res_id = rd.res_id
+        where rm.res_check_in = #{resCheckIn}
+    </select>
+    
+    
 
 </mapper>
