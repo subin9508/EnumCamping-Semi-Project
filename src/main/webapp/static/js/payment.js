@@ -3,13 +3,14 @@
  */
 
  
- 
+ document.addEventListener ('DOMContentLoaded', () => {
+
  const btnPayment = document.querySelector('button#btnPayment');
  
  // 결제하기 버튼의 클릭 이벤트 리스너:
  btnPayment.addEventListener('click', () => {
 	
-	var IMP = window.IMP;
+	const IMP = window.IMP;
 	IMP.init('imp45647302'); // 내 식별코드
 	IMP.request_pay({
 		pg: 'html5_inicis', // PG사
@@ -43,5 +44,41 @@
 				alert("결제 검증 실패");
 			}
 	        )
-		});
+	});
+  })
+  
+  
+  const verifyAndSavePayInfo = (imp_uid) => {
+	const payId = document.querySelector("input[name=select]:checked").value;
+	
+	const params = {
+		"payId" : payId,
+		"resId" : resId
+		
+	}
+	
+	$.ajax({
+		type: "POST",
+		url: "/reservation/verify/" + imp_uid,
+		data: params,
+		success: data => {
+			cosole.log(data);
+			
+			if(data.data.result === "SUCCESS") {
+				location.href = "/reservation/succeeded/" +
+				data.data.orderNum;
+			} else {
+				alert("처리 중 오류가 발생하였습니다. 다시 시도해 주세요.");
+			}
+			
+		}
+		
+		
+		
 	})
+  }
+  
+  
+  
+ });
+	

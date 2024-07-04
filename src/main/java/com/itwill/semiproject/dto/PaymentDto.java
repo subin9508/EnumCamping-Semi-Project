@@ -1,6 +1,7 @@
 package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import com.itwill.semiproject.repository.Payments;
 
@@ -12,16 +13,18 @@ public class PaymentDto {
 	
 	private Integer payId;
 	private String impUid;
+	private String pgTid;
 	private Integer resId;
-	private Integer payPrice;
-	private LocalDate payDate;
-	private Integer payMethod;
-	private Integer payStatus;
+	private Integer amount;
+	private Date payDate;
+	private String payMethod;
+	private String payStatus;
+	private String buyerEmail;
 	
 	
 	
 	public Payments toEntity() {
-		return Payments.builder().payId(payId).impUid(impUid).resId(resId).payDate(payDate).payPrice(payPrice).payMethod(payMethod).payStatus(payStatus).build();
+		return Payments.builder().payId(payId).impUid(impUid).pgTid(pgTid).resId(resId).amount(amount).payDate(payDate).payMethod(payMethod).payStatus(payStatus).buyerEmail(buyerEmail).build();
 		
 }
 }

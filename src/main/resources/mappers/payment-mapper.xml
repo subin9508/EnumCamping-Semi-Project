@@ -14,8 +14,8 @@
     <!-- 결제 정보 삽입 -->
     
     <insert id="insertPayment" parameterType="Payments">
-        insert into payments (pay_id, impuid, res_id, pay_price, pay_date, pay_method, pay_status)
-        values (#{payId}, #{impUid}, #{resId}, #{payPrice}, #{payDate}, #{payMethod}, #{payStatus})
+        insert into payments (pay_id, imp_uid, pg_tid, res_id, amount, pay_date, pay_method, pay_status, buyer_email)
+        values (#{payId}, #{impUid}, #{pgTid}, #{resId}, #{amount}, #{payDate}, #{payMethod}, #{payStatus}, #{buyerEmail})
     </insert>
     
     
