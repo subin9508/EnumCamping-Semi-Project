@@ -12,7 +12,7 @@
 	var IMP = window.IMP;
 	IMP.init('imp45647302'); // 내 식별코드
 	IMP.request_pay({
-		pg: 'kakaopay', // PG사
+		pg: 'html5_inicis', // PG사
 		pay_method: 'card', // 결제방식
 		merchant_uid: 'merchant_' + new Date().getTime(),
 		name: '바베큐 세트',
