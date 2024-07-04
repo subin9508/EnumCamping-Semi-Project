@@ -209,7 +209,7 @@ public class UserController {
 	@PostMapping("/uploadProfilePicture")
 	public String uploadProfilePicture(@RequestPart("profilePicture") MultipartFile file, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if (user == null || file.isEmpty()) {
+		if (user == null) {
 			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
 		}
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.semiproject.repository.PaymentDao">
+
+    
+    <!-- pay_id 조회 -->
+    <select id="selectByPayid" resultType="Payments">
+        select * from payments where pay_id = #{payId}
+    </select>
+    
+    
+    <!-- 결제 정보 삽입 -->
+    
+    <insert id="insertPayment" parameterType="Payments">
+        insert into payments (pay_id, impuid, res_id, pay_price, pay_date, pay_method, pay_status)
+        values (#{payId}, #{impUid}, #{resId}, #{payPrice}, #{payDate}, #{payMethod}, #{payStatus})
+    </insert>
+    
+    
+</mapper>
