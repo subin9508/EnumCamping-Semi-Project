@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itwill.semiproject.dto.ItemsDto;
+import com.itwill.semiproject.dto.ReservationDetailDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ItemsDao;
+import com.itwill.semiproject.repository.ReservationDetail;
+import com.itwill.semiproject.repository.ReservationDetailDao;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ReservationService{
 
     private final ItemsDao itemsDao;
+    private final ReservationDetailDao reservationDetailDao;
 
    // items 테이블
     public Items read(ItemsDto dto) {
@@ -30,6 +34,15 @@ public class ReservationService{
     
     public List<Items> getAllItems() {
         return itemsDao.selectAllItems();
+    }
+    
+    public int create(ReservationDetailDto dto) {
+        log.debug("create({})", dto);
+        
+        ReservationDetail reservationDetail = dto.toEntity();
+        int result = reservationDetailDao.insert(reservationDetail);
+        
+        return result;
     }
     
 }

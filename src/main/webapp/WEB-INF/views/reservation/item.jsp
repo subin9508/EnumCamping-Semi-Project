@@ -80,9 +80,6 @@ th, td {
                                                 id="totalPrice-${i.itemId}">0</span>
                                             원
                                         </div>
-                                        <button
-                                            onclick="addToReservation('${i.itemId}', '${i.itemName}', ${i.itemPrice}, parseInt(document.getElementById('quantity-${i.itemId}').textContent))">
-                                            추가</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -154,31 +151,34 @@ th, td {
             grandTotalPriceElement.textContent = formatPrice(grandTotal);
         }
 
-        function addToReservation(itemId, itemName, itemPrice, itemQuantity) {
-            axios.post('/reservation-detail/add', {
-                itemId: itemId,
-                itemName: itemName,
-                itemPrice: itemPrice,
-                itemQuantity: itemQuantity
-            })
-            .then(function(response) {
-                // 성공적으로 서버에서 처리한 경우
-                alert('예약 상세 정보가 성공적으로 추가되었습니다.');
-            })
-            .catch(function(error) {
-                // 에러 발생 시 처리
-                console.error('예약 상세 정보 추가 중 에러:', error);
-                alert('예약 상세 정보 추가 중 에러가 발생했습니다.');
-            });
-        }
+        
+        
+     // 다음 단계 버튼 클릭 시 호출되는 함수
+        function handleNextStep() {
+            const items = document.querySelectorAll('[id^="quantity-"]');
+            const selectedItems = [];
 
-        // 페이지 로드 시 초기 가격 포맷팅
-        document.addEventListener('DOMContentLoaded', function() {
-            const priceElements = document.querySelectorAll('[id^="price"]');
-            priceElements.forEach(function(element) {
-                element.textContent = formatPrice(parseInt(element.textContent));
+            items.forEach(function(item) {
+                const id = item.id.split('-')[1];
+                const quantity = parseInt(item.textContent);
+                if (quantity > 0) {
+                    selectedItems.push({ itemId: id, itemQuantity: quantity });
+                }
             });
-        });
+
+            // AJAX 요청을 사용하여 서버로 데이터 전송
+            axios.post('/reservation/createReservation', selectedItems)
+                .then(function(response) {
+                    // 성공적으로 처리되었을 경우의 처리
+                    console.log('Reservation created successfully');
+                    // 원하는 후속 작업 수행
+                })
+                .catch(function(error) {
+                    // 오류 발생 시의 처리
+                    console.error('Failed to create reservation', error);
+                    // 오류 메시지를 사용자에게 알림
+                });
+        }
     
     </script>
 
