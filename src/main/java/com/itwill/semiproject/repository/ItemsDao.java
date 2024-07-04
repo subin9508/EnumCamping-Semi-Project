@@ -7,4 +7,4 @@ public interface ItemsDao {
 	Items selectOrderByItemsId(Items itemId);
 	
 	 List<Items> selectAllItems();
-}
+	 }

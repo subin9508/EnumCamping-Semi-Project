@@ -9,10 +9,10 @@
         SELECT * FROM items WHERE item_id = #{itemId} AND item_price = #{itemPrice}
     </select>
     
-    <!-- 모든 아이템 조회 -->
+    <!-- 대여 및 판매 물품 아이템만 조회 -->
     <select id="selectAllItems" resultType="Items">
-        SELECT * FROM items
+        SELECT * FROM items WHERE item_id >= 5
     </select>
-    
+      
     
 </mapper>
