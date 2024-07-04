@@ -201,6 +201,9 @@
         selectedDate = `${year}-${autoLeftPad(month, 2)}-${autoLeftPad(day, 2)}`;
         console.log('calendarChoiceDay - selectedDate=', selectedDate);
         
+        // night 라디오 버튼 숨기기
+        const nightCard = document.getElementById('night-card');
+        nightCard.style.display = 'none';
         
         // 선택한 날짜에 대한 예약 정보 가져오기
         getReservations(year, month, day);
@@ -217,9 +220,8 @@
             radio.checked = false;
         });
         
-        // night 라디오 버튼 숨기기
-        const nightCard = document.getElementById('night-card');
-        nightCard.style.display = 'none';
+        selectedArea = null;
+        
         
         // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
         if (selectedDate && selectedArea) {
