@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class ReservationService {
+public class ItemsService {
 
     private final ItemsDao itemsDao;
     private final OrderDao orderDao;
