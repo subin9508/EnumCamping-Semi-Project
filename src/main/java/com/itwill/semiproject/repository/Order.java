@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Order {
-	private Integer orderId;
+	private Integer resId;
 	private Integer itemId;
-	private Integer quantity;
-	private Integer price;
-	private Integer checkedPay;
+	private Integer itemQuantity;
+	private Integer itemPrice;
 }
