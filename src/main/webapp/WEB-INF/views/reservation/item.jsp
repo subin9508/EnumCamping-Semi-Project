@@ -7,16 +7,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대여 및 물품 선택</title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous" />
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous" />
 
-    <c:url value="../css/header.css" var="headerCss" />
-    <link rel="stylesheet" href="${headerCss}">
-    <c:url value="../css/footer.css" var="footerCss" />
-    <link rel="stylesheet" href="${footerCss}">
+<c:url value="../css/header.css" var="headerCss" />
+<link rel="stylesheet" href="${headerCss}">
+<c:url value="../css/footer.css" var="footerCss" />
+<link rel="stylesheet" href="${footerCss}">
 
 <style>
 table {
@@ -36,6 +36,22 @@ th, td {
     width: 150px;
     height: 150px;
 }
+.quantity-controls {
+    margin-bottom: 5px; /* 원하는 간격 조정 */
+}
+
+.total-price {
+    margin-top: 10px; /* 총 가격 위쪽 여백 설정 */
+}
+
+#totalAllItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px; /* 원하는 크기로 조정 */
+    font-weight: bold; /* 두껍게 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
 </style>
 
 </head>
@@ -45,12 +61,13 @@ th, td {
         <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
-
-                        <main style="margin-bottom: 5%; margin-top: 5%">
-                <div class="container-fluid d-flex justify-content-center">
+            <main style="margin-bottom: 5%; margin-top: 5%">
+                <div
+                    class="container-fluid d-flex justify-content-center">
                     <h1>대여 및 판매 물품</h1>
                 </div>
-                <div class="container-fluid d-flex justify-content-center">
+                <div
+                    class="container-fluid d-flex justify-content-center">
                     <table>
                         <tbody>
                             <c:forEach var="i" items="${items}">
@@ -68,32 +85,34 @@ th, td {
                                     <td>${i.itemPrice}원</td>
                                     <td class="narrow">
                                         <div class="quantity-controls">
-                                            <button
-                                                onclick="decreaseQuantity('${i.itemId}', ${i.itemPrice})">-</button>
-                                            <span
-                                                id="quantity-${i.itemId}">0</span>
-                                            <button
-                                                onclick="increaseQuantity('${i.itemId}', ${i.itemPrice})">+</button>
+                                            <select
+                                                id="quantity-${i.itemId}"
+                                                onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <!-- 필요한 경우 수량 옵션을 더 추가 -->
+                                            </select>
                                         </div>
-                                        <div>
-                                            총 가격: <span
-                                                id="totalPrice-${i.itemId}">0</span>
-                                            원
-                                        </div>
+                                        <div id="total-${i.itemId}"
+                                            class="total-price">0원</div>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
                 </div>
-                <div class="container-fluid d-flex justify-content-center mt-3">
-                    <h4>전체 총 가격: <span id="grandTotalPrice">0</span> 원</h4>
-                </div>
+
+                <!-- 전체 총 가격을 표시할 공간 -->
+                <div id="totalAllItems"></div>
+
+                <!-- 선택된 아이템들 리스트를 표시할 공간 -->
+                <div id="selectedItemsList"></div>
+
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
-                    <c:url value="/reservation/order" var="orderJsp" />
-                    <a href="${orderJsp}" class="btn btn-primary"
-                        role="button">다음 단계</a>
+                    <a href="../reservation/order" class="btn btn-primary">다음
+                        단계</a>
                 </div>
             </main>
 
@@ -110,77 +129,68 @@ th, td {
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
-
+    
     <script>
-        // 가격 포맷팅 함수
-        function formatPrice(price) {
-            return price.toLocaleString();
-        }
+    // 전역 변수로 선택된 아이템 정보를 담을 배열 선언
+    var selectedItems = [];
 
-        function decreaseQuantity(id, price) {
-            const quantityElement = document.querySelector('#quantity-' + id);
-            let quantity = parseInt(quantityElement.textContent);
+    // 수량 업데이트할 때 호출되는 함수
+    function updateQuantity(itemId, itemPrice) {
+        var quantity = document.getElementById('quantity-' + itemId).value;
+        var totalPrice = quantity * itemPrice;
+
+        // 총 가격 업데이트
+        document.getElementById('total-' + itemId).textContent = totalPrice + '원';
+
+        // 선택된 아이템 정보 업데이트
+        var selectedItem = {
+            itemId: itemId,
+            quantity: quantity,
+            totalPrice: totalPrice
+        };
+
+        // 이미 선택된 아이템인지 확인 후 업데이트 또는 제거
+        var existingIndex = selectedItems.findIndex(item => item.itemId === itemId);
+        if (existingIndex !== -1) {
             if (quantity > 0) {
-                quantityElement.textContent = --quantity;
-                updateTotalPrice(id, price, quantity);
-                updateGrandTotalPrice();
+                selectedItems[existingIndex] = selectedItem;
+            } else {
+                selectedItems.splice(existingIndex, 1); // quantity가 0인 경우 아이템 제거
+            }
+        } else {
+            if (quantity > 0) {
+                selectedItems.push(selectedItem);
             }
         }
 
-        function increaseQuantity(id, price) {
-            const quantityElement = document.querySelector('#quantity-' + id);
-            let quantity = parseInt(quantityElement.textContent);
-            quantityElement.textContent = ++quantity;
-            updateTotalPrice(id, price, quantity);
-            updateGrandTotalPrice();
-        }
+        // 선택된 아이템들 리스트 업데이트
+        updateSelectedItemsList();
+        // 전체 총 가격 업데이트
+        updateTotalAllItems();
+    }
 
-        function updateTotalPrice(id, price, quantity) {
-            const totalPriceElement = document.querySelector('#totalPrice-' + id);
-            const totalPrice = price * quantity;
-            totalPriceElement.textContent = formatPrice(totalPrice);
-        }
+    // 선택된 아이템들 리스트 업데이트 함수
+    function updateSelectedItemsList() {
+        var tableHtml = '<table class="table table-bordered"><thead><tr><th>아이템 ID</th><th>수량</th><th>총 가격</th></tr></thead><tbody>';
+        selectedItems.forEach(function(item) {
+            tableHtml += '<tr><td>' + item.itemId + '</td><td>' + item.quantity + '</td><td>' + item.totalPrice + '원</td></tr>';
+        });
+        tableHtml += '</tbody></table>';
 
-        function updateGrandTotalPrice() {
-            const totalPriceElements = document.querySelectorAll('[id^="totalPrice"]');
-            let grandTotal = 0;
-            totalPriceElements.forEach(function(element) {
-                grandTotal += parseInt(element.textContent.replace(/,/g, ''));
-            });
-            const grandTotalPriceElement = document.querySelector('#grandTotalPrice');
-            grandTotalPriceElement.textContent = formatPrice(grandTotal);
-        }
+        // HTML에 선택된 아이템들 리스트 표시
+        var selectedItemsElement = document.getElementById('selectedItemsList');
+        selectedItemsElement.innerHTML = tableHtml;
+    }
 
-        
-        
-     // 다음 단계 버튼 클릭 시 호출되는 함수
-        function handleNextStep() {
-            const items = document.querySelectorAll('[id^="quantity-"]');
-            const selectedItems = [];
-
-            items.forEach(function(item) {
-                const id = item.id.split('-')[1];
-                const quantity = parseInt(item.textContent);
-                if (quantity > 0) {
-                    selectedItems.push({ itemId: id, itemQuantity: quantity });
-                }
-            });
-
-            // AJAX 요청을 사용하여 서버로 데이터 전송
-            axios.post('/reservation/createReservation', selectedItems)
-                .then(function(response) {
-                    // 성공적으로 처리되었을 경우의 처리
-                    console.log('Reservation created successfully');
-                    // 원하는 후속 작업 수행
-                })
-                .catch(function(error) {
-                    // 오류 발생 시의 처리
-                    console.error('Failed to create reservation', error);
-                    // 오류 메시지를 사용자에게 알림
-                });
-        }
-    
+    // 전체 총 가격 업데이트 함수
+    function updateTotalAllItems() {
+        var total = selectedItems.reduce(function(sum, item) {
+            return sum + item.totalPrice;
+        }, 0);
+        var totalAllItemsElement = document.getElementById('totalAllItems');
+        totalAllItemsElement.textContent = '전체 총 가격: ' + total + '원';
+    }
     </script>
-
+    
 </body>
 </html>

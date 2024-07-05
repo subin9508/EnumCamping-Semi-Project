@@ -13,17 +13,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReservationDetailDto {
 	
-	private Integer resId;
 	private Integer itemId;
 	private Integer itemQuantity;
-	private Integer itemPrice;
+	private Integer itemTotalPrice;
 	
 	public ReservationDetail toEntity() {
 		return ReservationDetail.builder()
-				.resId(resId)
 				.itemId(itemId)
 				.itemQuantity(itemQuantity)
-				.itemPrice(itemPrice)
+				.itemTotalPrice(itemTotalPrice)
 				.build();
 	}
 }

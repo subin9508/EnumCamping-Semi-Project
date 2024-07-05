@@ -39,8 +39,8 @@ public class ReservationService{
     public int create(ReservationDetailDto dto) {
         log.debug("create({})", dto);
         
-        ReservationDetail reservationDetail = dto.toEntity();
-        int result = reservationDetailDao.insert(reservationDetail);
+       int result = reservationDetailDao.insert(dto.toEntity());
+  
         
         return result;
     }

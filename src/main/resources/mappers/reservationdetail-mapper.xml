@@ -6,7 +6,7 @@
     
      <!-- 예약 상세 정보 삽입 -->
     <insert id="insert" parameterType="ReservationDetail">
-        INSERT INTO reservation_detail (res_id, item_id, item_quantity, item_price) VALUES (#{resId}, #{itemId}, #{itemQuantity}, #{itemPrice})
+        INSERT INTO reservation_detail (item_id, item_quantity, item_totalprice) VALUES (#{itemId}, #{itemQuantity}, #{itemTotalPrice})
     </insert>
 
 </mapper>

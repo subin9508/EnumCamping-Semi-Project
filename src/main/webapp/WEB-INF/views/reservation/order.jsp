@@ -19,6 +19,16 @@
     <link rel="stylesheet" href="${footerCss}">
 
 
+<style>
+.custom-form {
+    width: 70%; /* 폼의 너비를 70%로 설정 */
+    margin: auto; /* 가운데 정렬 */
+}
+
+.form-container {
+    margin-bottom: 50px; /* 폼 사이 간격을 설정 */
+}
+</style>
 
 </head>
 
@@ -34,63 +44,87 @@
                     class="container-fluid d-flex justify-content-center">
                     <h1>예약 및 주문</h1>
                 </div>
-                <div class="form-group">
-                    <label for="userName">이름:</label> <input type="text"
-                        class="form-control" id="userName"
-                        value="${user.userName}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="userEmail">이메일:</label> <input
-                        type="text" class="form-control" id="userEmail"
-                        value="${user.userEmail}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="userPhone">휴대폰 번호:</label> <input
-                        type="text" class="form-control" id="userPhone"
-                        value="${user.userPhone}" readonly>
-                </div>
 
 
-                <div
-                    class="container-fluid d-flex justify-content-center">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">개인 정보 수집 동의</h5>
-                            <p class="card-text">저희 사이트는 귀하의 개인 정보를
-                                수집합니다. 수집된 정보는 사용자 식별, 서비스 제공 등의 목적으로
-                                사용됩니다. 자세한 정보는 개인 정보 보호 정책을 참조하시기 바랍니다.</p>
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                    type="checkbox" value=""
-                                    id="agreeCollect"> <label
-                                    class="form-check-label"
-                                    for="agreeCollect"> 개인 정보
-                                    수집에 동의합니다. </label>
+                <div class="container">
+                    <div class="form-container">
+                        <form class="custom-form">
+                            <div class="form-group">
+                                <label for="userName">이름:</label> <input
+                                    type="text" class="form-control"
+                                    id="userName"
+                                    value="${user.userName}" readonly>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="userEmail">이메일:</label> <input
+                                    type="text" class="form-control"
+                                    id="userEmail"
+                                    value="${user.userEmail}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="userPhone">휴대폰 번호:</label> <input
+                                    type="text" class="form-control"
+                                    id="userPhone"
+                                    value="${user.userPhone}" readonly>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 두 번째 폼 -->
+                    <div class="form-container">
+                        <form class="custom-form">
+                            <div
+                                class="container-fluid d-flex justify-content-center">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">개인
+                                            정보 수집 동의</h5>
+                                        <p class="card-text">저희 사이트는
+                                            귀하의 개인 정보를 수집합니다. 수집된 정보는
+                                            사용자 식별, 서비스 제공 등의 목적으로
+                                            사용됩니다. 자세한 정보는 개인 정보 보호 정책을
+                                            참조하시기 바랍니다.</p>
+                                        <div class="form-check">
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox" value=""
+                                                id="agreeCollect">
+                                            <label
+                                                class="form-check-label"
+                                                for="agreeCollect">
+                                                개인 정보 수집에 동의합니다. </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="container-fluid d-flex justify-content-center mt-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">개인
+                                            정보 제공 동의</h5>
+                                        <p class="card-text">귀하의 개인
+                                            정보는 서비스 제공을 목적으로 일부 외부 제휴사에게
+                                            제공될 수 있습니다. 자세한 정보는 개인 정보 보호
+                                            정책을 참조하시기 바랍니다.</p>
+                                        <div class="form-check">
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox" value=""
+                                                id="agreeProvide">
+                                            <label
+                                                class="form-check-label"
+                                                for="agreeProvide">
+                                                개인 정보 제공에 동의합니다. </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <div
-                    class="container-fluid d-flex justify-content-center">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">개인 정보 제공 동의</h5>
-                            <p class="card-text">귀하의 개인 정보는 서비스 제공을
-                                목적으로 일부 외부 제휴사에게 제공될 수 있습니다. 자세한 정보는 개인
-                                정보 보호 정책을 참조하시기 바랍니다.</p>
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                    type="checkbox" value=""
-                                    id="agreeProvide"> <label
-                                    class="form-check-label"
-                                    for="agreeProvide"> 개인 정보
-                                    제공에 동의합니다. </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
                     <form action="../reservation/reservationConfirm"
