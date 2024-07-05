@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextLoadException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/reservation")
 
 public class PaymentController {
@@ -46,20 +48,47 @@ public class PaymentController {
 	private PaymentService paymentService;
 	
 	
+	
 	public PaymentController() {
 		this.api = new IamportClient("3375010277812188",
 				"mgaKoMpLV17tc8oVjs15v3HoGesdCCXCvYe4CvDcol6M7FKU3MXB2cyncxvsSrrb8YuqRZXWmDhfRLUY");
 	}
+	
+	
+	
+	
+	@GetMapping("/payment")
+	public String payment() {
+		log.debug("payment()");
+		return "/reservation/payment";
+		
+	}
+	
+	
+	@GetMapping("/paymentInfo")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resKey") Integer resKey) {
+	    try {
+	        Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResKey(resKey);
+	        return ResponseEntity.ok(paymentInfo);
+	    } catch (ServiceException e) {
+	        log.error("Error fetching payment info for resKey: {}", resKey, e);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	    }
+	}
+	
 	
 	// 결제 검증
 	@ResponseBody
 	@PostMapping("/verifyIamport/{imp_uid}")
 	public APIResponse paymentByImpUid(
 		@PathVariable(value= "imp_uid") String imp_uid,
-		Integer payId,
-		Integer resId
+		@RequestParam("payKey") Integer payKey,
+		@RequestParam("payId") String payId,
+		@RequestParam("resId") String resId,
+		@RequestParam("resKey") Integer resKey
 		) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
-		log.trace("paymentByImpUid({}, {}, {}) invoked.", imp_uid, payId, resId);
+		log.trace("paymentByImpUid({}, {}, {}, {}, {}) invoked.", imp_uid, payKey, payId, resId, resKey);
 		
 		APIResponse  irsp = new APIResponse ();
 		String result = "";
@@ -70,7 +99,7 @@ public class PaymentController {
 		try {
 			switch(payment.getStatus()) {
 			case "paid" :
-				result = this.paymentService.savePayment(payment, payId, resId);
+				result = this.paymentService.savePayment(payment, payKey, payId, resId, resKey);
 				 break;
 				 
 			case "failed" :

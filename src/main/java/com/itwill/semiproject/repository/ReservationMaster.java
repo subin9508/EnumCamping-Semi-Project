@@ -1,6 +1,7 @@
 package com.itwill.semiproject.repository;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReservationMaster {
 	
-	private Integer resId;
+	private Integer resKey;
+	private String resId;
 	private String userId;
 	private String requirement;
 	private LocalDate resCreatedTime;
