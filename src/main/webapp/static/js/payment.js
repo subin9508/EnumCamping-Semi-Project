@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await $.ajax({
                 type: "GET",
-                url: "/reservation/paymentInfo?resKey=" + resKey,
+                url: "/semiproject/reservation/paymentInfo?resKey=" + resKey,
                 dataType: 'json'
             });
             return response;
@@ -66,15 +66,19 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await $.ajax({
                 type: "POST",
-                url: "/reservation/verifyIamport/" + imp_uid,
-                data: { resKey: resKey },
+                url: "/semiproject/reservation/verifyIamport/" + imp_uid,
+                data: { resKey: resKey
+                		
+               
+                
+                 },
                 dataType: 'json'
             });
 
             console.log(response);
 
             if (response.result === "SUCCESS") {
-                location.href = "/reservation/succeeded/" + response.data.orderNum;
+                location.href = "/semiproject/reservation/succeeded/" + response.data.orderNum;
             } else {
                 throw new Error("서버에서 성공 응답을 받지 못했습니다.");
             }

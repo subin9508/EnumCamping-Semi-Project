@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.itwill.semiproject.repository.ReservationDao">
+<mapper namespace="com.itwill.semiproject.repository.ReservationMasterDao">
 
- <select id="selectByResKey" resultType="ReservationMaster">
+ <select id="selectByResKey" resultType="ReservationMasterDto">
 	select * from reservation_master where res_Key = #{resKey}
  </select>
 

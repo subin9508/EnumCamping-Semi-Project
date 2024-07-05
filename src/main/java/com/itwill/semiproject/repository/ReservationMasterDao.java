@@ -4,6 +4,6 @@ import com.itwill.semiproject.dto.ReservationMasterDto;
 
 public interface ReservationMasterDao {
 	
-	ReservationMasterDto selectByReskey(Integer resKey);
+	ReservationMaster selectByResKey(Integer resKey);
 
 }

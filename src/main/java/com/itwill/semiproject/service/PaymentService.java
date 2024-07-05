@@ -45,7 +45,8 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	    public Map<String, Object> getPaymentInfoByResKey(Integer resKey) throws ServiceException {
 	        try {
 	            // 예약 테이블에서 정보를 조회합니다.
-	            ReservationMasterDto reservation = reservationMasterDao.selectByReskey(resKey);
+	        	ReservationMasterDto reservation = ReservationMasterDto.of(reservationMasterDao.selectByResKey(resKey));
+	            
 	            if (reservation == null) {
 	                throw new ServiceException("Reservation not found for resKey: " + resKey);
 	            }
