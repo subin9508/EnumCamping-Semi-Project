@@ -8,20 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ReservationDetailDto {
+public class ReservationDetailCreateDto {
 	
 	private Integer itemId;
 	private Integer itemQuantity;
-	private Integer itemTotalPrice;
+	private Integer itemAmount;
 	
+	// reservationDetailCreateDto 타입을 reservationDetail 타입으로 변환해서 리턴
 	public ReservationDetail toEntity() {
 		return ReservationDetail.builder()
 				.itemId(itemId)
 				.itemQuantity(itemQuantity)
-				.itemTotalPrice(itemTotalPrice)
+				.itemAmount(itemAmount)
 				.build();
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itwill.semiproject.dto.ItemsDto;
-import com.itwill.semiproject.dto.ReservationDetailDto;
+import com.itwill.semiproject.dto.ReservationDetailCreateDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ItemsDao;
 import com.itwill.semiproject.repository.ReservationDetail;
@@ -36,7 +36,7 @@ public class ReservationService{
         return itemsDao.selectAllItems();
     }
     
-    public int create(ReservationDetailDto dto) {
+    public int create(ReservationDetailCreateDto dto) {
         log.debug("create({})", dto);
         
        int result = reservationDetailDao.insert(dto.toEntity());

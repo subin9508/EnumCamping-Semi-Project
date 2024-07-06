@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReservationDetail {
-	private Integer resId;
-	private Integer itemId;
+	
+	private Integer detailId; // primary key
+	private Integer itemId;	// foreign key: items 테이블의 id 컬럼을 참조
 	private Integer itemQuantity;
-	private Integer itemTotalPrice;
+	private Integer itemAmount;
 }

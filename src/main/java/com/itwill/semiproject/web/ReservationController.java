@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwill.semiproject.dto.ReservationDetailDto;
+import com.itwill.semiproject.dto.ReservationDetailCreateDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.service.ReservationService;
 
@@ -53,8 +53,8 @@ public class ReservationController {
 		
 	}
 	
-	@PostMapping("/create")
-	public String create(ReservationDetailDto dto) {
+	@PostMapping("/item")
+	public String create(ReservationDetailCreateDto dto) {
 	    log.debug("create(dto={})", dto);
 	    
 	    reservationService.create(dto);

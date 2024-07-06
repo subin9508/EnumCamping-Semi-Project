@@ -62,22 +62,15 @@ th, td {
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
             <main style="margin-bottom: 5%; margin-top: 5%">
-                <div
-                    class="container-fluid d-flex justify-content-center">
+                <div class="container-fluid d-flex justify-content-center">
                     <h1>대여 및 판매 물품</h1>
                 </div>
-                <div
-                    class="container-fluid d-flex justify-content-center">
+                <div class="container-fluid d-flex justify-content-center">
                     <table>
                         <tbody>
                             <c:forEach var="i" items="${items}">
                                 <tr>
-                                    <td class="img-container"><c:url
-                                            value="${i.itemImg}"
-                                            var="itemImgUrl" /> <img
-                                        alt="${i.itemName}"
-                                        src="${itemImgUrl}" class="img"
-                                        id="itemImg-${i.itemId}" /></td>
+                                    <td class="img-container"><c:url value="${i.itemImg}" var="itemImgUrl" /> <img alt="${i.itemName}" src="${itemImgUrl}" class="img" id="itemImg-${i.itemId}" /></td>
                                     <td>
                                         <h5>${i.itemName}</h5>
                                     </td>
@@ -85,17 +78,14 @@ th, td {
                                     <td>${i.itemPrice}원</td>
                                     <td class="narrow">
                                         <div class="quantity-controls">
-                                            <select
-                                                id="quantity-${i.itemId}"
-                                                onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
+                                            <select id="quantity-${i.itemId}" onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
                                                 <option value="0">0</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <!-- 필요한 경우 수량 옵션을 더 추가 -->
                                             </select>
                                         </div>
-                                        <div id="total-${i.itemId}"
-                                            class="total-price">0원</div>
+                                        <div id="total-${i.itemId}" class="total-price">0원</div>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -109,10 +99,8 @@ th, td {
                 <!-- 선택된 아이템들 리스트를 표시할 공간 -->
                 <div id="selectedItemsList"></div>
 
-                <div
-                    class="container-fluid d-flex justify-content-center mt-3">
-                    <a href="../reservation/order" class="btn btn-primary">다음
-                        단계</a>
+                <div class="container-fluid d-flex justify-content-center mt-3">
+                    <button onclick="submitReservationDetails()" class="btn btn-primary">다음 단계</button>
                 </div>
             </main>
 
@@ -122,40 +110,32 @@ th, td {
         </div>
     </div>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
     
     <script>
-    // 전역 변수로 선택된 아이템 정보를 담을 배열 선언
     var selectedItems = [];
 
-    // 수량 업데이트할 때 호출되는 함수
     function updateQuantity(itemId, itemPrice) {
         var quantity = document.getElementById('quantity-' + itemId).value;
         var totalPrice = quantity * itemPrice;
 
-        // 총 가격 업데이트
         document.getElementById('total-' + itemId).textContent = totalPrice + '원';
 
-        // 선택된 아이템 정보 업데이트
         var selectedItem = {
             itemId: itemId,
-            quantity: quantity,
-            totalPrice: totalPrice
+            itemQuantity: quantity,
+            itemAmount: totalPrice
         };
 
-        // 이미 선택된 아이템인지 확인 후 업데이트 또는 제거
         var existingIndex = selectedItems.findIndex(item => item.itemId === itemId);
         if (existingIndex !== -1) {
             if (quantity > 0) {
                 selectedItems[existingIndex] = selectedItem;
             } else {
-                selectedItems.splice(existingIndex, 1); // quantity가 0인 경우 아이템 제거
+                selectedItems.splice(existingIndex, 1);
             }
         } else {
             if (quantity > 0) {
@@ -163,34 +143,44 @@ th, td {
             }
         }
 
-        // 선택된 아이템들 리스트 업데이트
         updateSelectedItemsList();
-        // 전체 총 가격 업데이트
         updateTotalAllItems();
     }
 
-    // 선택된 아이템들 리스트 업데이트 함수
     function updateSelectedItemsList() {
         var tableHtml = '<table class="table table-bordered"><thead><tr><th>아이템 ID</th><th>수량</th><th>총 가격</th></tr></thead><tbody>';
         selectedItems.forEach(function(item) {
-            tableHtml += '<tr><td>' + item.itemId + '</td><td>' + item.quantity + '</td><td>' + item.totalPrice + '원</td></tr>';
+            tableHtml += '<tr><td>' + item.itemId + '</td><td>' + item.itemQuantity + '</td><td>' + item.itemAmount + '원</td></tr>';
         });
         tableHtml += '</tbody></table>';
 
-        // HTML에 선택된 아이템들 리스트 표시
         var selectedItemsElement = document.getElementById('selectedItemsList');
         selectedItemsElement.innerHTML = tableHtml;
     }
 
-    // 전체 총 가격 업데이트 함수
     function updateTotalAllItems() {
         var total = selectedItems.reduce(function(sum, item) {
-            return sum + item.totalPrice;
+            return sum + item.itemAmount;
         }, 0);
         var totalAllItemsElement = document.getElementById('totalAllItems');
         totalAllItemsElement.textContent = '전체 총 가격: ' + total + '원';
     }
+
+    function submitReservationDetails() {
+        axios.post('/api/reservationDetail', selectedItems)
+            .then(function(response) {
+                if (response.data > 0) {
+                    alert('예약이 성공적으로 완료되었습니다.');
+                    window.location.href = '../reservation/order';
+                } else {
+                    alert('예약에 실패하였습니다.');
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('예약 처리 중 오류가 발생하였습니다.');
+            });
+    }
     </script>
-    
 </body>
 </html>
