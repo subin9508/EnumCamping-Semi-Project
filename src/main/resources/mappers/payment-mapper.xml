@@ -6,16 +6,28 @@
 
     
     <!-- pay_id 조회 -->
-    <select id="selectByPaykey" resultType="Payments">
+    <select id="selectByPaykey" resultType="Payments" parameterType="Integer">
         select * from payments where pay_key = #{payKey}
     </select>
     
     
     <!-- 결제 정보 삽입 -->
-    
-    <insert id="insertPayment" parameterType="Payments" useGeneratedKeys="true" keyProperty="payKey">
+
+	<insert id="insertPayment" parameterType="Payments" >
         insert into payments (pay_id, imp_uid, pg_tid, res_id, res_key, amount, pay_date, pay_method, pay_status, buyer_email)
-        values (#{payId,jdbcType=VARCHAR }, #{impUid,jdbcType=VARCHAR}, #{pgTid,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{resKey,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{payDate,jdbcType=DATE}, #{payMethod,jdbcType=VARCHAR}, #{payStatus,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR})
-    </insert>
+        values (#{payId}, #{impUid}, #{pgTid}, #{resId}, #{resKey}, #{amount}, #{payDate}, #{payMethod}, #{payStatus}, #{buyerEmail})
+   		
+	</insert>
+	
+	<select id="selectPayKey" parameterType="Payments"
+	resultType="Integer">
+	SELECT pay_key
+	FROM payments
+	WHERE pay_id = #{payId}
+	AND imp_uid = #{impUid}
+	AND pg_tid = #{pgTid}
+	AND res_id = #{resId}
+	AND res_key = #{resKey}
+</select>
   
 </mapper>

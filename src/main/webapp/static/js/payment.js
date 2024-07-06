@@ -67,14 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await $.ajax({
                 type: "POST",
-                url: "/semiproject/reservation/verifyIamport/" + imp_uid,
-                data: { resKey: resKey
-                		
-                		
-               
+                url: "/semiproject/reservation/verifyIamport/" + imp_uid + "?resKey=" + resKey
                 
-                 },
-                dataType: 'json'
+            
             });
 
             console.log(response);

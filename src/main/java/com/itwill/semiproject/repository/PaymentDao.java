@@ -10,7 +10,9 @@ public interface PaymentDao {
 	
 	
 	
-	@Options(useGeneratedKeys = true, keyProperty = "payKey")
+	
 	int insertPayment(PaymentDto dto);
+	
+	int selectPayKey(PaymentDto dto);
 	
 }

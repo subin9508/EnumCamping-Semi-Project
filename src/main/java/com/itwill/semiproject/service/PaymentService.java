@@ -1,7 +1,6 @@
 package com.itwill.semiproject.service;
 
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,18 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.dto.ReservationMasterDto;
-import com.itwill.semiproject.repository.Payments;
 import com.itwill.semiproject.dto.PaymentDto;
 import com.itwill.semiproject.exception.ServiceException;
 import com.itwill.semiproject.repository.PaymentDao;
-import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
-import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -86,7 +80,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		
 		// dto 세팅
 		PaymentDto dto = new PaymentDto();
-		
+		dto.setPayKey(payKey); // 파라미터로 받은 payKey 사용
 		dto.setPayId(payId != null ? payId : "");
 		dto.setImpUid(payment.getImpUid());
 		dto.setPgTid(payment.getPgTid());
@@ -108,23 +102,21 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 			
 			int result = this.paymentDao.insertPayment(dto);
 			
-			if(result != 1) return "FAIL:01";
+			if(result < 1) return "FAIL:01";
 			
 			return "SUCCESS";
 				
 		} catch(UncategorizedSQLException e) {
 			throw e;
-		} catch(Exception e) {
-			log.info("\t+ Transfer Failure.");
+		} 
 			
-			throw new ServiceException(e);
+			
 		}
 		
 		
 		
 	}
 
-}	
 			
 	
 	

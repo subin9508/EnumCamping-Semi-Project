@@ -1,8 +1,6 @@
 package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import com.itwill.semiproject.repository.Payments;
 
 import lombok.Data;
