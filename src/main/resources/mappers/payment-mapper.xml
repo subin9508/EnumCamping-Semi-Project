@@ -6,17 +6,16 @@
 
     
     <!-- pay_id 조회 -->
-    <select id="selectByPayid" resultType="Payments">
-        select * from payments where pay_id = #{payId}
+    <select id="selectByPaykey" resultType="Payments">
+        select * from payments where pay_key = #{payKey}
     </select>
     
     
     <!-- 결제 정보 삽입 -->
     
-    <insert id="insertPayment" parameterType="Payments">
-        insert into payments (pay_key, pay_id, imp_uid, pg_tid, res_id, res_key, amount, pay_date, pay_method, pay_status, buyer_email)
-        values (#{pay_key}, #{payId}, #{impUid}, #{pgTid}, #{resId}, #{resKey}, #{amount}, #{payDate}, #{payMethod}, #{payStatus}, #{buyerEmail})
+    <insert id="insertPayment" parameterType="Payments" useGeneratedKeys="true" keyProperty="payKey">
+        insert into payments (pay_id, imp_uid, pg_tid, res_id, res_key, amount, pay_date, pay_method, pay_status, buyer_email)
+        values (#{payId,jdbcType=VARCHAR }, #{impUid,jdbcType=VARCHAR}, #{pgTid,jdbcType=VARCHAR}, #{resId,jdbcType=VARCHAR}, #{resKey,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{payDate,jdbcType=DATE}, #{payMethod,jdbcType=VARCHAR}, #{payStatus,jdbcType=VARCHAR}, #{buyerEmail,jdbcType=VARCHAR})
     </insert>
-    
-    
+  
 </mapper>

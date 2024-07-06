@@ -2,6 +2,7 @@ package com.itwill.semiproject.service;
 
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,14 +87,17 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		// dto 세팅
 		PaymentDto dto = new PaymentDto();
 		
-		dto.setPayKey(payKey);
-		dto.setPayId(payId);
+		dto.setPayId(payId != null ? payId : "");
 		dto.setImpUid(payment.getImpUid());
 		dto.setPgTid(payment.getPgTid());
-		dto.setResId(resId);
+		dto.setResId(resId != null ? resId : "");
 		dto.setResKey(resKey);
 		dto.setAmount(payment.getAmount().intValue());
-		dto.setPayDate(payment.getPaidAt());
+		if (payment.getPaidAt() != null) {
+	        dto.setPayDate(payment.getPaidAt().toInstant()
+	                .atZone(ZoneId.systemDefault())
+	                .toLocalDate());
+	    }
 		dto.setPayMethod(payment.getPayMethod());
 		dto.setPayStatus(payment.getStatus());
 		dto.setBuyerEmail(payment.getBuyerEmail());
@@ -101,7 +105,10 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		
 		try {
 			// 실패한 메서드 종류에 따라 오류 코드 반환
-			if(this.paymentDao.insertPayment(dto) != 1) return "FAIL:01";
+			
+			int result = this.paymentDao.insertPayment(dto);
+			
+			if(result != 1) return "FAIL:01";
 			
 			return "SUCCESS";
 				

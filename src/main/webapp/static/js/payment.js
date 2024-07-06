@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
     btnPayment.addEventListener('click', async () => {
         const resKey = document.querySelector("input[name=resKey]").value;
+        
         console.log(resKey);
         if (!resKey) {
             alert("예약 키 값이 있어야 합니다.");
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 type: "POST",
                 url: "/semiproject/reservation/verifyIamport/" + imp_uid,
                 data: { resKey: resKey
+                		
                 		
                
                 

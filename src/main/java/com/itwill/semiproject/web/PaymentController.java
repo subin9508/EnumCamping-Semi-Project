@@ -83,9 +83,9 @@ public class PaymentController {
 	@PostMapping("/verifyIamport/{imp_uid}")
 	public APIResponse paymentByImpUid(
 		@PathVariable(value= "imp_uid") String imp_uid,
-		@RequestParam("payKey") Integer payKey,
-		@RequestParam("payId") String payId,
-		@RequestParam("resId") String resId,
+		@RequestParam(required = false) Integer payKey,
+		@RequestParam(required = false) String payId,
+		@RequestParam(required = false) String resId,
 		@RequestParam("resKey") Integer resKey
 		) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
 		log.trace("paymentByImpUid({}, {}, {}, {}, {}) invoked.", imp_uid, payKey, payId, resId, resKey);

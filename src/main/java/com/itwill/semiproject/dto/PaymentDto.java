@@ -17,7 +17,7 @@ public class PaymentDto {
 	private String resId;
 	private Integer resKey;
 	private Integer amount;
-	private Date payDate;
+	private LocalDate payDate;
 	private String payMethod;
 	private String payStatus;
 	private String buyerEmail;

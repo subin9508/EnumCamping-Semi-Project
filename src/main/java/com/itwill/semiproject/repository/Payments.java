@@ -20,7 +20,7 @@ public class Payments { //데이터베이스 테이블 payments 테이블의 모
 	private String resId;
 	private Integer resKey;
 	private Integer amount;
-	private Date payDate;
+	private LocalDate payDate;
 	private String payMethod;
 	private String payStatus;
 	private String buyerEmail;
