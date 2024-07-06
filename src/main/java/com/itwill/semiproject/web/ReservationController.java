@@ -2,10 +2,13 @@ package com.itwill.semiproject.web;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
@@ -47,20 +50,18 @@ public class ReservationController {
 		return "/reservation/reservationConfirm";
 	}
 	
-	@GetMapping("/create")
-	public void create() {
-		log.debug("create() GET");
-		
-	}
 	
 	@PostMapping("/item")
-	public String create(ReservationDetailCreateDto dto) {
-	    log.debug("create(dto={})", dto);
+	public ResponseEntity<String> create(@RequestBody List<ReservationDetailCreateDto> dtos) {
+	    log.debug("create(dtos={})", dtos);
 	    
-	    reservationService.create(dto);
-	    
-	    return "reservation/order";
+	    try {
+	        reservationService.createBatch(dtos);
+	        return ResponseEntity.ok("success");
+	    } catch (Exception e) {
+	        log.error("Error creating reservation details", e);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
+	    }
 	}
-
 
 }

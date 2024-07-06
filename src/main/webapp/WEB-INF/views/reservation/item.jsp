@@ -167,11 +167,19 @@ th, td {
     }
 
     function submitReservationDetails() {
-        axios.post('/api/reservationDetail', selectedItems)
+        var dtos = selectedItems.map(function(item) {
+            return {
+                itemId: parseInt(item.itemId),
+                itemQuantity: parseInt(item.itemQuantity),
+                itemAmount: parseInt(item.itemAmount)
+            };
+        });
+
+        axios.post('../reservation/item', dtos)
             .then(function(response) {
-                if (response.data > 0) {
+                if (response.data === "success") {
                     alert('예약이 성공적으로 완료되었습니다.');
-                    window.location.href = '../reservation/order';
+                    window.location.href = '/reservation/order';
                 } else {
                     alert('예약에 실패하였습니다.');
                 }

@@ -3,6 +3,7 @@ package com.itwill.semiproject.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.dto.ItemsDto;
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
@@ -43,6 +44,13 @@ public class ReservationService{
   
         
         return result;
+    }
+    
+    @Transactional
+    public void createBatch(List<ReservationDetailCreateDto> dtos) {
+        for (ReservationDetailCreateDto dto : dtos) {
+            reservationDetailDao.insert(dto.toEntity());
+        }
     }
     
 }
