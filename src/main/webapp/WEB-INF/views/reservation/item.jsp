@@ -178,7 +178,6 @@ th, td {
         axios.post('../reservation/item', dtos)
             .then(function(response) {
                 if (response.data === "success") {
-                    alert('예약이 성공적으로 완료되었습니다.');
                     window.location.href = '../reservation/order';
                 } else {
                     alert('예약에 실패하였습니다.');
