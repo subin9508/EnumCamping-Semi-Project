@@ -252,18 +252,22 @@
         console.log(reservedAreas);
         
         for (let i = 1; i <= totalAreas; i++) {
-            console.log(`area${i} 처리 시작`)
-            const area = document.getElementById(`area${i}_radio`);
-            console.log(`area${i}`, area);
+			const areaIndex = Math.ceil(i / 4); // 각 구역의 인덱스 계산
+            console.log(`area${areaIndex} 처리 시작`)
+            const area = document.getElementById(`area${areaIndex}_radio`);
+            console.log(`area${areaIndex}`, area);
 
             if (area) {
-                const card = document.getElementById(`area${i}`);
+                const card = document.getElementById(`area${areaIndex}`);
                 
-                console.log(`Processing Area ${i}`);
-                console.log(`card${i}=`, card);
+                // 현재 areaIndex에 속하는 모든 구역 번호
+            	const areaNumbers = Array.from({ length: 4 }, (_, k) => (areaIndex - 1) * 4 + k + 1);
+            
+            	// 예약된 구역이 하나라도 포함되어 있는지 확인
+            	const isReserved = areaNumbers.some(num => reservedAreas.includes(num));
                 
-                if (reservedAreas.includes(i)) {
-                    console.log(`Area ${i} is reserved`);
+                if (isReserved) {
+                    console.log(`Area ${areaIndex} is reserved`);
                     card.style.display = "none";
                 } else {
                     card.style.display = "block";

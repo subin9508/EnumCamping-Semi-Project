@@ -30,7 +30,9 @@
         select rd.item_id
         from reservation_master rm
         join reservation_detail rd ON rm.res_id = rd.res_id
-        where rm.res_check_in = #{resCheckIn}
+        where rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD')
+        	or(rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') - INTERVAL '1' DAY
+        		and rm.res_check_out - rm.res_check_in = 2)
     </select>
     
     <!-- 구역 선택 후 가능한 night 수 -->
