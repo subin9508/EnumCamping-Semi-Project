@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
 import com.itwill.semiproject.repository.Items;
+import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.service.ReservationService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,9 +38,11 @@ public class ReservationController {
 	
 
 	@GetMapping("/order")
-	public String order() {
-		log.debug("order()");
+	public String getReservationDetail(Model model) {
+		List<ReservationDetail> reservationDetail = reservationService.getReservationDeatil(); 
+		log.debug("order()", reservationDetail);
 		
+		model.addAttribute("reservationDetail", reservationDetail);
 		return "/reservation/order";
 	}
 	

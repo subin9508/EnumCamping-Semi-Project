@@ -25,8 +25,8 @@ public class ReservationService{
     private final ReservationDetailDao reservationDetailDao;
 
    // items 테이블
-    public Items read(ItemsDto dto) {
-        log.debug("read(dto={})", dto);
+    public Items readItem(ItemsDto dto) {
+        log.debug("readItem(dto={})", dto);
         
         Items items = itemsDao.selectOrderByItemsId(dto.toEntity());
         log.debug("상품 가격 ={}", items);
@@ -36,6 +36,10 @@ public class ReservationService{
     
     public List<Items> getAllItems() {
         return itemsDao.selectAllItems();
+    }
+    
+    public List<ReservationDetail> getReservationDeatil() {
+    	return reservationDetailDao.selectOrderByResId();
     }
     
     public int create(ReservationDetailCreateDto dto) {

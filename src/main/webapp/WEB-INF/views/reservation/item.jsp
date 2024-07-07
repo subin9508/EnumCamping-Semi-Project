@@ -97,7 +97,7 @@ th, td {
                 <div id="totalAllItems"></div>
 
                 <!-- 선택된 아이템들 리스트를 표시할 공간 -->
-                <div id="selectedItemsList"></div>
+                <div id="selectedItemsList" style="display: none;"></div>
 
                 <div class="container-fluid d-flex justify-content-center mt-3">
                     <button onclick="submitReservationDetails()" class="btn btn-primary">다음 단계</button>
@@ -147,16 +147,24 @@ th, td {
         updateTotalAllItems();
     }
 
+    /* 선택된 리스트 화면에 보이게 하는 부분
     function updateSelectedItemsList() {
-        var tableHtml = '<table class="table table-bordered"><thead><tr><th>아이템 ID</th><th>수량</th><th>총 가격</th></tr></thead><tbody>';
-        selectedItems.forEach(function(item) {
-            tableHtml += '<tr><td>' + item.itemId + '</td><td>' + item.itemQuantity + '</td><td>' + item.itemAmount + '원</td></tr>';
-        });
-        tableHtml += '</tbody></table>';
-
         var selectedItemsElement = document.getElementById('selectedItemsList');
-        selectedItemsElement.innerHTML = tableHtml;
+
+        if (selectedItems.length > 0) {
+            var tableHtml = '<table class="table table-bordered"><thead><tr><th>아이템 ID</th><th>수량</th><th>총 가격</th></tr></thead><tbody>';
+            selectedItems.forEach(function(item) {
+                tableHtml += '<tr><td>' + item.itemId + '</td><td>' + item.itemQuantity + '</td><td>' + item.itemAmount + '원</td></tr>';
+            });
+            tableHtml += '</tbody></table>';
+            selectedItemsElement.innerHTML = tableHtml;
+            selectedItemsElement.style.display = 'block'; // 리스트를 표시합니다.
+        } else {
+            selectedItemsElement.innerHTML = '';
+            selectedItemsElement.style.display = 'none'; // 리스트를 숨깁니다.
+        }
     }
+    */
 
     function updateTotalAllItems() {
         var total = selectedItems.reduce(function(sum, item) {

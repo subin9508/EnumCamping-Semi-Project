@@ -8,5 +8,10 @@
     <insert id="insert">
         INSERT INTO reservation_detail (item_id, item_quantity, item_amount) VALUES (#{itemId}, #{itemQuantity}, #{itemAmount})
     </insert>
+    
+    <!-- 선택한 물품 리스트  -->
+    <select id="selectOrderByResId" resultType="ReservationDetail">
+        SELECT * FROM reservation_detail
+    </select>
 
 </mapper>

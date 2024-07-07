@@ -45,7 +45,30 @@
                     <h1>예약 및 주문</h1>
                 </div>
 
-
+                 <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>주문 번호</th>
+                                <th>물품 번호</th>
+                                <th>수량</th>
+                                <th>총가격</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderDetails">
+                            <c:forEach var="rs" items="${reservationDetail}">
+                                <tr>
+                                    <td>${rs.detailId}</td>
+                                    <td>${rs.itemId}</td>
+                                    <td>${rs.itemQuantity}</td>
+                                    <td>${rs.itemAmount}원</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
                 <div class="container">
                     <div class="form-container">
                         <form class="custom-form">
@@ -125,6 +148,11 @@
                     </div>
                 </div>
                 
+                <!-- 총 결제 금액 표시 -->
+                <div class="container-fluid d-flex justify-content-center mt-3">
+                    <h3>총 결제 금액: <span id="totalAmount">0</span></h3>
+                </div>
+                
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
                     <form action="../reservation/reservationConfirm"
@@ -178,6 +206,30 @@
 							'change', checkAgreements);
 					document.getElementById('agreeProvide').addEventListener(
 							'change', checkAgreements);
+					
+					
+					// 페이지 로딩 시 주문 상세 항목들의 총 금액 계산하여 표시
+					document.addEventListener('DOMContentLoaded', function() {
+					    calculateTotalAmount(); // 초기화시 총 금액 계산 함수 호출
+					});
+
+					// 총 결제 금액 계산 함수
+					function calculateTotalAmount() {
+					    let totalAmount = 0;
+
+					    // 각 주문 상세 항목의 금액을 모두 합산
+					    const itemAmountElements = document.querySelectorAll('#orderDetails td:nth-child(4)');
+					    itemAmountElements.forEach(function(element) {
+					        totalAmount += parseInt(element.textContent.replace('원', ''), 10);
+					    });
+
+					    // 총 결제 금액을 화면에 반영
+					    const totalAmountElement = document.getElementById('totalAmount');
+					    totalAmountElement.textContent = totalAmount + '원';
+					}
+					
+					
+					
 				</script>
 
 </body>
