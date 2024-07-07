@@ -26,7 +26,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 
-// 결제 관련 기능을 동작하게 하는 컨트롤러
+// 결제 관련 기능을 동작
 @Slf4j
 @Controller
 @RequestMapping("/reservation")
