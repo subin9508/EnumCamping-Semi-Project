@@ -5,9 +5,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.repository.ItemsDao;
+import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 
@@ -22,6 +26,7 @@ public class ReservationService {
 	
 	private final ReservationMasterDao reservationMasterDao;
 	private final ItemsDao itemsDao;
+	private final SqlSessionFactory sqlSessionFactory;
 	
 	public List<Integer> readReservedAreas(LocalDate date) {
 //		List<Integer> reservedArea = reservationAreaDao.selectReservedArea(date);
@@ -38,6 +43,27 @@ public class ReservationService {
 	
 	public Integer readItemPrice(int itemId) {
 		return itemsDao.selectItemPrice(itemId);
+	}
+	
+	@Transactional
+	public void makeReservation(ReservationMaster reservationMaster, ReservationDetail reservationDetail) {
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			ReservationMasterDao reservationMasterDao = session.getMapper(ReservationMasterDao.class);
+			
+			// reservation_master 테이블에 데이터 삽입
+			reservationMasterDao.insertReservationMaster(reservationMaster);
+			// 자동 생성된 res_id 가져오기
+			int resId = reservationMaster.getResId();
+			reservationDetail.setResId(resId);
+			
+			// reservation_detail 테이블에 데이터 삽입
+			reservationMasterDao.insertReservationDetail(reservationDetail);
+			
+			session.commit();
+		} catch (Exception e) {
+			log.error("Reservation failed", e);
+            throw new RuntimeException("Reservation failed", e);
+		}
 	}
 
 }

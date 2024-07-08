@@ -381,7 +381,7 @@
             return false;
         }
         
-        window.location.href = "/semiproject/reservation/item";
+        window.location.href = "/semiproject/reservation/reservationConfirm";
     }
     
     function updatePrice(year, month, day, selectedArea, selectedNight) {

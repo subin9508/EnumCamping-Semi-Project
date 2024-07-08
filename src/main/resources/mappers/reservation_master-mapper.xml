@@ -43,5 +43,17 @@
         where rd.item_id = #{itemId}
             and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + 1
     </select>
+    
+    <!-- reservation_master에 데이터 삽입 -->
+    <insert id="insertReservationMaster" useGeneratedKeys="true" keyProperty="res_id">
+        insert into reservation_master (user_id, res_check_in, res_check_out, res_state)
+        values (#{user_id}, TO_DATE(#{res_check_in}, 'YYYY-MM-DD'), TO_DATE(#{res_check_out}, 'YYYY-MM-DD'))
+    </insert>
+    
+    <!-- reservation_detail에 데이터 삽입 -->
+    <insert id="insertReservationDetail">
+        insert into reservation_detail (res_id, item_id, item_price)
+        values (#{resId}, #{itemId}, #{itemPrice})        
+    </insert>
 
 </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.service.ReservationService;
 
@@ -65,4 +66,15 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping("/reservationConfirm") 
+	public void reservationList() {
+		log.debug("GET: reservationList()");
+	}
+	
+//	@PostMapping("/reservationConfirm")
+//	public String reservationList(ReservationMaster reservationMaster, ReservationDetail reservation)  {
+//		
+//	}
+	
 }
