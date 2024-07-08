@@ -1,10 +1,8 @@
 package com.itwill.semiproject.repository;
 
-import java.util.List;
-
-import com.itwill.semiproject.dto.ReservationListDto;
-
 public interface ReservationMasterDao {
-	List<ReservationListDto> selectByUserId (String userId);
-	ReservationMaster selectByResId(Integer resId);
+	
+	// 예약 키로 예약 정보를 조회
+	ReservationMaster selectByResKey(Integer resKey);
+
 }

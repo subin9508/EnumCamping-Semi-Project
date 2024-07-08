@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.semiproject.repository.PaymentDao">
+
+    
+    <!-- pay_id 조회 -->
+    <select id="selectByPaykey" resultType="Payments" parameterType="Integer">
+        select * from payments where pay_key = #{payKey}
+    </select>
+    
+    
+    <!-- 결제 정보 삽입 -->
+
+	<insert id="insertPayment" parameterType="Payments" >
+        insert into payments (pay_id, imp_uid, pg_tid, res_id, res_key, amount, pay_date, pay_method, pay_status, buyer_email)
+        values (#{payId}, #{impUid}, #{pgTid}, #{resId}, #{resKey}, #{amount}, #{payDate}, #{payMethod}, #{payStatus}, #{buyerEmail})
+   		
+	</insert>
+	
+	<!-- 컨트롤러 파라미터 형식에 맞는 셀렉트 문 작성 -->
+	<select id="selectPayKey" parameterType="Payments"
+	resultType="Integer">
+	SELECT pay_key
+	FROM payments
+	WHERE pay_id = #{payId}
+	AND imp_uid = #{impUid}
+	AND pg_tid = #{pgTid}
+	AND res_id = #{resId}
+	AND res_key = #{resKey}
+</select>
+  
+</mapper>
