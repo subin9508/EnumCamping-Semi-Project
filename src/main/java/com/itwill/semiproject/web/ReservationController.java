@@ -1,7 +1,9 @@
 package com.itwill.semiproject.web;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,7 @@ import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.service.ReservationService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,13 +72,35 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reservationConfirm") 
-	public void reservationList() {
+	public void reservationConfirm() {
 		log.debug("GET: reservationList()");
 	}
 	
-//	@PostMapping("/reservationConfirm")
-//	public String reservationList(ReservationMaster reservationMaster, ReservationDetail reservation)  {
-//		
-//	}
+	@PostMapping("/reservationConfirm")
+	public ResponseEntity<?> reservationConfirm(@RequestBody Map<String, Object> requestData, HttpSession session) {
+	    log.debug("reservationList(requestData={})", requestData);
+
+	    // 세션에서 사용자 정보 가져오기
+	    String userId = (String) session.getAttribute("signedInUser");
+	    log.debug("userId={}", userId);
+
+	    // requestData에서 reservationMaster와 reservationDetail 추출
+	    Map<String, Object> reservationMasterMap = (Map<String, Object>) requestData.get("reservationMaster");
+	    Map<String, Object> reservationDetailMap = (Map<String, Object>) requestData.get("reservationDetail");
+
+	    // ReservationMaster 객체 생성 및 설정
+	    ReservationMaster reservationMaster = new ReservationMaster();
+	    reservationMaster.setUserId(userId);
+	    reservationMaster.setResCheckIn(LocalDate.parse((String) reservationMasterMap.get("resCheckIn")));
+	    reservationMaster.setResCheckOut(LocalDate.parse((String) reservationMasterMap.get("resCheckOut")));
+	    // ReservationDetail 객체 생성 및 설정
+	    ReservationDetail reservationDetail = new ReservationDetail();
+	    reservationDetail.setItemId(Integer.parseInt(reservationDetailMap.get("itemId").toString()));
+	    reservationDetail.setItemAmount(Integer.parseInt(reservationDetailMap.get("itemPrice").toString()));
+
+	    reservationService.makeReservation(reservationMaster, reservationDetail);
+
+	    return ResponseEntity.ok().build();
+	}
 	
 }

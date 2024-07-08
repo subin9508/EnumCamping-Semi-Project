@@ -431,10 +431,65 @@
                     console.log('selectedNight', selectedNight);
 
                     updatePrice(year, month, day, selectedArea, selectedNight);
+                    addNextPageEventListeners(year, month, day, selectedArea, selectedNight);
                 }
             });
         });
     }
+    
+    // 예약하기 버튼에 이벤트 리스너 추가
+    function addNextPageEventListeners(year, month, day, selectedArea, selectedNight) {
+        console.log('addNextPageEventListeners()');
+
+        // 기존 이벤트 리스너 제거
+        const btnNextPage = document.querySelector('.btnNextPage');
+        btnNextPage.addEventListener('click', function(event) {
+            event.preventDefault();
+            console.log('Button clicked'); // 버튼 클릭 로그
+            
+            const date = `${year}-${month}-${day}`;
+            const reservationMaster = {
+                resCheckIn: date,
+                resCheckOut: calculateCheckOutDate(date, selectedNight) // 실제로는 종료 날짜를 계산해야 합니다.
+            };
+
+            const reservationDetail = {
+                itemId: selectedArea,
+                itemAmount: document.getElementById('price-value').innerText
+            };
+            
+            const data = {
+                reservationMaster: reservationMaster,
+                reservationDetail: reservationDetail
+            };
+            
+            console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
+
+            const uri = '../reservation/reservationConfirm';
+
+            axios.post(uri, data, {
+                headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response data:', response.data);
+                // window.location.href = uri; // 주석 처리
+            })
+            .catch(error => {
+                console.error('Error details:', error.response ? error.response.data : error.message);
+                console.error('Error status:', error.response ? error.response.status : 'Unknown');
+            });
+        });
+    }
+    
+    function calculateCheckOutDate(checkInDate, nights) {
+        const date = new Date(checkInDate);
+        date.setDate(date.getDate() + parseInt(nights));
+        return date.toISOString().split('T')[0];
+    }
+    
 
     /**
      * @brief   숫자 두자릿수( 00 ) 변경

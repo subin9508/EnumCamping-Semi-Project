@@ -99,7 +99,7 @@
                 </div>
                 
                 <div class="nextPage" style="text-align: center; margin-top: 20px;">
-                    <a href="#" class="btn btn-primary" onclick="validateForm(event)">예약하기</a>
+                    <a href="#" class="btn btn-primary btnNextPage" onclick="validateForm(event)">예약하기</a>
                 </div>
             </div>
         </div>

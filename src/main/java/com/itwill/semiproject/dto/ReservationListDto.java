@@ -1,5 +1,6 @@
 package com.itwill.semiproject.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.itwill.semiproject.repository.ReservationMaster;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ReservationListDto {
 	private String userId;
 	private Integer resId;
-	private LocalDateTime resCheckIn;
+	private LocalDate resCheckIn;
 	private Integer resState;
 	private String userName;
 	
