@@ -60,7 +60,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 			
 			// hashMap 객체인 paymentInfo를 생성해서 결제 정보를 담음.
 			Map<String, Object> paymentInfo = new HashMap<>(); 
-			paymentInfo.put("name", "상품명 " + reservation.getRequirement()); // 상품명
+			paymentInfo.put("name", "예약 번호 " + reservation.getResId()); // 예약 번호
 			paymentInfo.put("amount", reservation.getResTotalPrice()); // 결제 금액 설정
 			paymentInfo.put("email", user.getUserEmail()); // (유저)이메일 정보 설정
 			paymentInfo.put("buyerName", user.getUserName()); // (유저)구매자 이름 설정

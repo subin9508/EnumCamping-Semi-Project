@@ -28,14 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 buyer_tel: paymentInfo.phoneNumber
             }, async function(rsp) { // 비동기적 함수, 반환되는 값을 rsp에 넣는다.
                 console.log(rsp);
-
+				
+				// 결제 성공 시 처리 로직
                 if (rsp.success) { // 반환 값이 success이면 await 메서드를 실행하여 유저에게 결제 완료 알림.
+                    console.log("결제 성공, 검증 시작");
                     try {
-                        await verifyAndSavePayInfo(rsp.imp_uid, resId);
+                       const result = await verifyAndSavePayInfo(rsp.imp_uid, resId);
+                        console.log("검증 결과:", result);
+                        if(result && (result.result === "SUCCESS" || result.status === "success")) {
                         alert('결제가 완료되었습니다.');
+                        location.href = "/semiproject/reservation/succeeded/" + result.orderNum;
+                        } else {
+							throw new Error("서버 검증 실패");
+						}
                     } catch (error) {
-                        console.error("결제 검증 및 저장 중 오류:", error);
-                        alert('결제 검증 중 오류가 발생했습니다. 고객센터에 문의해 주세요.');
+                        console.error("결제 검증 및 저장 중 오류:", error, error.stack);
+                        alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
                     }
                 } else {
                     alert('결제에 실패했습니다. 다시 시도해 주세요.');
@@ -63,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // 결제 검증 후 db 업데이트
+  // verifyAndSavePayInfo 함수 설정
     const verifyAndSavePayInfo = async (imp_uid, resId) => {
         try {// imp_uid와 resId를 이용해 서버에 POST 요청을 보내 결제 정보 검증 및 저장.
             const response = await $.ajax({
@@ -71,16 +79,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: "/semiproject/reservation/verifyIamport/" + imp_uid + "?resId=" + resId
               
             });
-
-            console.log(response);
-
-            if (response.result === "SUCCESS") { // 결제 정보 저장 성공 응답을 받으면, 결제 완료창으로 넘어감.
-                location.href = "/semiproject/reservation/succeeded/" + response.data.orderNum;
+            console.log("서버 응답:", response);
+             
+            if (response.status === 200 && response.data && response.data.result === "SUCCESS") { 
+                return response.data; // 성공 시 data 객체 반환
+               // location.href = "/semiproject/reservation/succeeded/" + response.data.orderNum;
             } else {
-                throw new Error("서버에서 성공 응답을 받지 못했습니다.");
+                throw new Error("서버 응답이 예상과 다릅니다: " + JSON.stringify(response));
             }
+            	
         } catch (error) {
-            console.error("결제 정보 저장 실패:", error);
+            console.error("결제 정보 저장 실패:", error.message, error.stack);
             throw error;
         }
     };
