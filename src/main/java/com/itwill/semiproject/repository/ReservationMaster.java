@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReservationMaster {
-	
-	private Integer resKey;
-	private String resId;
+
+	private Integer resId;
 	private String userId;
 	private String requirement;
 	private LocalDate resCreatedTime;

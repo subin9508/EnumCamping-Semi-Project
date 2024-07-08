@@ -35,20 +35,20 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	private UserDao userDao; // 사용자 정보를 가져오기 위한 레포지토리
 
 	/**
-	 * 예약 키를 기반으로 결제 정보를 조회하여 반환하는 메서드
+	 * 예약 id를 기반으로 결제 정보를 조회하여 반환하는 메서드
 	 * 
-	 * @param resKey 예약키
+	 * @param resId 예약 아이디
 	 * @return 결제 정보를 담은 Map 객체
 	 * @throws ServiceException 예외 발생시 ServiceException으로 wrapping하여 throw
 	 */
-	public Map<String, Object> getPaymentInfoByResKey(Integer resKey) throws ServiceException {
+	public Map<String, Object> getPaymentInfoByResId(Integer resId) throws ServiceException {
 		try {
-			// 예약 테이블에서 resKey에 해당하는 예약 정보를 DB에서 가져옴.
+			// 예약 테이블에서 resId에 해당하는 예약 정보를 DB에서 가져옴.
 			// 조회한 예약정보(master)를 Dto.of 메서드를 통해 dto 객체로 변환. 
-			ReservationMasterDto reservation = ReservationMasterDto.of(reservationMasterDao.selectByResKey(resKey));		
+			ReservationMasterDto reservation = ReservationMasterDto.of(reservationMasterDao.selectByResId(resId));		
 			// 변환된 reservation 객체가 null인지 확인. (예약 정보 없을 경우)
 			if (reservation == null) {
-				throw new ServiceException("Reservation not found for resKey: " + resKey);
+				throw new ServiceException("Reservation not found for resId: " + resId);
 			}
 
 			// reservation 객체에서 사용자id 가져옴. 주어진 사용자 id에 해당하는 사용자 정보를 DB에서 조회.
@@ -60,7 +60,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 			
 			// hashMap 객체인 paymentInfo를 생성해서 결제 정보를 담음.
 			Map<String, Object> paymentInfo = new HashMap<>(); 
-			paymentInfo.put("name", "예약 번호 " + reservation.getResId()); // 상품명으로 예약 번호를 설정
+			paymentInfo.put("name", "상품명 " + reservation.getRequirement()); // 상품명
 			paymentInfo.put("amount", reservation.getResTotalPrice()); // 결제 금액 설정
 			paymentInfo.put("email", user.getUserEmail()); // (유저)이메일 정보 설정
 			paymentInfo.put("buyerName", user.getUserName()); // (유저)구매자 이름 설정
@@ -76,32 +76,26 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	 * 결제 정보를 저장하는 메서드
 	 * 
 	 * @param payment 결제 정보를 담은 payment 객체
-	 * @param payKey 결제 키
 	 * @param payId 결제 ID
-	 * @param resI 예약 ID
-	 * @param resKey 예약 키
+	 * @param resId 예약 ID
 	 * @return 처리 결과를 문자열로 반환 (SUCCESS 또는 실패 코드)
 	 * @throws ServiceException 예외 발생 시 ServiceException으로 wrapping 하여 throw
 	 */
 	public String savePayment(
 			Payment payment, 
-			Integer payKey, 
-			String payId, 
-			String resId, 
-			Integer resKey) 
-			throws ServiceException {
+			Integer payId, 
+			Integer resId
+			) throws ServiceException {
 
-		log.trace("savePayment({}, {}, {}, {}, {}) invoked.", 
-				payment, payKey, payId, resId, resKey);
+		log.trace("savePayment({}, {}, {}) invoked.", 
+				payment, payId, resId);
 
 		// PaymentDto 객체를 생성하고, 파라미터로 받은 필드 값을 설정
 		PaymentDto dto = new PaymentDto(); 
-		dto.setPayKey(payKey); // 파라미터로 받은 payKey 사용
-		dto.setPayId(payId != null ? payId : ""); // 결제 ID 설정 (payId가 null인 경우 빈 문자열로 설정)
+		dto.setPayId(payId); // 파라미터로 받은 payId 설정
 		dto.setImpUid(payment.getImpUid()); // 아이엠포트 UID 설정
 		dto.setPgTid(payment.getPgTid()); //PG사 TID 설정
-		dto.setResId(resId != null ? resId : ""); // 예약 ID 설정 (resId가 null인 경우 빈 문자열로 설정)
-		dto.setResKey(resKey); // 예약키 설정
+		dto.setResId(resId);  // 파라미터로 받은 resId 설정
 		dto.setAmount(payment.getAmount().intValue()); // 결제 금액 설정
 		
 		// 결제 완료 시간이 null이 아닌 경우, 해당 시간을 localDate 형식으로 변환하여 dto의 payDate 필드에 설정.

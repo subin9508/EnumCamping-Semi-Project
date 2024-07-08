@@ -13,12 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor // 모든 필드를 인자로 받는 생성자를 자동 생성
 @Builder
 public class Payments { //데이터베이스 테이블 payments 테이블의 모델 객체  
-	private Integer payKey;
-	private String payId;
+	private Integer payId;
 	private String impUid;
 	private String pgTid;
-	private String resId;
-	private Integer resKey;
+	private Integer resId;
 	private Integer amount;
 	private LocalDate payDate;
 	private String payMethod;

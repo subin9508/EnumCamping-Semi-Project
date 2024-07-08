@@ -2,17 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnPayment = document.querySelector('button#btnPayment');
 	
     btnPayment.addEventListener('click', async () => { // 비동기적 함수 
-        const resKey = document.querySelector("input[name=resKey]").value;
+        const resId = document.querySelector("input[name=resId]").value;
         
-        console.log(resKey);
-        if (!resKey) {
-            alert("예약 키 값이 있어야 합니다.");
+        console.log(resId);
+        if (!resId) {
+            alert("예약 아이디 값이 있어야 합니다.");
             return;
         }
 
         try {
-            // 서버에서 결제에 필요한 정보를 가져옵니다.
-            const paymentInfo = await getPaymentInfo(resKey);
+            // 서버에서 결제에 필요한 정보를 가져옵니다. (예약 아이디를 매개로)
+            const paymentInfo = await getPaymentInfo(resId);
 
             const IMP = window.IMP;
             IMP.init('imp45647302'); // 가맹점 식별코드 설정
@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 pg: 'kakaopay',
                 pay_method: 'card',
                 merchant_uid: 'merchant_' + new Date().getTime(),
-                name: paymentInfo.name,
-                amount: paymentInfo.amount,
+                name: paymentInfo.name, // 상품명
+                amount: paymentInfo.amount, // 결제 금액
                 buyer_email: paymentInfo.email,
                 buyer_name: paymentInfo.buyerName,
                 buyer_tel: paymentInfo.phoneNumber
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (rsp.success) { // 반환 값이 success이면 await 메서드를 실행하여 유저에게 결제 완료 알림.
                     try {
-                        await verifyAndSavePayInfo(rsp.imp_uid, resKey);
+                        await verifyAndSavePayInfo(rsp.imp_uid, resId);
                         alert('결제가 완료되었습니다.');
                     } catch (error) {
                         console.error("결제 검증 및 저장 중 오류:", error);
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     // 결제정보를 서버에서 가져오는 비동기 함수
-    const getPaymentInfo = async (resKey) => { 
-        try { // resKey를 매개로 서버에 GET 요청을 보내 결제 정보를 가져옴.
+    const getPaymentInfo = async (resId) => { 
+        try { // resId를 매개로 서버에 GET 요청을 보내 결제 정보를 가져옴.
             const response = await $.ajax({ 
                 type: "GET",
-                url: "/semiproject/reservation/paymentInfo?resKey=" + resKey, // 요청 URL, resKey를 쿼리 파라미터로 전달.
+                url: "/semiproject/reservation/paymentInfo?resId=" + resId, // 요청 URL, resId를 쿼리 파라미터로 전달.
                 dataType: 'json'
             });
             // 성공적으로 데이터를 받아오면 응답 반환.
@@ -64,17 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // 결제 검증 후 db 업데이트
-    const verifyAndSavePayInfo = async (imp_uid, resKey) => {
-        try {// imp_uid와 resKey를 이용해 서버에 POST 요청을 보내 결제 정보 검증 및 저장.
+    const verifyAndSavePayInfo = async (imp_uid, resId) => {
+        try {// imp_uid와 resId를 이용해 서버에 POST 요청을 보내 결제 정보 검증 및 저장.
             const response = await $.ajax({
                 type: "POST",
-                url: "/semiproject/reservation/verifyIamport/" + imp_uid + "?resKey=" + resKey
+                url: "/semiproject/reservation/verifyIamport/" + imp_uid + "?resId=" + resId
               
             });
 
             console.log(response);
 
-            if (response.result === "SUCCESS") { // 결제 정보 성공 응답을 받으면, 결제 완료창으로 넘어감.
+            if (response.result === "SUCCESS") { // 결제 정보 저장 성공 응답을 받으면, 결제 완료창으로 넘어감.
                 location.href = "/semiproject/reservation/succeeded/" + response.data.orderNum;
             } else {
                 throw new Error("서버에서 성공 응답을 받지 못했습니다.");

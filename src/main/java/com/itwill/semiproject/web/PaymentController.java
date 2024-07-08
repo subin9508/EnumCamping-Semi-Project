@@ -54,19 +54,19 @@ public class PaymentController {
 
 	}
 
-	// resKey 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
+	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
 	@GetMapping("/paymentInfo")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resKey") Integer resKey) { // reKey를 매개로 결제
+	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resId") Integer resId) { // resId를 매개로 결제
 																										// 정보 불러옴.
 		try {
 
-			Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResKey(resKey); // null 아니면 저장.
+			Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResId(resId); // null 아니면 저장.
 			return ResponseEntity.ok(paymentInfo);
 		} catch (ServiceException e) {
-			// resKey에 해당하는 결제 정보를 가져오는 도중 예외 발생한 경우 에러 로그 출력.
-			log.error("Error fetching payment info for resKey: {}", resKey, e);
+			// resId에 해당하는 결제 정보를 가져오는 도중 예외 발생한 경우 에러 로그 출력.
+			log.error("Error fetching payment info for resId: {}", resId, e);
 			// 서버 내부 오류가 발생한 경우, HTTP 상태 코드 500 함께 null 값을 포함하는 응답을 반환.
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
@@ -77,13 +77,12 @@ public class PaymentController {
 	@ResponseBody
 	@PostMapping("/verifyIamport/{imp_uid}")
 
-	public APIResponse paymentByImpUid( // resKey를 필수 파라미터로 전달
-			@PathVariable(value = "imp_uid") String imp_uid, @RequestParam(required = false) Integer payKey,
-			@RequestParam(required = false) String payId, @RequestParam(required = false) String resId,
-			@RequestParam("resKey") Integer resKey
+	public APIResponse paymentByImpUid( // resId를 필수 파라미터로 전달
+			@PathVariable(value = "imp_uid") String imp_uid, @RequestParam(required = false) Integer payId,
+			@RequestParam("resId") Integer resId
 
 	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
-		log.trace("paymentByImpUid({}, {}, {}, {}, {}) invoked.", imp_uid, payKey, payId, resId, resKey);
+		log.trace("paymentByImpUid({}, {}, {}) invoked.", imp_uid, payId, resId);
 
 		// APIResponse 객체 생성 (결제 검증 결과와 추가 정보를 담아서 반환할 목적으로 사용)
 		APIResponse irsp = new APIResponse();
@@ -98,7 +97,7 @@ public class PaymentController {
 
 			case "paid":
 
-				result = this.paymentService.savePayment(payment, payKey, payId, resId, resKey); // service의 dto 정보를
+				result = this.paymentService.savePayment(payment, payId, resId); // service의 dto 정보를
 																									// result에 저장.
 
 				break;
