@@ -53,4 +53,16 @@ public class ReservationController {
 		
 		return new ResponseEntity<>(reservations, HttpStatus.OK);
 	}
+	
+	@GetMapping("/itemPrice/{itemId}") 
+	public ResponseEntity<Integer> getItemPrice(@PathVariable("itemId") int itemId) {
+		log.debug("GET: itemPrice with itemId {}", itemId);
+		
+		Integer itemPrice = reservationService.readItemPrice(itemId);
+		if (itemPrice != null) {
+			return new ResponseEntity<Integer>(itemPrice, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

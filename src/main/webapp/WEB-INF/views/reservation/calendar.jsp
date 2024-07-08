@@ -92,7 +92,15 @@
                     </label>
                 </div>
                 <!-- // radio -->
-                <a href="/semiproject/reservation/item">다음 페이지</a>
+                
+                <div id="price" style="">
+                    <span id="price-label">가격: </span>
+                    <span id="price-value"></span>원
+                </div>
+                
+                <div class="nextPage" style="text-align: center; margin-top: 20px;">
+                    <a href="#" class="btn btn-primary" onclick="validateForm(event)">예약하기</a>
+                </div>
             </div>
         </div>
 

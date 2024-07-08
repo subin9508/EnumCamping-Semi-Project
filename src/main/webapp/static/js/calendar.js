@@ -227,6 +227,11 @@
         if (selectedDate && selectedArea) {
             getReservationNight(year, month, day, selectedArea);
         }
+        
+        // 가격 정보 지움
+        const priceValue = document.getElementById('price-value');
+        priceValue.innerText = '';
+        
     }
     
     // date정보 uri로 전송
@@ -297,6 +302,10 @@
                         radio.checked = false;
                     });
                     
+                    // 가격 정보 지움
+                    const priceValue = document.getElementById('price-value');
+                    priceValue.innerText = '';
+                    
                     // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
                     if (selectedDate && selectedArea) {
                         const year = document.getElementById("calYear").innerText;
@@ -305,6 +314,8 @@
                         console.log('year, month, day, selectedArea:', year, month, day, selectedArea);  // 로그 추가
                         getReservationNight(year, month, day, selectedArea);
                     }
+                    
+                    addNightRadioEventListeners();
                 }
             });
         });
@@ -352,10 +363,77 @@
                 
                 // nightCard 표시
                 nightCard.style.display = 'block';
+                addNightRadioEventListeners();
             })
             .catch(error => {
                 console.error("There was an error fetching the reservations!", error);
             });
+    }
+    
+    function validateForm(event) {
+        var dateSelected = document.getElementById('date').innerText.trim() !== "";
+        var areaSelected = document.querySelector('input[name="area"]:checked') !== null;
+        var nightSelected = document.querySelector('input[name="night"]:checked') !== null;
+        
+        if (!dateSelected || !areaSelected || !nightSelected) {
+            alert("날짜, 구역, 숙박 일수를 선택해 주세요.");
+            event.preventDefault;
+            return false;
+        }
+        
+        window.location.href = "/semiproject/reservation/item";
+    }
+    
+    function updatePrice(year, month, day, selectedArea, selectedNight) {
+        const date = `${year}-${month}-${day}`;
+        const selectedDateObj = new Date(year, month - 1, day);
+        const isWeekend = (selectedDateObj.getDay() === 0 || selectedDateObj.getDay() === 6); // 0: Sunday, 6: Saturday
+        
+        // 성수기 기간 설정
+        const startPeakSeason = new Date(year, 6, 1); // 7월 1일 (월은 0부터 시작하므로 6은 7월을 의미)
+        const endPeakSeason = new Date(year, 7, 31); // 8월 31일
+
+        // 성수기 여부 결정
+        const isPeakSeason = selectedDateObj >= startPeakSeason && selectedDateObj <= endPeakSeason;
+        const seasonFactor = isPeakSeason ? 2 : 0; // 성수기면 2, 비수기면 0
+
+        const weekendFactor = isWeekend ? 1 : 0; // 주말이면 1, 평일이면 0
+
+        const baseItemId = (selectedArea - 1) * 4;
+        const itemId = baseItemId + seasonFactor + weekendFactor + 1;
+
+        const uri = `../reservation/itemPrice/${itemId}`;
+
+        console.log('updatePrice()', uri);
+
+        axios.get(uri)
+            .then(response => {
+                const price = (response.data) * selectedNight;
+                document.getElementById('price-value').innerText = price;
+                document.getElementById('price').style.display = 'block';
+            })
+            .catch(error => {
+                console.error("There was an error fetching the price!", error);
+            });
+    }
+    
+    // night 라디오 버튼에 이벤트 리스너 추가
+    function addNightRadioEventListeners() {
+        console.log('addNightRadioEventListeners()');
+        document.querySelectorAll('.night-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    console.log('night-radio checked');
+                    const year = document.getElementById("calYear").innerText;
+                    const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
+                    const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
+                    const selectedNight = this.value;
+                    console.log('selectedNight', selectedNight);
+
+                    updatePrice(year, month, day, selectedArea, selectedNight);
+                }
+            });
+        });
     }
 
     /**

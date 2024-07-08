@@ -43,7 +43,5 @@
         where rd.item_id = #{itemId}
             and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + 1
     </select>
-    
-    
 
 </mapper>

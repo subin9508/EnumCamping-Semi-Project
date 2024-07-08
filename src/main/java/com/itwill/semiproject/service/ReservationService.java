@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.repository.ItemsDao;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 
@@ -20,6 +21,7 @@ import oracle.sql.DATE;
 public class ReservationService {
 	
 	private final ReservationMasterDao reservationMasterDao;
+	private final ItemsDao itemsDao;
 	
 	public List<Integer> readReservedAreas(LocalDate date) {
 //		List<Integer> reservedArea = reservationAreaDao.selectReservedArea(date);
@@ -32,6 +34,10 @@ public class ReservationService {
 	public List<ReservationMaster> readReservationMaster(LocalDate date, int area) {
 		String formattedDate = date.toString();
 		return reservationMasterDao.selectByItemIdAndResCheckIn(area, formattedDate);
+	}
+	
+	public Integer readItemPrice(int itemId) {
+		return itemsDao.selectItemPrice(itemId);
 	}
 
 }
