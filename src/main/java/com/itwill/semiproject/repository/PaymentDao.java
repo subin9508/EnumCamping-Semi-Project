@@ -8,9 +8,6 @@ public interface PaymentDao {
 
 	Payments selectByPayKey(Integer payKey);
 	
-	
-	
-	
 	int insertPayment(PaymentDto dto);
 	
 	int selectPayKey(PaymentDto dto);

@@ -29,7 +29,7 @@ public class ReservationMasterDto {
 				.resState(resState).build();
 }
    
-    public static ReservationMasterDto of (ReservationMaster rm) {
+    public static ReservationMasterDto of (ReservationMaster rm) { // reservationMaster 타입을 dto 타입으로 반환.
         return ReservationMasterDto.builder().resKey(rm.getResKey()).resId(rm.getResId())
         		.userId(rm.getUserId()).requirement(rm.getRequirement())
         		.resCreatedTime(rm.getResCreatedTime()).resModifiedTime(rm.getResModifiedTime())

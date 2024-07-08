@@ -59,7 +59,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	            paymentInfo.put("buyerName", user.getUserName()); // 사용자 테이블에서 가져옴
 	            paymentInfo.put("phoneNumber", user.getUserPhone()); // 사용자 테이블에서 가져옴
 
-	            return paymentInfo;
+	            return paymentInfo; // 결제 정보를 담은 paymentInfo 반환.
 	        } catch (Exception e) {
 	            throw new ServiceException(e);
 	        }
@@ -68,7 +68,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	
 	
 	
-	public String savePayment(
+	public String savePayment( // pg사로부터 전달 받은 정보와 payments 테이블 컬럼 정보 저장 메서드
 			
 			Payment payment,
 			Integer payKey,
@@ -100,9 +100,9 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		try {
 			// 실패한 메서드 종류에 따라 오류 코드 반환
 			
-			int result = this.paymentDao.insertPayment(dto);
+			int result = this.paymentDao.insertPayment(dto); // result 값이 1보다 같거나 클 경우 성공 반환.
 			
-			if(result < 1) return "FAIL:01";
+			if(result < 1) return "FAIL:01"; // result 값이 1보다 작을 시 실패 반환.
 			
 			return "SUCCESS";
 				

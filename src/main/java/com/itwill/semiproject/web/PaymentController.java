@@ -42,14 +42,14 @@ public class PaymentController {
 	
 	
 	
-	public PaymentController() {
+	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
 		this.api = new IamportClient("3375010277812188",
 				"mgaKoMpLV17tc8oVjs15v3HoGesdCCXCvYe4CvDcol6M7FKU3MXB2cyncxvsSrrb8YuqRZXWmDhfRLUY");
 	}
 	
 	
 	
-	
+	// 예약 키 값을 받을 페이지 
 	@GetMapping("/payment")
 	public String payment() {
 		log.debug("payment()");
@@ -60,9 +60,9 @@ public class PaymentController {
 	
 	@GetMapping("/paymentInfo")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resKey") Integer resKey) {
+	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resKey") Integer resKey) { // reKey를 매개로 결제 정보 불러옴.
 	    try {
-	        Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResKey(resKey);
+	        Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResKey(resKey); // null 아니면 저장.
 	        return ResponseEntity.ok(paymentInfo);
 	    } catch (ServiceException e) {
 	        log.error("Error fetching payment info for resKey: {}", resKey, e);
@@ -74,7 +74,7 @@ public class PaymentController {
 	// 결제 검증
 	@ResponseBody
 	@PostMapping("/verifyIamport/{imp_uid}")
-	public APIResponse paymentByImpUid(
+	public APIResponse paymentByImpUid( // resKey를 필수 파라미터로 전달
 		@PathVariable(value= "imp_uid") String imp_uid,
 		@RequestParam(required = false) Integer payKey,
 		@RequestParam(required = false) String payId,
@@ -84,28 +84,28 @@ public class PaymentController {
 		log.trace("paymentByImpUid({}, {}, {}, {}, {}) invoked.", imp_uid, payKey, payId, resId, resKey);
 		
 		APIResponse  irsp = new APIResponse ();
-		String result = "";
+		String result = ""; // 검증 결과와 dto를 모두 포함한 정보를 저장할 객체.
 		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
 		
 		
 		// 리턴받은 payment의 status가 결제완료이면 DB 조작 메서드 실행
 		try {
-			switch(payment.getStatus()) {
+			switch(payment.getStatus()) { // payment 상태에 따라 메서드 실행.
 			case "paid" :
-				result = this.paymentService.savePayment(payment, payKey, payId, resId, resKey);
+				result = this.paymentService.savePayment(payment, payKey, payId, resId, resKey); // service의 dto 정보를 result에 저장.
 				 break;
 				 
 			case "failed" :
 				result = "FAIL:04";
 			} // switch
 			
-			irsp.add("result", result);
-			irsp.add("orderNum", payment.getMerchantUid());
+			irsp.add("result", result); // result 응답 객체에 저장
+			irsp.add("orderNum", payment.getMerchantUid()); // 주문번호 저장
 			
 		} catch (ServiceException e) {
 			throw new ControllerException(e);
 		} // try-catch
 		
-		return irsp;
+		return irsp; // 주문번호, result 정보가 담긴 irsp 리턴.
  } 
 } // paymentByImpUid

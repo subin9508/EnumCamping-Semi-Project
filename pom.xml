@@ -33,7 +33,8 @@
 
 
 	<repositories>
-
+		
+		<!-- 아임포트 검증을 위한 설정 -->
 		<repository>
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
@@ -204,14 +205,14 @@
             <version>${mybatis-spring-version}</version>
         </dependency>
 
-
+		<!-- 아임포트 검증을 위한 rest api 설정 -->
 		<dependency>
 			<groupId>com.github.iamport</groupId>
 			<artifactId>iamport-rest-client-java</artifactId>
 			<version>0.2.23</version>
 		</dependency>
 
-
+		<!-- rest api 문서화를 위한 설정 -->
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>

@@ -19,6 +19,7 @@
    		
 	</insert>
 	
+	<!-- 컨트롤러 파라미터 형식에 맞는 셀렉트 문 작성 -->
 	<select id="selectPayKey" parameterType="Payments"
 	resultType="Integer">
 	SELECT pay_key
