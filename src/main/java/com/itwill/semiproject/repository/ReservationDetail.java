@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ReservationDetail {
+
 	private Integer resId;
 	private Integer itemId;
 	private Integer itemQuantity;

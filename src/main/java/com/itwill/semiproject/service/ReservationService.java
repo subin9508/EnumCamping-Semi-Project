@@ -10,8 +10,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.semiproject.dto.ItemsDto;
+import com.itwill.semiproject.dto.ReservationDetailCreateDto;
+import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ItemsDao;
 import com.itwill.semiproject.repository.ReservationDetail;
+import com.itwill.semiproject.repository.ReservationDetailDao;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 
@@ -25,6 +29,7 @@ import oracle.sql.DATE;
 public class ReservationService {
 	
 	private final ReservationMasterDao reservationMasterDao;
+	private final ReservationDetailDao reservationDetailDao;
 	private final ItemsDao itemsDao;
 	private final SqlSessionFactory sqlSessionFactory;
 	
@@ -65,5 +70,32 @@ public class ReservationService {
             throw new RuntimeException("Reservation failed", e);
 		}
 	}
+	
+	// items 테이블
+    public Items readItem(ItemsDto dto) {
+        log.debug("readItem(dto={})", dto);
+        
+        Items items = itemsDao.selectOrderByItemsId(dto.toEntity());
+        log.debug("상품 가격 ={}", items);
+        
+        return items;
+    }
+    
+    public List<Items> getAllItems() {
+        return itemsDao.selectAllItems();
+    }
+    
+    public List<ReservationDetail> getReservationDeatil() {
+    	return reservationDetailDao.selectOrderByResId();
+    }
+    
+    public int create(ReservationDetailCreateDto dto) {
+        log.debug("create({})", dto);
+        
+       int result = reservationDetailDao.insert(dto.toEntity());
+  
+        
+        return result;
+    }
 
 }

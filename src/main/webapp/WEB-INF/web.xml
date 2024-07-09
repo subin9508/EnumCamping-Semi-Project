@@ -40,7 +40,6 @@
         <url-pattern>/user/user_update</url-pattern>
         <url-pattern>/reservation/calendar</url-pattern>
         <!-- 
-        <url-pattern>/post/modify</url-pattern>
         <url-pattern>/post/update</url-pattern>
         <url-pattern>/post/delete</url-pattern>
         <url-pattern>/api/comment/*</url-pattern>

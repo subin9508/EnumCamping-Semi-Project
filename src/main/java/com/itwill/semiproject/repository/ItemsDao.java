@@ -1,5 +1,12 @@
 package com.itwill.semiproject.repository;
 
+import java.util.List;
+
 public interface ItemsDao {
-	Integer selectItemPrice(int itemId);
-}
+
+	Items selectOrderByItemsId(Items itemId);
+	
+	 List<Items> selectAllItems();
+	 
+	 Integer selectItemPrice(int itemId);
+	 }

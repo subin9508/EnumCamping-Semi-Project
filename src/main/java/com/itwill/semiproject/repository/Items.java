@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Items {
-	Integer itemId;
-	String itemName;
-	Integer itemPrice;
-	String itemImg;
-	String itemDesc;
+
+	private Integer itemId;
+	private String itemName;
+	private Integer itemPrice;
+	private String itemImg;
+	private String itemDesc;
+
 }

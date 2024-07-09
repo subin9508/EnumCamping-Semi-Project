@@ -299,7 +299,7 @@ public class UserController {
 			return "user/findpassword"; // 비밀번호 찾기 입력 폼으로 다시 이동
 		}
 	}
-	
+
 	@GetMapping("/reservation_list")
 	public String reservationList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
 		log.debug("reservation_list(userId={})", userId);
@@ -324,5 +324,6 @@ public class UserController {
     	model.addAttribute("resMaster", resMaster);
     	
     }
+
 }
 
