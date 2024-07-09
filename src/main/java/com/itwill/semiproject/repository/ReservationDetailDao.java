@@ -9,4 +9,8 @@ public interface ReservationDetailDao {
 	ReservationDetail selectByResId(Integer resid);
 
 	List<ReservationDetail> selectOrderByResId();
+	
+	List<ReservationDetail> selectDetailsByUserId(String userId);
+	
+	int deleteByResId(String userId);
 }

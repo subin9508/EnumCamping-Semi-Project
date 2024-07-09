@@ -14,4 +14,5 @@ public interface ReservationMasterDao {
 	List<ReservationMaster> selectByItemIdAndResCheckIn(@Param("itemId") int itemId, @Param("resCheckIn") String resCheckIn);
 	void insertReservationMaster(ReservationMaster reservationMaster);
 	void insertReservationDetail(ReservationDetail reservationDetail);
+	int deleteByUserId(String userId);
 }

@@ -13,5 +13,17 @@
     <select id="selectOrderByResId" resultType="ReservationDetail">
         SELECT * FROM reservation_detail
     </select>
+    
+    <!-- userId에 해당하는 reservation_detail -->
+    <select id="selectDetailsByUserId" resultType="ReservationDetail">
+        select * from reservation_detail where res_id = 
+        (select res_id from reservation_master where user_id = #{userId})
+    </select>
+    
+    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->  
+    <delete id="deleteByResId">
+        delete from reservation_detail
+        where res_id in (select res_id from reservation_master where user_id = #{userId})
+    </delete>
 
 </mapper>

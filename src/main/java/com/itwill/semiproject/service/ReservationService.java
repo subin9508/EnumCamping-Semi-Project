@@ -102,5 +102,21 @@ public class ReservationService {
         
         return result;
     }
+    
+    public List<ReservationDetail> getReservationDetailsByUserId(String userId) {
+        return reservationDetailDao.selectDetailsByUserId(userId);
+    }
+    
+    public int deleteReservationMaster(String userId) {
+    	int result = reservationMasterDao.deleteByUserId(userId);
+    	
+    	return result;
+    }
+    
+    public int deleteReservationDetail(String userId) {
+    	int result = reservationDetailDao.deleteByResId(userId);
+    	
+    	return result;
+    }
 
 }

@@ -56,9 +56,9 @@
                             </tr>
                         </thead>
                         <tbody id="orderDetails">
-                            <c:forEach var="rs" items="${reservationDetail}">
+                            <c:forEach var="rs" items="${reservationDetails}">
                                 <tr>
-                                    <td>${rs.detailId}</td>
+                                    <td>${rs.resId}</td>
                                     <td>${rs.itemId}</td>
                                     <td>${rs.itemQuantity}</td>
                                     <td>${rs.itemAmount}원</td>

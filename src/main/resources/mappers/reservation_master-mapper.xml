@@ -54,5 +54,10 @@
         insert into reservation_detail (res_id, item_id, item_quantity, item_amount)
         values (#{resId}, #{itemId}, #{itemQuantity}, #{itemAmount})        
     </insert>
+    
+    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->   
+    <delete id="deleteByUserId">
+        delete from reservation_master where user_id = #{userId} and res_state = 0
+    </delete>
 
 </mapper>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
 import com.itwill.semiproject.dto.ReservationDetailListDto;
@@ -93,18 +94,37 @@ public class ReservationController {
 		}
 	}
 	
-	@GetMapping("/reservationConfirm") 
-	public void reservationConfirm() {
-		log.debug("GET: reservationConfirm()");
+	@GetMapping("/order") 
+	public String getReservationList(HttpSession session, Model model) {
+		log.debug("GET: getReservationList()");
+		
+		//세션에서 사용자 정보 가져오기
+		String userId = (String) session.getAttribute("signedInUser");
+		log.debug("userId={}", userId);
+		User user = userService.read(userId);
+		model.addAttribute("user", user);
+		
+		// 예약 상세정보 가져오기
+		List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
+		
+		model.addAttribute("reservationDetails", reservationDetails);
+		
+		return "/reservation/order";
 	}
 	
-	@PostMapping("/reservationConfirm")
-	public ResponseEntity<?> reservationConfirm(@RequestBody Map<String, Object> requestData, HttpSession session) {
+	@PostMapping("/order")
+	public ResponseEntity<?> getReservationList
+	(@RequestBody Map<String, Object> requestData, HttpSession session, Model model) {
 	    log.debug("reservationList(requestData={})", requestData);
-
+	    
+	    
+	    
 	    // 세션에서 사용자 정보 가져오기
 	    String userId = (String) session.getAttribute("signedInUser");
 	    log.debug("userId={}", userId);
+	    
+	    reservationService.deleteReservationDetail(userId);
+	    reservationService.deleteReservationMaster(userId);
 
 	    // requestData에서 reservationMaster와 reservationDetail 추출
 	    Map<String, Object> reservationMasterMap = (Map<String, Object>) requestData.get("reservationMaster");
@@ -157,16 +177,6 @@ public class ReservationController {
 		
 		model.addAttribute("items", items);
 		return "/reservation/items";
-	}
-	
-
-	@GetMapping("/order")
-	public String getReservationDetail(Model model) {
-		List<ReservationDetail> reservationDetail = reservationService.getReservationDeatil(); 
-		log.debug("order()", reservationDetail);
-		
-		model.addAttribute("reservationDetail", reservationDetail);
-		return "/reservation/order";
 	}
 	
 }

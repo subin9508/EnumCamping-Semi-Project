@@ -419,6 +419,10 @@
     }
     
     function calculateCheckOutDate(checkInDate, nights) {
+        
+        if (!checkInDate || isNaN(Date.parse(checkInDate))) {
+            throw new RangeError("Invalid check-in date");
+        }
         const date = new Date(checkInDate);
         date.setDate(date.getDate() + parseInt(nights));
         return date.toISOString().split('T')[0];
@@ -542,7 +546,7 @@
             
                 console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
 
-                const uri = '../reservation/reservationConfirm';
+                const uri = '../reservation/order';
 
                 axios.post(uri, data, {
                     headers: {
