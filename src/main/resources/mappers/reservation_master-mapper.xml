@@ -51,8 +51,8 @@
     
     <!-- reservation_detail에 데이터 삽입 -->
     <insert id="insertReservationDetail">
-        insert into reservation_detail (res_id, item_id, item_amount)
-        values (#{resId}, #{itemId}, #{itemAmount})        
+        insert into reservation_detail (res_id, item_id, item_quantity, item_amount)
+        values (#{resId}, #{itemId}, #{itemQuantity}, #{itemAmount})        
     </insert>
 
 </mapper>

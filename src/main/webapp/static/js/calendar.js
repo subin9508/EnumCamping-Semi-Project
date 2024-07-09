@@ -411,11 +411,63 @@
             .then(response => {
                 const price = (response.data) * selectedNight;
                 document.getElementById('price-value').innerText = price;
-                document.getElementById('price').style.display = 'block';
+                updateTotalAllItems();
             })
             .catch(error => {
                 console.error("There was an error fetching the price!", error);
             });
+    }
+    
+    function calculateCheckOutDate(checkInDate, nights) {
+        const date = new Date(checkInDate);
+        date.setDate(date.getDate() + parseInt(nights));
+        return date.toISOString().split('T')[0];
+    }
+    
+    var selectedItems = [];
+
+    function updateQuantity(itemId, itemPrice) {
+        var quantity = document.getElementById('quantity-' + itemId).value;
+        var totalPrice = quantity * itemPrice;
+
+        document.getElementById('total-' + itemId).textContent = totalPrice + '원';
+
+        var selectedItem = {
+            itemId: itemId,
+            itemQuantity: quantity,
+            itemAmount: totalPrice
+        };
+
+        var existingIndex = selectedItems.findIndex(item => item.itemId === itemId);
+        if (existingIndex !== -1) {
+            if (quantity > 0) {
+                selectedItems[existingIndex] = selectedItem;
+            } else {
+                selectedItems.splice(existingIndex, 1);
+            }
+        } else {
+            if (quantity > 0) {
+                selectedItems.push(selectedItem);
+            }
+        }
+
+        updateTotalAllItems();
+    }
+
+    function updateTotalAllItems() {
+        // price 값을 숫자로 변환
+        const priceText = document.getElementById('price-value').innerText;
+        console.log('priceText:', priceText); // 로그 추가        
+        const price = parseInt(priceText.replace(/[^0-9]/g, ''), 10) || 0; // 숫자만 추출하고 정수로 변환
+        console.log('price:', price); // 로그 추가
+        
+        var total = selectedItems.reduce(function(sum, item) {
+            return sum + item.itemAmount;
+        }, price);
+        console.log('total:', total); // 로그 추가
+        
+        var totalAllItemsElement = document.getElementById('totalAllItems');
+        totalAllItemsElement.textContent = '전체 총 가격: ' + total + '원';
     }
     
     // night 라디오 버튼에 이벤트 리스너 추가
@@ -429,10 +481,16 @@
                     const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
                     const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
                     const selectedNight = this.value;
+                    const items = document.getElementById("items-table");
+                    const totalAllItemsElement = document.getElementById('totalAllItems');
+                    
                     console.log('selectedNight', selectedNight);
 
                     updatePrice(year, month, day, selectedArea, selectedNight);
                     addNextPageEventListeners(year, month, day, selectedArea, selectedNight);
+                    
+                    items.style.display = 'block';
+                    totalAllItemsElement.style.display = 'block';
                 }
             });
         });
@@ -444,58 +502,68 @@
 
         // 기존 이벤트 리스너 제거
         const btnNextPage = document.querySelector('.btnNextPage');
-        btnNextPage.removeEventListener('click', handleNextPageClick);
+        if (btnNextPage) { // 요소가 존재하는지 확인
+            btnNextPage.removeEventListener('click', handleNextPageClick);
         
-        function handleNextPageClick(event) {
-            event.preventDefault();
-            console.log('Button clicked'); // 버튼 클릭 로그
+            function handleNextPageClick(event) {
+                event.preventDefault();
+                console.log('Button clicked'); // 버튼 클릭 로그
             
-            if (!validateForm(event)) {
-                return;
+                if (!validateForm(event)) {
+                    return;
+                }
+            
+                const date = `${year}-${month}-${day}`;
+                const reservationMaster = {
+                    resCheckIn: date,
+                    resCheckOut: calculateCheckOutDate(date, selectedNight) // 실제로는 종료 날짜를 계산해야 합니다.
+                };
+
+                const mainReservationDetail = {
+                    itemId: selectedArea,
+                    itemQuantity: '1',
+                    itemAmount: document.getElementById('price-value').innerText
+                };
+                
+                const additionalItems = selectedItems.map(function(item) {
+                    return {
+                        itemId: parseInt(item.itemId),
+                        itemQuantity: parseInt(item.itemQuantity) || 0,
+                        itemAmount: parseInt(item.itemAmount)
+                    };
+                });
+                
+                const reservationDetails = [mainReservationDetail, ...additionalItems];
+            
+                const data = {
+                    reservationMaster: reservationMaster,
+                    reservationDetail: reservationDetails
+                };
+            
+                console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
+
+                const uri = '../reservation/reservationConfirm';
+
+                axios.post(uri, data, {
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }   
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response data:', response.data);
+                    window.location.href = uri; // 페이지 리디렉션
+                })
+                .catch(error => {
+                    console.error('Error details:', error.response ? error.response.data : error.message);
+                    console.error('Error status:', error.response ? error.response.status : 'Unknown');
+                    alert('예약 처리 중 오류가 발생하였습니다.');
+                });
             }
-            
-            const date = `${year}-${month}-${day}`;
-            const reservationMaster = {
-                resCheckIn: date,
-                resCheckOut: calculateCheckOutDate(date, selectedNight) // 실제로는 종료 날짜를 계산해야 합니다.
-            };
-
-            const reservationDetail = {
-                itemId: selectedArea,
-                itemAmount: document.getElementById('price-value').innerText
-            };
-            
-            const data = {
-                reservationMaster: reservationMaster,
-                reservationDetail: reservationDetail
-            };
-            
-            console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
-
-            const uri = '../reservation/reservationConfirm';
-
-            axios.post(uri, data, {
-                headers: {
-                'Content-Type': 'application/json'
-                }   
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                console.log('Response data:', response.data);
-                window.location.href = uri; // 페이지 리디렉션
-            })
-            .catch(error => {
-                console.error('Error details:', error.response ? error.response.data : error.message);
-                console.error('Error status:', error.response ? error.response.status : 'Unknown');
-            });
+            btnNextPage.addEventListener('click', handleNextPageClick);
+        } else {
+                console.error("btnNextPage element not found");
         }
-        btnNextPage.addEventListener('click', handleNextPageClick);
-    }
-    
-    function calculateCheckOutDate(checkInDate, nights) {
-        const date = new Date(checkInDate);
-        date.setDate(date.getDate() + parseInt(nights));
-        return date.toISOString().split('T')[0];
     }
     
 

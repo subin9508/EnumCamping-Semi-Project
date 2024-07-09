@@ -2,6 +2,7 @@ package com.itwill.semiproject.web;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -107,13 +108,13 @@ public class ReservationController {
 
 	    // requestData에서 reservationMaster와 reservationDetail 추출
 	    Map<String, Object> reservationMasterMap = (Map<String, Object>) requestData.get("reservationMaster");
-	    Map<String, Object> reservationDetailMap = (Map<String, Object>) requestData.get("reservationDetail");
+	    List<Map<String, Object>> reservationDetailList = (List<Map<String, Object>>) requestData.get("reservationDetail");
 
 	    log.debug("reservationMasterMap={}", reservationMasterMap);
-	    log.debug("reservationDetailMap={}", reservationDetailMap);
+	    log.debug("reservationDetailMap={}", reservationDetailList);
 	    
-	    if (reservationMasterMap == null || reservationDetailMap == null) {
-	        log.error("reservationMasterMap or reservationDetailMap is null");
+	    if (reservationMasterMap == null || reservationDetailList == null) {
+	        log.error("reservationMasterMap or reservationDetailList is null");
 	        return new ResponseEntity<>("Invalid reservation data", HttpStatus.BAD_REQUEST);
 	    }
 	    
@@ -125,22 +126,26 @@ public class ReservationController {
 	    
 	    // ReservationDetail 객체 생성 및 설정
 	    
-	    Object itemIdObj = reservationDetailMap.get("itemId");
-	    Object itemAmountObj = reservationDetailMap.get("itemAmount");
-	    
-	    log.debug("itemIdObj={}, itemAmountObj={}", itemIdObj, itemAmountObj);
+	    List<ReservationDetail> reservationDetails = new ArrayList<>();
 
-	    
-	    if (itemIdObj == null || itemAmountObj == null) {
-	        log.error("itemId or itemAmount is null");
-	        return new ResponseEntity<>("Invalid reservation detail data", HttpStatus.BAD_REQUEST);
+	    for (Map<String, Object> detailMap : reservationDetailList) {
+	        Object itemIdObj = detailMap.get("itemId");
+	        Object itemAmountObj = detailMap.get("itemAmount");
+
+	        log.debug("itemIdObj={}, itemAmountObj={}", itemIdObj, itemAmountObj);
+
+	        if (itemIdObj == null || itemAmountObj == null) {
+	            log.error("itemId or itemAmount is null");
+	            return new ResponseEntity<>("Invalid reservation detail data", HttpStatus.BAD_REQUEST);
+	        }
+
+	        ReservationDetail reservationDetail = new ReservationDetail();
+	        reservationDetail.setItemId(Integer.parseInt(itemIdObj.toString()));
+	        reservationDetail.setItemAmount(Integer.parseInt(itemAmountObj.toString()));
+	        reservationDetails.add(reservationDetail);
 	    }
 	    
-	    ReservationDetail reservationDetail = new ReservationDetail();
-	    reservationDetail.setItemId(Integer.parseInt(itemIdObj.toString()));
-	    reservationDetail.setItemAmount(Integer.parseInt(itemAmountObj.toString()));
-	    
-	    reservationService.makeReservation(reservationMaster, reservationDetail);
+	    reservationService.makeReservation(reservationMaster, reservationDetails);
 
 	    return ResponseEntity.ok().build();
 	}

@@ -51,7 +51,7 @@ public class ReservationService {
 	}
 	
 	@Transactional
-	public void makeReservation(ReservationMaster reservationMaster, ReservationDetail reservationDetail) {
+	public void makeReservation(ReservationMaster reservationMaster, List<ReservationDetail> reservationDetails) {
 		try (SqlSession session = sqlSessionFactory.openSession()) {
 			ReservationMasterDao reservationMasterDao = session.getMapper(ReservationMasterDao.class);
 			
@@ -59,10 +59,15 @@ public class ReservationService {
 			reservationMasterDao.insertReservationMaster(reservationMaster);
 			// 자동 생성된 res_id 가져오기
 			int resId = reservationMaster.getResId();
-			reservationDetail.setResId(resId);
 			
-			// reservation_detail 테이블에 데이터 삽입
-			reservationMasterDao.insertReservationDetail(reservationDetail);
+			// reservation_detail 테이블에 여러 데이터 삽입
+			for (ReservationDetail detail : reservationDetails) {
+				detail.setResId(resId);
+				if(detail.getItemQuantity() == null) {
+					detail.setItemQuantity(0); // 기본값 설정
+				}
+				reservationMasterDao.insertReservationDetail(detail);
+			}
 			
 			session.commit();
 		} catch (Exception e) {
