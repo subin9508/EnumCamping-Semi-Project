@@ -77,53 +77,43 @@ public class PaymentController {
 	// 결제 검증
 	@ResponseBody
 	@PostMapping("/verifyIamport/{imp_uid}")
-
-	public APIResponse paymentByImpUid( // resId를 필수 파라미터로 전달
-			@PathVariable(value = "imp_uid") String imp_uid, @RequestParam(required = false) Integer payId,
-			@RequestParam("resId") Integer resId
-
+	public ResponseEntity<?> paymentByImpUid(
+	        @PathVariable(value = "imp_uid") String imp_uid,
+	        @RequestParam(required = false) Integer payId,
+	        @RequestParam("resId") Integer resId
 	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
-		log.trace("paymentByImpUid({}, {}, {}) invoked.", imp_uid, payId, resId);
+	    log.trace("paymentByImpUid({}, {}, {}) invoked.", imp_uid, payId, resId);
 
-		// APIResponse 객체 생성 (결제 검증 결과와 추가 정보를 담아서 반환할 목적으로 사용)
-		APIResponse irsp = new APIResponse();
-
-		String result = ""; // 검증 결과와 dto를 모두 포함한 정보를 저장할 객체.
-		Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 검증처리
-
-		// 리턴받은 payment의 status가 결제완료이면 DB 조작 메서드 실행
-		try {
-
-			switch (payment.getStatus()) { // payment 상태에 따라 메서드 실행.
-
-			case "paid":
-
-				result = this.paymentService.savePayment(payment, payId, resId); // service의 dto 정보를
-																									// result에 저장.
-
-				break;
-
-			case "failed":
-				// 결제가 실패한 경우
-				result = "FAIL:04";
-			} // switch
-
-			irsp.add("result", result); // result 응답 객체에 저장
-			irsp.add("orderNum", payment.getMerchantUid()); // 주문번호 저장
-
-		} catch (ServiceException e) {
-			// ServiceException 발생시 controllerException으로 wrapping 하여 throw
-			throw new ControllerException(e);
-		} // try-catch
-
-		return irsp; // 주문번호, result 정보가 담긴 irsp 리턴.
-
-	} // paymentByImpUid
-	
-	@GetMapping("/succeeded/{orderNum}")
-	public String paymentSucceeded(@PathVariable String orderNum, Model model) {
-		model.addAttribute("orderNum", orderNum);
-		return "reservation/succeeded";
+	    try {
+	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse();
+	        
+	        if ("paid".equals(payment.getStatus())) {
+	            String result = this.paymentService.savePayment(payment, payId, resId);
+	            log.info("Payment saved successfully: {}", result);
+	            // 결제 정보를 그대로 반환
+	            return ResponseEntity.ok(Map.of(
+	                    "status", payment.getStatus(),
+	                    "merchant_uid", payment.getMerchantUid(),
+	                    "payment", payment
+	                ));
+	        } else if ("failed".equals(payment.getStatus())) {
+	            return ResponseEntity.badRequest().body("결제 실패: " + payment.getFailReason());
+	        } else {
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알 수 없는 결제 상태");
+	        }
+	    } catch (IamportResponseException | IOException e) {
+	        log.error("결제 검증 중 오류 발생", e);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("결제 검증 실패: " + e.getMessage());
+	    } catch (ServiceException e) {
+	    	log.error("결제 정보 저장 중 오류 발생", e);
+	        throw new ControllerException(e);
+	    }
 	}
 	
-} 
+	
+	@GetMapping("/succeeded/{merchant_uid}")
+	public String paymentSucceeded(@PathVariable String merchant_uid, Model model) {
+	    model.addAttribute("merchant_uid", merchant_uid);
+	    return "reservation/succeeded"; // succeeded.jsp 파일을 가리킴
+	}
+}
