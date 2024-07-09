@@ -6,9 +6,14 @@
 
 
 	<!-- pay_id 조회 -->
-	<select id="selectByPayid" resultType="Payments"
+	<select id="selectByPayId" resultType="Payments"
 		parameterType="Integer">
 		select * from payments where pay_id = #{payId}
+	</select>
+	
+	<!-- 예약 아이디로 결제 정보를 조회 -->
+	<select id="selectByResId" resultType="Payments" parameterType="Integer">
+		SELECT * FROM payments WHERE res_id = #{resId}
 	</select>
 
 
@@ -31,5 +36,12 @@
 		AND pg_tid = #{pgTid}
 		AND res_id = #{resId}
 	</select>
+	
+	<!-- 결제 정보 업데이트: 결제 상태를 'CANCEL'로 업데이트 -->
+    <update id="updatePayment">
+        UPDATE payments
+        SET pay_status = #{payStatus}
+        WHERE pay_id = #{payId}
+    </update>
   
 </mapper>

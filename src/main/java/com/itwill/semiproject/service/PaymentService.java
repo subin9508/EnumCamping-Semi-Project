@@ -10,12 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.dto.ReservationMasterDto;
+import com.itwill.semiproject.dto.PaymentCancelDto;
 import com.itwill.semiproject.dto.PaymentDto;
 import com.itwill.semiproject.exception.ServiceException;
+import com.itwill.semiproject.repository.PaymentCancelDao;
 import com.itwill.semiproject.repository.PaymentDao;
+import com.itwill.semiproject.repository.Payments;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.request.CancelData;
+import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +39,15 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 
 	@Autowired
 	private UserDao userDao; // 사용자 정보를 가져오기 위한 레포지토리
+	
+	@Autowired
+    private PaymentCancelDao paymentCancelDao;
+	
+	private IamportClient iamportClient;
+	
+	public PaymentService() {
+        this.iamportClient = new IamportClient("3375010277812188", "mgaKoMpLV17tc8oVjs15v3HoGesdCCXCvYe4CvDcol6M7FKU3MXB2cyncxvsSrrb8YuqRZXWmDhfRLUY");
+    }
 
 	/**
 	 * 예약 id를 기반으로 결제 정보를 조회하여 반환하는 메서드
@@ -83,16 +98,15 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	 */
 	public String savePayment(
 			Payment payment, 
-			Integer payId, 
+			
 			Integer resId
 			) throws ServiceException {
 
-		log.trace("savePayment({}, {}, {}) invoked.", 
-				payment, payId, resId);
+		log.trace("savePayment({}, {}) invoked.", 
+				payment, resId);
 
 		// PaymentDto 객체를 생성하고, 파라미터로 받은 필드 값을 설정
 		PaymentDto dto = new PaymentDto(); 
-		dto.setPayId(payId); // 파라미터로 받은 payId 설정
 		dto.setImpUid(payment.getImpUid()); // 아이엠포트 UID 설정
 		dto.setPgTid(payment.getPgTid()); //PG사 TID 설정
 		dto.setResId(resId);  // 파라미터로 받은 resId 설정
@@ -122,4 +136,76 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 			throw e; // DB 작업 중 예외 발생시 throw.
 		}
 	}
+	
+	/**
+	 * 예약 ID로 결제 ID를 조회하는 메서드
+	 * 
+	 * @param resId 예약 ID
+	 * @return 결제 ID
+	 * @throws ServiceException 예외 발생 시 ServiceException으로 wrapping 하여 throw
+	 */
+	public Integer getPayIdByResId(Integer resId) throws ServiceException {
+	    try {
+	        Payments payment = paymentDao.selectByResId(resId);
+	        if (payment != null) {
+	            return payment.getPayId();
+	        } else {
+	            throw new ServiceException("Payment not found for resId: " + resId);
+	        }
+	    } catch (Exception e) {
+	        throw new ServiceException(e);
+	    }
+	}
+	
+	
+	
+	
+	// 결제 취소 메서드 
+		public String cancelPayment(Integer payId) throws ServiceException {
+			log.debug("Attempting to cancel payment with payId: {}", payId);
+	        Payments payment = paymentDao.selectByPayId(payId);
+	        log.debug("Retrieved payment: {}", payment);
+	        if (payment == null) {
+	            return "Payment not found";
+	        }
+	        
+	        // 결제 상태 확인
+	        if ("CANCEL".equals(payment.getPayStatus())) {
+	            log.info("Payment already cancelled for payId: {}", payId);
+	            return "Payment already cancelled";
+	        }
+	                
+	        try {
+	        	String imp_uid = payment.getImpUid(); // 결제 고유 ID를 가져옴
+	        	IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(new CancelData(imp_uid, true)); // 결제 취소 시도
+	            if (response.getResponse() != null) {
+	            	payment.setPayStatus("CANCEL"); // 결제 상태를 CANCEL로 설정
+	            	paymentDao.updatePayment(payment); // 업데이트 메서드 호출로 DB에 반영
+
+	                // 취소 테이블에 취소 내역 저장
+	                PaymentCancelDto cancelDto = new PaymentCancelDto();
+	                cancelDto.setCanId(payId);
+	                cancelDto.setCanPrice(payment.getAmount());
+	                
+	                log.debug("Attempting to insert payment cancel record: {}", cancelDto);
+	                int result = paymentCancelDao.insertPaymentCancel(cancelDto);
+	                if(result > 0) {
+	                    log.debug("Payment cancel record inserted successfully");
+	                } else {
+	                    log.error("Failed to insert payment cancel record");
+	                }
+	            	
+	            	return "Payment cancellation successful";
+	            } else {
+	            	log.error("Cancellation failed: " + response.getMessage());
+	                return "Cancellation failed: " + response.getMessage();
+	            }
+	        } catch (Exception e) {
+	        	log.error("Error during cancellation", e);
+	            return "Error during cancellation: " + e.getMessage();
+	        }
+	    }
+	
+	
+	
 }

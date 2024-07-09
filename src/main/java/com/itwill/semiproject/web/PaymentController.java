@@ -54,6 +54,14 @@ public class PaymentController {
 		return "/reservation/payment"; // 클라이언트에게 보여줄 뷰 페이지의 경로
 
 	}
+	
+	
+	@GetMapping("/paymentCancel")
+	public String paymentCancel() {
+		log.debug("paymentCancel()");
+		return "/reservation/paymentCancel"; // 클라이언트에게 보여줄 뷰 페이지의 경로
+		
+	}
 
 	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
@@ -79,16 +87,16 @@ public class PaymentController {
 	@PostMapping("/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
 	        @PathVariable(value = "imp_uid") String imp_uid,
-	        @RequestParam(required = false) Integer payId,
+	        
 	        @RequestParam("resId") Integer resId
 	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
-	    log.trace("paymentByImpUid({}, {}, {}) invoked.", imp_uid, payId, resId);
+	    log.trace("paymentByImpUid({}, {}) invoked.", imp_uid, resId);
 
 	    try {
 	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse();
 	        
 	        if ("paid".equals(payment.getStatus())) {
-	            String result = this.paymentService.savePayment(payment, payId, resId);
+	            String result = this.paymentService.savePayment(payment, resId);
 	            log.info("Payment saved successfully: {}", result);
 	            // 결제 정보를 그대로 반환
 	            return ResponseEntity.ok(Map.of(
@@ -116,4 +124,42 @@ public class PaymentController {
 	    model.addAttribute("merchant_uid", merchant_uid);
 	    return "reservation/succeeded"; // succeeded.jsp 파일을 가리킴
 	}
+	
+	
+	  @GetMapping("/payments/getPayId/{resId}")
+	    public ResponseEntity<?> getPayId(@PathVariable("resId") Integer resId) {
+	        try {
+	            Integer payId = paymentService.getPayIdByResId(resId);
+	            return ResponseEntity.ok(payId);
+	        } catch (Exception e) {
+	            return ResponseEntity.status(500).body(e.getMessage());
+	        }
+	    }
+	
+	
+	/**
+	 * 결제 취소 요청을 처리하는 메서드
+	 * @param payId 결제 키로 결제를 식별
+	 * @return ResponseEntity 객체로 HTTP 응답 상태와 메세지를 반환.
+	 */
+    @PostMapping("/cancel/{payId}")
+    public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
+        try {
+            String result = paymentService.cancelPayment(payId);
+            if (result.equals("Payment cancellation successful")) {
+                return ResponseEntity.ok(result);
+            } else {
+                // 결과 메시지에 따라 적절한 HTTP 상태 코드를 반환
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+            }
+        } catch (ServiceException e) {  // ServiceException 대신 RuntimeException 처리
+            log.error("Error during payment cancellation for payId: {}", payId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cancellation failed: " + e.getMessage());
+        }
+    }
+	
+	
+	
+	
+	
 }
