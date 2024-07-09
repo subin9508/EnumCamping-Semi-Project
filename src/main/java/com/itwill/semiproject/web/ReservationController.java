@@ -73,7 +73,7 @@ public class ReservationController {
 	
 	@GetMapping("/reservationConfirm") 
 	public void reservationConfirm() {
-		log.debug("GET: reservationList()");
+		log.debug("GET: reservationConfirm()");
 	}
 	
 	@PostMapping("/reservationConfirm")
@@ -88,16 +88,37 @@ public class ReservationController {
 	    Map<String, Object> reservationMasterMap = (Map<String, Object>) requestData.get("reservationMaster");
 	    Map<String, Object> reservationDetailMap = (Map<String, Object>) requestData.get("reservationDetail");
 
+	    log.debug("reservationMasterMap={}", reservationMasterMap);
+	    log.debug("reservationDetailMap={}", reservationDetailMap);
+	    
+	    if (reservationMasterMap == null || reservationDetailMap == null) {
+	        log.error("reservationMasterMap or reservationDetailMap is null");
+	        return new ResponseEntity<>("Invalid reservation data", HttpStatus.BAD_REQUEST);
+	    }
+	    
 	    // ReservationMaster 객체 생성 및 설정
 	    ReservationMaster reservationMaster = new ReservationMaster();
 	    reservationMaster.setUserId(userId);
 	    reservationMaster.setResCheckIn(LocalDate.parse((String) reservationMasterMap.get("resCheckIn")));
 	    reservationMaster.setResCheckOut(LocalDate.parse((String) reservationMasterMap.get("resCheckOut")));
+	    
 	    // ReservationDetail 객체 생성 및 설정
-	    ReservationDetail reservationDetail = new ReservationDetail();
-	    reservationDetail.setItemId(Integer.parseInt(reservationDetailMap.get("itemId").toString()));
-	    reservationDetail.setItemAmount(Integer.parseInt(reservationDetailMap.get("itemPrice").toString()));
+	    
+	    Object itemIdObj = reservationDetailMap.get("itemId");
+	    Object itemAmountObj = reservationDetailMap.get("itemAmount");
+	    
+	    log.debug("itemIdObj={}, itemAmountObj={}", itemIdObj, itemAmountObj);
 
+	    
+	    if (itemIdObj == null || itemAmountObj == null) {
+	        log.error("itemId or itemAmount is null");
+	        return new ResponseEntity<>("Invalid reservation detail data", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    ReservationDetail reservationDetail = new ReservationDetail();
+	    reservationDetail.setItemId(Integer.parseInt(itemIdObj.toString()));
+	    reservationDetail.setItemAmount(Integer.parseInt(itemAmountObj.toString()));
+	    
 	    reservationService.makeReservation(reservationMaster, reservationDetail);
 
 	    return ResponseEntity.ok().build();

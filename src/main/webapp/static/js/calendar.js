@@ -381,7 +381,8 @@
             return false;
         }
         
-        window.location.href = "/semiproject/reservation/reservationConfirm";
+        return true;
+
     }
     
     function updatePrice(year, month, day, selectedArea, selectedNight) {
@@ -443,9 +444,15 @@
 
         // 기존 이벤트 리스너 제거
         const btnNextPage = document.querySelector('.btnNextPage');
-        btnNextPage.addEventListener('click', function(event) {
+        btnNextPage.removeEventListener('click', handleNextPageClick);
+        
+        function handleNextPageClick(event) {
             event.preventDefault();
             console.log('Button clicked'); // 버튼 클릭 로그
+            
+            if (!validateForm(event)) {
+                return;
+            }
             
             const date = `${year}-${month}-${day}`;
             const reservationMaster = {
@@ -470,18 +477,19 @@
             axios.post(uri, data, {
                 headers: {
                 'Content-Type': 'application/json'
-            }
-        })
+                }   
+            })
             .then(response => {
                 console.log('Response status:', response.status);
                 console.log('Response data:', response.data);
-                // window.location.href = uri; // 주석 처리
+                window.location.href = uri; // 페이지 리디렉션
             })
             .catch(error => {
                 console.error('Error details:', error.response ? error.response.data : error.message);
                 console.error('Error status:', error.response ? error.response.status : 'Unknown');
             });
-        });
+        }
+        btnNextPage.addEventListener('click', handleNextPageClick);
     }
     
     function calculateCheckOutDate(checkInDate, nights) {
