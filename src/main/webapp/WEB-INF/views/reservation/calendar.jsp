@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/calendar.css">
+
 </head>
+
 <body>
     <div class="wrapper">
     <%@ include file="../fragments/header.jspf"%>
@@ -97,15 +99,67 @@
                     <span id="price-label">가격: </span>
                     <span id="price-value"></span>원
                 </div>
-                
-                <div class="nextPage" style="text-align: center; margin-top: 20px;">
-                    <a href="#" class="btn btn-primary btnNextPage" onclick="validateForm(event)">예약하기</a>
-                </div>
             </div>
         </div>
+        
+        <div class="container-fluid d-flex justify-content-center">
+                    <h3>대여 및 판매 물품</h3>
+                </div>
+        <div class="container-fluid d-flex justify-content-center">
+            <table class="table" style="width: 70%;">
+                <tbody>
+                    <c:forEach var="i" items="${items}">
+                        <tr>
+                            <td class="img-container"
+                                style="width: 20%;"><c:url
+                                    value="${i.itemImg}"
+                                    var="itemImgUrl" /> <img
+                                alt="${i.itemName}" src="${itemImgUrl}"
+                                class="img" id="itemImg-${i.itemId}"
+                                style="height: 150px; width: 150px;" />
+                            </td>
+                            <td style="width: 20%; height: 10%;">
+                                <h5>${i.itemName}</h5>
+                            </td>
+                            <td style="width: 20%; height: 10%;">${i.itemDesc}</td>
+                            <td
+                                style="width: 20%; height: 10%; text-align: center;">${i.itemPrice}원</td>
+                            <td class="narrow"
+                                style="width: 20%; height: 10%; text-align: center;">
+                                <div class="quantity-controls">
+                                    <select id="quantity-${i.itemId}"
+                                        onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <!-- 필요한 경우 수량 옵션을 더 추가 -->
+                                    </select>
+                                </div>
+                                <p />
+                                <div id="total-${i.itemId}"
+                                    class="total-price">0원</div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
 
-    
-    <%@ include file="../fragments/footer.jspf"%>
+       
+        <!-- 전체 총 가격을 표시할 공간 -->
+         <div id="totalAllItems" style="display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold; text-align: center;"></div>
+
+        
+        <!-- 선택된 아이템들 리스트를 표시할 공간 -->
+        <div id="selectedItemsList" style="display: none;"></div>
+
+        <div class="container-fluid d-flex justify-content-center mt-3">
+            <button onclick="submitReservationDetails()"
+                class="btn btn-primary">다음 단계</button>
+        </div>
+
+
+        <%@ include file="../fragments/footer.jspf"%>
    </div> 
     
     <script
@@ -117,5 +171,90 @@
     <script src="${weatherJS}"></script>
     <c:url var="calendarJS" value="/js/calendar.js" />
     <script src="${calendarJS}"></script>
+    
+    <script>
+    var selectedItems = [];
+
+    function updateQuantity(itemId, itemPrice) {
+        var quantity = document.getElementById('quantity-' + itemId).value;
+        var totalPrice = quantity * itemPrice;
+
+        document.getElementById('total-' + itemId).textContent = totalPrice + '원';
+
+        var selectedItem = {
+            itemId: itemId,
+            itemQuantity: quantity,
+            itemAmount: totalPrice
+        };
+
+        var existingIndex = selectedItems.findIndex(item => item.itemId === itemId);
+        if (existingIndex !== -1) {
+            if (quantity > 0) {
+                selectedItems[existingIndex] = selectedItem;
+            } else {
+                selectedItems.splice(existingIndex, 1);
+            }
+        } else {
+            if (quantity > 0) {
+                selectedItems.push(selectedItem);
+            }
+        }
+
+        updateTotalAllItems();
+    }
+
+    function updateTotalAllItems() {
+        var total = selectedItems.reduce(function(sum, item) {
+            return sum + item.itemAmount;
+        }, 0);
+        var totalAllItemsElement = document.getElementById('totalAllItems');
+        totalAllItemsElement.textContent = '전체 총 가격: ' + total + '원';
+    }
+
+    function submitReservationDetails() {
+        var dtos = selectedItems.map(function(item) {
+            return {
+                itemId: parseInt(item.itemId),
+                itemQuantity: parseInt(item.itemQuantity),
+                itemAmount: parseInt(item.itemAmount)
+            };
+        });
+
+        axios.post('../reservation/calendar', dtos)
+            .then(function(response) {
+                if (response.data === "success") {
+                    window.location.href = '../reservation/order';
+                } else {
+                    alert('예약에 실패하였습니다.');
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('예약 처리 중 오류가 발생하였습니다.');
+            });
+    }
+    </script>
+    
+    <script>
+    // JavaScript를 사용하여 날짜 입력 형식 제어
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+        // Prevent form submission if validation fails
+        if (!validateDateInput('resCheckIn') || !validateDateInput('resCheckOut')) {
+            event.preventDefault();
+        }
+    });
+
+    function validateDateInput(inputId) {
+        var input = document.getElementById(inputId);
+        var pattern = /^\d{4}-\d{2}-\d{2}$/;
+        var isValid = pattern.test(input.value);
+        if (!isValid) {
+            input.setCustomValidity('Please enter a date in yyyy-mm-dd format.');
+        } else {
+            input.setCustomValidity('');
+        }
+        return isValid;
+    }
+</script>
 </body>
 </html>

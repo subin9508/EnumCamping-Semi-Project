@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
+import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
+import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.ReservationService;
+import com.itwill.semiproject.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +38,28 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/reservation")
 public class ReservationController {
 	
-	private final ReservationService reservationService;
-	
-	@GetMapping("/calendar")
-	public void reservationCalendar() {
-		log.debug("GET : calendar");
-	}
-	
+	private final ReservationService reservationService; 
+	private final UserService userService;
+    
+    @GetMapping("/calendar")
+    public String reservationCalendar(Model model, HttpSession session) {
+        log.debug("GET : calendar");
+        List<Items> items = reservationService.getAllItems();
+        log.debug("items size: {}", items.size());
+        for (Items item : items) {
+            log.debug("Item: {}", item);
+        }
+        
+        // 세션에서 로그인 정보 가져오기
+        String signedInUser = (String) session.getAttribute("signedInUser");
+        User user = userService.read(signedInUser);
+        log.debug("user = {}", user);
+        
+        model.addAttribute("items", items);
+        model.addAttribute("user", user);
+        
+        return "reservation/calendar";
+    }
 	
 	@GetMapping("/calendar/{date}")
 	@ResponseBody
@@ -130,10 +148,10 @@ public class ReservationController {
 	@GetMapping("/item")
 	public String getItems(Model model) {
 		List<Items> items = reservationService.getAllItems();
-		log.debug("itmes()", items);
+		log.debug("items()", items);
 		
 		model.addAttribute("items", items);
-		return "/reservation/item";
+		return "/reservation/items";
 	}
 	
 
