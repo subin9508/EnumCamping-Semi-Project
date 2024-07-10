@@ -9,7 +9,6 @@
         select 
             r.user_id,
             r.res_id,
-            r.area_id,
             r.res_check_in,
             r.res_state,
             u.user_name
@@ -24,6 +23,48 @@
     <!-- 예약 상세 내역 -->
     <select id="selectByResId" resultType="ReservationMaster">
         select * from reservation_master where res_id = #{resId}
+    </select>
+    
+    <!-- 예약된 구역(아이템) -->
+    <select id="selectByResCheckIn" resultType="java.lang.Integer">
+        select rd.item_id
+        from reservation_master rm
+        join reservation_detail rd ON rm.res_id = rd.res_id
+        where rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD')
+        	or(rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') - INTERVAL '1' DAY
+        		and rm.res_check_out - rm.res_check_in = 2)
+    </select>
+    
+    <!-- 구역 선택 후 가능한 night 수 -->
+    <select id="selectByItemIdAndResCheckIn" resultType="ReservationMaster">
+        select rm.*
+        from reservation_master rm
+        join reservation_detail rd on rm.res_id = rd.res_id
+        where rd.item_id = #{itemId}
+            and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + 1
+    </select>
+    
+    <!-- reservation_master에 데이터 삽입 -->
+    <insert id="insertReservationMaster" useGeneratedKeys="true" keyProperty="resId" keyColumn="res_id">
+        insert into reservation_master (user_id, res_check_in, res_check_out, res_total_price)
+        values (#{userId}, #{resCheckIn}, #{resCheckOut}, #{resTotalPrice})
+    </insert>
+    
+    <!-- reservation_detail에 데이터 삽입 -->
+    <insert id="insertReservationDetail">
+        insert into reservation_detail (res_id, item_id, item_quantity, item_amount)
+        values (#{resId}, #{itemId}, #{itemQuantity}, #{itemAmount})        
+    </insert>
+    
+    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->   
+    <delete id="deleteByUserId">
+        delete from reservation_master where user_id = #{userId} and res_state = 0
+    </delete>
+    
+    <!-- userId에 해당하는 reservation_master -->
+    <select id="selectMasterByUserId" resultType="ReservationMaster">
+        select * from reservation_master
+         where user_id = #{userId} and res_state = 0     
     </select>
 
 </mapper>

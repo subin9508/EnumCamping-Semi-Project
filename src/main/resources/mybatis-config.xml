@@ -15,16 +15,10 @@
 
         <typeAlias type="com.itwill.semiproject.repository.Notice" alias="Notice" />
         <typeAlias type="com.itwill.semiproject.repository.QnA" alias="QnA" />
+        <typeAlias type="com.itwill.semiproject.repository.ReservationMaster" alias="ReservationMaster" />
+        <typeAlias type="com.itwill.semiproject.repository.Items" alias="Items" />
         <typeAlias type="com.itwill.semiproject.repository.Payments" alias="Payments"/>
-        <typeAlias type="com.itwill.semiproject.repository.ReservationMaster" alias="ReservationMasterDto"/>
-        <typeAlias type="com.itwill.semiproject.repository.ReservationMaster" alias="ReservationMaster"/>
-        <typeAlias type="com.itwill.semiproject.repository.ReservationMaster" alias="ReservationListDto"/>
-        
-        
-    <!-- 
-        <typeAlias type="com.itwill.semiproject.repository.Post" alias="Post" />
-        <typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" />
-     -->
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
+        <typeAlias type="com.itwill.semiproject.repository.ReservationDetail" alias="ReservationDetail" />
     </typeAliases>
 </configuration>
