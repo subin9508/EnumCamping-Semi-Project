@@ -16,8 +16,8 @@ public class ReservationListDto {
 	private String userId;
 	private Integer resId;
 	private LocalDate resCheckIn;
+	private LocalDate resCreatedTime;
 	private Integer resState;
-	private String userName;
 	
 	public ReservationListDto fromEntity(ReservationMaster reservationMaster) {
 		return ReservationListDto.builder()
@@ -25,7 +25,7 @@ public class ReservationListDto {
 				.resId(reservationMaster.getResId())
 				.resCheckIn(reservationMaster.getResCheckIn())
 				.resState(reservationMaster.getResState())
-				.userName(userName)
+				.resCreatedTime(reservationMaster.getResCreatedTime())
 				.build();
 	}
 }
