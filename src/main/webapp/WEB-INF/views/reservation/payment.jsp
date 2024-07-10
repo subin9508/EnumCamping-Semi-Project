@@ -20,7 +20,7 @@
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>정보 수정 페이지</title>
+    <title>결제 페이지</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
@@ -28,69 +28,47 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="container-fluid no-padding">
-        <c:set var="pageTitle" value="User Profile" scope="page" />
-        <%@ include file="../fragments/header.jspf" %>
-    </div>
-
+    
     <main class="container-fluid no-padding content">
-        <div class="row">
-            <div class="col-md-3 mypage-sidebar">
-                <c:set var="pageTitle" value="Home" scope="page" />
-                <%@ include file="../fragments/mypage-sidebar.jspf" %>
-            </div>
+       
             <div class="col-md-9 main-content">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2>내 정보 수정</h2>
+                        <h2>결제 페이지</h2>
                     </div>
 						<div class="card-body">
-							<form action="/user/user_update" method="post">
+							
 								<%--<input type="hidden" name="userid" value="${user.userId}" /--%>
 								<div class="mb-3 row">
-									<label for="userName" class="col-sm-2 col-form-label">이름</label>
+									<label for="resId" class="col-sm-2 col-form-label">예약 아이디</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userName"
-											name="userName" value="${user.userName}" readonly>
+										<input type="text" class="form-control" id="resId"
+											name="resId" value="${reservationMaster.resId}">
 									</div>
 								</div>
-								<div class="mb-3 row">
-									<label for="userId" class="col-sm-2 col-form-label">아이디</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userId"
-											name="userId" value="${user.userId}" readonly>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userPassword"
-											name="userPassword" value="${user.userPassword}" readonly>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userEmail"
-											name="userEmail" value="${user.userEmail}" readonly>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userPhone" class="col-sm-2 col-form-label">전화번호</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userPhone"
-											name="userPhone" value="${user.userPhone}" readonly>
-									</div>
-								</div>
-
-							</form>
+								
+							
 
 							<!-- 결제하기 버튼 추가 -->
+							
 							<div class="mb-3 row">
 								<div class="col-sm-10 offset-sm-2">
 									<button id="btnPayment" class="btn btn-primary">결제하기</button>
 								</div>
 							</div>
+							
+							
+							
+							<div class="mb-3 row">
+								<div class="col-sm-10 offset-sm-2">
+									<button id="btnPaymentCancle" class="btn btn-primary">결제취소</button>
+								</div>
+							</div>
+							
+							
+							
+							
+							
 						</div>
 
 						<div class="card-footer"></div>
@@ -99,9 +77,7 @@
         </div>
     </main>
 
-    <footer class="container-fluid no-padding" id="wrap">
-        <%@ include file="../fragments/footer.jspf" %>
-    </footer>
+   
 </div>
 <%--<a href="user_update.jsp"></a>--%>
 
@@ -115,6 +91,9 @@
 
 <c:url var="payment_js" value="/js/payment.js" />
 <script src="${payment_js}"></script>
+
+<c:url var="payment_cancle_js" value="/js/payment_cancle.js" />
+<script src="${payment_cancle_js}"></script>
 
 </body>
 </html>

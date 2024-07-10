@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.semiproject.repository.PaymentDao">
+
+
+	<!-- pay_id 조회 -->
+	<select id="selectByPayId" resultType="Payments"
+		parameterType="Integer">
+		select * from payments where pay_id = #{payId}
+	</select>
+	
+	<!-- 예약 아이디로 결제 정보를 조회 -->
+	<select id="selectByResId" resultType="Payments" parameterType="Integer">
+		SELECT * FROM payments WHERE res_id = #{resId}
+	</select>
+
+
+	<!-- 결제 정보 삽입 -->
+
+	<insert id="insertPayment" parameterType="Payments">
+		insert into payments (imp_uid, pg_tid, res_id, amount, pay_date, pay_method,
+		pay_status, buyer_email)
+		values (#{impUid}, #{pgTid}, #{resId}, #{amount}, #{payDate}, #{payMethod},
+		#{payStatus}, #{buyerEmail})
+
+	</insert>
+
+	<!-- 컨트롤러 파라미터 형식에 맞는 셀렉트 문 작성 -->
+	<select id="selectPayId" parameterType="Payments"
+		resultType="Integer">
+		SELECT pay_id
+		FROM payments
+		WHERE imp_uid = #{impUid}
+		AND pg_tid = #{pgTid}
+		AND res_id = #{resId}
+	</select>
+	
+	<!-- 결제 정보 업데이트: 결제 상태를 'CANCEL'로 업데이트 -->
+    <update id="updatePayment">
+        UPDATE payments
+        SET pay_status = #{payStatus}
+        WHERE pay_id = #{payId}
+    </update>
+  
+</mapper>

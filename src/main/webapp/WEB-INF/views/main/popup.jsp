@@ -130,7 +130,7 @@
 
 	<div class="layerpopup" id="layer_popup">
 		<div class="popup" id="popup1">
-			<img src="./images/main/popup_open.png" alt="popup" style="width: 100%; height: auto;">
+			<img src="./images/main/popup_open.png" alt="popup1" style="width: 100%; height: auto;">
 
 			<div class="pop_check_button" name="pop_check_button" >
 				<div id="check1">
@@ -143,7 +143,7 @@
 
 
 		<div class="popup" id="popup2">
-			<img src="./images/main/popup_bbqset.png" alt="popup" style="width: 100%; height: auto;">
+			<img src="./images/main/popup_bbqset.png" alt="popup2" style="width: 100%; height: auto;">
             
 			<div class="pop_check_button" name="pop_check_button" >
 				<div id="check2">
@@ -159,16 +159,6 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-<script>
-    // 쿠키 설정 함수
-    function setCookie(name, value, expiredays) {
-        var todayDate = new Date();
-        todayDate.setDate(todayDate.getDate() + expiredays);
-        document.cookie = name + "=" + encodeURIComponent(value)
-                + "; path=/; expires=" + todayDate.toGMTString()
-                + "; secure; SameSite=Strict";
-        console.log("Setting cookie:", name, value, "Expires:", todayDate);
-    }
 <script>
 	// 쿠키 설정 함수
 	function setCookie(name, value, expiredays) {
@@ -244,7 +234,6 @@
 		layerPopup.classList.add('active'); // 활성화 상태 추가
 		layerPopup.style.visibility = 'visible';
 	}
->>>>>>> refs/heads/develop
 </script>
 </body>
 </html>

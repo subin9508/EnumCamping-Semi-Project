@@ -21,6 +21,7 @@
 </head>
 <body>
 <div class="wrapper">
+		<jsp:include page="./main/popup.jsp" />
 		<%@ include file="./fragments/header.jspf"%>
 		<section id="gallery" class="gallery">
 			<div class="container-fluid">
@@ -179,8 +180,4 @@
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> refs/heads/develop
