@@ -20,5 +20,6 @@
         <typeAlias type="com.itwill.semiproject.repository.Payments" alias="Payments"/>
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
         <typeAlias type="com.itwill.semiproject.repository.ReservationDetail" alias="ReservationDetail" />
+        <typeAlias type="com.itwill.semiproject.dto.ReservationListDto" alias="ReservationListDto" />
     </typeAliases>
 </configuration>

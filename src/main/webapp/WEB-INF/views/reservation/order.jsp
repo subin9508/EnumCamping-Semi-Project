@@ -155,13 +155,13 @@
                 
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
-                    <form action="../reservation/reservationConfirm"
-                        method="get">
+                    <!--  <form action="../reservation/reservationConfirm"
+                        method="get">  -->
                         <input type="text" name="resId" id="resId" value="${reservationMaster.resId}" />
-                        <button id="paymentButton"
+                        <button id="btnPayment"
                             class="btn btn-primary" type="submit"
                             disabled>결제하기</button>
-                    </form>
+                    <!-- </form>  -->
                 </div>
             </main>
 
@@ -176,6 +176,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+            <c:url var="payment_js" value="/js/payment.js" />
+    <script src="${payment_js}"></script>
+    
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
     <script>
@@ -194,10 +198,10 @@
 
                         // 모든 체크 박스가 선택되었을 때 버튼 활성화
                         if (agreeCollect && agreeProvide) {
-                            document.getElementById('paymentButton')
+                            document.getElementById('btnPayment')
                                     .removeAttribute('disabled');
                         } else {
-                            document.getElementById('paymentButton')
+                            document.getElementById('btnPayment')
                                     .setAttribute('disabled', 'disabled');
                         }
                     }

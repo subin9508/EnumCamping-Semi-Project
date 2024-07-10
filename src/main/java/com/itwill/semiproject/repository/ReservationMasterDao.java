@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.itwill.semiproject.dto.ReservationListDto;
 
 public interface ReservationMasterDao {
-
+	List<ReservationListDto> selectByUserId (String userId);
 	// 예약 id로 예약 정보를 조회
 	ReservationMaster selectByResId(Integer resId);
 	List<Integer> selectByResCheckIn(@Param("resCheckIn") String resCheckIn);
