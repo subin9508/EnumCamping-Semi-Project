@@ -1,4 +1,9 @@
+ /**
+  *  /reservation/calendar.jsp에 포함
+  */
+ 
  document.addEventListener("DOMContentLoaded", function() {
+        selectedDate = null;
         buildCalendar();
         
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
@@ -8,11 +13,14 @@
         document.getElementById("nextNextCalendar").addEventListener("click", function(event) {
             nextCalendar();
         });
+        
+        addAreaRadioEventListeners();
     });
 
     var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
     var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
-    
+    var selectedDate = null;
+    var selectedArea= null;
 
     function prevCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
@@ -25,6 +33,7 @@
         buildCalendar();    // @param 명월 캘린더 출력 요청
     }
 
+    console.log('Initial selectedDate:', selectedDate);
 
     function buildCalendar() {
 
@@ -151,6 +160,7 @@
             }
             dom++;
         }
+        console.log('buildCalendar - current selectedDate:', selectedDate);
     }
 
     /**
@@ -181,9 +191,388 @@
         // @param 선택일 클래스명 변경
         column.classList.add("choiceDay");
         
-        let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
-        document.getElementById('date').innerText = selectedDate;
+        // let selectedDate = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
+        document.getElementById('date').innerText = document.getElementById("calMonth").innerText +"월"+ document.getElementsByClassName("choiceDay")[0].innerHTML+"일";
+        
+        // @details 선택한 날짜에 대한 예약 정보 가져오기
+        const year = document.getElementById("calYear").innerText;
+        const month = document.getElementById("calMonth").innerText;
+        const day = column.innerText;
+        selectedDate = `${year}-${autoLeftPad(month, 2)}-${autoLeftPad(day, 2)}`;
+        console.log('calendarChoiceDay - selectedDate=', selectedDate);
+        
+        // night 라디오 버튼 숨기기
+        const nightCard = document.getElementById('night-card');
+        nightCard.style.display = 'none';
+        
+        // 선택한 날짜에 대한 예약 정보 가져오기
+        getReservations(year, month, day);
+        
+        // area 라디오 버튼 표시
+        const areaCards = document.querySelectorAll('.area-card');
+        areaCards.forEach(card => {
+            card.style.display = 'block';
+        });
+        
+        // 모든 라디오 버튼 체크 해제
+        const radios = document.querySelectorAll('.area-radio');
+        radios.forEach(radio => {
+            radio.checked = false;
+        });
+        
+        selectedArea = null;
+        
+        
+        // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
+        if (selectedDate && selectedArea) {
+            getReservationNight(year, month, day, selectedArea);
+        }
+        
+        // 가격 정보 지움
+        const priceValue = document.getElementById('price-value');
+        priceValue.innerText = '';
+        
     }
+    
+    // date정보 uri로 전송
+    function getReservations(year, month, day) {
+        const date = `${year}-${month}-${day}`
+        const uri = `../reservation/calendar/${date}`;
+        
+        axios.get(uri)
+            .then(response => {
+                console.log(response.data);
+                const reservedAreas = response.data || [];
+                updateRadioButtons(reservedAreas);
+            })
+            .catch(error => {
+                console.error("There was an error fetching the reservations!", error);
+            });
+    }
+    
+    
+    // 예약된 날짜 있으면 해당 구역 display = none;
+    function updateRadioButtons(reservedAreas) {
+        const totalAreas = 20; // 총 구역 수
+        console.log(reservedAreas);
+        
+        for (let i = 1; i <= totalAreas; i++) {
+			const areaIndex = Math.ceil(i / 4); // 각 구역의 인덱스 계산
+            console.log(`area${areaIndex} 처리 시작`)
+            const area = document.getElementById(`area${areaIndex}_radio`);
+            console.log(`area${areaIndex}`, area);
+
+            if (area) {
+                const card = document.getElementById(`area${areaIndex}`);
+                
+                // 현재 areaIndex에 속하는 모든 구역 번호
+            	const areaNumbers = Array.from({ length: 4 }, (_, k) => (areaIndex - 1) * 4 + k + 1);
+            
+            	// 예약된 구역이 하나라도 포함되어 있는지 확인
+            	const isReserved = areaNumbers.some(num => reservedAreas.includes(num));
+                
+                if (isReserved) {
+                    console.log(`Area ${areaIndex} is reserved`);
+                    card.style.display = "none";
+                } else {
+                    card.style.display = "block";
+                }
+            }
+        }
+    }
+    
+    
+    // 구역 클릭 시 nightCard 뜨게 
+    function addAreaRadioEventListeners() {
+        const radios = document.querySelectorAll('.area-radio');
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                
+                if (this.checked) {
+                    selectedArea = this.value;
+                    console.log('addAreaRadioEventListeners - selectedArea=', selectedArea);
+                    console.log('addAreaRadioEventListeners - selectedDate=', selectedDate);
+                    
+                    const nightCard = document.getElementById('night-card');
+                    nightCard.style.display = 'block';
+                    
+                    // 모든 라디오 버튼 체크 해제
+                    const nightRadio = document.querySelectorAll('.night-radio');
+                    nightRadio.forEach(radio => {
+                        radio.checked = false;
+                    });
+                    
+                    // 가격 정보 지움
+                    const priceValue = document.getElementById('price-value');
+                    priceValue.innerText = '';
+                    
+                    // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
+                    if (selectedDate && selectedArea) {
+                        const year = document.getElementById("calYear").innerText;
+                        const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
+                        const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
+                        console.log('year, month, day, selectedArea:', year, month, day, selectedArea);  // 로그 추가
+                        getReservationNight(year, month, day, selectedArea);
+                    }
+                    
+                    addNightRadioEventListeners();
+                }
+            });
+        });
+        
+        
+    }
+    
+    // 선택된 date, area 정보 uri로 전송
+    function getReservationNight(year, month, day, selectedArea) {
+        const date = `${year}-${month}-${day}`;
+        const uri = `../reservation/calendar/${date}/${selectedArea}`;
+
+        console.log('getReservationNight()', uri);
+
+        axios.get(uri)
+            .then(response => {
+                console.log(response.data);
+                const checkedDateAndArea = response.data || [];
+                console.log(checkedDateAndArea);
+                
+                const nightCard = document.getElementById('night-card');
+                const nightRadioLabel = document.getElementById('night-radio-label');
+                
+                // nigthCard 초기화
+                nightRadioLabel.innerHTML = '';
+                
+                if (checkedDateAndArea.length === 0) {
+                    // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
+                    nightRadioLabel.innerHTML = `
+                        <input class="night-radio" type="radio" name="night" value="1">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">1박</span>
+                        <input class="night-radio" type="radio" name="night" value="2">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">2박</span>
+                    `;
+                } else {
+                    // 다음날 예약이 있는 경우 1박 옵션만 표시
+                    nightRadioLabel.innerHTML = `
+                        <input class="night-radio" type="radio" name="night" value="1">
+                        <span class="radio_icon"></span>
+                        <span class="radio_text">1박</span>
+                    `;
+                }
+                
+                // nightCard 표시
+                nightCard.style.display = 'block';
+                addNightRadioEventListeners();
+            })
+            .catch(error => {
+                console.error("There was an error fetching the reservations!", error);
+            });
+    }
+    
+    function validateForm(event) {
+        var dateSelected = document.getElementById('date').innerText.trim() !== "";
+        var areaSelected = document.querySelector('input[name="area"]:checked') !== null;
+        var nightSelected = document.querySelector('input[name="night"]:checked') !== null;
+        
+        if (!dateSelected || !areaSelected || !nightSelected) {
+            alert("날짜, 구역, 숙박 일수를 선택해 주세요.");
+            event.preventDefault;
+            return false;
+        }
+        
+        return true;
+
+    }
+    
+    function updatePrice(year, month, day, selectedArea, selectedNight) {
+        const date = `${year}-${month}-${day}`;
+        const selectedDateObj = new Date(year, month - 1, day);
+        const isWeekend = (selectedDateObj.getDay() === 0 || selectedDateObj.getDay() === 6); // 0: Sunday, 6: Saturday
+        
+        // 성수기 기간 설정
+        const startPeakSeason = new Date(year, 6, 1); // 7월 1일 (월은 0부터 시작하므로 6은 7월을 의미)
+        const endPeakSeason = new Date(year, 7, 31); // 8월 31일
+
+        // 성수기 여부 결정
+        const isPeakSeason = selectedDateObj >= startPeakSeason && selectedDateObj <= endPeakSeason;
+        const seasonFactor = isPeakSeason ? 2 : 0; // 성수기면 2, 비수기면 0
+
+        const weekendFactor = isWeekend ? 1 : 0; // 주말이면 1, 평일이면 0
+
+        const baseItemId = (selectedArea - 1) * 4;
+        const itemId = baseItemId + seasonFactor + weekendFactor + 1;
+
+        const uri = `../reservation/itemPrice/${itemId}`;
+
+        console.log('updatePrice()', uri);
+
+        axios.get(uri)
+            .then(response => {
+                const price = (response.data) * selectedNight;
+                document.getElementById('price-value').innerText = price;
+                updateTotalAllItems();
+            })
+            .catch(error => {
+                console.error("There was an error fetching the price!", error);
+            });
+    }
+    
+    function calculateCheckOutDate(checkInDate, nights) {
+        
+        if (!checkInDate || isNaN(Date.parse(checkInDate))) {
+            throw new RangeError("Invalid check-in date");
+        }
+        const date = new Date(checkInDate);
+        date.setDate(date.getDate() + parseInt(nights));
+        return date.toISOString().split('T')[0];
+    }
+    
+    var selectedItems = [];
+
+    function updateQuantity(itemId, itemPrice) {
+        var quantity = document.getElementById('quantity-' + itemId).value;
+        var totalPrice = quantity * itemPrice;
+
+        document.getElementById('total-' + itemId).textContent = totalPrice + '원';
+
+        var selectedItem = {
+            itemId: itemId,
+            itemQuantity: quantity,
+            itemAmount: totalPrice
+        };
+
+        var existingIndex = selectedItems.findIndex(item => item.itemId === itemId);
+        if (existingIndex !== -1) {
+            if (quantity > 0) {
+                selectedItems[existingIndex] = selectedItem;
+            } else {
+                selectedItems.splice(existingIndex, 1);
+            }
+        } else {
+            if (quantity > 0) {
+                selectedItems.push(selectedItem);
+            }
+        }
+
+        updateTotalAllItems();
+    }
+
+    function updateTotalAllItems() {
+        // price 값을 숫자로 변환
+        const priceText = document.getElementById('price-value').innerText;
+        console.log('priceText:', priceText); // 로그 추가        
+        const price = parseInt(priceText.replace(/[^0-9]/g, ''), 10) || 0; // 숫자만 추출하고 정수로 변환
+        console.log('price:', price); // 로그 추가
+        
+        var total = selectedItems.reduce(function(sum, item) {
+            return sum + item.itemAmount;
+        }, price);
+        console.log('total:', total); // 로그 추가
+        
+        var totalAllItemsElement = document.getElementById('totalAllItems');
+        totalAllItemsElement.textContent = '전체 총 가격: ' + total + '원';
+    }
+    
+    // night 라디오 버튼에 이벤트 리스너 추가
+    function addNightRadioEventListeners() {
+        console.log('addNightRadioEventListeners()');
+        document.querySelectorAll('.night-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    console.log('night-radio checked');
+                    const year = document.getElementById("calYear").innerText;
+                    const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
+                    const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
+                    const selectedNight = this.value;
+                    const items = document.getElementById("items-table");
+                    const totalAllItemsElement = document.getElementById('totalAllItems');
+                    
+                    console.log('selectedNight', selectedNight);
+
+                    updatePrice(year, month, day, selectedArea, selectedNight);
+                    addNextPageEventListeners(year, month, day, selectedArea, selectedNight);
+                    
+                    items.style.display = 'block';
+                    totalAllItemsElement.style.display = 'block';
+                }
+            });
+        });
+    }
+    
+    // 예약하기 버튼에 이벤트 리스너 추가
+    function addNextPageEventListeners(year, month, day, selectedArea, selectedNight) {
+        console.log('addNextPageEventListeners()');
+
+        // 기존 이벤트 리스너 제거
+        const btnNextPage = document.querySelector('.btnNextPage');
+        if (btnNextPage) { // 요소가 존재하는지 확인
+            btnNextPage.removeEventListener('click', handleNextPageClick);
+        
+            function handleNextPageClick(event) {
+                event.preventDefault();
+                console.log('Button clicked'); // 버튼 클릭 로그
+            
+                if (!validateForm(event)) {
+                    return;
+                }
+            
+                const date = `${year}-${month}-${day}`;
+                const reservationMaster = {
+                    resCheckIn: date,
+                    resCheckOut: calculateCheckOutDate(date, selectedNight) // 실제로는 종료 날짜를 계산해야 합니다.
+                };
+
+                const mainReservationDetail = {
+                    itemId: selectedArea,
+                    itemQuantity: 1,
+                    itemAmount: document.getElementById('price-value').innerText
+                };
+                
+                // 디버깅을 위한 로그 추가
+                console.log('mainReservationDetail:', mainReservationDetail);
+                
+                const additionalItems = selectedItems.map(function(item) {
+                    return {
+                        itemId: parseInt(item.itemId),
+                        itemQuantity: parseInt(item.itemQuantity) || 0,
+                        itemAmount: parseInt(item.itemAmount)
+                    };
+                });
+                
+                const reservationDetails = [mainReservationDetail, ...additionalItems];
+            
+                const data = {
+                    reservationMaster: reservationMaster,
+                    reservationDetail: reservationDetails
+                };
+            
+                console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
+
+                const uri = '../reservation/order';
+
+                axios.post(uri, data, {
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }   
+                })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    console.log('Response data:', response.data);
+                    window.location.href = uri; // 페이지 리디렉션
+                })
+                .catch(error => {
+                    console.error('Error details:', error.response ? error.response.data : error.message);
+                    console.error('Error status:', error.response ? error.response.status : 'Unknown');
+                    alert('예약 처리 중 오류가 발생하였습니다.');
+                });
+            }
+            btnNextPage.addEventListener('click', handleNextPageClick);
+        } else {
+                console.error("btnNextPage element not found");
+        }
+    }
+    
 
     /**
      * @brief   숫자 두자릿수( 00 ) 변경

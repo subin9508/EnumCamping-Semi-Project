@@ -9,9 +9,6 @@
     <title>ENUM CAMPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/footer.css">
-
     <c:url value="../css/header.css" var="headerCss" />
     <link rel="stylesheet" href="${headerCss}">
 
@@ -47,7 +44,7 @@
                         <div class="mt-2">
                             <label for="resCheckOut" class="form-label">체크아웃 날짜</label>
                             <input id="resCheckOut" class="form-control"
-                                type="text" value="${resMaster.resNight}"
+                                type="text" value="${resMaster.resCheckOut}"
                                 readonly />
                         </div>
                         <div class="mt-2">
@@ -84,8 +81,9 @@
                             <input id="resState"
                                 class="form-control" type="text"
                                 value="<c:choose>
-                                        <c:when test='${resMaster.resState == 0}'>예약완료</c:when>
-                                        <c:when test='${resMaster.resState == 1}'>예약취소</c:when>
+                                        <c:when test='${resMaster.resState == 0}'>예약대기</c:when>
+                                        <c:when test='${resMaster.resState == 1}'>예약완료</c:when>
+                                        <c:when test='${resMaster.resState == 2}'>예약취소</c:when>
                                         <c:otherwise>알 수 없음</c:otherwise>
                                         </c:choose>" readonly />
                         </div>
@@ -95,7 +93,7 @@
                 <div class="card-footer d-flex justify-content-end">
                     <div>
                         <button class="btn btn-primary">예약 수정</button>
-                        <button class="btn btn-danger">예약 취소</button>
+                        <button id="btnDelete" class="btn btn-danger">예약 취소</button>
                     </div>
                 </div>
 

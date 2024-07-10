@@ -1,18 +1,187 @@
 package com.itwill.semiproject.web;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.itwill.semiproject.dto.ReservationDetailCreateDto;
+import com.itwill.semiproject.dto.ReservationDetailListDto;
+import com.itwill.semiproject.repository.Items;
+import com.itwill.semiproject.repository.ReservationDetail;
+import com.itwill.semiproject.repository.ReservationMaster;
+import com.itwill.semiproject.repository.User;
+import com.itwill.semiproject.service.ReservationService;
+import com.itwill.semiproject.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor()
 @RequestMapping("/reservation")
 public class ReservationController {
 	
-	@GetMapping("/calendar")
-	public void reservationCalendar() {
-		log.debug("GET : calendar");
+	private final ReservationService reservationService; 
+	private final UserService userService;
+    
+    @GetMapping("/calendar")
+    public String reservationCalendar(Model model, HttpSession session) {
+        log.debug("GET : calendar");
+        List<Items> items = reservationService.getAllItems();
+        log.debug("items size: {}", items.size());
+        for (Items item : items) {
+            log.debug("Item: {}", item);
+        }
+        
+        // 세션에서 로그인 정보 가져오기
+        String signedInUser = (String) session.getAttribute("signedInUser");
+        User user = userService.read(signedInUser);
+        log.debug("user = {}", user);
+        
+        model.addAttribute("items", items);
+        model.addAttribute("user", user);
+        
+        return "reservation/calendar";
+    }
+	
+	@GetMapping("/calendar/{date}")
+	@ResponseBody
+	public List<Integer> reservationCalendar(@PathVariable("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+		log.debug("GET: calendar with date {}", date);
+		
+		 // 해당 날짜에 예약된 구역 ID 목록을 가져옵니다.
+        List<Integer> reservedAreaIds = reservationService.readReservedAreas(date);
+        return reservedAreaIds;
 	}
+	
+	@GetMapping("/calendar/{date}/{area}")
+	public ResponseEntity<List<ReservationMaster>> reservationCalendar(@PathVariable("date") String date, @PathVariable("area") int area) {
+		LocalDate checkInDate = LocalDate.parse(date);
+		log.debug("GET: calendar with date and area {}, {}", date, area);
+		List<ReservationMaster> reservations = reservationService.readReservationMaster(checkInDate, area);
+		
+		return new ResponseEntity<>(reservations, HttpStatus.OK);
+	}
+	
+	@GetMapping("/itemPrice/{itemId}") 
+	public ResponseEntity<Integer> getItemPrice(@PathVariable("itemId") int itemId) {
+		log.debug("GET: itemPrice with itemId {}", itemId);
+		
+		Integer itemPrice = reservationService.readItemPrice(itemId);
+		if (itemPrice != null) {
+			return new ResponseEntity<Integer>(itemPrice, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/order") 
+	public String getReservationList(HttpSession session, Model model) {
+		log.debug("GET: getReservationList()");
+		
+		//세션에서 사용자 정보 가져오기
+		String userId = (String) session.getAttribute("signedInUser");
+		log.debug("userId={}", userId);
+		User user = userService.read(userId);
+		model.addAttribute("user", user);
+		
+		// 예약정보 가져오기
+		ReservationMaster reservationMaster = reservationService.getReservationMasterByUserId(userId);
+		
+		model.addAttribute("reservationMaster", reservationMaster);
+		
+		// 예약 상세정보 가져오기
+		List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
+		
+		model.addAttribute("reservationDetails", reservationDetails);
+		
+		return "/reservation/order";
+	}
+	
+	@PostMapping("/order")
+	public ResponseEntity<?> getReservationList
+	(@RequestBody Map<String, Object> requestData, HttpSession session, Model model) {
+	    log.debug("reservationList(requestData={})", requestData);
+	        
+	    // 세션에서 사용자 정보 가져오기
+	    String userId = (String) session.getAttribute("signedInUser");
+	    log.debug("userId={}", userId);
+	    
+	    reservationService.deleteReservationDetail(userId);
+	    reservationService.deleteReservationMaster(userId);
+
+	    // requestData에서 reservationMaster와 reservationDetail 추출
+	    Map<String, Object> reservationMasterMap = (Map<String, Object>) requestData.get("reservationMaster");
+	    List<Map<String, Object>> reservationDetailList = (List<Map<String, Object>>) requestData.get("reservationDetail");
+
+	    log.debug("reservationMasterMap={}", reservationMasterMap);
+	    log.debug("reservationDetailMap={}", reservationDetailList);
+	    
+	    if (reservationMasterMap == null || reservationDetailList == null) {
+	        log.error("reservationMasterMap or reservationDetailList is null");
+	        return new ResponseEntity<>("Invalid reservation data", HttpStatus.BAD_REQUEST);
+	    }
+	    
+	    // ReservationMaster 객체 생성 및 설정
+	    ReservationMaster reservationMaster = new ReservationMaster();
+	    reservationMaster.setUserId(userId);
+	    reservationMaster.setResCheckIn(LocalDate.parse((String) reservationMasterMap.get("resCheckIn")));
+	    reservationMaster.setResCheckOut(LocalDate.parse((String) reservationMasterMap.get("resCheckOut")));
+	    
+	    // ReservationDetail 객체 생성 및 설정
+	    
+	    List<ReservationDetail> reservationDetails = new ArrayList<>();
+
+	    for (Map<String, Object> detailMap : reservationDetailList) {
+	        Object itemIdObj = detailMap.get("itemId");
+	        Object itemAmountObj = detailMap.get("itemAmount");
+	        Object itemQuantityObj = detailMap.get("itemQuantity");
+
+	        log.debug("itemIdObj={}, itemAmountObj={}", itemIdObj, itemAmountObj);
+
+	        if (itemIdObj == null || itemAmountObj == null) {
+	            log.error("itemId or itemAmount is null");
+	            return new ResponseEntity<>("Invalid reservation detail data", HttpStatus.BAD_REQUEST);
+	        }
+
+	        ReservationDetail reservationDetail = new ReservationDetail();
+	        reservationDetail.setItemId(Integer.parseInt(itemIdObj.toString()));
+	        reservationDetail.setItemQuantity(Integer.parseInt(itemQuantityObj.toString()));
+	        reservationDetail.setItemAmount(Integer.parseInt(itemAmountObj.toString()));
+	        reservationDetails.add(reservationDetail);
+	    }
+	    
+	    reservationService.makeReservation(reservationMaster, reservationDetails);
+
+	    return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/item")
+	public String getItems(Model model) {
+		List<Items> items = reservationService.getAllItems();
+		log.debug("items()", items);
+		
+		model.addAttribute("items", items);
+		return "/reservation/items";
+	}
+	
 }
