@@ -525,9 +525,12 @@
 
                 const mainReservationDetail = {
                     itemId: selectedArea,
-                    itemQuantity: '1',
+                    itemQuantity: 1,
                     itemAmount: document.getElementById('price-value').innerText
                 };
+                
+                // 디버깅을 위한 로그 추가
+                console.log('mainReservationDetail:', mainReservationDetail);
                 
                 const additionalItems = selectedItems.map(function(item) {
                     return {

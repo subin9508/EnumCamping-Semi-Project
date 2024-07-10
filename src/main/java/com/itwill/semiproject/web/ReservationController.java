@@ -104,6 +104,11 @@ public class ReservationController {
 		User user = userService.read(userId);
 		model.addAttribute("user", user);
 		
+		// 예약정보 가져오기
+		ReservationMaster reservationMaster = reservationService.getReservationMasterByUserId(userId);
+		
+		model.addAttribute("reservationMaster", reservationMaster);
+		
 		// 예약 상세정보 가져오기
 		List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
 		
@@ -116,9 +121,7 @@ public class ReservationController {
 	public ResponseEntity<?> getReservationList
 	(@RequestBody Map<String, Object> requestData, HttpSession session, Model model) {
 	    log.debug("reservationList(requestData={})", requestData);
-	    
-	    
-	    
+	        
 	    // 세션에서 사용자 정보 가져오기
 	    String userId = (String) session.getAttribute("signedInUser");
 	    log.debug("userId={}", userId);
@@ -151,6 +154,7 @@ public class ReservationController {
 	    for (Map<String, Object> detailMap : reservationDetailList) {
 	        Object itemIdObj = detailMap.get("itemId");
 	        Object itemAmountObj = detailMap.get("itemAmount");
+	        Object itemQuantityObj = detailMap.get("itemQuantity");
 
 	        log.debug("itemIdObj={}, itemAmountObj={}", itemIdObj, itemAmountObj);
 
@@ -161,6 +165,7 @@ public class ReservationController {
 
 	        ReservationDetail reservationDetail = new ReservationDetail();
 	        reservationDetail.setItemId(Integer.parseInt(itemIdObj.toString()));
+	        reservationDetail.setItemQuantity(Integer.parseInt(itemQuantityObj.toString()));
 	        reservationDetail.setItemAmount(Integer.parseInt(itemAmountObj.toString()));
 	        reservationDetails.add(reservationDetail);
 	    }

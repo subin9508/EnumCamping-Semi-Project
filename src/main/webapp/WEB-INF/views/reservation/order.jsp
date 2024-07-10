@@ -157,6 +157,7 @@
                     class="container-fluid d-flex justify-content-center mt-3">
                     <form action="../reservation/reservationConfirm"
                         method="get">
+                        <input type="text" name="resId" id="resId" value="${reservationMaster.resId}" />
                         <button id="paymentButton"
                             class="btn btn-primary" type="submit"
                             disabled>결제하기</button>

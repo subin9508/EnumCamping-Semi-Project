@@ -44,6 +44,7 @@
             and rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') + 1
     </select>
     
+    <!-- reservation_master에 데이터 삽입 -->
     <insert id="insertReservationMaster" useGeneratedKeys="true" keyProperty="resId" keyColumn="res_id">
         insert into reservation_master (user_id, res_check_in, res_check_out)
         values (#{userId}, #{resCheckIn}, #{resCheckOut})
@@ -59,5 +60,11 @@
     <delete id="deleteByUserId">
         delete from reservation_master where user_id = #{userId} and res_state = 0
     </delete>
+    
+    <!-- userId에 해당하는 reservation_detail -->
+    <select id="selectMasterByUserId" resultType="ReservationMaster">
+        select * from reservation_master
+         where user_id = #{userId}        
+    </select>
 
 </mapper>

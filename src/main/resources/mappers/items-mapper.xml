@@ -11,7 +11,7 @@
     
     <!-- 대여 및 판매 물품 아이템만 조회 -->
     <select id="selectAllItems" resultType="Items">
-        SELECT * FROM items WHERE item_id >= 5
+        SELECT * FROM items WHERE item_id >= 21
     </select>
     
     <!-- 아이템 가격 -->
