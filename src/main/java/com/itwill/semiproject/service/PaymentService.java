@@ -110,7 +110,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		dto.setImpUid(payment.getImpUid()); // 아이엠포트 UID 설정
 		dto.setPgTid(payment.getPgTid()); //PG사 TID 설정
 		dto.setResId(resId);  // 파라미터로 받은 resId 설정
-		dto.setAmount(payment.getAmount().intValue()); // 결제 금액 설정
+		dto.setResTotalPrice(payment.getAmount().intValue()); // 결제 금액 설정
 		
 		// 결제 완료 시간이 null이 아닌 경우, 해당 시간을 localDate 형식으로 변환하여 dto의 payDate 필드에 설정.
 		// setPayDate 메서드 호출해서 payment 객체의 결제 완료 시간을 localDate 형식으로 반환하여 설정
@@ -185,7 +185,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	                // 취소 테이블에 취소 내역 저장
 	                PaymentCancelDto cancelDto = new PaymentCancelDto();
 	                cancelDto.setCanId(payId);
-	                cancelDto.setCanPrice(payment.getAmount());
+	                cancelDto.setCanPrice(payment.getResTotalPrice());
 	                
 	                log.debug("Attempting to insert payment cancel record: {}", cancelDto);
 	                int result = paymentCancelDao.insertPaymentCancel(cancelDto);

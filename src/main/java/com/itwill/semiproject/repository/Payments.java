@@ -17,7 +17,7 @@ public class Payments { //데이터베이스 테이블 payments 테이블의 모
 	private String impUid;
 	private String pgTid;
 	private Integer resId;
-	private Integer amount;
+	private Integer resTotalPrice;
 	private LocalDate payDate;
 	private String payMethod;
 	private String payStatus;

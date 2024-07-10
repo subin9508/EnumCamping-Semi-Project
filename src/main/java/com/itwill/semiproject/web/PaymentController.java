@@ -65,7 +65,7 @@ public class PaymentController {
 
 	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
-	@GetMapping("/paymentInfo")
+	@GetMapping("/paymentInfo/{resId}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resId") Integer resId) { // resId를 매개로 결제
 																										// 정보 불러옴.
