@@ -179,59 +179,59 @@
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
     <script>
-					
-					// 페이지 로딩 시 초기 버튼 상태 설정
-					document.addEventListener('DOMContentLoaded', function() {
-						checkAgreements(); // 초기 버튼 상태 설정을 위해 함수 호출
-					});
+                    
+                    // 페이지 로딩 시 초기 버튼 상태 설정
+                    document.addEventListener('DOMContentLoaded', function() {
+                        checkAgreements(); // 초기 버튼 상태 설정을 위해 함수 호출
+                    });
 
-					// 체크 박스 상태 변경 시 호출될 함수
-					function checkAgreements() {
-						const agreeCollect = document
-								.getElementById('agreeCollect').checked;
-						const agreeProvide = document
-								.getElementById('agreeProvide').checked;
+                    // 체크 박스 상태 변경 시 호출될 함수
+                    function checkAgreements() {
+                        const agreeCollect = document
+                                .getElementById('agreeCollect').checked;
+                        const agreeProvide = document
+                                .getElementById('agreeProvide').checked;
 
-						// 모든 체크 박스가 선택되었을 때 버튼 활성화
-						if (agreeCollect && agreeProvide) {
-							document.getElementById('paymentButton')
-									.removeAttribute('disabled');
-						} else {
-							document.getElementById('paymentButton')
-									.setAttribute('disabled', 'disabled');
-						}
-					}
+                        // 모든 체크 박스가 선택되었을 때 버튼 활성화
+                        if (agreeCollect && agreeProvide) {
+                            document.getElementById('paymentButton')
+                                    .removeAttribute('disabled');
+                        } else {
+                            document.getElementById('paymentButton')
+                                    .setAttribute('disabled', 'disabled');
+                        }
+                    }
 
-					// 체크 박스 상태 변화 감지
-					document.getElementById('agreeCollect').addEventListener(
-							'change', checkAgreements);
-					document.getElementById('agreeProvide').addEventListener(
-							'change', checkAgreements);
-					
-					
-					// 페이지 로딩 시 주문 상세 항목들의 총 금액 계산하여 표시
-					document.addEventListener('DOMContentLoaded', function() {
-					    calculateTotalAmount(); // 초기화시 총 금액 계산 함수 호출
-					});
+                    // 체크 박스 상태 변화 감지
+                    document.getElementById('agreeCollect').addEventListener(
+                            'change', checkAgreements);
+                    document.getElementById('agreeProvide').addEventListener(
+                            'change', checkAgreements);
+                    
+                    
+                    // 페이지 로딩 시 주문 상세 항목들의 총 금액 계산하여 표시
+                    document.addEventListener('DOMContentLoaded', function() {
+                        calculateTotalAmount(); // 초기화시 총 금액 계산 함수 호출
+                    });
 
-					// 총 결제 금액 계산 함수
-					function calculateTotalAmount() {
-					    let totalAmount = 0;
+                    // 총 결제 금액 계산 함수
+                    function calculateTotalAmount() {
+                        let totalAmount = 0;
 
-					    // 각 주문 상세 항목의 금액을 모두 합산
-					    const itemAmountElements = document.querySelectorAll('#orderDetails td:nth-child(4)');
-					    itemAmountElements.forEach(function(element) {
-					        totalAmount += parseInt(element.textContent.replace('원', ''), 10);
-					    });
+                        // 각 주문 상세 항목의 금액을 모두 합산
+                        const itemAmountElements = document.querySelectorAll('#orderDetails td:nth-child(4)');
+                        itemAmountElements.forEach(function(element) {
+                            totalAmount += parseInt(element.textContent.replace('원', ''), 10);
+                        });
 
-					    // 총 결제 금액을 화면에 반영
-					    const totalAmountElement = document.getElementById('totalAmount');
-					    totalAmountElement.textContent = totalAmount + '원';
-					}
-					
-					
-					
-				</script>
+                        // 총 결제 금액을 화면에 반영
+                        const totalAmountElement = document.getElementById('totalAmount');
+                        totalAmountElement.textContent = totalAmount + '원';
+                    }
+                    
+                    
+                    
+                </script>
 
 </body>
 </html>

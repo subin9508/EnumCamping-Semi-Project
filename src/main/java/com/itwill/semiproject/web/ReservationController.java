@@ -3,6 +3,7 @@ package com.itwill.semiproject.web;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,37 +95,30 @@ public class ReservationController {
 		}
 	}
 	
-	@GetMapping("/order") 
-	public String getReservationList(HttpSession session, Model model) {
-		log.debug("GET: getReservationList()");
-		
-		//세션에서 사용자 정보 가져오기
-		String userId = (String) session.getAttribute("signedInUser");
-		log.debug("userId={}", userId);
-		User user = userService.read(userId);
-		model.addAttribute("user", user);
-		
-		// 예약정보 가져오기
-		ReservationMaster reservationMaster = reservationService.getReservationMasterByUserId(userId);
-		
-		model.addAttribute("reservationMaster", reservationMaster);
-		
-		// 예약 상세정보 가져오기
-		List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
-		
-		model.addAttribute("reservationDetails", reservationDetails);
-		
-		return "/reservation/order";
+	@GetMapping("/order")
+	public String showOrderPage(HttpSession session, Model model) {
+	    String userId = (String) session.getAttribute("signedInUser");
+	    User user = userService.read(userId);
+	    ReservationMaster reservationMaster = reservationService.getReservationMasterByUserId(userId);
+	    List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
+
+	    model.addAttribute("user", user);
+	    model.addAttribute("reservationMaster", reservationMaster);
+	    model.addAttribute("reservationDetails", reservationDetails);
+
+	    return "reservation/order"; // JSP 파일 이름
 	}
 	
 	@PostMapping("/order")
-	public ResponseEntity<?> getReservationList
+	public String getReservationList
 	(@RequestBody Map<String, Object> requestData, HttpSession session, Model model) {
 	    log.debug("reservationList(requestData={})", requestData);
 	        
 	    // 세션에서 사용자 정보 가져오기
 	    String userId = (String) session.getAttribute("signedInUser");
 	    log.debug("userId={}", userId);
+	    User user = userService.read(userId);
+	    model.addAttribute("user", user);
 	    
 	    reservationService.deleteReservationDetail(userId);
 	    reservationService.deleteReservationMaster(userId);
@@ -138,7 +132,7 @@ public class ReservationController {
 	    
 	    if (reservationMasterMap == null || reservationDetailList == null) {
 	        log.error("reservationMasterMap or reservationDetailList is null");
-	        return new ResponseEntity<>("Invalid reservation data", HttpStatus.BAD_REQUEST);
+	        return "/reservation/order";
 	    }
 	    
 	    // ReservationMaster 객체 생성 및 설정
@@ -146,6 +140,7 @@ public class ReservationController {
 	    reservationMaster.setUserId(userId);
 	    reservationMaster.setResCheckIn(LocalDate.parse((String) reservationMasterMap.get("resCheckIn")));
 	    reservationMaster.setResCheckOut(LocalDate.parse((String) reservationMasterMap.get("resCheckOut")));
+	    reservationMaster.setResTotalPrice((Integer) reservationMasterMap.get("resTotalPrice"));
 	    
 	    // ReservationDetail 객체 생성 및 설정
 	    
@@ -160,7 +155,7 @@ public class ReservationController {
 
 	        if (itemIdObj == null || itemAmountObj == null) {
 	            log.error("itemId or itemAmount is null");
-	            return new ResponseEntity<>("Invalid reservation detail data", HttpStatus.BAD_REQUEST);
+	            return "/reservation/order";
 	        }
 
 	        ReservationDetail reservationDetail = new ReservationDetail();
@@ -172,7 +167,16 @@ public class ReservationController {
 	    
 	    reservationService.makeReservation(reservationMaster, reservationDetails);
 
-	    return ResponseEntity.ok().build();
+	    // 예약정보 가져오기
+	 	reservationMaster = reservationService.getReservationMasterByUserId(userId);
+	 		
+	 	// 예약 상세정보 가져오기
+	 	reservationDetails = reservationService.getReservationDetailsByUserId(userId);
+	 	
+	 	model.addAttribute("reservationMaster", reservationMaster);
+	    model.addAttribute("reservationDetails", reservationDetails);
+
+	    return "/reservation/order";
 	}
 	
 	@GetMapping("/item")

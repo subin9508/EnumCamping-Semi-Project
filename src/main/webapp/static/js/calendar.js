@@ -257,7 +257,7 @@
         console.log(reservedAreas);
         
         for (let i = 1; i <= totalAreas; i++) {
-			const areaIndex = Math.ceil(i / 4); // 각 구역의 인덱스 계산
+            const areaIndex = Math.ceil(i / 4); // 각 구역의 인덱스 계산
             console.log(`area${areaIndex} 처리 시작`)
             const area = document.getElementById(`area${areaIndex}_radio`);
             console.log(`area${areaIndex}`, area);
@@ -266,10 +266,10 @@
                 const card = document.getElementById(`area${areaIndex}`);
                 
                 // 현재 areaIndex에 속하는 모든 구역 번호
-            	const areaNumbers = Array.from({ length: 4 }, (_, k) => (areaIndex - 1) * 4 + k + 1);
+                const areaNumbers = Array.from({ length: 4 }, (_, k) => (areaIndex - 1) * 4 + k + 1);
             
-            	// 예약된 구역이 하나라도 포함되어 있는지 확인
-            	const isReserved = areaNumbers.some(num => reservedAreas.includes(num));
+                // 예약된 구역이 하나라도 포함되어 있는지 확인
+                const isReserved = areaNumbers.some(num => reservedAreas.includes(num));
                 
                 if (isReserved) {
                     console.log(`Area ${areaIndex} is reserved`);
@@ -520,7 +520,8 @@
                 const date = `${year}-${month}-${day}`;
                 const reservationMaster = {
                     resCheckIn: date,
-                    resCheckOut: calculateCheckOutDate(date, selectedNight) // 실제로는 종료 날짜를 계산해야 합니다.
+                    resCheckOut: calculateCheckOutDate(date, selectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
+                    resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')) // 총 가격 추가
                 };
 
                 const mainReservationDetail = {
@@ -541,7 +542,8 @@
                 });
                 
                 const reservationDetails = [mainReservationDetail, ...additionalItems];
-            
+                
+                
                 const data = {
                     reservationMaster: reservationMaster,
                     reservationDetail: reservationDetails
