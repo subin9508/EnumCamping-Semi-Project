@@ -33,20 +33,17 @@
             <strong>[편의시설]</strong>
         </h3>
 
-        <div class="facilities-section">
-        
+        <div class="facilities-section">        
+            
             <div class="facilities-card">
-                <h5>바베큐장</h5>
+                <h5>개수대</h5>
                 <div class="img-container">
-                    <c:url value="/images/intro/intro2_barbecue.jpg"
-                        var="intro2_barbecue" />
-                    <img alt="barbecue" src="${intro2_barbecue}"
-                        class="img" height=400px width=500px
-                        id="barbecueImage" />
-
+                    <c:url value="/images/intro/intro2_sink.jpg"
+                        var="intro2_sink" />
+                    <img alt="sink" src="${intro2_sink}" class="img"
+                        height=400px width=500px id="sinkImage" />
                 </div>
             </div>
-
             <div class="facilities-card">
                 <h5>샤워실</h5>
                 <div class="img-container">
@@ -72,21 +69,23 @@
 
         <div class="facilities-section">
             <div class="facilities-card">
-                <h5>개수대</h5>
+                <h5>바베큐장</h5>
                 <div class="img-container">
-                    <c:url value="/images/intro/intro2_sink.jpg"
-                        var="intro2_sink" />
-                    <img alt="sink" src="${intro2_sink}" class="img"
-                        height=400px width=500px id="sinkImage" />
+                    <c:url value="/images/intro/barbecue.gif"
+                        var="intro2_barbecue" />
+                    <img alt="barbecue" src="${intro2_barbecue}"
+                        class="img" height=400px width=500px
+                        id="barbecueImage" />
+
                 </div>
             </div>
             <div class="facilities-card">
-                <h5>수영장</h5>
+                <h5>캠프파이어존</h5>
                 <div class="img-container">
-                    <c:url value="/images/intro/intro2_pool.jpg"
-                        var="intro2_pool" />
-                    <img alt="pool" src="${intro2_pool}" class="img"
-                        height=400px width=500px id="poolImage" />
+                    <c:url value="/images/intro/campfire.gif"
+                        var="intro2_campfire" />
+                    <img alt="campfire" src="${intro2_campfire}" class="img"
+                        height=400px width=500px id="campFierImage" />
                 </div>
             </div>
             <div class="facilities-card">

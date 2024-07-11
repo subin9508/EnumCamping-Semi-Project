@@ -347,17 +347,17 @@
                     nightRadioLabel.innerHTML = `
                         <input class="night-radio" type="radio" name="night" value="1">
                         <span class="radio_icon"></span>
-                        <span class="radio_text">1박</span>
+                        <span class="radio_text">1박 2일</span>
                         <input class="night-radio" type="radio" name="night" value="2">
                         <span class="radio_icon"></span>
-                        <span class="radio_text">2박</span>
+                        <span class="radio_text">2박 3일</span>
                     `;
                 } else {
                     // 다음날 예약이 있는 경우 1박 옵션만 표시
                     nightRadioLabel.innerHTML = `
                         <input class="night-radio" type="radio" name="night" value="1">
                         <span class="radio_icon"></span>
-                        <span class="radio_text">1박</span>
+                        <span class="radio_text">1박 2일</span>
                     `;
                 }
                 
