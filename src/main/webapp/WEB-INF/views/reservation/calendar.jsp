@@ -43,47 +43,60 @@
                     <tbody></tbody>
                 </table>
 
-                <div id="date"></div>
+                <div id="date" style="display: none;"></div>
                 
                 <c:url value="/images/calendar/calendar_campingzone1.gif" var="calendar_campingzone1"/>
+                <c:url value="/images/calendar/calendar_campingzone2.gif" var="calendar_campingzone2"/>
+                <c:url value="/images/calendar/calendar_campingzone3.gif" var="calendar_campingzone3"/>
                 <!-- radio -->
                 <div class="area-card" style="display:none;">
-                <div class="card mt-2 p-2" id="area1">
+                <div class="card m-2 p-2" id="area1">
                     <label class="radio_label"> 
                         <input class="area-radio" type="radio" id="area1_radio" name="area" value="1"> 
                         <span class="radio_icon"></span>
                         <img alt="campingzone1" src="${calendar_campingzone1}"
-                            height=200px width=250px/>
-                        <span class="radio_text">구역1</span> 
+                            height=150px width=200px/>
+                        <span class="radio_text" style="font-size: 18px;"><strong>캠핑존A-1</strong></span> 
                     </label>
                 </div>
-                <div class="card mt-2 p-2" id="area2">
+                <div class="card m-2 p-2" id="area2">
                     <label class="radio_label"> 
                         <input class="area-radio" type="radio" id="area2_radio" name="area" value="2">
-                        <span class="radio_icon"></span> 
-                        <span class="radio_text">구역2</span>
+                        <span class="radio_icon"></span>
+                        <img alt="campingzone2" src="${calendar_campingzone1}"
+                            height=150px width=200px/> 
+                        <span class="radio_text" style="font-size: 18px;"><strong>캠핑존A-2</strong></span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2" id="area3">
+                <div class="card m-2 p-2" id="area3">
                     <label class="radio_label"> 
                         <input class="area-radio" type="radio" id="area3_radio" name="area" value="3"> 
-                        <span class="radio_icon"></span> 
-                        <span class="radio_text">구역3</span>
+                        <span class="radio_icon"></span>
+                        <img alt="campingzone3" src="${calendar_campingzone2}"
+                            height=150px width=200px/>  
+                        <span class="radio_text" style="font-size: 18px;"><strong>캠핑존B-1</strong></span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2">
+                <div class="card m-2 p-2">
                     <label class="radio_label" id="area4"> 
                         <input class="area-radio" type="radio" id="area4_radio" name="area" value="4"> 
                         <span class="radio_icon"></span> 
-                        <span class="radio_text">구역4</span>
+                        <img alt="campingzone4" src="${calendar_campingzone2}"
+                            height=150px width=200px/>
+                        <span class="radio_text" style="font-size: 18px;"><strong>캠핑존B-2</strong></span>
                     </label>
                 </div>
-                <div class="card mt-2 p-2" id="area5">
-                    <label class="radio_label"> 
-                        <input class="area-radio" type="radio" id="area5_radio" name="area" value="5"> 
-                        <span class="radio_icon"></span> 
-                        <span class="radio_text">구역5</span>
-                    </label>
+                <div class="card m-2 p-2" id="area5" style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center;">
+                        <label class="radio_label" style="display: flex; align-items: center;"> 
+                            <input class="area-radio" type="radio" id="area5_radio" name="area" value="5"> 
+                            <span class="radio_icon"></span>
+                            <img alt="campingzone5" src="${calendar_campingzone3}"
+                                height=150px width=200px/> 
+                            <span class="radio_text" style="font-size: 18px;"><strong>캠핑존C</strong></span>
+                        </label>
+                    </div>
+                    <p style="text-">40,000원~</p>                    
                 </div>
                 </div>
                 <div class="card mt-2 p-2" id="night-card" style="display:none;">
