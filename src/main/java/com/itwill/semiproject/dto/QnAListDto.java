@@ -16,6 +16,7 @@ public class QnAListDto {
 	private String qnaTitle;
 	private String qnaUserId;
 	private LocalDateTime qnaModifiedTime;
+	private Integer qnaViewCnt;
 	
 	public static QnAListDto fromEntity(QnA qna) {
 		return QnAListDto.builder()
@@ -23,6 +24,7 @@ public class QnAListDto {
 				.qnaTitle(qna.getQnaTitle())
 				.qnaUserId(qna.getQnaUserId())
 				.qnaModifiedTime(qna.getQnaModifiedTime())
+				.qnaViewCnt(qna.getQnaViewCnt())
 				.build();
 	}
 }

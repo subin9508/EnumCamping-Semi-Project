@@ -17,4 +17,13 @@ public interface QnADao {
 	int deleteQnA(Integer qnaPostId);
 	
 	List<QnA> searchQnA(QnASearchDto dto);
+	
+    // 페이징 처리를 위한 메서드들 추가
+    List<QnA> selectPagedQnAList(Pager pager);
+    
+    long selectTotalCount();
+    
+    // 조회수
+    int updateViewCount(Integer qnaPostId);
+	
 }

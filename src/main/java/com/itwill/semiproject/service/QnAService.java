@@ -8,6 +8,7 @@ import com.itwill.semiproject.dto.QnACreateDto;
 import com.itwill.semiproject.dto.QnAListDto;
 import com.itwill.semiproject.dto.QnASearchDto;
 import com.itwill.semiproject.dto.QnAUpdateDto;
+import com.itwill.semiproject.repository.Pager;
 import com.itwill.semiproject.repository.QnA;
 import com.itwill.semiproject.repository.QnADao;
 
@@ -71,5 +72,17 @@ public class QnAService {
 		return list.stream().map(QnAListDto::fromEntity).toList();
 	}
 	
-	
+	public List<QnAListDto> selectPagedQnAList(Pager pager) {
+        log.debug("selectPagedQnAList({})", pager);
+
+        // 전체 글의 갯수를 가져와 Pager 객체 설정
+        long totalCount = qnaDao.selectTotalCount();
+        pager.setNum(totalCount);
+        pager.setRow();
+
+        // 페이징 처리된 글 목록을 가져옴
+        List<QnA> list = qnaDao.selectPagedQnAList(pager);
+
+        return list.stream().map(QnAListDto::fromEntity).toList();
+    }
 }

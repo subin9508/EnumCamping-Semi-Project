@@ -67,6 +67,10 @@
                     </form>
                 </div>
                 <div class="card-footer">
+                <c:url var="qnaListPage" value="/community/qna/list" />
+                    <a class="btn btn-outline-info"
+                        href="${qnaListPage}">목록보기</a>
+                
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
                     <c:if test="${signedInUser eq qna.qnaUserId}">
                     <c:url var="qnaModifyPage" value="/community/qna/modify">
