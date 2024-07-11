@@ -15,4 +15,6 @@ public class ReservationDetail {
 	private Integer itemId;
 	private Integer itemQuantity;
 	private Integer itemAmount;
+	private String itemName;
+	private String itemImg;
 }

@@ -20,7 +20,7 @@
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>정보 수정 페이지</title>
+    <title>ENUM CAMPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
@@ -42,7 +42,7 @@
             <div class="col-md-9 main-content">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2>내 정보 수정</h2>
+                        <h2>내 정보</h2>
                     </div>
 						<div class="card-body">
 							<form action="/user/user_update" method="post">
@@ -85,15 +85,17 @@
 
 							</form>
 
-							<!-- 결제하기 버튼 추가 -->
+
+							<!-- 수정하기 버튼 추가 -->
 							<div class="mb-3 row">
-								<div class="col-sm-10 offset-sm-2">
-									<button id="btnPayment" class="btn btn-primary">결제하기</button>
+								<div class="col-sm-8 offset-sm-2">
+									<button id="btnModify" class="btn btn-primary"><a href="password_check">수정하기</a></button>
+
 								</div>
 							</div>
 						</div>
 
-						<div class="card-footer"></div>
+
                 </div>
             </div>
         </div>
@@ -110,11 +112,9 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></</script>    
+        <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 
-<c:url var="payment_js" value="/js/payment.js" />
-<script src="${payment_js}"></script>
 
 </body>
 </html>

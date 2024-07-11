@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.UserService;
@@ -319,9 +321,12 @@ public class UserController {
     public void reservationDetails(@RequestParam(name="resId") int resId, Model model) {
     	log.debug("reservation_details()");
     	
-    	ReservationMaster resMaster = userService.readReservationDetails(resId);
+    	ReservationMaster resMaster = userService.readReservationMasterDetails(resId);
+    	
+    	List<ReservationDetailListDto> resDetail = userService.readReservationDetails(resId);
     	
     	model.addAttribute("resMaster", resMaster);
+    	model.addAttribute("resDetail", resDetail);
     	
     }
 

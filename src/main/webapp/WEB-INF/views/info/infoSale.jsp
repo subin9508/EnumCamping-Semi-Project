@@ -23,7 +23,7 @@
 .info-section {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .info-card {
@@ -34,7 +34,7 @@
 }
 
 .info-card img {
-    width: 100%;
+    width: 80%;
     height: auto;
     border-radius: 5px;
 }
@@ -43,10 +43,10 @@
 </head>
 <body>
             <%@ include file="../fragments/header.jspf"%>
-
             <%@ include file="../fragments/info-sidebar.jspf"%>
 
         <div class="content">
+        <main main class="main-content" style="margin-left: 300px; margin-top: 50px;">
             <div class="slider">
             
             <div class="content-1"> 
@@ -103,6 +103,7 @@
                 </div>
                 </div>
                 </div>
+                </main>
             </div>
 
             <%@ include file="../fragments/footer.jspf"%>

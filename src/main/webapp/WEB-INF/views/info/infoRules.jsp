@@ -23,15 +23,11 @@
 
 <body>
 
-
-
-
             <%@ include file="../fragments/header.jspf"%>
-
             <%@ include file="../fragments/info-sidebar.jspf"%>
         
         <div class="content">
-            <main class="main-content"><br>
+           <main main class="main-content" style="margin-left: 300px; margin-top: 50px;">
                 <div class="slider">
            
                 <div class="content-1">

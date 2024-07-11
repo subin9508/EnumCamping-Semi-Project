@@ -43,7 +43,7 @@ header a {
 .main .nav-link {
     font-size: 1.2rem; /* 네비게이션 바 링크의 폰트 크기 */
     padding: 10px 20px; /* 네비게이션 바 링크의 패딩 */
-    margin-right: 100px;
+    width: 200px; /* 고정된 넓이 설정 */
 }
 
 
