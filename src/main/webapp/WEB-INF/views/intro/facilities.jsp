@@ -4,30 +4,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:url value="/css/facilities.css" var="facilitiesCSS" />
-<link rel="stylesheet" href="${facilitiesCSS}" />
-
-<c:url value="../css/header.css" var="headerCss" />
-<link rel="stylesheet" href="${headerCss}">
-<c:url value="../css/footer.css" var="footerCss" />
-<link rel="stylesheet" href="${footerCss}">
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Enum Semi-Project</title>
+<title>캠핑장 편의시설</title>
 <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
+<c:url value="../css/header.css" var="headerCss" />
+<link rel="stylesheet" href="${headerCss}">
+<c:url value="../css/footer.css" var="footerCss" />
+<link rel="stylesheet" href="${footerCss}">
+<c:url var="sidebarCSS" value="/css/sidebar.css" />
+<link rel="stylesheet" href="${sidebarCSS}">
+<c:url value="/css/facilities.css" var="facilitiesCSS" />
+<link rel="stylesheet" href="${facilitiesCSS}" />
+
 </head>
 <body>
     <div class="wrapper">
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
-
-
+            
             <main class="main-content"
                 style="margin-left: 300px; margin-top: 50px;">
                 <div class="content-1">
