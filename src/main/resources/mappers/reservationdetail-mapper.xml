@@ -9,16 +9,23 @@
         INSERT INTO reservation_detail (item_id, item_quantity, item_amount) VALUES (#{itemId}, #{itemQuantity}, #{itemAmount})
     </insert>
     
-    <!-- 선택한 물품 리스트  -->
-    <select id="selectOrderByResId" resultType="ReservationDetail">
-        SELECT * FROM reservation_detail
+    
+    <!-- 선택한 물품 리스트 (수정함.)  -->
+    <select id="selectItemsByResId" resultType="ReservationDetailListDto">
+        select  i.item_name, rd.item_quantity, rd.item_amount,rd.item_id from reservation_detail rd
+        join items i
+        on rd.item_id = i.item_id
+        where res_id = #{resId}
     </select>
     
     <!-- userId에 해당하는 reservation_detail -->
     <select id="selectDetailsByUserId" resultType="ReservationDetail">
-        select rd.* from reservation_detail rd
-        join reservation_master rm on rd.res_id = rm.res_id
-         where rm.user_id = #{userId}        
+        select rd.res_id, rd.item_id, rd.item_quantity,
+        rd.item_amount, i.item_name, i.item_img
+        from reservation_detail rd
+        join items i on rd.item_id = i.item_id
+        where rd.res_id = (select res_id from reservation_master where user_id = #{userId})
+        order BY rd.item_id ASC      
     </select>
     
     <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->  

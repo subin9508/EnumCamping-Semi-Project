@@ -28,6 +28,17 @@
 .form-container {
     margin-bottom: 50px; /* 폼 사이 간격을 설정 */
 }
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+}
 </style>
 
 </head>
@@ -44,28 +55,35 @@
                     class="container-fluid d-flex justify-content-center">
                     <h1>예약 및 주문</h1>
                 </div>
-
+                <br />
+                <br />
                  <div class="container">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>주문 번호</th>
-                                <th>물품 번호</th>
-                                <th>수량</th>
-                                <th>총가격</th>
+                                <th style="background-color: #003366; color: white;">물품 이름</th>
+                                <th style="background-color: #003366; color: white;">물품 사진</th>
+                                <th style="background-color: #003366; color: white;">수량</th>
+                                <th style="background-color: #003366; color: white;">총가격</th>
                             </tr>
                         </thead>
                         <tbody id="orderDetails">
                             <c:forEach var="rs" items="${reservationDetails}">
                                 <tr>
-                                    <td>${rs.resId}</td>
-                                    <td>${rs.itemId}</td>
+                                    <td>${rs.itemName}</td>
+                                    <td class="img-container"  style="width: 20%;">
+                                    <c:url value="${rs.itemImg}"  var="itemImgUrl" /> 
+                                    <img alt="${rs.itemName}" src="${itemImgUrl}"
+                                class="img" id="itemImg-${rs.itemId}"  style="height: 150px; width: 150px;" />
+                                    </td>
                                     <td>${rs.itemQuantity}</td>
                                     <td>${rs.itemAmount}원</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                <br />
+                <br />
                 </div>
                 
                 
@@ -157,7 +175,7 @@
                     class="container-fluid d-flex justify-content-center mt-3">
                     <!--  <form action="../reservation/reservationConfirm"
                         method="get">  -->
-                        <input type="text" name="resId" id="resId" value="${reservationMaster.resId}" />
+                        <input type="hidden" name="resId" id="resId" value="${reservationMaster.resId}" />
                         <button id="btnPayment"
                             class="btn btn-primary" disabled>결제하기</button>
                     <!-- </form>  -->

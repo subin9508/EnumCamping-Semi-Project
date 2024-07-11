@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.dto.ItemsDto;
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
+import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ItemsDao;
 import com.itwill.semiproject.repository.ReservationDetail;
@@ -91,8 +92,8 @@ public class ReservationService {
         return itemsDao.selectAllItems();
     }
     
-    public List<ReservationDetail> getReservationDeatil() {
-    	return reservationDetailDao.selectOrderByResId();
+    public List<ReservationDetailListDto> getReservationDeatil(Integer resId) {
+    	return reservationDetailDao.selectItemsByResId(resId);
     }
     
     public int create(ReservationDetailCreateDto dto) {

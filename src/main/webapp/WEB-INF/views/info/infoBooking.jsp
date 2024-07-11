@@ -21,12 +21,12 @@
 
 </head>
 <body>
-<div class="wrapper">
+
             <%@ include file="../fragments/header.jspf"%>
             <%@ include file="../fragments/info-sidebar.jspf"%>
             
         <div class="content">
-            <main class="main-content">
+            <main class="main-content" style="margin-left: 300px; margin-top: 50px;">
             <div class="slider">
             
             <div class="content-1"> 
@@ -45,12 +45,16 @@
                             <h5>8. 예약자와 시설이용자는 동일인이여야 합니다</h5>
                         </div>
                         <br><br>
+                        <br><br>
+                        <br><br>
+                        <br><br>
+                        <br><br>
+                        
               </div>
             </main>
         </div>
-    
-        <%@ include file="../fragments/footer.jspf" %>
-   </div> 
+     <%@ include file="../fragments/footer.jspf" %>
+      
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 

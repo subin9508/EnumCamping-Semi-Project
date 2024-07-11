@@ -262,6 +262,4 @@ document.addEventListener('DOMContentLoaded', () => {
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
    
 
-
-
 });

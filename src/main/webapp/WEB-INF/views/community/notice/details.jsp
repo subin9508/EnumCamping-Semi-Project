@@ -59,7 +59,7 @@
         
                 
                 <!-- signedUser 체크 -->
-                <c:if test="${userRole eq 'admin'}">
+                <c:if test="${userRole eq 0}">
                     <div class="card-footer">
                     <button id="btnDelete" type="button" class="btn btn-outline-danger">삭제하기</button>
                     <c:url var="noticeModifyPage" value="/community/notice/modify">
