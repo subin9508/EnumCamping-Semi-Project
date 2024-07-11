@@ -118,7 +118,7 @@
             </div>
         </div>
         
-        <div class="" id="items-table" style="display: none;">
+        <div class="m-5" id="items-table" style="display: none;">
         <div class="container-fluid d-flex justify-content-center">
                     <h3>대여 및 판매 물품</h3>
         </div>
