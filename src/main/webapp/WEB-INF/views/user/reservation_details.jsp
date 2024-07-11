@@ -63,8 +63,9 @@
 		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript"
 		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		
-        <c:url var="paymentCancel_js" value="/js/paymentCancel.js" />
+    <c:url var="paymentCancel_js" value="/js/paymentCancel.js" />
     <script src="${paymentCancel_js}"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>

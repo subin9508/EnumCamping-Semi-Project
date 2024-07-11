@@ -20,6 +20,7 @@ import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.repository.UserDao;
 import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
@@ -159,7 +160,6 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	
 	
 	
-	
 	// 결제 취소 메서드 
 		public String cancelPayment(Integer payId) throws ServiceException {
 			log.debug("Attempting to cancel payment with payId: {}", payId);
@@ -169,48 +169,85 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	            return "Payment not found";
 	        } 
 	        log.debug("status= {}",payment.getPayStatus());
-	        // 결제 상태 확인
+	        // 이미 취소된 결제인지  확인
 	        if ("CANCEL".equals(payment.getPayStatus())) {
 	            log.info("Payment already cancelled for payId: {}", payId);
 	            return "Payment already cancelled";
-	        }
-	                
+	        }       
+	        
 	        try {
 	        	String imp_uid = payment.getImpUid(); // 결제 고유 ID를 가져옴
 	        	log.debug("uid={}",imp_uid);
-	        	IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(new CancelData(imp_uid, true)); // 결제 취소 시도
+
+	        	CancelData cancelData = new CancelData(imp_uid, true);
+	        	IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(cancelData); // 결제 취소 시도
+	        	
+	        	log.debug("response = {}", response);
 	        	log.debug("new CancelData(imp_uid, true)={}", new CancelData(imp_uid, true));
-	        	log.debug("response.getResponse={}", response.getResponse());
-	        	if (response.getResponse() != null) {
-	            	payment.setPayStatus("CANCEL"); // 결제 상태를 CANCEL로 설정
-	            	log.debug("2");
-	            	paymentDao.updatePayment(payment); // 업데이트 메서드 호출로 DB에 반영
-	            	log.debug("3");
-	                // 취소 테이블에 취소 내역 저장
-	                PaymentCancelDto cancelDto = new PaymentCancelDto();
-	                log.debug("4");
-	                cancelDto.setCanId(payId);
-	                cancelDto.setCanPrice(payment.getResTotalPrice());
-	                
-	                log.debug("Attempting to insert payment cancel record: {}", cancelDto);
-	                int result = paymentCancelDao.insertPaymentCancel(cancelDto);
-	                if(result > 1) {
-	                    log.debug("Payment cancel record inserted successfully");
+//	        	log.debug("response.getResponse={}", response.getResponse());
+	        	
+	        	if (response != null && response.getResponse() != null) {
+	        		Payment paymentResponse = response.getResponse();
+	                if ("cancelled".equals(paymentResponse.getStatus())) {
+	                    payment.setPayStatus("CANCEL");
+	                    paymentDao.updatePayment(payment);
+
+	                    PaymentCancelDto cancelDto = new PaymentCancelDto();
+	                    cancelDto.setCanId(payId);
+	                    cancelDto.setCanPrice(payment.getResTotalPrice());
+	                    int result = paymentCancelDao.insertPaymentCancel(cancelDto);
+
+	                    if (result > 0) {
+	                        log.info("Payment cancel record inserted successfully");
+	                    } else {
+	                        log.error("Failed to insert payment cancel record");
+	                    }
+	                    return "Payment cancellation successful";
 	                } else {
-	                    log.error("Failed to insert payment cancel record");
+	                    return "Cancellation failed: Payment status is not cancelled on PG site";
 	                }
-	            	
-	            	return "Payment cancellation successful";
 	            } else {
-	            	log.error("Cancellation failed: " + response.getMessage());
+	                log.error("Cancellation failed: " + response.getMessage());
 	                return "Cancellation failed: " + response.getMessage();
 	            }
+	        } catch (IamportResponseException e) {
+	            log.error("API call failed: ", e);
+	            return "API call failed: " + e.getMessage();
 	        } catch (Exception e) {
-	        	log.error("Error during cancellation", e);
+	            log.error("Error during cancellation", e);
 	            return "Error during cancellation: " + e.getMessage();
 	        }
 	    }
-	
+	        		
+//	            	payment.setPayStatus("CANCEL"); // 결제 상태를 CANCEL로 설정
+//	            	log.debug("2");
+//	            	paymentDao.updatePayment(payment); // 업데이트 메서드 호출로 DB에 반영
+//	            	log.debug("3");
+//	                // 취소 테이블에 취소 내역 저장
+//	                PaymentCancelDto cancelDto = new PaymentCancelDto();
+//	                log.debug("4");
+//	                cancelDto.setCanId(payId);
+//	                cancelDto.setCanPrice(payment.getResTotalPrice());
+//	                
+//	                log.debug("Attempting to insert payment cancel record: {}", cancelDto);
+//	                int result = paymentCancelDao.insertPaymentCancel(cancelDto);
+//	                if(result > 0) {
+//	                    log.debug("Payment cancel record inserted successfully");
+//	                } else {
+//	                    log.error("Failed to insert payment cancel record");
+//	                }
+//	            	
+//	            	return "Payment cancellation successful";
+//	            } else {
+//	            	log.error("Cancellation failed: " + response.getMessage());
+//	                return "Cancellation failed: " + response.getMessage();
+//	            }
+//	        } catch (Exception e) {
+//	        	log.error("Error during cancellation", e);
+//	            return "Error during cancellation: " + e.getMessage();
+//	        }
+//	    }
+//	
 	
 	
 }

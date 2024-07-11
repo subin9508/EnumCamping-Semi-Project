@@ -65,7 +65,7 @@ public class PaymentController {
 
 	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
-	@GetMapping("/paymentInfo")
+	@GetMapping("/reservation/paymentInfo")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resId") Integer resId) { // resId를 매개로 결제
 																										// 정보 불러옴.
@@ -84,7 +84,7 @@ public class PaymentController {
 
 	// 결제 검증
 	@ResponseBody
-	@PostMapping("/verifyIamport/{imp_uid}")
+	@PostMapping("/reservation/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
 	        @PathVariable(value = "imp_uid") String imp_uid,
 	        
@@ -119,7 +119,7 @@ public class PaymentController {
 	}
 	
 	
-	@GetMapping("/succeeded/{merchant_uid}")
+	@GetMapping("/reservation/succeeded/{merchant_uid}")
 	public String paymentSucceeded(@PathVariable String merchant_uid, Model model) {
 	    model.addAttribute("merchant_uid", merchant_uid);
 	    return "reservation/succeeded"; // succeeded.jsp 파일을 가리킴
