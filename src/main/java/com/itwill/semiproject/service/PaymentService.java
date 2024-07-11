@@ -91,8 +91,6 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	/**
 	 * 결제 정보를 저장하는 메서드
 	 * 
-	 * @param payment 결제 정보를 담은 payment 객체
-	 * @param payId 결제 ID
 	 * @param resId 예약 ID
 	 * @return 처리 결과를 문자열로 반환 (SUCCESS 또는 실패 코드)
 	 * @throws ServiceException 예외 발생 시 ServiceException으로 wrapping 하여 throw
