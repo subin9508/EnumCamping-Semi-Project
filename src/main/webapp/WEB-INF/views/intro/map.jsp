@@ -25,14 +25,14 @@
 </head>
 
 <body>
-    
+<div class="wrapper">
             <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
             <%@ include file="../fragments/header.jspf"%>
       
 
-        <div class="container-fluid">
+       <div class="footer-main-content">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
-        </div>
+
         
         <main>
             <section class="facility-section">
@@ -101,7 +101,8 @@
             </div>
 
         </main>   
-
+</div>
+</div>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5f576fbc4bf2a712d8f138a0b208af6"></script>
     <script>
