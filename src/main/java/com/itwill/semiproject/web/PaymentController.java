@@ -28,13 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-<<<<<<< HEAD
 @RequestMapping("/") // 해당 클래스의 기본 URL 매핑을 설정
-=======
-
-@RequestMapping("/")
-
->>>>>>> branch 'develop' of https://github.com/woodstock0513/semiproject.git
 public class PaymentController {
 
 	// 아임포트 API와 상호작용하기 위한 클라이언트 객체를 정의
@@ -45,14 +39,8 @@ public class PaymentController {
 	@Setter(onMethod_ = @Autowired)
 	private PaymentService paymentService;
 
-<<<<<<< HEAD
 	// 기본 생성자. 가맹점 식별키와 비밀키를 전달하여 API 인증을 수행
 	public PaymentController() { 
-=======
-	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
-
-
->>>>>>> branch 'develop' of https://github.com/woodstock0513/semiproject.git
 		this.api = new IamportClient("3360178750462177",
 				"xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
 	}
@@ -124,19 +112,13 @@ public class PaymentController {
 	    }
 	}
 	
-<<<<<<< HEAD
 	// 결제 성공 페이지를 매핑하는 메서드
-=======
-	
-
->>>>>>> branch 'develop' of https://github.com/woodstock0513/semiproject.git
 	@GetMapping("/reservation/succeeded/{merchant_uid}")
 	public String paymentSucceeded(@PathVariable String merchant_uid, Model model) {
 	    model.addAttribute("merchant_uid", merchant_uid); // 모델에 merchant_uid를 추가
 	    return "reservation/succeeded"; // succeeded.jsp 파일을 가리킴
 	}
 	
-<<<<<<< HEAD
 	// 예약 ID를 통해 결제 ID를 조회하는 메서드
 	@GetMapping("/user/reservation_details/getPayId/{resId}")
 	public ResponseEntity<?> getPayId(@PathVariable("resId") Integer resId) {
@@ -145,22 +127,9 @@ public class PaymentController {
 	        return ResponseEntity.ok(payId); // 조회된 결제 ID를 반환
 	    } catch (Exception e) {
 	        return ResponseEntity.status(500).body(e.getMessage()); // 예외 발생 시 에러 메시지를 반환
-=======
-	
-
-	  @GetMapping("/user/reservation_details/getPayId/{resId}")
-	    public ResponseEntity<?> getPayId(@PathVariable("resId") Integer resId) {
-	        try {
-	            Integer payId = paymentService.getPayIdByResId(resId);
-	            return ResponseEntity.ok(payId);
-	        } catch (Exception e) {
-	            return ResponseEntity.status(500).body(e.getMessage());
-	        }
->>>>>>> branch 'develop' of https://github.com/woodstock0513/semiproject.git
 	    }
 	}
 	
-<<<<<<< HEAD
 	// 결제 취소 요청을 처리하는 메서드
 	@ResponseBody
 	@PostMapping("/user/reservation_details/cancel/{payId}")
@@ -180,35 +149,3 @@ public class PaymentController {
 	    }
 	}
 }
-=======
-	
-	/**
-	 * 결제 취소 요청을 처리하는 메서드
-	 * @param payId 결제 키로 결제를 식별
-	 * @return ResponseEntity 객체로 HTTP 응답 상태와 메세지를 반환.
-	 */
-
-    @ResponseBody
-    @PostMapping("/user/reservation_details/cancel/{payId}")
-    public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
-        try {
-            String result = paymentService.cancelPayment(payId);
-            log.debug("!@#!@#!@#post result: {}",result);
-            if (result.equals("Payment cancellation successful")) {
-                return ResponseEntity.ok(result);
-            } else {
-                // 결과 메시지에 따라 적절한 HTTP 상태 코드를 반환
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-            }
-        } catch (ServiceException e) {  // ServiceException 대신 RuntimeException 처리
-            log.error("Error during payment cancellation for payId: {}", payId, e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cancellation failed: " + e.getMessage());
-        }
-    }
-	
-	
-	
-	
-	
-}
->>>>>>> branch 'develop' of https://github.com/woodstock0513/semiproject.git
