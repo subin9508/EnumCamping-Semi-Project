@@ -23,14 +23,14 @@
             <div>
                 <table class="scriptCalendar">
                     <thead>
-                        <tr>
+                        <tr id="trHead">
                             <td class="calendarBtn" id="btnPrevCalendar">&#60;&#60;</td>
                             <td colspan="5"><span id="calYear">YYYY</span>년
                                 <span id="calMonth">MM</span>월</td>
                             <td class="calendarBtn"
                                 id="nextNextCalendar">&#62;&#62;</td>
                         </tr>
-                        <tr>
+                        <tr id="weekDays">
                             <td>일</td>
                             <td>월</td>
                             <td>화</td>
@@ -45,13 +45,16 @@
 
                 <div id="date"></div>
                 
+                <c:url value="/images/calendar/calendar_campingzone1.gif" var="calendar_campingzone1"/>
                 <!-- radio -->
                 <div class="area-card" style="display:none;">
                 <div class="card mt-2 p-2" id="area1">
                     <label class="radio_label"> 
                         <input class="area-radio" type="radio" id="area1_radio" name="area" value="1"> 
-                        <span class="radio_icon"></span> 
-                        <span class="radio_text">구역1</span>
+                        <span class="radio_icon"></span>
+                        <img alt="campingzone1" src="${calendar_campingzone1}"
+                            height=200px width=250px/>
+                        <span class="radio_text">구역1</span> 
                     </label>
                 </div>
                 <div class="card mt-2 p-2" id="area2">
