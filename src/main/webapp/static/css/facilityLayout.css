@@ -1,20 +1,5 @@
 @charset "UTF-8";
 
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* 콘텐츠를 수평으로 중앙에 배치 */
-}
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
 header {
     width: 100%;
     background-color: #000; /* 헤더의 배경색 설정 */
@@ -26,36 +11,32 @@ nav {
     padding: 10px;
 }
 
-.fheading-3 {
-    text-align: center;  /* 텍스트를 중앙으로 정렬 */
-    width: 100%;  /* 선택 사항: 텍스트가 부모 요소의 전체 너비를 차지하도록 설정 */
-    margin-top: 20px;  /* 선택 사항: 위쪽 여백을 추가하여 상단과의 간격 조정 */
-}
-
-.image-sidebar-wrapper {
+.container {
     display: flex;
-    justify-content: center;  /* 전체 컨테이너를 중앙에 배치 */
-    align-items: flex-start;
-    max-width: 1200px;  /* 선택사항: 전체 너비를 제한 */
-    width: 100%;
-    margin: 20px; /* 좌우 여백 설정 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 필요에 따라 조정 */
 }
 
-.intro-sidebar {
-    flex: 0 0 200px; /* 사이드바의 너비를 고정으로 설정 */
-    margin-right: 50px; /* 사이드바와 이미지 사이의 간격을 설정 */
-}
-
-.image-wrapper {
-    text-align: center;
-    flex: 1;  /* 남은 공간을 차지하도록 설정 */
+.fheading-3 {
+    text-align: center; /* 텍스트를 중앙으로 정렬 */
+    width: 100%; /* 선택 사항: 텍스트가 부모 요소의 전체 너비를 차지하도록 설정 */
+    margin-top: 20px; /* 선택 사항: 위쪽 여백을 추가하여 상단과의 간격 조정 */
 }
 
 .facility-image {
     margin-top: 20px;
     margin-bottom: 30px; /* 수정된 부분: 오타 수정 */
     padding: 20px; /* 이미지 주위에 여백 추가 */
-    margin-left:38px;
+    width: 60%; /* 원하는 너비를 지정합니다. 예: 80% */
+}
+
+
+.info-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .box {
@@ -65,10 +46,7 @@ nav {
     justify-content: space-between;
     border-radius: 15px;
     flex-wrap: wrap;
-    margin-top: 20px; /* 이미지와 텍스트 박스 사이에 여백 추가 */
-    margin-bottom: 40px;
-    width: 100%;  /* 박스가 전체 너비를 차지하도록 설정 */
-    max-width: 1200px;  /* 선택사항: 최대 너비를 제한 */
+    width: 70%; /* 박스가 전체 너비를 차지하도록 설정 */
 }
 
 .left-content, .right-content {
@@ -78,26 +56,4 @@ nav {
 
 .item2, .item4 {
     margin-top: 30px;
-}
-
-@media (max-width: 768px) {
-    .image-sidebar-wrapper {
-        flex-direction: column;
-        align-items: center;  /* 작은 화면에서는 중앙 정렬 */
-    }
-    
-    .intro-sidebar {
-        margin-left: -50px;
-        margin-right: 0;
-        margin-bottom: 20px;  /* 작은 화면에서는 아래쪽 여백 추가 */
-    }
-
-    .box {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .left-content, .right-content {
-        margin: 10px 0;
-    }
 }

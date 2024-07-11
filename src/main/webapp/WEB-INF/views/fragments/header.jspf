@@ -88,12 +88,7 @@
                         <li>
                             <c:url value="/intro/introduce" var="introPage1" />
                             <a class="nav-link" aria-current="page"
-                            href="${introPage1}">장점</a>
-                        </li>
-                        <li>
-                            <c:url value="/intro/facilities" var="introPage2" />
-                            <a class="nav-link" aria-current="page"
-                            href="${introPage2}">편의시설</a>
+                            href="${introPage1}">캠핑장 소개</a>
                         </li>
                         <li>
                             <c:url value="/intro/facilityLayout" var="introPage3" />
@@ -101,14 +96,19 @@
                             href="${introPage3}">시설배치도</a>
                         </li>
                         <li>
+                            <c:url value="/intro/facilities" var="introPage2" />
+                            <a class="nav-link" aria-current="page"
+                            href="${introPage2}">편의시설</a>
+                        </li>
+                        <li>
                             <c:url value="/intro/travel" var="introPage4" />
                             <a class="nav-link" aria-current="page"
-                            href="${introPage4}">주변볼거리</a>
+                            href="${introPage4}">주변 볼거리</a>
                         </li>
                         <li>
                             <c:url value="/intro/map" var="introPage5" />
                             <a class="nav-link" aria-current="page"
-                            href="${introPage5}">지도</a>
+                            href="${introPage5}">캠핑장 위치</a>
                         </li>
                     </ul>
                     </li>

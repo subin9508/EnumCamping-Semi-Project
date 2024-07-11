@@ -18,14 +18,17 @@ public class ReservationDetailListDto {
 	private Integer itemId;
 	private Integer itemQuantity;
 	private Integer itemAmount;
-	private String itemName;
+	private String itemName;  
+  private String itemImg;
 	
-	public ReservationDetailListDto fromEntity(ReservationDetail resDetail, Items items) {
-		return ReservationDetailListDto.builder()
-				.itemId(resDetail.getItemId())
-				.itemQuantity(resDetail.getItemQuantity())
-				.itemAmount(resDetail.getItemAmount())
-				.itemName(items.getItemName())
+	public ReservationDetail fromEntity(ReservationDetail reservationDetail) {
+		return ReservationDetail.builder()
+				.resId(reservationDetail.getResId())
+				.itemId(reservationDetail.getItemId())
+				.itemQuantity(reservationDetail.getItemQuantity())
+				.itemAmount(reservationDetail.getItemAmount())
+				.itemName(reservationDetail.getItemName()) 
+        .itemImg(reservationDetail.getItemImg()) 
 				.build();
 	}
 }
