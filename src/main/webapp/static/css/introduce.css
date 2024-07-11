@@ -17,9 +17,6 @@ body, html {
     padding: 0;
 }
 
-main {
-    flex: 1;
-}
 
 .heading-3 {
     width: 150px;

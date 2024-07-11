@@ -29,9 +29,14 @@
         <div class="footer-main-content">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
 
-            <main>
-                <div class="container">
-                    <h5 class="fheading-3">시설배치도</h5>
+            <main class="main-content" style="margin-left: 300px; margin-top: 50px;">
+                    <div class="content-1">
+                        <br>
+                        <h1>
+                            <strong>[시설배치도]</strong>
+                        </h1>
+                    </div>
+                     <div class="container">
                     <img class="facility-image"
                         src="../images/facilityLayout.jpg"
                         alt="캠핑장 시설배치도" width="600" height="600">
@@ -68,8 +73,9 @@
 
                 </div>
 
-                <%@ include file="../fragments/footer.jspf"%>
+                
             </main>
+            <%@ include file="../fragments/footer.jspf"%>
         </div>
     </div>
 

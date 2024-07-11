@@ -57,6 +57,7 @@ header a {
     padding-left: 0; /* 서브 메뉴 패딩 제거 */
 }
 
+
 .navbar-nav .nav-item:hover .subMenu { /* nav-item을 빼면 음.. 전체 보이기가 되긴 하는데,,*/
     display: block; /* 부모 요소에 호버 시 서브 메뉴 표시 */
     color : red;
