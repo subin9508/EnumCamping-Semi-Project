@@ -176,11 +176,13 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+ 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript"
-		src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
+		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
+	
 	<c:url var="payment_js" value="/js/payment.js" />
     <script src="${payment_js}"></script>
     

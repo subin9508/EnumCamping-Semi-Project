@@ -58,7 +58,6 @@ public class ReservationService {
 			// reservation_master 테이블에 데이터 삽입
 			reservationMasterDao.insertReservationMaster(reservationMaster);
 			// 자동 생성된 res_id 가져오기
-			session.commit();
 			int resId = reservationMaster.getResId();
 			log.debug("resId({})", resId);
 			

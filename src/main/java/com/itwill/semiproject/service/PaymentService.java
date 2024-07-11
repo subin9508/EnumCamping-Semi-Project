@@ -46,7 +46,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	private IamportClient iamportClient;
 	
 	public PaymentService() {
-        this.iamportClient = new IamportClient("3375010277812188", "mgaKoMpLV17tc8oVjs15v3HoGesdCCXCvYe4CvDcol6M7FKU3MXB2cyncxvsSrrb8YuqRZXWmDhfRLUY");
+        this.iamportClient = new IamportClient("3360178750462177", "xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
     }
 
 	/**
@@ -167,8 +167,8 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	        log.debug("Retrieved payment: {}", payment);
 	        if (payment == null) {
 	            return "Payment not found";
-	        }
-	        
+	        } 
+	        log.debug("status= {}",payment.getPayStatus());
 	        // 결제 상태 확인
 	        if ("CANCEL".equals(payment.getPayStatus())) {
 	            log.info("Payment already cancelled for payId: {}", payId);
@@ -177,19 +177,24 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	                
 	        try {
 	        	String imp_uid = payment.getImpUid(); // 결제 고유 ID를 가져옴
+	        	log.debug("uid={}",imp_uid);
 	        	IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(new CancelData(imp_uid, true)); // 결제 취소 시도
-	            if (response.getResponse() != null) {
+	        	log.debug("new CancelData(imp_uid, true)={}", new CancelData(imp_uid, true));
+	        	log.debug("response.getResponse={}", response.getResponse());
+	        	if (response.getResponse() != null) {
 	            	payment.setPayStatus("CANCEL"); // 결제 상태를 CANCEL로 설정
+	            	log.debug("2");
 	            	paymentDao.updatePayment(payment); // 업데이트 메서드 호출로 DB에 반영
-
+	            	log.debug("3");
 	                // 취소 테이블에 취소 내역 저장
 	                PaymentCancelDto cancelDto = new PaymentCancelDto();
+	                log.debug("4");
 	                cancelDto.setCanId(payId);
 	                cancelDto.setCanPrice(payment.getResTotalPrice());
 	                
 	                log.debug("Attempting to insert payment cancel record: {}", cancelDto);
 	                int result = paymentCancelDao.insertPaymentCancel(cancelDto);
-	                if(result > 0) {
+	                if(result > 1) {
 	                    log.debug("Payment cancel record inserted successfully");
 	                } else {
 	                    log.error("Failed to insert payment cancel record");

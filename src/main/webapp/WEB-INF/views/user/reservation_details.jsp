@@ -34,7 +34,7 @@
                     <form>
                         <div class="mt-2">
                             <label for="resId" class="form-label">예약번호</label>
-                            <input id="resId" class="form-control"
+                            <input id="resId" name="resId" class="form-control"
                                 type="text" value="${resMaster.resId}" readonly />
                         </div>
                         <div class="mt-2">
@@ -43,62 +43,12 @@
                                 type="text" value="${resMaster.resCheckIn}"
                                 readonly />
                         </div>
-                        <!-- TODO: resNight으로 계산해서  checkout 날짜 뜨게 -->
-                        <div class="mt-2">
-                            <label for="resCheckOut" class="form-label">체크아웃 날짜</label>
-                            <input id="resCheckOut" class="form-control"
-                                type="text" value="${resMaster.resNight}"
-                                readonly />
+                        
+                        <div>
+                        <button id="btnPayCancel" class="btn btn-primary">결제 취소</button>
                         </div>
-                        <div class="mt-2">
-                            <label for="areaId" class="form-label">구역</label>
-                            <input id="areaId" class="form-control"
-                                type="text" value="${resMaster.areaId}"
-                                readonly />
-                        </div>
-                        <div class="mt-2">
-                            <label for="requirement" class="form-label">요청사항</label>
-                            <textarea id="requirement" class="form-control"
-                                rows="5" readonly>${resMaster.requirement}</textarea>
-                        </div>
-                        <div class="mt-2">
-                            <label for="resCreatedTime" class="form-label">최초 예약 시간</label> 
-                                <input id="resCreatedTime"
-                                class="form-control" type="text"
-                                value="${resMaster.resCreatedTime}" readonly />
-                        </div>
-                        <div class="mt-2">
-                            <label for="resModifiedTime" class="form-label">최종 수정 시간</label> 
-                            <input id="resModifiedTime"
-                                class="form-control" type="text"
-                                value="${resMaster.resModifiedTime}" readonly />
-                        </div>
-                        <div class="mt-2">
-                            <label for="resTotalPrice" class="form-label">총 가격</label> 
-                            <input id="resTotalPrice"
-                                class="form-control" type="text"
-                                value="${resMaster.resTotalPrice}" readonly />
-                        </div>
-                        <div class="mt-2">
-                            <label for="resState" class="form-label">예약 상태</label> 
-                            <input id="resState"
-                                class="form-control" type="text"
-                                value="<c:choose>
-                                        <c:when test='${resMaster.resState == 0}'>예약완료</c:when>
-                                        <c:when test='${resMaster.resState == 1}'>예약취소</c:when>
-                                        <c:otherwise>알 수 없음</c:otherwise>
-                                        </c:choose>" readonly />
-                        </div>
-                    </form>
-                </div>
-
-                <div class="card-footer d-flex justify-content-end">
-                    <div>
-                        <button class="btn btn-primary">예약 수정</button>
-                        <button class="btn btn-danger">예약 취소</button>
-                    </div>
-                </div>
-
+                        
+					 </form>
             </div>
         </main>
 </div>
@@ -107,10 +57,17 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+ 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+		
+        <c:url var="paymentCancel_js" value="/js/paymentCancel.js" />
+    <script src="${paymentCancel_js}"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
-    <c:url var="notify_delete_JS" value="/js/notice_delete.js" />
-    <script src="${notify_delete_JS}"></script>
+
 </body>
 </html>

@@ -13,7 +13,7 @@
         try {
             const response = await $.ajax({
                 type: "GET",
-                url: "/semiproject/reservation/payments/getPayId/" + resId,
+                url: "/semiproject/user/reservation_details/getPayId/" + resId,
                 dataType: 'json'
             });
             return response;
@@ -45,11 +45,16 @@
                 console.log("결제 취소 확인 단계에서 사용자가 취소함");
                 return;  // 사용자가 취소를 확인하지 않은 경우, 함수 실행을 중지합니다.
             }
-
-            const response = await fetch(`/semiproject/reservation/cancel/${payId}`, {
-                method: 'POST'
-            });
-
+			
+            //const response = await fetch(`/semiproject/user/reservation_details/cancel/${payId}`, {
+            //    method: 'POST'
+            //});
+			
+			const response = await $.ajax({
+                method: "POST",
+                url: `/user/reservation_details/cancel/${payId}`
+            }); 
+			
             const result = await response.text();
             if (response.ok) {
                 console.log("결제 취소 성공: ", result);
