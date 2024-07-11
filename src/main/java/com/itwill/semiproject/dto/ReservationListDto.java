@@ -2,6 +2,7 @@ package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.itwill.semiproject.repository.ReservationMaster;
 
@@ -17,7 +18,7 @@ public class ReservationListDto {
 	private Integer resId;
 	private LocalDate resCheckIn;
 	private Integer resState;
-	private String userName;
+	private String resCreatedTime;	
 	
 	public ReservationListDto fromEntity(ReservationMaster reservationMaster) {
 		return ReservationListDto.builder()
@@ -25,7 +26,7 @@ public class ReservationListDto {
 				.resId(reservationMaster.getResId())
 				.resCheckIn(reservationMaster.getResCheckIn())
 				.resState(reservationMaster.getResState())
-				.userName(userName)
+				.resCreatedTime(reservationMaster.getResCreatedTime())
 				.build();
 	}
 }

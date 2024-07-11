@@ -29,7 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 // 결제 관련 기능을 동작
 @Slf4j
 @Controller
+
 @RequestMapping("/")
+
 public class PaymentController {
 
 	// 아임포트 API와 상호작용하기 위한 클라이언트 객체
@@ -41,6 +43,7 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
+
 
 		this.api = new IamportClient("3360178750462177",
 				"xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
@@ -66,6 +69,7 @@ public class PaymentController {
 	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
 	@GetMapping("/reservation/paymentInfo")
+
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resId") Integer resId) { // resId를 매개로 결제
 																										// 정보 불러옴.
@@ -84,6 +88,7 @@ public class PaymentController {
 
 	// 결제 검증
 	@ResponseBody
+
 	@PostMapping("/reservation/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
 	        @PathVariable(value = "imp_uid") String imp_uid,
@@ -119,6 +124,7 @@ public class PaymentController {
 	}
 	
 	
+
 	@GetMapping("/reservation/succeeded/{merchant_uid}")
 	public String paymentSucceeded(@PathVariable String merchant_uid, Model model) {
 	    model.addAttribute("merchant_uid", merchant_uid);
@@ -126,6 +132,7 @@ public class PaymentController {
 	}
 	
 	
+
 	  @GetMapping("/user/reservation_details/getPayId/{resId}")
 	    public ResponseEntity<?> getPayId(@PathVariable("resId") Integer resId) {
 	        try {
@@ -142,6 +149,7 @@ public class PaymentController {
 	 * @param payId 결제 키로 결제를 식별
 	 * @return ResponseEntity 객체로 HTTP 응답 상태와 메세지를 반환.
 	 */
+
     @ResponseBody
     @PostMapping("/user/reservation_details/cancel/{payId}")
     public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
