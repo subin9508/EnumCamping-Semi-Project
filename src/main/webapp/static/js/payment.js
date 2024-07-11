@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
             name: paymentInfo.name,
-            amount: paymentInfo.amount,
+            amount: paymentInfo.resTotalPrice,
             buyer_email: paymentInfo.email,
             buyer_name: paymentInfo.buyerName,
             buyer_tel: paymentInfo.phoneNumber

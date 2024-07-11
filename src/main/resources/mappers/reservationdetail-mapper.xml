@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwill.semiproject.repository.ReservationDetailDao">
+    
+     <!-- 예약 상세 정보 삽입 -->
+    <insert id="insert">
+        INSERT INTO reservation_detail (item_id, item_quantity, item_amount) VALUES (#{itemId}, #{itemQuantity}, #{itemAmount})
+    </insert>
+    
+    <!-- 선택한 물품 리스트  -->
+    <select id="selectOrderByResId" resultType="ReservationDetail">
+        SELECT * FROM reservation_detail
+    </select>
+    
+    <!-- userId에 해당하는 reservation_detail -->
+    <select id="selectDetailsByUserId" resultType="ReservationDetail">
+        select rd.* from reservation_detail rd
+        join reservation_master rm on rd.res_id = rm.res_id
+         where rm.user_id = #{userId}        
+    </select>
+    
+    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->  
+    <delete id="deleteByResId">
+        delete from reservation_detail
+        where res_id in (select res_id from reservation_master where user_id = #{userId})
+    </delete>
+
+</mapper>

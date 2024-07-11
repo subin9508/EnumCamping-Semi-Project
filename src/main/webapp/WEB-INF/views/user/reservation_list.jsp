@@ -50,7 +50,7 @@
                                     </c:url>
                                     <a href="${reservationListDetails}">
                                     ${r.resId}</a></td>
-                                    <td>${r.areaId}</td>
+                                    <td>예약 구역</td>
                                     <td>${r.userName}</td>
                                     <td>${r.resCheckIn}</td>
                                     <td>
