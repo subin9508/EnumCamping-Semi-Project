@@ -44,6 +44,12 @@
     color: gray;
 }
 
+.card {
+    text-align: center;
+    width: 80%;
+    margin: 2px auto;
+}
+
 img {
     border-radius: 25px;
 }
