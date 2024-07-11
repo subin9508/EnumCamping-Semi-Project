@@ -88,11 +88,10 @@
                                     <input id="userPhone" type="text" class="form-control" name="userPhone" value="${user.userPhone}" >
                                 </div>
                             </div>
-                            <button id="btnUpdate" class="btn btn-primary">수정하기</button>
+                            <button id="btnUpdate" class="btn btn-primary">완료</button>
                         </form>
                     </div>
                     
-                    <div class="card-footer"></div>
                 </div>
             </div>
         </div>

@@ -80,7 +80,7 @@
             
         
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
-                <c:if test="${userRole eq 'admin'}">
+                <c:if test="${userRole eq 0}">
                 <button type="button" onclick="location.href ='create'"
                 class="btn btn-info">공지사항 작성</button>
                 </c:if>

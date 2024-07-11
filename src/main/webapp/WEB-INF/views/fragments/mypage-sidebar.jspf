@@ -12,7 +12,10 @@
     </div>
     <ul class="sidebar-menu">
         <li id="firstmenu">
-            <a href="password_check">정보수정</a>           
+            <c:url var="myPage" value="/user/myPage">
+                <c:param name="userId" value="${user.userId}" />
+            </c:url>
+            <a href="${myPage}">내 정보</a>           
         </li>
         <li>
             <c:url var="reservationListUrl" value="/user/reservation_list">

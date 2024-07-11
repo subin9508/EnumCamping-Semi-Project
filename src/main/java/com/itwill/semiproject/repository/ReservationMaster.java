@@ -1,6 +1,9 @@
 package com.itwill.semiproject.repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +18,13 @@ public class ReservationMaster {
 	private Integer resId;
 	private String userId;
 	private String requirement;
-	private LocalDate resCreatedTime;
-	private LocalDate resModifiedTime;
+//	private LocalDateTime resCreatedTime;
+	
+	private String resCreatedTime;
+	
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
+	private LocalDateTime resModifiedTime;
 	private LocalDate resCheckIn;
 	private LocalDate resCheckOut;
 	private Integer resTotalPrice;

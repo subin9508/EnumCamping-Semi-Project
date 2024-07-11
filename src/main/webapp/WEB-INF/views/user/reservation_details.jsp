@@ -46,45 +46,82 @@
                                     value="${resMaster.resCheckIn}"
                                     readonly />
                             </div>
+                            
                             <div class="mt-2">
                                 <label for="resCheckOut"
                                     class="form-label">체크아웃 날짜</label> <input
-                                    id="resCheckOut"
-                                    class="form-control" type="text"
+                                    id="resCheckIn" class="form-control"
+                                    type="text"
                                     value="${resMaster.resCheckOut}"
                                     readonly />
                             </div>
-                            <!-- 
+
                             <div class="mt-2">
-                                <label for="areaId" class="form-label">구역</label>
-                                <input id="areaId" class="form-control"
-                                    type="text"
-                                    value="${resMaster.areaId}" readonly />
+                                <label for="requirement" class="form-label">요청사항</label>
+                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" />
+                                ${requirementValue}
+                                </textarea>
                             </div>
-                             -->
+
                             <div class="mt-2">
-                                <label for="requirement"
-                                    class="form-label">요청사항</label>
-                                <textarea id="requirement"
-                                    class="form-control" rows="5"
-                                    readonly>${resMaster.requirement}</textarea>
-                            </div>
-                            <div class="mt-2">
-                                <label for="resCreatedTime"
-                                    class="form-label">최초 예약 시간</label>
+                                <label for="resCreatedTime" class="form-label">예약 일시</label>
                                 <input id="resCreatedTime"
                                     class="form-control" type="text"
                                     value="${resMaster.resCreatedTime}"
                                     readonly />
                             </div>
+                            
+                      <div class="mt-2">
+                        <label for="resArea" class="form-label">예약 구역</label>
+                        <c:forEach items="${resDetail}" var="item">
+                            <c:choose>
+                                <c:when test="${item.itemId ge 1 and item.itemId le 4}">
+                                    <c:set var="area" value="1구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 5 and item.itemId le 8}">
+                                    <c:set var="area" value="2구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 9 and item.itemId le 12}">
+                                    <c:set var="area" value="3구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 13 and item.itemId le 16}">
+                                    <c:set var="area" value="4구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 17 and item.itemId le 20}">
+                                    <c:set var="area" value="5구역" />
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                            <input readonly class="form-control" type="text" name="resArea" value="${area}" />
+                    </div>
+
+
                             <div class="mt-2">
-                                <label for="resModifiedTime"
-                                    class="form-label">최종 수정 시간</label>
-                                <input id="resModifiedTime"
-                                    class="form-control" type="text"
-                                    value="${resMaster.resModifiedTime}"
-                                    readonly />
+                                <label for="resItems" class="form-label">구매/대여 물품</label>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">물품 이름</th>
+                                            <th scope="col">물품 수량</th>
+                                            <th scope="col">물품 가격</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${resDetail}" var="item" varStatus="loop">
+                                            <c:if test="${item.itemId gt 20}">
+                                                <tr>
+                                                    <td>${item.itemName}</td>
+                                                    <td>${item.itemQuantity}</td>
+                                                    <td>${item.itemAmount}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </tbody>
+                                </table>
                             </div>
+
+    
                             <div class="mt-2">
                                 <label for="resTotalPrice"
                                     class="form-label">총 가격</label> <input
@@ -117,8 +154,7 @@
 
                     <div class="card-footer d-flex justify-content-end">
                         <div>
-                            <button class="btn btn-primary">예약
-                                수정</button>
+                            <button class="btn btn-primary">예약 변경</button>
                             <button id="btnDelete"
                                 class="btn btn-danger">예약 취소</button>
                         </div>
