@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 비밀번호 확인 필드 값이 변경될 때마다 checkPasswordMatch 함수를 호출합니다.
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
    
-   /**********************회원가입 후 메시지*****************************/
+   /**********************회원가입 후 메시지*****************
    
    const btnSignUp = document.getElementById('btnSignUp');
 
@@ -278,6 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'signin'; // signin 페이지로 이동
         }, 2000); // 2000ms(2초) 후에 이동
     });
-
+************/
 
 });
