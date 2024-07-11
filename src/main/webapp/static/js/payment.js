@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         try {
             const paymentInfo = await getPaymentInfo(resId);
+            console.log("결제 금액 확인",paymentInfo.amount);
             requestPayment(paymentInfo, resId);
         } catch (error) {
             console.error("결제 정보 조회 중 오류:", error);
@@ -23,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function requestPayment(paymentInfo, resId) {
         const IMP = window.IMP;
-        IMP.init('imp45647302');
+        IMP.init('imp53143455');
 
         IMP.request_pay({
-            pg: 'kakaopay',
+            pg: 'html5_inicis',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
             name: paymentInfo.name,
-            amount: paymentInfo.resTotalPrice,
+            amount: paymentInfo.amount,
             buyer_email: paymentInfo.email,
             buyer_name: paymentInfo.buyerName,
             buyer_tel: paymentInfo.phoneNumber

@@ -12,7 +12,7 @@ public class PaymentDto {
 	private String impUid; // 아임포트 UID
 	private String pgTid; // PG사 거래 ID
 	private Integer resId; // 예약 ID
-	private Integer amount; // 결제 금액
+	private Integer resTotalPrice; // 결제 금액
 	private LocalDate payDate; // 결제 날짜
 	private String payMethod; // 결제 방법
 	private String payStatus; // 결제 상태
@@ -21,7 +21,7 @@ public class PaymentDto {
 	
 	// DTO를 엔티티로 변환. payments 엔티티를 빌더 패턴을 사용해서 생성하고 각 필드 설정.
 	public Payments toEntity() {
-		return Payments.builder().payId(payId).impUid(impUid).pgTid(pgTid).resId(resId).amount(amount).payDate(payDate).payMethod(payMethod).payStatus(payStatus).buyerEmail(buyerEmail).build();
+		return Payments.builder().payId(payId).impUid(impUid).pgTid(pgTid).resId(resId).resTotalPrice(resTotalPrice).payDate(payDate).payMethod(payMethod).payStatus(payStatus).buyerEmail(buyerEmail).build();
 		
 }
 }
