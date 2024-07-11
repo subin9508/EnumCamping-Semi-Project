@@ -38,6 +38,8 @@
 
 #trHead {
     font-size: 25px;
+    background-color: #001522;
+    color: white;
 }
 
 #weekDays {
