@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.ReservationDetail;
+import com.itwill.semiproject.repository.ReservationDetailDao;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.ReservationMasterDao;
 import com.itwill.semiproject.repository.User;
@@ -24,6 +27,7 @@ public class UserService {
 
     private final UserDao userDao;
     private final ReservationMasterDao reservationMasterDao;
+    private final ReservationDetailDao reservationDetailDao;
 
 
 	// 아이디 중복 체크: true - 중복되지 않은 아이디(사용 가능한 아이디), false - 중복된 아이디.
@@ -102,19 +106,29 @@ public class UserService {
 	// 예약내역 read 메서드 추가
     public List<ReservationListDto> readReservationList(String userId) {
 		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
-		log.debug("list({})", list);
+		log.debug("Reservation list({})", list);
 	
 		return list;
 	}
 
     // 예약 상세 내역 read 메서드 추가
-    public ReservationMaster readReservationDetails(int resId) {
-    	log.debug("readReservationDetails({})", resId);
+    public ReservationMaster readReservationMasterDetails(int resId) {
+    	log.debug("readReservationMasterDetails({})", resId);
     	
     	ReservationMaster resMaster = reservationMasterDao.selectByResId(resId);
-    	log.debug("{}", resMaster);
+    	log.debug("ReservationMaster = {}", resMaster);
     	
     	return resMaster;
+    }
+    
+    //예약 detail 읽는 메서드
+    public List<ReservationDetailListDto> readReservationDetails(int resId) {
+    	log.debug("readReservationDetails({})", resId);
+    	
+    	List<ReservationDetailListDto> resDetails= reservationDetailDao.selectItemsByResId(resId);
+    	log.debug("ReservationDetails = {}", resDetails);
+    	
+    	return resDetails;
     }
 
 	public User searchPassword(User user) {

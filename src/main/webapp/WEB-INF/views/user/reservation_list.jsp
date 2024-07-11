@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Insert title here</title>
+    <title>ENUM CAMPING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
@@ -34,34 +35,38 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>예약번호</th>
-                                <th>예약사이트</th>
-                                <th>예약자</th>
-                                <th>예약일</th>
-                                <th>예약상태</th>
+                                <th>예약 번호</th>
+                                <th>숙박일</th>
+                                <th>예약 일시</th>
+                                <th>예약 상태</th>
                             </tr>
                         </thead>
                         <tbody>
                            <c:forEach items="${reservations}" var="r">
+                           
                                 <tr>
                                     <td>
                                     <c:url var="reservationListDetails" value="/user/reservation_details">
                                     <c:param name="resId" value="${r.resId}"></c:param>
                                     </c:url>
-                                    <a href="${reservationListDetails}">
-                                    ${r.resId}</a></td>
-                                    <td>예약 구역</td>
-                                    <td>${r.userName}</td>
+                                    <a href="${reservationListDetails}">${r.resId}</a>
+                                    </td>
                                     <td>${r.resCheckIn}</td>
+                                    <td>${r.resCreatedTime}</td>  
+                                              
                                     <td>
                                         <c:if test="${r.resState == 0}">
-                                            예약완료
+                                            예약대기
                                         </c:if>
                                         <c:if test="${r.resState == 1}">
+                                            예약완료
+                                        </c:if>
+                                        <c:if test="${r.resState == 2}">
                                             예약취소
                                         </c:if>
                                     </td>
                                 </tr>
+                                
                             </c:forEach>
                         
                         </tbody>

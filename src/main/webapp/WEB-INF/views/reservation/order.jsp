@@ -177,8 +177,7 @@
                         method="get">  -->
                         <input type="hidden" name="resId" id="resId" value="${reservationMaster.resId}" />
                         <button id="btnPayment"
-                            class="btn btn-primary" type="submit"
-                            disabled>결제하기</button>
+                            class="btn btn-primary" disabled>결제하기</button>
                     <!-- </form>  -->
                 </div>
             </main>
@@ -194,8 +193,15 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
-            <c:url var="payment_js" value="/js/payment.js" />
+
+ 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
+	
+	<c:url var="payment_js" value="/js/payment.js" />
     <script src="${payment_js}"></script>
     
     <c:url var="weatherJS" value="/js/weather.js" />

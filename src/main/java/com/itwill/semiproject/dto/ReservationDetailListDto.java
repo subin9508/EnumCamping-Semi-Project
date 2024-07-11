@@ -1,5 +1,6 @@
 package com.itwill.semiproject.dto;
 
+import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ReservationDetail;
 
 import lombok.AllArgsConstructor;
@@ -13,12 +14,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReservationDetailListDto {
 
-	private Integer detailId;
+//	private Integer detailId;
 	private Integer itemId;
 	private Integer itemQuantity;
 	private Integer itemAmount;
 	private String itemName;  
-    private String itemImg;
+  private String itemImg;
 	
 	public ReservationDetail fromEntity(ReservationDetail reservationDetail) {
 		return ReservationDetail.builder()
@@ -27,7 +28,7 @@ public class ReservationDetailListDto {
 				.itemQuantity(reservationDetail.getItemQuantity())
 				.itemAmount(reservationDetail.getItemAmount())
 				.itemName(reservationDetail.getItemName()) 
-                .itemImg(reservationDetail.getItemImg()) 
+        .itemImg(reservationDetail.getItemImg()) 
 				.build();
 	}
 }

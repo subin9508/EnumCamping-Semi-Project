@@ -23,6 +23,7 @@
 
 </head>
 <body>
+
     <div class="wrapper">
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
@@ -35,6 +36,35 @@
                     <h1>
                         <strong>[편의시설]</strong>
                     </h1>
+
+        <div class="facilities-section">        
+            
+            <div class="facilities-card">
+                <h5>개수대</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_sink.jpg"
+                        var="intro2_sink" />
+                    <img alt="sink" src="${intro2_sink}" class="img"
+                        height=400px width=500px id="sinkImage" />
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>샤워실</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_shower.jpg"
+                        var="intro2_shower" />
+                    <img alt="shower" src="${intro2_shower}" class="img"
+                        height=400px width=500px id="showerImage" />
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>화장실</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/intro2_toilet.jpg"
+                        var="intro2_toilet" />
+                    <img alt="toilet" src="${intro2_toilet}" class="img"
+                        height=400px width=500px id="toiletImage" />
+
                 </div>
                 <br /> <br />
                 <div class="container">
@@ -76,7 +106,39 @@
                                     id="toiletImage" />
                             </div>
 
-                        </div>
+        <div class="facilities-section">
+            <div class="facilities-card">
+                <h5>바베큐장</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/barbecue.gif"
+                        var="intro2_barbecue" />
+                    <img alt="barbecue" src="${intro2_barbecue}"
+                        class="img" height=400px width=500px
+                        id="barbecueImage" />
+
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>캠프파이어존</h5>
+                <div class="img-container">
+                    <c:url value="/images/intro/campfire.gif"
+                        var="intro2_campfire" />
+                    <img alt="campfire" src="${intro2_campfire}" class="img"
+                        height=400px width=500px id="campFierImage" />
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>매점</h5>
+                <div class="img-container">
+                <c:url value="/images/intro/intro2_store.png"
+                    var="intro2_store" />
+                <img alt="store" src="${intro2_store}" class="img"
+                    height=400px width=500px id="storeImage" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 
                     </div>
 
