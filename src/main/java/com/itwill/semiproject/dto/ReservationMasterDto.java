@@ -1,7 +1,9 @@
 package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
+
 import java.util.Date;
 
 import com.itwill.semiproject.repository.ReservationMaster;
@@ -15,8 +17,10 @@ public class ReservationMasterDto {
     private Integer resId; // 예약 ID
     private String userId; // 사용자 ID
     private String requirement; // 요청 사항
+
     private String resCreatedTime; // 예약 최초 시간
     private LocalDateTime resModifiedTime; // 예약 수정 시간
+
     private LocalDate resCheckIn; // 체크인 날짜
     private LocalDate resCheckOut; // 체크아웃 날짜 
     private Integer resTotalPrice; // 예약 총 가격

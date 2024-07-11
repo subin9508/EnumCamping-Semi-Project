@@ -25,6 +25,7 @@
         <div class="footer-main-content">
             <%@ include file="../fragments/mypage-sidebar.jspf"%>
 
+
             <main>
                 <div class="mt-2 card">
                     <div class="card-header">
@@ -166,14 +167,15 @@
 
         <%@ include file="../fragments/footer.jspf"%>
     </div>
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
-    <c:url var="notify_delete_JS" value="/js/notice_delete.js" />
-    <script src="${notify_delete_JS}"></script>
+
 </body>
 </html>

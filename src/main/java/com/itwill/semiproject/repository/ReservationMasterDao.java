@@ -11,6 +11,7 @@ public interface ReservationMasterDao {
 
 	// 예약 id로 예약 정보를 조회
 	List<ReservationListDto> selectByUserId (String userId);
+	// 예약 id로 예약 정보를 조회
 	ReservationMaster selectByResId(Integer resId);
 	List<Integer> selectByResCheckIn(@Param("resCheckIn") String resCheckIn);
 	List<ReservationMaster> selectByItemIdAndResCheckIn(@Param("itemId") int itemId, @Param("resCheckIn") String resCheckIn);

@@ -29,8 +29,8 @@
         from reservation_master rm
         join reservation_detail rd ON rm.res_id = rd.res_id
         where rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD')
-        	or(rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') - INTERVAL '1' DAY
-        		and rm.res_check_out - rm.res_check_in = 2)
+            or(rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') - INTERVAL '1' DAY
+                and rm.res_check_out - rm.res_check_in = 2)
     </select>
     
     <!-- 구역 선택 후 가능한 night 수 -->
@@ -44,8 +44,8 @@
     
     <!-- reservation_master에 데이터 삽입 -->
     <insert id="insertReservationMaster" useGeneratedKeys="true" keyProperty="resId" keyColumn="res_id">
-        insert into reservation_master (user_id, res_check_in, res_check_out)
-        values (#{userId}, #{resCheckIn}, #{resCheckOut})
+        insert into reservation_master (user_id, res_check_in, res_check_out, res_total_price)
+        values (#{userId}, #{resCheckIn}, #{resCheckOut}, #{resTotalPrice})
     </insert>
     
     <!-- reservation_detail에 데이터 삽입 -->
@@ -59,10 +59,10 @@
         delete from reservation_master where user_id = #{userId} and res_state = 0
     </delete>
     
-    <!-- userId에 해당하는 reservation_detail -->
+    <!-- userId에 해당하는 reservation_master -->
     <select id="selectMasterByUserId" resultType="ReservationMaster">
         select * from reservation_master
-         where user_id = #{userId}        
+         where user_id = #{userId} and res_state = 0     
     </select>
 
 </mapper>

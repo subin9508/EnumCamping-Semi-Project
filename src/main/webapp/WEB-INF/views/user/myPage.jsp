@@ -85,15 +85,17 @@
 
 							</form>
 
+
 							<!-- 수정하기 버튼 추가 -->
 							<div class="mb-3 row">
 								<div class="col-sm-8 offset-sm-2">
 									<button id="btnModify" class="btn btn-primary"><a href="password_check">수정하기</a></button>
+
 								</div>
 							</div>
 						</div>
 
-						
+
                 </div>
             </div>
         </div>
@@ -109,8 +111,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
     crossorigin="anonymous"></script>
+
         <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
+
 
 </body>
 </html>
