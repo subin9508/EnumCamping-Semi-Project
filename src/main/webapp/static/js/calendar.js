@@ -4,6 +4,7 @@
  
  document.addEventListener("DOMContentLoaded", function() {
         selectedDate = null;
+        selectedNight = null;
         buildCalendar();
         
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
@@ -21,6 +22,7 @@
     var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
     var selectedDate = null;
     var selectedArea= null;
+    var selectedNight = null;
 
     function prevCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
@@ -199,6 +201,7 @@
         const month = document.getElementById("calMonth").innerText;
         const day = column.innerText;
         selectedDate = `${year}-${autoLeftPad(month, 2)}-${autoLeftPad(day, 2)}`;
+        selectedNight = null;
         console.log('calendarChoiceDay - selectedDate=', selectedDate);
         
         // night 라디오 버튼 숨기기
@@ -221,6 +224,10 @@
         });
         
         selectedArea = null;
+        
+        // 아이템 테이블 숨기기
+        const itemsTable = document.getElementById('items-table');
+        itemsTable.style.display = 'none';
         
         
         // 두 가지 조건이 모두 만족되었는지 확인하여 함수 호출
@@ -267,6 +274,7 @@
                 
                 // 현재 areaIndex에 속하는 모든 구역 번호
                 const areaNumbers = Array.from({ length: 4 }, (_, k) => (areaIndex - 1) * 4 + k + 1);
+                console.log(`areaNumbers=${areaNumbers}`, area)
             
                 // 예약된 구역이 하나라도 포함되어 있는지 확인
                 const isReserved = areaNumbers.some(num => reservedAreas.includes(num));
@@ -337,7 +345,7 @@
                 console.log(checkedDateAndArea);
                 
                 const nightCard = document.getElementById('night-card');
-                const nightRadioLabel = document.getElementById('night-radio-label');
+                const nightRadioLabel = document.getElementById('night-radio_label');
                 
                 // nigthCard 초기화
                 nightRadioLabel.innerHTML = '';
@@ -345,19 +353,28 @@
                 if (checkedDateAndArea.length === 0) {
                     // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
                     nightRadioLabel.innerHTML = `
-                        <input class="night-radio" type="radio" name="night" value="1">
-                        <span class="radio_icon"></span>
-                        <span class="radio_text">1박 2일</span>
-                        <input class="night-radio" type="radio" name="night" value="2">
-                        <span class="radio_icon"></span>
-                        <span class="radio_text">2박 3일</span>
+                        <h5> <strong>체류기간<strong> </h5>
+                        <div class="radio-options">
+                            <label>
+                                <input class="night-radio" type="radio" name="night" value="1">
+                                <span class="night-radio_text">1박 2일</span>
+                            </label>
+                            <label>
+                                <input class="night-radio" type="radio" name="night" value="2">
+                                <span class="night-radio_text">2박 3일</span>
+                            </label>
+                        </div>
                     `;
                 } else {
                     // 다음날 예약이 있는 경우 1박 옵션만 표시
                     nightRadioLabel.innerHTML = `
-                        <input class="night-radio" type="radio" name="night" value="1">
-                        <span class="radio_icon"></span>
-                        <span class="radio_text">1박 2일</span>
+                        <h5> <strong>체류기간<strong> </h5>
+                        <div class="radio-options">
+                            <label>
+                                <input class="night-radio" type="radio" name="night" value="1">
+                                <span class="night-radio_text">1박 2일</span>
+                            </label>
+                        </div>
                     `;
                 }
                 
@@ -402,7 +419,7 @@
 
         const baseItemId = (selectedArea - 1) * 4;
         const itemId = baseItemId + seasonFactor + weekendFactor + 1;
-
+        
         const uri = `../reservation/itemPrice/${itemId}`;
 
         console.log('updatePrice()', uri);
@@ -412,6 +429,9 @@
                 const price = (response.data) * selectedNight;
                 document.getElementById('price-value').innerText = price;
                 updateTotalAllItems();
+                
+                // addNextPageEventListeners 함수에 itemId 전달
+                addNextPageEventListeners(year, month, day, itemId, selectedNight);
             })
             .catch(error => {
                 console.error("There was an error fetching the price!", error);
@@ -484,14 +504,13 @@
                     const year = document.getElementById("calYear").innerText;
                     const month = autoLeftPad(document.getElementById("calMonth").innerText, 2);
                     const day = autoLeftPad(document.getElementsByClassName("choiceDay")[0].innerText, 2);
-                    const selectedNight = this.value;
+                    selectedNight = this.value;
                     const items = document.getElementById("items-table");
                     const totalAllItemsElement = document.getElementById('totalAllItems');
                     
                     console.log('selectedNight', selectedNight);
 
                     updatePrice(year, month, day, selectedArea, selectedNight);
-                    addNextPageEventListeners(year, month, day, selectedArea, selectedNight);
                     
                     items.style.display = 'block';
                     totalAllItemsElement.style.display = 'block';
@@ -501,7 +520,7 @@
     }
     
     // 예약하기 버튼에 이벤트 리스너 추가
-    function addNextPageEventListeners(year, month, day, selectedArea, selectedNight) {
+    function addNextPageEventListeners(year, month, day, itemId, selectedNight) {
         console.log('addNextPageEventListeners()');
 
         // 기존 이벤트 리스너 제거
@@ -518,14 +537,17 @@
                 }
             
                 const date = `${year}-${month}-${day}`;
+                const requirement = document.getElementById("special-requests").value;
                 const reservationMaster = {
                     resCheckIn: date,
                     resCheckOut: calculateCheckOutDate(date, selectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
-                    resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')) // 총 가격 추가
+                    resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')), // 총 가격 추가
+                    requirement: requirement
                 };
+                console.log('reservationMaster: {}', reservationMaster);
 
                 const mainReservationDetail = {
-                    itemId: selectedArea,
+                    itemId: itemId,
                     itemQuantity: 1,
                     itemAmount: document.getElementById('price-value').innerText
                 };

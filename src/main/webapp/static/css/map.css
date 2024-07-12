@@ -72,6 +72,7 @@
     border-color: #ebebeb;
     border-width: 1px 0px 0px 0px;
     height: 91px;
+    width: 96%;
     position: absolute;
     right: 200px;
     left: 0px;
@@ -135,6 +136,7 @@
     border-color: #ebebeb;
     border-width: 1px 0px 0px 0px;
     height: 190px;
+    width: 96%;
     position: absolute;
     right: 200px;
     left: 0px;
@@ -267,6 +269,7 @@
 
 .background {
     background: #f8f9fa;
+    width: 96%;
     height: 600px;
     position: absolute;
     right: 100px;
@@ -277,6 +280,7 @@
 
 .background2 {
     background: #ffffff;
+    width: 96%;
     height: 65px;
     position: absolute;
     right: 300px;
@@ -286,6 +290,7 @@
 
 .container1 {
     height: 38px;
+    width: 96%;
     position: absolute;
     right: 265px;
     left: 20px;
@@ -316,6 +321,7 @@
     border-color: #ebebeb;
     border-width: 1px 0px 0px 0px;
     height: 200px;
+    width: 96%;
     position: absolute;
     right: 200px;
     left: 0px;
@@ -327,6 +333,7 @@
     border-color: #ebebeb;
     border-width: 1px 0px 0px 0px;
     height: 180px;
+    width: 96%;
     position: absolute;
     right: 410px;
     left: 50px;
@@ -336,6 +343,7 @@
 .descriptions3 {
     width: 900px;
     height: 300px;
+    width: 96%;
     position: absolute;
     left: 0px;
     top: 1px;
