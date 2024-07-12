@@ -22,8 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		//결제 정보를 조회하는 비동기 함수 호출
         try {
             const paymentInfo = await getPaymentInfo(resId);
-            console.log("결제 금액 확인",paymentInfo.amount);
+
+            if(paymentInfo.res_state === 1) {
+				alert('이미 결제가 완료된 예약입니다.');
+				return;
+			}
+  console.log("결제 금액 확인",paymentInfo.amount);
             console.log(paymentInfo);
+
             requestPayment(paymentInfo, resId);
         } catch (error) {
             console.error("결제 정보 조회 중 오류:", error);
@@ -36,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		//I'mport 결제 라이브러리 초기화
         const IMP = window.IMP;
         IMP.init('imp53143455');
-
         IMP.request_pay({ //요청 전문양식을 그대로 가지고와서 우리 입맛에 맞게 넣음
+
             pg: 'html5_inicis',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(), //우리 상점에서 이런 결제를 할거라고 알림
@@ -46,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             buyer_email: paymentInfo.email, //구매자 이메일
             buyer_name: paymentInfo.buyerName, //구매자 이름
             buyer_tel: paymentInfo.phoneNumber //구매자 핸드폰 번호
+
         }, function(rsp) {
             handlePaymentResponse(rsp, resId); //응답함수를 실행
         });
@@ -67,7 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     //주문번호 추출 및 로깅
                     const orderNum = result.merchant_uid || (result.payment && result.payment.merchantUid) || 'unknown';
                     console.log("이동할 주문번호:", orderNum);
+
+                    window.location.href = `/semiproject/reservation/succeeded/${orderNum}`;
+                } else if (result.message === "이미 결제가 완료된 예약입니다.") {
+                	alert(result.message);
+
                     window.location.href = `/semiproject/reservation/succeeded/${orderNum}`; //결제 성공페이지로감
+
                 } else {
                     throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
                 }
@@ -88,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			//서버에 결제 정보 조회 요청
             const response = await $.ajax({
                 type: "GET",
-                url: "/semiproject/reservation/paymentInfo?resId=" + resId,
+                url: "/semiproject/reservation/paymentInfo/" + resId,
                 dataType: 'json'
             });
             return response;

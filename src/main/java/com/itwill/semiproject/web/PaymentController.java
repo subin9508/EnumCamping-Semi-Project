@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/") // 해당 클래스의 기본 URL 매핑을 설정
+@RequestMapping("/reservation") // 해당 클래스의 기본 URL 매핑을 설정
 public class PaymentController {
 
 	// 아임포트 API와 상호작용하기 위한 클라이언트 객체를 정의
@@ -39,8 +39,8 @@ public class PaymentController {
 	@Setter(onMethod_ = @Autowired)
 	private PaymentService paymentService;
 
-	// 기본 생성자. 가맹점 식별키와 비밀키를 전달하여 API 인증을 수행
-	public PaymentController() { 
+	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
+
 		this.api = new IamportClient("3360178750462177",
 				"xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
 	}
@@ -60,11 +60,12 @@ public class PaymentController {
 	}
 	*/
 
-	// resId 파라미터를 받아 결제 서비스를 통해 해당 결제 정보를 조회하고 JSON 형식으로 반환
-	@GetMapping("/reservation/paymentInfo")
-
+	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
+	// 응답 반환.
+	@GetMapping("/paymentInfo/{resId}")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getPaymentInfo(@RequestParam("resId") Integer resId) { // resId를 매개로 결제 정보를 불러옴.
+	public ResponseEntity<Map<String, Object>> getPaymentInfo(@PathVariable("resId") Integer resId) { // resId를 매개로 결제
+																										// 정보 불러옴.
 		try {
 			Map<String, Object> paymentInfo = paymentService.getPaymentInfoByResId(resId); // 결제 정보를 조회
 			return ResponseEntity.ok(paymentInfo); // 조회된 결제 정보를 반환
@@ -79,20 +80,37 @@ public class PaymentController {
 	// 결제 검증을 수행하는 메서드
 	@ResponseBody
 
-	@PostMapping("/reservation/verifyIamport/{imp_uid}")
+	@PostMapping("/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
-	        @PathVariable(value = "imp_uid") String imp_uid, //url 경로에서 'imp_uid'를 변수로 추출
-	        @RequestParam("resId") Integer resId //요청 파라미터에서 'resId'를 추출
+	        @PathVariable(value = "imp_uid") String imp_uid,
+	        @RequestParam("resId") Integer resId
 	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
 	    log.trace("paymentByImpUid({}, {}) invoked.", imp_uid, resId);
 
 	    try {
 	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 아임포트 API를 통해 결제 정보를 조회
 	        
-	        if ("paid".equals(payment.getStatus())) { // 결제가 성공적으로 완료된 경우
-	            String result = this.paymentService.savePayment(payment, resId); // 결제 정보를 데이터베이스에 저장
+	        if ("paid".equals(payment.getStatus())) {
+	        	// 먼저 예약 상태를 확인
+	        	Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
+	        	if(paymentInfo != null) {
+	        		Object resStateObj = paymentInfo.get("res_state");
+	        			if(resStateObj != null) {
+	        				int resState = ((Number) resStateObj).intValue();
+	        					if(resState == 1) {
+	        						// 이미 결제가 완료된 예약이면 오류 반환
+	        						return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
+	        					}
+	        			}
+	        	}
+	        	
+	            String result = this.paymentService.savePayment(payment, resId);
 	            log.info("Payment saved successfully: {}", result);
-	            // 결제 정보를 JSON 형식으로 반환
+	            
+	            // 결제 성공 시 예약 상태를 1로 업데이트
+	            this.paymentService.updateReservationState(resId, 1);
+	      
+	            // 결제 정보를 그대로 반환
 	            return ResponseEntity.ok(Map.of(
 	                    "status", payment.getStatus(),
 	                    "merchant_uid", payment.getMerchantUid(),
@@ -130,22 +148,40 @@ public class PaymentController {
 	    }
 	}
 	
-	// 결제 취소 요청을 처리하는 메서드
-	@ResponseBody
-	@PostMapping("/user/reservation_details/cancel/{payId}")
-	public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
-	    try {
-	        String result = paymentService.cancelPayment(payId); // 결제 취소를 처리
-	        log.debug("!@#!@#!@#post result: {}", result);
-	        if (result.equals("Payment cancellation successful")) { // 결제 취소가 성공한 경우
-	            return ResponseEntity.ok(result);
-	        } else {
-	            // 결과 메시지에 따라 적절한 HTTP 상태 코드를 반환
-	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
-	        }
-	    } catch (ServiceException e) { // 예외 처리
-	        log.error("Error during payment cancellation for payId: {}", payId, e);
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cancellation failed: " + e.getMessage());
-	    }
-	}
+	
+	/**
+	 * 결제 취소 요청을 처리하는 메서드
+	 * @param payId 결제 키로 결제를 식별
+	 * @return ResponseEntity 객체로 HTTP 응답 상태와 메세지를 반환.
+	 */
+    @PostMapping("/cancel/{payId}")
+    public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
+        try {
+            String result = paymentService.cancelPayment(payId);
+            if (result.equals("Payment cancellation successful")) {
+            	
+            	// 결제 취소가 성공했을 때 예약 상태를 업데이트
+            	Integer resId = paymentService.getPayIdByResId(payId);
+            	if(resId != null) {
+            		paymentService.updateReservationState(resId, 2); // 2는 취소 상태
+            		log.info("Reservation state updated to cancelled for resId: {}", resId);
+            		} else {
+            			log.warn("Could not find reservation for payId: {}", payId);
+            		}
+            	
+                return ResponseEntity.ok(result);
+            } else {
+                // 결과 메시지에 따라 적절한 HTTP 상태 코드를 반환
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+            }
+        } catch (ServiceException e) {  // ServiceException 대신 RuntimeException 처리
+            log.error("Error during payment cancellation for payId: {}", payId, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Cancellation failed: " + e.getMessage());
+        }
+    }
+	
+	
+	
+	
+	
 }
