@@ -28,13 +28,120 @@
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
 
-             <main
-                style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
+             <main style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
+             <div class="mt-2 card">
+                    <div class="card-header">
+                        <h2>예약내역</h2>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="d-flex">
+                                <div class="mt-2 flex-fill me-2">
+                                    <label for="resCheckIn"
+                                        class="form-label">체크인
+                                        날짜</label> <input id="resCheckIn"
+                                        class="form-control" type="text"
+                                        value="${resMaster.resCheckIn}"
+                                        readonly />
+                                </div><br/><br/>~<div>
+                                
+                                </div>
+                                <div class="mt-2 flex-fill ms-2">
+                                    <label for="resCheckOut"
+                                        class="form-label">체크아웃
+                                        날짜</label> <input id="resCheckOut"
+                                        class="form-control" type="text"
+                                        value="${resMaster.resCheckOut}"
+                                        readonly />
+                                </div>
+                            </div>
+
+
+
+                            <div class="mt-2">
+                                <label for="resCreatedTime" class="form-label">예약 일시</label>
+                                <input id="resCreatedTime"
+                                    class="form-control" type="text"
+                                    value="${resMaster.resCreatedTime}"
+                                    readonly />
+                            </div>
+                            
+                      <div class="mt-2">
+                        <label for="resArea" class="form-label">예약 구역</label>
+                        <c:forEach items="${resDetail}" var="item">
+                            <c:choose>
+                                <c:when test="${item.itemId ge 1 and item.itemId le 4}">
+                                    <c:set var="area" value="1구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 5 and item.itemId le 8}">
+                                    <c:set var="area" value="2구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 9 and item.itemId le 12}">
+                                    <c:set var="area" value="3구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 13 and item.itemId le 16}">
+                                    <c:set var="area" value="4구역" />
+                                </c:when>
+                                <c:when test="${item.itemId ge 17 and item.itemId le 20}">
+                                    <c:set var="area" value="5구역" />
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                            <input readonly class="form-control" type="text" name="resArea" value="${area}" />
+                    </div>
+
+
+                            <div class="mt-2">
+                                <label for="resItems" class="form-label">구매/대여 물품</label>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">물품 이름</th>
+                                            <th scope="col">물품 수량</th>
+                                            <th scope="col">물품 가격</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${resDetail}" var="item" varStatus="loop">
+                                            <c:if test="${item.itemId gt 20}">
+                                                <tr>
+                                                    <td>${item.itemName}</td>
+                                                    <td>${item.itemQuantity}</td>
+                                                    <td>${item.itemAmount}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="mt-2">
+                                <label for="requirement" class="form-label">요청사항</label>
+                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" />
+                                ${requirementValue}
+                                </textarea>
+                            </div>
+                            
+                            <div class="mt-2">
+                                <label for="resTotalPrice"
+                                    class="form-label">총 가격</label> <input
+                                    id="resTotalPrice"
+                                    class="form-control" type="text"
+                                    value="${resMaster.resTotalPrice}"
+                                    readonly />
+                            </div>
+                        </form>
+                        
+                    </div>
+
+                </div>
                 <div class="container-fluid d-flex justify-content-center">
                     <!-- 결제 완료 메시지 -->
                     <div class="text-center mt-5">
                         <h2>결제가 완료되었습니다</h2>
                         <p>이용해 주셔서 감사합니다.</p>
+                        <a href="../user/reservation_list" class="btn btn-primary mt-3">예약 상세내역으로 가기</a>
                         <a href="/semiproject/" class="btn btn-primary mt-3">홈으로 가기</a>
                     </div>
                 </div>

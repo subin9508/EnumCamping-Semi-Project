@@ -1,6 +1,7 @@
 package com.itwill.semiproject.web;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.exception.ControllerException;
 import com.itwill.semiproject.exception.ServiceException;
 import com.itwill.semiproject.repository.APIResponse;
+import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.service.PaymentService;
+import com.itwill.semiproject.service.UserService;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.response.Payment;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/reservation") // 해당 클래스의 기본 URL 매핑을 설정
 public class PaymentController {
 
+	
 	// 아임포트 API와 상호작용하기 위한 클라이언트 객체를 정의
 	private IamportClient api;
 
@@ -38,6 +45,10 @@ public class PaymentController {
 	// 스프링에 의해 PaymentService 타입의 빈을 주입
 	@Setter(onMethod_ = @Autowired)
 	private PaymentService paymentService;
+	
+	 // 스프링에 의해 UserService 타입의 빈을 주입
+    @Setter(onMethod_ = @Autowired)
+    private UserService userService; 
 
 	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
 
@@ -131,11 +142,20 @@ public class PaymentController {
 	}
 	
 	// 결제 성공 페이지를 매핑하는 메서드
-	@GetMapping("/reservation/succeeded/{merchant_uid}")
-	public String paymentSucceeded(@PathVariable String merchant_uid, Model model) {
-	    model.addAttribute("merchant_uid", merchant_uid); // 모델에 merchant_uid를 추가
+	@GetMapping("/reservation/succeeded/{resId}")
+	public String paymentSucceeded(@PathVariable("resId") Integer resId, Model model, HttpSession session) {
+	    ReservationMaster resMaster = userService.readReservationMasterDetails(resId);
+	    List<ReservationDetailListDto> resDetail = userService.readReservationDetails(resId);
+
+	    Integer userId = (Integer) session.getAttribute("userId"); // 세션에서 userId 가져오기
+	    model.addAttribute("res_id", resId); // 모델에 resId 추가
+	    model.addAttribute("resMaster", resMaster);
+	    model.addAttribute("resDetail", resDetail);
+	    model.addAttribute("userId", userId); // 모델에 userId 추가
+
 	    return "reservation/succeeded"; // succeeded.jsp 파일을 가리킴
 	}
+	
 	
 	// 예약 ID를 통해 결제 ID를 조회하는 메서드
 	@GetMapping("/user/reservation_details/getPayId/{resId}")

@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
+
 	//결제 응답 처리 비동기 함수
     async function handlePaymentResponse(rsp, resId) {
 		//결제 응답 로깅
@@ -87,12 +88,17 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error("결제 검증 및 저장 중 오류:", error);
                 alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
+
             }
-        } else {
-            console.log('Payment Failed:', rsp);
-            alert('결제에 실패했습니다. 다시 시도해 주세요.');
+        } catch (error) {
+            console.error("결제 검증 및 저장 중 오류:", error);
+            alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
         }
+    } else {
+        console.log('Payment Failed:', rsp);
+        alert('결제에 실패했습니다. 다시 시도해 주세요.');
     }
+}
 
 //결제 정보 조회함수
     async function getPaymentInfo(resId) {
