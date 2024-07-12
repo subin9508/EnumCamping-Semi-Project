@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.Session;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itwill.semiproject.dto.ReservationDetailCreateDto;
 import com.itwill.semiproject.dto.ReservationDetailListDto;
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.repository.Items;
 import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
@@ -185,6 +187,19 @@ public class ReservationController {
 		
 		model.addAttribute("items", items);
 		return "/reservation/items";
+	}
+	
+	@GetMapping("/reservationConfirm")
+	public String reservationConfirm(@RequestParam(name = "resId") int resId, Model model) {
+		log.debug("reservationConfirm()");
+		
+		ReservationMaster resMaster = userService.readReservationMasterDetails(resId);
+		List<ReservationDetailListDto> resDetail = userService.readReservationDetails(resId);
+
+		model.addAttribute("resMaster", resMaster);
+		model.addAttribute("resDetail", resDetail);
+
+		return "reservation/reservationConfirm";
 	}
 	
 }
