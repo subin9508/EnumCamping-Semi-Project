@@ -24,5 +24,18 @@ public interface UserDao {
 
 	String findPasswordByNameAndEmailAndId(@Param("user_name") String name, @Param("user_email") String email,
 			@Param("user_id") String id);
+	
+	
+	Integer checkPassword(Integer id, String password); // 비밀번호 확인 메서드
+	
+	int deactivateUser(Integer id); // 회원 비활성화 메서드
+	
+    int insertDeletedUser(Integer id); // 탈퇴 회원 정보 저장 메서드
+    
+    User selectUserById(Integer id); // 사용자 ID로 사용자 정보 조회 메서드
+    
+    Integer checkUserIsActive(String userId); // 회원 활성 확인 여부 메서드
+    
+    Integer checkDeactivationPeriod(String userId); // 비활성화 기간 확인 메서드
 
 }

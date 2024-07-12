@@ -27,7 +27,10 @@
            <a href="">문의내역</a> 
         </li>
         <li>
-            <a href="">회원탈퇴</a>
+            <c:url var="userWithdraw" value="/user/user_withdraw">
+	            <c:param name="userId" value="${user.userId}" />
+            </c:url>
+            <a href="${userWithdraw}">회원탈퇴</a>
         </li>
     </ul>
 </aside>

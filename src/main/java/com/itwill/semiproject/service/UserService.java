@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
@@ -160,4 +161,35 @@ public class UserService {
 		return null;
 	}
 
+	// 회원탈퇴 관련
+	@Transactional
+    public boolean deactivateAccount(Integer id, String password) {
+        // 비밀번호 확인
+    	Integer count = userDao.checkPassword(id, password);
+        if (count == 0) {
+            return false; // 비밀번호가 일치하지 않으면 false 반환
+        }
+        
+        // 회원 비활성화
+        userDao.deactivateUser(id);
+        
+        // 탈퇴 회원 정보 저장
+        userDao.insertDeletedUser(id);
+        
+        return true; // 비활성화 성공 시 true 반환
+    }
+    
+    public boolean checkUserIsActive(String userId) {
+        return userDao.checkUserIsActive(userId) == 1; // 1이면 활성, 0이면 비활성
+    }
+    
+    public boolean checkDeactivationPeriod(String userId) {
+        return userDao.checkDeactivationPeriod(userId) == 0; // 0이면 비활성화 기간 종료, 1이면 기간 중
+    }
+    
+    public User getUserById(Integer id) {
+        return userDao.selectUserById(id);
+    }
+
+	
 }
