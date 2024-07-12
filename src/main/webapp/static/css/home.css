@@ -8,6 +8,7 @@ body {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+	
 }
 
 .rounded-content {
@@ -16,7 +17,6 @@ body {
 	/*background-color: #212529;*/
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 
 .contact form {
 	display: flex;
@@ -42,12 +42,12 @@ body {
 }
 
 .container {
-  width: 1500px;
-  object-fit: cover;
+	width: 1500px;
+	object-fit: cover;
 }
 
 .with-background {
-	background-image: url('../images/sun.jpg');
+	background-image: url('../images/main/sun.jpg');
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -73,7 +73,6 @@ body {
 .content {
 	text-align: center;
 	color: black;
-	
 }
 
 .content h2 {
@@ -85,11 +84,23 @@ body {
 	line-height: 1.8;
 }
 
-/* Font specific */
 .jua-regular {
 	font-family: "Jua", sans-serif;
 	font-weight: 400;
 	font-style: normal;
-
 }
 
+.black-han-sans-regular {
+  font-family: "Black Han Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+.noto-sans-kr{
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
