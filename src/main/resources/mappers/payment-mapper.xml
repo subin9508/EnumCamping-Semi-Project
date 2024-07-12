@@ -43,5 +43,13 @@
         SET pay_status = #{payStatus}
         WHERE pay_id = #{payId}
     </update>
+
+
+	<update id="updateReservationState">
+		UPDATE reservation_master
+		SET res_state = #{resState},
+		res_modified_time = SYSDATE
+		WHERE res_id = #{resId}
+	</update>
   
 </mapper>
