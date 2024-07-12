@@ -22,7 +22,7 @@ public interface UserDao {
 
 	String findIdByNameAndEmail(@Param("user_name") String name, @Param("user_email") String email);
 
-	String findIdByNameAndEmailAndId(@Param("user_name") String name, @Param("user_email") String email,
+	String findPasswordByNameAndEmailAndId(@Param("user_name") String name, @Param("user_email") String email,
 			@Param("user_id") String id);
 
 }

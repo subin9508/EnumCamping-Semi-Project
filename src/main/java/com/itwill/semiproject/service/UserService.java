@@ -144,7 +144,7 @@ public class UserService {
 
 	public String findPasswordByNameAndEmailAndId(String name, String email, String id) {
 		log.debug("findPasswordByNameAndEmailAndId({}{}{})", name, email, id);
-		String user = userDao.findIdByNameAndEmailAndId(name, email, id);
+		String user = userDao.findPasswordByNameAndEmailAndId(name, email, id);
 		if (user != null) {
 			return user;
 		}
