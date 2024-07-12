@@ -1,6 +1,7 @@
 package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.itwill.semiproject.repository.PaymentCancel;
 import com.itwill.semiproject.repository.Payments;
@@ -9,19 +10,17 @@ import lombok.Data;
 
 @Data
 public class PaymentCancelDto {
+	private Integer payId;
+	private String impUid;
     private Integer canId;
     private Integer canPrice;
-    private LocalDate canAppDate;
-    private LocalDate canWitDate;
+    private LocalDateTime canDate;
     private String canRole;
-    private String canCsStatus;
     
     
     public PaymentCancelDto() {
-        this.canAppDate = LocalDate.now();
-        this.canWitDate = null; // 초기값으로 null 설정
+        this.canDate = LocalDateTime.now();
         this.canRole = "구매자"; // 초기값 설정
-        this.canCsStatus = "취소 완료"; // 초기값 설정
     }
     
 //	public PaymentCancel toEntity() {
