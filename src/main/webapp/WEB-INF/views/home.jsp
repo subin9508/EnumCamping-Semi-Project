@@ -25,7 +25,9 @@
 	rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css"
 	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 <style type="text/css">
 .hanna {
 	font-family: 'hanna';
@@ -151,8 +153,10 @@
 		</section>
 
 		<!-- Notice Section -->
+
 		<section id="notice" class="section"
 			style="padding-top: 200px; padding-bottom: 200px;">
+
 			<div class="container noto-sans-kr" style="color: white;">
 				<h2>공지사항</h2>
 				<div class="row">
@@ -160,9 +164,11 @@
 						<div class="card border-3 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title">공지사항</h5>
-								<p class="card-text">이 캠핑장은 다음 달 15일부터 20일까지 오픈이 제한될 예정입니다.</p>
-								<a href="#공지사항" class="stretched-link"></a>
+								<p class="card-text">중요공지입니다</p>
+								<a href="/semiproject/community/notice/details?id=1"
+									class="stretched-link" /></a>
 							</div>
+
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -171,7 +177,7 @@
 								<h5 class="card-title">이벤트 소식</h5>
 								<p class="card-text">이번 주말 특별 이벤트가 열립니다! 참여하고 특별 혜택을 누리세요.</p>
 								<a href="https://example.com/event-details"
-									class="stretched-link"></a>
+									class="stretched-link" /></a>
 							</div>
 						</div>
 					</div>
