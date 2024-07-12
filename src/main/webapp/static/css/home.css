@@ -73,6 +73,8 @@ body {
 .content {
 	text-align: center;
 	color: black;
+	font-size: 1.3rem;
+	
 }
 
 .content h2 {
@@ -97,7 +99,7 @@ body {
 }
 
 
-
+  
 .noto-sans-kr{
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
