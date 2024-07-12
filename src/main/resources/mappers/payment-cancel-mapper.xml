@@ -4,11 +4,25 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.semiproject.repository.PaymentCancelDao">
 
-    <!-- 취소 테이블 insert -->
-    <insert id="insertPaymentCancel">
-        INSERT INTO PAYMENTCANCEL 
-        (can_price, can_app_date, can_wit_date, can_role, can_cs_status)
-        VALUES (#{canPrice}, #{canAppDate}, #{canWitDate, jdbcType=DATE}, #{canRole}, #{canCsStatus})
-    </insert>
+	<!--  취소 테이블 insert -->
+	<insert id="insertPaymentCancel">
+    INSERT INTO paymentcancel (pay_id, imp_uid, can_amount, can_date, can_role)
+    SELECT p.pay_id, p.imp_uid, p.res_total_price, SYSDATE, '구매자'
+    FROM payments p
+    WHERE p.pay_id = #{payId}
+    AND NOT EXISTS (
+        SELECT 1 FROM paymentcancel pc WHERE pc.pay_id = p.pay_id)
+</insert>
+	
+        
+<!--     payId에 해당하는 paymentcancel -->
+<!--     <select id="selectPaycanByPayId" resultType="PaymentCancel"> -->
+<!--     	select pc.pay_id, pc.imp_id, pc.can_id, pc.can_price, pc.can_date, pc.can_role -->
+<!--     	, p.imp_uid -->
+<!--     	from paymentcancel pc -->
+<!--     	join payments p on pc.pay_id = p.pay_id -->
+<!--     	where pc.pay_id = (select pay_id from payments where pay_id = #{payId}) -->
+<!--     	order by pc.pay_id asc -->
+<!--    	</select> -->
 
 </mapper>

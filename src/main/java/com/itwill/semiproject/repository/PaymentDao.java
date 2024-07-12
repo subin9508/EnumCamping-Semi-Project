@@ -19,4 +19,6 @@ public interface PaymentDao {
 		
 		// 결제 정보 업데이트
 		int updatePayment(Payments payment);
+		
+		int updateReservationState(Integer resId, Integer resState);
 }
