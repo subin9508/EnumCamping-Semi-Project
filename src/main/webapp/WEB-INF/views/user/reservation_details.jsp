@@ -100,19 +100,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${resDetail}" var="item" varStatus="loop">
-                                            <c:if test="${item.itemId gt 20}">
+                                        <c:set var="hasItems" value="false" />
+                                        <c:forEach var="rs" items="${resDetail}">
+                                            <c:if test="${rs.itemId gt 20}">
+                                                <c:set var="hasItems" value="true" />
                                                 <tr>
-                                                    <td>${item.itemName}</td>
-                                                    <td>${item.itemQuantity}</td>
-                                                    <td>${item.itemAmount}원</td>
+                                                    <td>${rs.itemName}</td>
+                                                    <td>${rs.itemQuantity}</td>
+                                                    <td>${rs.itemAmount}원</td>
                                                 </tr>
                                             </c:if>
                                         </c:forEach>
-
+                                        <c:if test="${!hasItems}">
+                                            <tr>
+                                                <td colspan="4" style="text-align: center;">선택하신 구매/대여물품이 없습니다.</td>
+                                            </tr>
+                                        </c:if>
                                     </tbody>
                                 </table>
                             </div>
+
+
+
+
+
+
+
 
     
                             <div class="mt-2">
