@@ -62,4 +62,23 @@
         order by qna_post_id desc
     </select>
 
+<!-- 페이징된 목록 가져오기 -->
+	<select id="selectPagedQnAList" parameterType="Pager" resultType="QnA">
+		SELECT
+		qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt
+		FROM (SELECT ROWNUM R, Q.*
+			FROM (SELECT * FROM QNA ORDER BY qna_post_id DESC) Q)
+		WHERE R BETWEEN	#{startRow} AND #{lastRow}
+	</select>
+
+	<!--  전체 글의 갯수 -->
+	<select id="selectTotalCount" resultType="Long">
+		SELECT COUNT(qna_post_id) FROM QNA
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="updateViewCount">
+		UPDATE QNA SET qna_view_cnt = qna_view_cnt + 1 WHERE qna_post_id = #{qnaPostId}
+	</update>
+
 </mapper>

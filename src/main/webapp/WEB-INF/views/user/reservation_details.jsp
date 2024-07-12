@@ -35,7 +35,7 @@
                         <form>
                             <div class="mt-2">
                                 <label for="resId" class="form-label">예약번호</label>
-                                <input id="resId" class="form-control"
+                                <input id="resId" name="resId" class="form-control"
                                     type="text"
                                     value="${resMaster.resId}" readonly />
                             </div>
@@ -156,8 +156,7 @@
                     <div class="card-footer d-flex justify-content-end">
                         <div>
                             <button class="btn btn-primary">예약 변경</button>
-                            <button id="btnDelete"
-                                class="btn btn-danger">예약 취소</button>
+                            <button id="btnPayCancel" class="btn btn-danger">예약 취소</button>
                         </div>
                     </div>
 
@@ -165,17 +164,21 @@
             </main>
         </div>
 
-        <%@ include file="../fragments/footer.jspf"%>
+    <%@ include file="../fragments/footer.jspf" %>
     </div>
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+ 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		
+    <c:url var="paymentCancel_js" value="/js/paymentCancel.js" />
+    <script src="${paymentCancel_js}"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
-
 </body>
 </html>
