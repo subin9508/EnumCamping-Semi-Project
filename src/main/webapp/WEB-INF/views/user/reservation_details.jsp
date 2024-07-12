@@ -34,9 +34,9 @@
                     <div class="card-body">
                         <form>
                             <div class="mt-2">
-                                <label for="resId" class="form-label">예약번호</label>
-                                <input id="resId" name="resId" class="form-control"
-                                    type="text"
+                                
+                                <input id="resId" class="form-control"
+                                    type="hidden"
                                     value="${resMaster.resId}" readonly />
                             </div>
                             <div class="mt-2">
@@ -57,43 +57,35 @@
                                     readonly />
                             </div>
 
-                            <div class="mt-2">
-                                <label for="requirement" class="form-label">요청사항</label>
-                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" />
-                                ${requirementValue}
-                                </textarea>
-                            </div>
 
-                            <div class="mt-2">
-                                <label for="resCreatedTime" class="form-label">예약 일시</label>
-                                <input id="resCreatedTime"
-                                    class="form-control" type="text"
-                                    value="${resMaster.resCreatedTime}"
-                                    readonly />
-                            </div>
                             
                       <div class="mt-2">
-                        <label for="resArea" class="form-label">예약 구역</label>
+                        <label for="resArea" class="form-label">예약 구역, 금액</label>
                         <c:forEach items="${resDetail}" var="item">
                             <c:choose>
                                 <c:when test="${item.itemId ge 1 and item.itemId le 4}">
                                     <c:set var="area" value="1구역" />
+                                    <c:set var="price" value="${item.itemAmount}" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 5 and item.itemId le 8}">
                                     <c:set var="area" value="2구역" />
+                                    <c:set var="price" value="${item.itemAmount}" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 9 and item.itemId le 12}">
                                     <c:set var="area" value="3구역" />
+                                    <c:set var="price" value="${item.itemAmount}" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 13 and item.itemId le 16}">
                                     <c:set var="area" value="4구역" />
+                                    <c:set var="price" value="${item.itemAmount}" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 17 and item.itemId le 20}">
                                     <c:set var="area" value="5구역" />
+                                    <c:set var="price" value="${item.itemAmount}" />
                                 </c:when>
                             </c:choose>
                         </c:forEach>
-                            <input readonly class="form-control" type="text" name="resArea" value="${area}" />
+                            <input readonly class="form-control" type="text" name="resArea" value="${area}, ${price}원" />
                     </div>
 
 
@@ -108,19 +100,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${resDetail}" var="item" varStatus="loop">
-                                            <c:if test="${item.itemId gt 20}">
+                                        <c:set var="hasItems" value="false" />
+                                        <c:forEach var="rs" items="${resDetail}">
+                                            <c:if test="${rs.itemId gt 20}">
+                                                <c:set var="hasItems" value="true" />
                                                 <tr>
-                                                    <td>${item.itemName}</td>
-                                                    <td>${item.itemQuantity}</td>
-                                                    <td>${item.itemAmount}</td>
+                                                    <td>${rs.itemName}</td>
+                                                    <td>${rs.itemQuantity}</td>
+                                                    <td>${rs.itemAmount}원</td>
                                                 </tr>
                                             </c:if>
                                         </c:forEach>
-
+                                        <c:if test="${!hasItems}">
+                                            <tr>
+                                                <td colspan="4" style="text-align: center;">선택하신 구매/대여물품이 없습니다.</td>
+                                            </tr>
+                                        </c:if>
                                     </tbody>
                                 </table>
                             </div>
+
+
+
+
+
+
+
 
     
                             <div class="mt-2">
@@ -128,7 +133,20 @@
                                     class="form-label">총 가격</label> <input
                                     id="resTotalPrice"
                                     class="form-control" type="text"
-                                    value="${resMaster.resTotalPrice}"
+                                    value="${resMaster.resTotalPrice}원"
+                                    readonly />
+                            </div>
+                            <div class="mt-2">
+                                <label for="requirement" class="form-label">요청사항</label>
+                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" />
+                                ${requirementValue}
+                                </textarea>
+                            </div>
+                            <div class="mt-2">
+                                <label for="resCreatedTime" class="form-label">예약 일시</label>
+                                <input id="resCreatedTime"
+                                    class="form-control" type="text"
+                                    value="${resMaster.resCreatedTime}"
                                     readonly />
                             </div>
                             <div class="mt-2">
@@ -156,7 +174,8 @@
                     <div class="card-footer d-flex justify-content-end">
                         <div>
                             <button class="btn btn-primary">예약 변경</button>
-                            <button id="btnPayCancel" class="btn btn-danger">예약 취소</button>
+                            <button id="btnDelete"
+                                class="btn btn-danger">예약 취소</button>
                         </div>
                     </div>
 
@@ -164,21 +183,17 @@
             </main>
         </div>
 
-    <%@ include file="../fragments/footer.jspf" %>
+        <%@ include file="../fragments/footer.jspf"%>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
- 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		
-    <c:url var="paymentCancel_js" value="/js/paymentCancel.js" />
-    <script src="${paymentCancel_js}"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
+
 </body>
 </html>
