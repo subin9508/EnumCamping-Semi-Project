@@ -141,6 +141,7 @@ public class ReservationController {
 	    reservationMaster.setResCheckIn(LocalDate.parse((String) reservationMasterMap.get("resCheckIn")));
 	    reservationMaster.setResCheckOut(LocalDate.parse((String) reservationMasterMap.get("resCheckOut")));
 	    reservationMaster.setResTotalPrice((Integer) reservationMasterMap.get("resTotalPrice"));
+	    reservationMaster.setRequirement((String)reservationMasterMap.get("requirement"));
 	    
 	    // ReservationDetail 객체 생성 및 설정
 	    

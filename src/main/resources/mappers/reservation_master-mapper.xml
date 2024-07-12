@@ -28,9 +28,9 @@
         select rd.item_id
         from reservation_master rm
         join reservation_detail rd ON rm.res_id = rd.res_id
-        where rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD')
+        where rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') and res_state = 1
             or(rm.res_check_in = TO_DATE(#{resCheckIn}, 'YYYY-MM-DD') - INTERVAL '1' DAY
-                and rm.res_check_out - rm.res_check_in = 2)
+                and rm.res_check_out - rm.res_check_in = 2) and res_state = 1
     </select>
     
     <!-- 구역 선택 후 가능한 night 수 -->
@@ -44,8 +44,8 @@
     
     <!-- reservation_master에 데이터 삽입 -->
     <insert id="insertReservationMaster" useGeneratedKeys="true" keyProperty="resId" keyColumn="res_id">
-        insert into reservation_master (user_id, res_check_in, res_check_out, res_total_price)
-        values (#{userId}, #{resCheckIn}, #{resCheckOut}, #{resTotalPrice})
+        insert into reservation_master (user_id, res_check_in, res_check_out, res_total_price, requirement)
+        values (#{userId}, #{resCheckIn}, #{resCheckOut}, #{resTotalPrice}, #{requirement})
     </insert>
     
     <!-- reservation_detail에 데이터 삽입 -->
