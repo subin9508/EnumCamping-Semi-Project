@@ -119,7 +119,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		// 결제 완료 시간이 null이 아닌 경우, 해당 시간을 localDate 형식으로 변환하여 dto의 payDate 필드에 설정.
 		// setPayDate 메서드 호출해서 payment 객체의 결제 완료 시간을 localDate 형식으로 반환하여 설정
 		if (payment.getPaidAt() != null) {
-			dto.setPayDate(payment.getPaidAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			dto.setPayDate(payment.getPaidAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 		}
 		
 		dto.setPayMethod(payment.getPayMethod()); //결제 수단 설정
