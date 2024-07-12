@@ -14,7 +14,7 @@ public class PaymentCancel {
 	private Integer payId;
 	private String impUid;
     private Integer canId;
-    private Integer canPrice;
+    private Integer canAmount;
     private LocalDateTime canDate;
     private String canRole;
 }

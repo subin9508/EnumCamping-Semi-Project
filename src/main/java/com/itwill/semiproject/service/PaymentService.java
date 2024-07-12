@@ -196,8 +196,10 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	                    paymentDao.updatePayment(payment);
 
 	                    PaymentCancelDto cancelDto = new PaymentCancelDto();
-	                    cancelDto.setCanId(payId);
-	                    cancelDto.setCanPrice(payment.getResTotalPrice());
+	                    cancelDto.setPayId(payId);
+	                    cancelDto.setImpUid(payment.getImpUid());
+	                    cancelDto.setCanAmount(payment.getResTotalPrice());
+	                    // cancelDto.setImpUid(imp_uid);
 	                    int result = paymentCancelDao.insertPaymentCancel(cancelDto);
 
 	                    if (result > 0) {
