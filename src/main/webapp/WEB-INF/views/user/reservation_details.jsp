@@ -39,22 +39,26 @@
                                     type="hidden"
                                     value="${resMaster.resId}" readonly />
                             </div>
-                            <div class="mt-2">
-                                <label for="resCheckIn"
-                                    class="form-label">체크인 날짜</label> <input
-                                    id="resCheckIn" class="form-control"
-                                    type="text"
-                                    value="${resMaster.resCheckIn}"
-                                    readonly />
-                            </div>
-                            
-                            <div class="mt-2">
-                                <label for="resCheckOut"
-                                    class="form-label">체크아웃 날짜</label> <input
-                                    id="resCheckIn" class="form-control"
-                                    type="text"
-                                    value="${resMaster.resCheckOut}"
-                                    readonly />
+                            <div class="d-flex">
+                                <div class="mt-2 flex-fill me-2">
+                                    <label for="resCheckIn"
+                                        class="form-label">체크인
+                                        날짜</label> <input id="resCheckIn"
+                                        class="form-control" type="text"
+                                        value="${resMaster.resCheckIn}"
+                                        readonly />
+                                </div>
+                                <br />
+                                <br />~
+                                <div></div>
+                                <div class="mt-2 flex-fill ms-2">
+                                    <label for="resCheckOut"
+                                        class="form-label">체크아웃
+                                        날짜</label> <input id="resCheckOut"
+                                        class="form-control" type="text"
+                                        value="${resMaster.resCheckOut}"
+                                        readonly />
+                                </div>
                             </div>
 
 
@@ -173,8 +177,12 @@
 
                     <div class="card-footer d-flex justify-content-end">
                         <div>
-                            <button class="btn btn-primary">예약 변경</button>
-                            <button id="btnPayCancel" class="btn btn-danger">예약 취소</button>
+                            <!--                             <button class="btn btn-primary">예약 변경</button> -->
+                            <c:if test="${resMaster.resState != 2}">
+                                <button id="btnPayCancel"
+                                    class="btn btn-danger">예약취소</button>
+                            </c:if>
+
                         </div>
                     </div>
 
