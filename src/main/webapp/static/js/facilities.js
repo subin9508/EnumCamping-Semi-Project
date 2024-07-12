@@ -7,7 +7,7 @@
     var showerImg = document.getElementById('showerImage');
     var toiletImg = document.getElementById('toiletImage');
     var sinkImg = document.getElementById('sinkImage');
-    var poolImg = document.getElementById('poolImage');
+    var campFireImg = document.getElementById('campFireImage');
 
     var modal1 = document.getElementById('myModal1');
     var modal2 = document.getElementById('myModal2');
