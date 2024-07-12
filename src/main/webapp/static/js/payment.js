@@ -60,35 +60,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
 
-	//결제 응답 처리 비동기 함수
-    async function handlePaymentResponse(rsp, resId) {
-		//결제 응답 로깅
-        console.log('Payment Response:', rsp);
-        if (rsp.success) {
-            console.log("결제 성공, 검증 시작");
-            try {
-				//결제 검증 및 정보 저장 함수 호출
-                const result = await verifyAndSavePayInfo(rsp.imp_uid, resId); //
-                console.log("검증 결과:", result);
-                if (result && (result.status === "paid")) {
-                    alert('결제가 완료되었습니다.');
-                    //주문번호 추출 및 로깅
-                    const orderNum = result.merchant_uid || (result.payment && result.payment.merchantUid) || 'unknown';
-                    console.log("이동할 주문번호:", orderNum);
-
-                    window.location.href = `/semiproject/reservation/succeeded/${orderNum}`;
-                } else if (result.message === "이미 결제가 완료된 예약입니다.") {
-                	alert(result.message);
-
-                    window.location.href = `/semiproject/reservation/succeeded/${orderNum}`; //결제 성공페이지로감
-
-                } else {
-                    throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
-                }
-            } catch (error) {
-                console.error("결제 검증 및 저장 중 오류:", error);
-                alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
-
+	// 결제 응답 처리 비동기 함수
+async function handlePaymentResponse(rsp, resId) {
+    // 결제 응답 로깅
+    console.log('Payment Response:', rsp);
+    if (rsp.success) {
+        console.log("결제 성공, 검증 시작");
+        try {
+            // 결제 검증 및 정보 저장 함수 호출
+            const result = await verifyAndSavePayInfo(rsp.imp_uid, resId);
+            console.log("검증 결과:", result);
+            if (result && (result.status === "paid")) {
+                alert('결제가 완료되었습니다.');
+                // resId 로깅
+                console.log("이동할 예약 ID:", resId);
+                window.location.href = `/semiproject/reservation/succeeded/${resId}`; // 결제 성공 페이지로 이동
+            } else {
+                throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
             }
         } catch (error) {
             console.error("결제 검증 및 저장 중 오류:", error);
