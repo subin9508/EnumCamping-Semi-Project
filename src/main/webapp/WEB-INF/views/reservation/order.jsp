@@ -21,7 +21,7 @@
 
 <style>
 .custom-form {
-    width: 70%; /* 폼의 너비를 70%로 설정 */
+    width: 100%; /* 폼의 너비를 70%로 설정 */
     margin: auto; /* 가운데 정렬 */
 }
 
@@ -39,6 +39,16 @@
     vertical-align: middle;
     padding: 8px;
 }
+.card {
+    width:100%;
+}
+
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
 </style>
 
 </head>
@@ -58,6 +68,50 @@
                 <br />
                 <br />
                  <div class="container">
+                 
+                 <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="background-color: #003366; color: white;">선택 구역</th>
+                                <th style="background-color: #003366; color: white;">가격</th>
+                            </tr>
+                        </thead>
+                        <tbody id="areaOrder">
+                            <c:forEach items="${reservationDetails}" var="item">
+                                    <c:choose>
+                                        <c:when test="${item.itemId ge 1 and item.itemId le 4}">
+                                            <c:set var="area" value="1구역" />
+                                            <c:set var="price" value="${item.itemAmount}" />
+                                        </c:when>
+                                        <c:when test="${item.itemId ge 5 and item.itemId le 8}">
+                                            <c:set var="area" value="2구역" />
+                                            <c:set var="price" value="${item.itemAmount}" />
+                                        </c:when>
+                                        <c:when test="${item.itemId ge 9 and item.itemId le 12}">
+                                            <c:set var="area" value="3구역" />
+                                            <c:set var="price" value="${item.itemAmount}" />
+                                        </c:when>
+                                        <c:when test="${item.itemId ge 13 and item.itemId le 16}">
+                                            <c:set var="area" value="4구역" />
+                                            <c:set var="price" value="${item.itemAmount}" />
+                                        </c:when>
+                                        <c:when test="${item.itemId ge 17 and item.itemId le 20}">
+                                            <c:set var="area" value="5구역" />
+                                            <c:set var="price" value="${item.itemAmount}" />
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                                    <tr>
+                                        <td>${area}</td>
+                                        <td>${price}원</td>
+                                    </tr>
+
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                 
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -68,41 +122,51 @@
                             </tr>
                         </thead>
                         <tbody id="orderDetails">
+                            <c:set var="hasItems" value="false" />
                             <c:forEach var="rs" items="${reservationDetails}">
-                                <tr>
-                                    <td>${rs.itemName}</td>
-                                    <td class="img-container"  style="width: 20%;">
-                                    <c:url value="${rs.itemImg}"  var="itemImgUrl" /> 
-                                    <img alt="${rs.itemName}" src="${itemImgUrl}"
-                                class="img" id="itemImg-${rs.itemId}"  style="height: 150px; width: 150px;" />
-                                    </td>
-                                    <td>${rs.itemQuantity}</td>
-                                    <td>${rs.itemAmount}원</td>
-                                </tr>
+                                <c:if test="${rs.itemId gt 20}">
+                                    <c:set var="hasItems" value="true" />
+                                    <tr>
+                                        <td>${rs.itemName}</td>
+                                        <td class="img-container" style="width: 20%;">
+                                            <c:url value="${rs.itemImg}" var="itemImgUrl" />
+                                            <img alt="${rs.itemName}" src="${itemImgUrl}" class="img" id="itemImg-${rs.itemId}" style="height: 150px; width: 150px;" />
+                                        </td>
+                                        <td>${rs.itemQuantity}</td>
+                                        <td>${rs.itemAmount}원</td>
+                                    </tr>
+                                </c:if>
                             </c:forEach>
+                            <c:if test="${!hasItems}">
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">선택하신 구매/대여물품이 없습니다.</td>
+                                </tr>
+                            </c:if>
                         </tbody>
                     </table>
-                <br />
-                <br />
+                    <br />
+                    <br />
                 </div>
                 
                 
                 <div class="container">
                     <div class="form-container">
                         <form class="custom-form">
-                            <div class="form-group">
+                            
+                        
+                            <div class="mt-2 form-group">
                                 <label for="userName">이름:</label> <input
                                     type="text" class="form-control"
                                     id="userName"
                                     value="${user.userName}" readonly>
                             </div>
-                            <div class="form-group">
+                            <div class="mt-2 form-group">
                                 <label for="userEmail">이메일:</label> <input
                                     type="text" class="form-control"
                                     id="userEmail"
                                     value="${user.userEmail}" readonly>
                             </div>
-                            <div class="form-group">
+                            <div class="mt-2 form-group">
                                 <label for="userPhone">휴대폰 번호:</label> <input
                                     type="text" class="form-control"
                                     id="userPhone"
@@ -114,8 +178,7 @@
                     <!-- 두 번째 폼 -->
                     <div class="form-container">
                         <form class="custom-form">
-                            <div
-                                class="container-fluid d-flex justify-content-center">
+                            <div class="container-fluid d-flex no-padding justify-content-center">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">개인
@@ -139,8 +202,7 @@
                                 </div>
                             </div>
 
-                            <div
-                                class="container-fluid d-flex justify-content-center mt-3">
+                            <div class="container-fluid d-flex no-padding justify-content-center mt-3">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">개인
@@ -170,7 +232,7 @@
                 <div class="container-fluid d-flex justify-content-center mt-3">
                     <h3>총 결제 금액: <span id="totalAmount">0</span></h3>
                 </div>
-                
+                <br/>
                 <div
                     class="container-fluid d-flex justify-content-center mt-3">
                     <!--  <form action="../reservation/reservationConfirm"
@@ -248,7 +310,14 @@
 
                         // 각 주문 상세 항목의 금액을 모두 합산
                         const itemAmountElements = document.querySelectorAll('#orderDetails td:nth-child(4)');
+                        //const areaPrice = document.querySelector('input#resAreaPrice');
+                        const areaPrice = document.querySelectorAll('#areaOrder td:nth-child(2)');
+                        console.log(areaPrice);
                         itemAmountElements.forEach(function(element) {
+                            totalAmount += parseInt(element.textContent.replace('원', ''), 10);
+                        });
+                        
+                        areaPrice.forEach(function(element) {
                             totalAmount += parseInt(element.textContent.replace('원', ''), 10);
                         });
 
