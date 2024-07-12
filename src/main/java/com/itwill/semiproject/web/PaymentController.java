@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextLoadException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/reservation") // 해당 클래스의 기본 URL 매핑을 설정
+@RequestMapping("/") // 해당 클래스의 기본 URL 매핑을 설정
 public class PaymentController {
 
 	
@@ -73,7 +74,7 @@ public class PaymentController {
 
 	// resId 파라미터 받아서 결제 서비스를 통해 해당하는 결제 정보 조회하고 JSON 형식으로 반환. 예외처리 통해 내부 오류 처리하고
 	// 응답 반환.
-	@GetMapping("/paymentInfo/{resId}")
+	@GetMapping("/reservation/paymentInfo/{resId}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> getPaymentInfo(@PathVariable("resId") Integer resId) { // resId를 매개로 결제
 																										// 정보 불러옴.
@@ -91,7 +92,7 @@ public class PaymentController {
 	// 결제 검증을 수행하는 메서드
 	@ResponseBody
 
-	@PostMapping("/verifyIamport/{imp_uid}")
+	@PostMapping("/reservation/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
 	        @PathVariable(value = "imp_uid") String imp_uid,
 	        @RequestParam("resId") Integer resId
@@ -174,22 +175,23 @@ public class PaymentController {
 	 * @param payId 결제 키로 결제를 식별
 	 * @return ResponseEntity 객체로 HTTP 응답 상태와 메세지를 반환.
 	 */
-    @PostMapping("/cancel/{payId}")
+	@ResponseBody
+    @PostMapping("/user/reservation_details/cancel/{payId}")
     public ResponseEntity<String> cancelPayment(@PathVariable Integer payId) {
         try {
             String result = paymentService.cancelPayment(payId);
             if (result.equals("Payment cancellation successful")) {
             	
             	// 결제 취소가 성공했을 때 예약 상태를 업데이트
-            	Integer resId = paymentService.getPayIdByResId(payId);
+            	Integer resId = paymentService.getResIdByPayId(payId);
             	if(resId != null) {
             		paymentService.updateReservationState(resId, 2); // 2는 취소 상태
             		log.info("Reservation state updated to cancelled for resId: {}", resId);
-            		} else {
-            			log.warn("Could not find reservation for payId: {}", payId);
-            		}
-            	
-                return ResponseEntity.ok(result);
+            		 return ResponseEntity.ok(result);
+            	 } else {
+                     log.warn("Could not find reservation for payId: {}", payId);
+                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Reservation not found for the given payment ID.");
+                 }
             } else {
                 // 결과 메시지에 따라 적절한 HTTP 상태 코드를 반환
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);

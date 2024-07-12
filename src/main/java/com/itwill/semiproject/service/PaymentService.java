@@ -173,6 +173,27 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	    }
 	}
 	
+	
+	/**
+	 * 결제 ID로 예약 ID를 조회하는 메서드
+	 * 
+	 * @param payId 결제 ID
+	 * @return 예약 ID
+	 * @throws ServiceException 예외 발생 시 ServiceException으로 wrapping 하여 throw
+	 */
+	   public Integer getResIdByPayId(Integer payId) throws ServiceException {
+	       try {
+	           Payments payment = paymentDao.selectByPayId(payId);
+	           if (payment != null) {
+	               return payment.getResId();
+	           } else {
+	               throw new ServiceException("Payment not found for resId: " + payId);
+	           }
+	       } catch (Exception e) {
+	           throw new ServiceException(e);
+	       }
+	   }
+	
 	// 결제 취소 메서드 
 			public String cancelPayment(Integer payId) throws ServiceException {
 				log.debug("Attempting to cancel payment with payId: {}", payId);
