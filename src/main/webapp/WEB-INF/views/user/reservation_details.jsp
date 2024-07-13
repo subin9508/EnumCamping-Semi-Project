@@ -34,12 +34,15 @@
                     <div class="card-body">
                         <form>
                             <div class="mt-2">
-                                
                                 <input id="resId" name="resId" class="form-control"
                                     type="hidden"
                                     value="${resMaster.resId}" readonly />
                             </div>
-                            <div class="d-flex">
+							<div class="mt-2">
+								<input id="userId" name="userId" class="form-control"
+									type="hidden" value="${resMaster.userId}" readonly />
+							</div>
+							<div class="d-flex">
                                 <div class="mt-2 flex-fill me-2">
                                     <label for="resCheckIn"
                                         class="form-label">체크인

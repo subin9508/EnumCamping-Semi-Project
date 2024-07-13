@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.semiproject.dto.ReservationDetailListDto;
+import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.exception.ControllerException;
 import com.itwill.semiproject.exception.ServiceException;
 import com.itwill.semiproject.repository.APIResponse;
 import com.itwill.semiproject.repository.ReservationMaster;
+import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.PaymentService;
 import com.itwill.semiproject.service.UserService;
 import com.siot.IamportRestClient.IamportClient;
@@ -142,7 +144,14 @@ public class PaymentController {
 	    }
 	}
 	
-	// 결제 성공 페이지를 매핑하는 메서드
+	
+	/**
+	 * 결제 성공 페이지를 매핑하는 메서드
+	 * @param resId
+	 * @param model
+	 * @param session
+	 * @return
+	 */	
 	@GetMapping("/reservation/succeeded/{resId}")
 	public String paymentSucceeded(@PathVariable("resId") Integer resId, Model model, HttpSession session) {
 	    ReservationMaster resMaster = userService.readReservationMasterDetails(resId);
@@ -158,7 +167,11 @@ public class PaymentController {
 	}
 	
 	
-	// 예약 ID를 통해 결제 ID를 조회하는 메서드
+	/**
+	 * resId를 통해 payId를 조회하는 메서드(결제취소시 사용)
+	 * @param resId
+	 * @return 에러 메세지 반환
+	 */
 	@GetMapping("/user/reservation_details/getPayId/{resId}")
 	public ResponseEntity<?> getPayId(@PathVariable("resId") Integer resId) {
 	    try {
@@ -202,8 +215,26 @@ public class PaymentController {
         }
     }
 	
-	
-	
-	
+	@GetMapping("/reservation_list")
+	public String reservationList(@RequestParam(name = "userId", required = false) String userId, Model model, HttpSession session) {
+	    if (userId == null) {
+	        userId = (String) session.getAttribute("signedInUser");
+	        if (userId == null) {
+	            return "redirect:/user/signin";
+	        }
+	    }
+	    
+	    log.debug("reservation_list(userId={})", userId);
+
+	    User user = userService.read(userId);
+	    session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+	    List<ReservationListDto> list = userService.readReservationList(user.getUserId());
+	    log.debug("list=({})", list);
+	    model.addAttribute("reservations", list);
+	    model.addAttribute("user", user); // 모델에 사용자 정보 추가
+
+	    return "/user/reservation_list"; // 반환할 뷰의 이름
+	}
 	
 }
