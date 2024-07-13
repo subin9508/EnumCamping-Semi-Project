@@ -63,7 +63,7 @@ ul.pagination {
 									</div>
 									<div class="col-2">
 										<input type="submit"
-											class="form-control btn btn-outline-secondary" value="검색" />
+											class="form-control btn btn-outline-info" value="검색" />
 									</div>
 								</div>
 							</form>
@@ -92,30 +92,34 @@ ul.pagination {
 											<td>${qna.qnaViewCnt}</td>
 										</tr>
 									</c:forEach>
+									<c:if test="${empty qnas}">
+                                <tr>
+                                    <td colspan="5" style="text-align: center;">검색 결과가 없습니다.</td>
+                                </tr>
+                            </c:if>
 								</tbody>
 							</table>
 
 							<div>
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item" value="${pager.pre}" id="pre"><a
-											class="page-link" href="./list?page=${pager.page-1}"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-										</a></li>
-
-										<c:forEach var="i" begin="${pager.startNum}"
-											end="${pager.lastNum}">
-											<li class="page-item ${pager.page==i? 'active':''}"><a
-												class="page-link" href="./list?page=${i}">${i}</a></li>
-										</c:forEach>
-
-										<li class="page-item ${pager.next?'':'disabled'}" id="next">
-											<a class="page-link" href="./list?page=${pager.page+1}"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a>
-										</li>
-									</ul>
-								</nav>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item ${pager.page == 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="?page=${pager.page - 1}&category=${category}&keyword=${keyword}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <c:forEach var="i" begin="1" end="${pager.totalPage}">
+                    <li class="page-item ${pager.page == i ? 'active' : ''}">
+                        <a class="page-link" href="?page=${i}&category=${category}&keyword=${keyword}">${i}</a>
+                    </li>
+                </c:forEach>
+                <li class="page-item ${pager.page == pager.totalPage ? 'disabled' : ''}">
+                    <a class="page-link" href="?page=${pager.page + 1}&category=${category}&keyword=${keyword}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 							</div>
 
 						</div>

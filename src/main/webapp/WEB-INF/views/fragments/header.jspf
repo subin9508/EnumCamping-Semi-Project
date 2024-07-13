@@ -139,7 +139,7 @@
                     class="nav-link  menu" href="${reservationPage}">예약</a></li>
                 <li class="nav-item"><c:url value="/community/notice/list"
                         var="communityPage" /> <a
-                    class="nav-link  menu" href="${communityPage}">게시판</a>
+                    class="nav-link  menu" href="${communityPage}">커뮤니티</a>
                     <ul class="subMenu">
                         <li><c:url value="/community/notice/list"
                                 var="communityPage1" /> <a
@@ -151,11 +151,11 @@
                             href="${communityPage2}">Q&A</a></li>
                         <li><c:url value="/community"
                                 var="communityPage3" /> <a
-                            class="nav-link" aria-current="page"
+                            class="nav-link" aria-current="page" hidden
                             href="${communityPage3}">FAQ</a></li>
                         <li><c:url value="/community"
                                 var="communityPage4" /> <a
-                            class="nav-link" aria-current="page"
+                            class="nav-link" aria-current="page" hidden
                             href="${communityPage4}">이용후기</a></li>
                     </ul></li>
 

@@ -1,6 +1,8 @@
 package com.itwill.semiproject.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -64,25 +66,60 @@ public class QnAService {
 		return result;
 	}
 	
-	public List<QnAListDto> search(QnASearchDto dto) {
-		log.debug("search({})",dto);
-		
-		List<QnA> list = qnaDao.searchQnA(dto);
-		
-		return list.stream().map(QnAListDto::fromEntity).toList();
-	}
+//	public List<QnAListDto> search(QnASearchDto dto) {
+//		log.debug("search({})",dto);
+//		
+//		List<QnA> list = qnaDao.searchQnA(dto);
+//		
+//		return list.stream().map(QnAListDto::fromEntity).toList();
+//	}
+//	
+//	public List<QnAListDto> selectPagedQnAList(Pager pager) {
+//        log.debug("selectPagedQnAList({})", pager);
+//
+//        // 전체 글의 갯수를 가져와 Pager 객체 설정
+//        long totalCount = qnaDao.selectTotalCount();
+//        pager.setNum(totalCount);
+//        pager.setRow();
+//
+//        // 페이징 처리된 글 목록을 가져옴
+//        List<QnA> list = qnaDao.selectPagedQnAList(pager);
+//
+//        return list.stream().map(QnAListDto::fromEntity).toList();
+//    }
 	
-	public List<QnAListDto> selectPagedQnAList(Pager pager) {
+	
+	public List<QnAListDto> search(QnASearchDto dto, Pager pager) {
+	    log.debug("search({}, {})", dto, pager);
+	    
+	    pager.setRow();
+	    long totalCount = qnaDao.selectTotalCount(dto);
+	    pager.setNum(totalCount);
+	    
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("dto", dto != null ? dto : new QnASearchDto());
+	    params.put("pager", pager);
+	    
+	    List<QnA> list = qnaDao.searchQnA(params);
+	    
+	    return list.stream().map(QnAListDto::fromEntity).toList();
+	}
+    
+    
+    public List<QnAListDto> selectPagedQnAList(Pager pager) {
         log.debug("selectPagedQnAList({})", pager);
 
-        // 전체 글의 갯수를 가져와 Pager 객체 설정
-        long totalCount = qnaDao.selectTotalCount();
+        long totalCount = qnaDao.selectTotalCountAll();
         pager.setNum(totalCount);
         pager.setRow();
 
-        // 페이징 처리된 글 목록을 가져옴
         List<QnA> list = qnaDao.selectPagedQnAList(pager);
 
         return list.stream().map(QnAListDto::fromEntity).toList();
     }
+    
+    public long getTotalCount(QnASearchDto dto) {
+        return qnaDao.selectTotalCount(dto);
+    }
+	
 }
