@@ -27,7 +27,37 @@
            <a href="">문의내역</a> 
         </li>
         <li>
-            <a href="">회원탈퇴</a>
+			<a href="#" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">회원탈퇴</a>
+        </li>
         </li>
     </ul>
 </aside>
+
+
+<!-- 회원 탈퇴 모달 -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel">회원 탈퇴</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>정말로 회원 탈퇴 페이지로 이동하시겠습니까?</p>
+                <p>회원 탈퇴 시 같은 아이디로 30일 동안 재가입이 불가능합니다.</p>
+            </div>
+            <div class="modal-footer">
+                <!-- 탈퇴 버튼을 링크로 변경 -->
+                <c:url var="userDeactivate" value="/user/deactivateUser">
+                    <c:param name="userId" value="${user.userId}" />
+                </c:url>
+                <a href="${userDeactivate}" class="btn btn-danger">회원 탈퇴 페이지로 이동</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS 추가 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

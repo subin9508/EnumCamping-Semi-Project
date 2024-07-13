@@ -37,6 +37,7 @@
 		where user_name = #{user_name}
 		and user_email = #{user_email}
 	</select>
+	
 	<!-- 비밀번호 찾기 -->
 	<select id="findPasswordByNameAndEmailAndId" resultType="String">
 		select user_password
@@ -45,5 +46,47 @@
 		and user_email = #{user_email}
 		and user_id = #{user_id}
 	</select>
+
+
+	<!-- 사용자 ID로 사용자 정보 조회 -->
+    <select id="selectUserById" resultType="User">
+        select * from users
+        where user_key = #{userKey}
+    </select>
+    
+    <!-- 회원 비활성화 -->
+    <update id="deactivateUser">
+        update users 
+        set user_state = 0,
+            deactiveuntil = sysdate + interval '30' day
+        where user_key = #{userKey}
+    </update>
+    
+    <!-- 탈퇴 회원 정보 저장 -->
+    <insert id="insertDeletedUser">
+        insert into withdraw_users (user_key) 
+        values (#{userKey})
+    </insert>
+    
+    <!-- 비밀번호 확인 -->
+    <select id="checkPassword" resultType="integer">
+        select count(*) 
+        from users 
+        where user_key = #{userKey} and user_password = #{userPassword}
+    </select>
+    
+    <!-- 활성 사용자 확인 -->
+    <select id="checkUserIsActive" resultType="integer">
+        select count(*)
+        from users
+        where user_id = #{userId} and user_state = 1
+    </select>
+     
+    <!-- 로그인 시 비활성화 기간 확인 -->
+    <select id="checkDeactivationPeriod" resultType="integer">
+        select count(*)
+        from users
+        where user_id = #{userId} and deactiveuntil > sysdate
+    </select>
 
 </mapper>
