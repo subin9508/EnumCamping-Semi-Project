@@ -51,54 +51,66 @@ public class UserController {
 	private final String uploadDirectory = "path/to/upload/directory"; // 실제 업로드 경로로 수정
 
 	@GetMapping("/signin")
-	public void signin() {
+	public void signin(HttpSession session) {
+		session.invalidate(); // 세션 초기화
 		log.debug("signin()");
 	}
 
 	@PostMapping("/signin")
-	public String signin(@ModelAttribute UserSignInDto dto, HttpSession session,
-			@RequestParam(name = "target", defaultValue = "") String target) throws UnsupportedEncodingException {
-		log.debug("POST - signin(dto={}, session={}, target={})", dto, session, target);
-		
-		// 서비스 메서드를 호출해서 아이디와 비밀번호가 일치하는 사용자가 있는 지 확인
-		User user = userService.read(dto);
+    public String signIn(UserSignInDto dto, 
+            @RequestParam(name = "target", defaultValue = "") String target,
+            HttpSession session) throws IOException {
+        log.debug("POST signIn({})", dto);
+        
+        // 사용자가 존재하는지 확인 (아이디와 비밀번호를 검증)
+        User user = userService.read(dto);
+        
+        // 로그인 실패한 경우
+        if (user == null) {
+            // 아이디와 비밀번호가 일치하는 사용자 없는 경우
+            return "redirect:/user/signin?result=f&target="
+                    + URLEncoder.encode(target, "UTF-8");
+        }
+
+//        // 비활성화된 사용자 확인
+//        log.debug("Checking if user is active...");
+//        if (!userService.checkUserIsActive(dto.getUserId())) {
+//            // 사용자가 비활성 상태인 경우
+//        	 log.debug("User is inactive");
+//            return "redirect:/user/signin?result=inactive";
+//        }
+
+        // 비활성화된 사용자 확인
+        log.debug("Checking if user is active...");
+        boolean isActive = userService.checkUserIsActive(dto.getUserId());
+        log.debug("User active status: {}", isActive);
+        if (!isActive) {
+            // 사용자가 비활성 상태인 경우
+            log.debug("User is inactive");
+            return "redirect:/user/signin?result=inactive";
+        }
+        
+        
+        // 비활성화 기간 확인
+        if (!userService.checkDeactivationPeriod(dto.getUserId())) {
+            // 비활성화 기간이 남아있는 경우
+        	 log.debug("User is still in deactivation period");
+            return "redirect:/user/signin?result=deactivated";
+        }
+        
+        // 로그인 성공 시 세션에 로그인 사용자 아이디를 저장
+        session.setAttribute("signedInUser", user.getUserId());
+        // 세션에 유저 role을 저장
+        session.setAttribute("userRole", user.getUserRole());
+
+        session.setAttribute("loginUserId", user.getUserKey());
+        log.debug("로그인 성공 - 세션에 loginUserId 저장: {}, 세션에 signedInUser 저장: {}", user.getUserKey(), user.getUserId());
+        
+        // 로그인 성공 후 이동할 타겟 페이지
+        String targetPage = (target.equals("")) ? "/" : target;
+        return "redirect:" + targetPage;
+    
 	
-		if (user != null) { // 아이디와 비밀번호 모두 일치하는 사용자가 있는 경우 -> 로그인 성공
-			// 세션에 로그인 사용자 정보를 저장
-			session.setAttribute("signedInUser", user.getUserId());
-			// 세션에 유저 role을 저장
-			session.setAttribute("userRole", user.getUserRole());
-
-			// 타겟 페이지로 이동
-			return (target.equals("")) ? "redirect:/" : "redirect:" + target;
-
-		} else { // 아이디와 비밀번호가 일치하는 사용자가 없는 경우 -> 로그인 실패
-			// 로그인 페이지로 이동
-			log.debug("target({})", target);
-			String redirectUrl = "redirect:/user/signin?result=f";
-			if (!target.isEmpty()) {
-				redirectUrl += "&target=" + URLEncoder.encode(target, "UTF-8");
-			}
-			
-
-			// 회원 탈퇴 관련
-	        // 비활성화된 사용자 확인
-	        if (!userService.checkUserIsActive(dto.getUserId())) {
-	            // 사용자가 비활성 상태인 경우
-	            return "redirect:/user/signin?result=inactive";
-	        }
-
-	        // 비활성화 기간 확인
-	        if (!userService.checkDeactivationPeriod(dto.getUserId())) {
-	            // 비활성화 기간이 남아있는 경우
-	            return "redirect:/user/signin?result=deactivated";
-	        }
-			
-			
-			return redirectUrl;
-		}
-		
-		
 	}
 
 	@GetMapping("/signout")
@@ -168,6 +180,7 @@ public class UserController {
 		User user = userService.read(userId);
 
 		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+		log.debug("세션에 저장된 사용자 정보: {}", session.getAttribute("user"));
 
 		model.addAttribute("user", user);
 
@@ -357,13 +370,15 @@ public class UserController {
     @GetMapping("/deactivateUser")
     public String deactivateAccount(Model model, HttpSession session) {
         // 세션에서 사용자 ID 가져오기
-        Integer id = (Integer) session.getAttribute("loginUserId");
-        if (id == null) {
+         Integer userKey = (Integer) session.getAttribute("loginUserId");
+         log.debug("세션에서 가져온 userKey: {}", userKey);
+        if (userKey == null) {
             return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
         }
         
         // 사용자 정보 가져오기
-        User user = userService.getUserById(id);
+        User user = userService.getUserById(userKey);
+        log.debug("가져온 사용자 정보: {}", user);
         model.addAttribute("user", user);
         
         return "user/deactivateUser";
@@ -372,11 +387,16 @@ public class UserController {
     @PostMapping("/deactivateUser")
     @ResponseBody
     public ResponseEntity<?> deactivateAccount(@RequestBody UserDeactivateDto dto, HttpSession session, HttpServletResponse response) {
-    	// 요청 바디에서 id와 password를 추출
-        Integer id = (Integer) dto.getId();
-        String password = (String) dto.getPassword();
+        log.debug("Received deactivation request for userKey: {}", dto.getUserKey());
+        log.debug("Password received: {}", dto.getUserPassword());
     	
-    	boolean result = userService.deactivateAccount(id, password);
+    	// 요청 바디에서 id와 password를 추출
+        Integer userKey = (Integer) dto.getUserKey(); 
+        String userPassword = (String) dto.getUserPassword();
+    	
+        log.debug("Before calling service - userKey: {}, password: {}", userKey, userPassword);
+        
+    	boolean result = userService.deactivateAccount(userKey, userPassword);
         
         if (result) {
             // 세션 삭제
@@ -388,8 +408,10 @@ public class UserController {
             cookie.setPath("/");
             response.addCookie(cookie);
             
-            return ResponseEntity.ok().body("계정이 성공적으로 비활성화되었습니다.");
+            log.debug("Account deactivated successfully.");
+            return ResponseEntity.ok().body("/semiproject");
         } else {
+        	log.debug("비밀번호가 일치하지 않습니다.");
             return ResponseEntity.badRequest().body("비밀번호가 일치하지 않습니다.");
         }
     }

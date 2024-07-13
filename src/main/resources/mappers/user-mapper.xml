@@ -51,42 +51,42 @@
 	<!-- 사용자 ID로 사용자 정보 조회 -->
     <select id="selectUserById" resultType="User">
         select * from users
-        where id = #{id}
+        where user_key = #{userKey}
     </select>
     
     <!-- 회원 비활성화 -->
     <update id="deactivateUser">
         update users 
-        set is_active = 0,
-            deactivated_until = sysdate + interval '30' day
-        where id = #{id}
+        set user_state = 0,
+            deactiveuntil = sysdate + interval '30' day
+        where user_key = #{userKey}
     </update>
     
     <!-- 탈퇴 회원 정보 저장 -->
     <insert id="insertDeletedUser">
-        insert into del_users (id) 
-        values (#{id})
+        insert into withdraw_users (user_key) 
+        values (#{userKey})
     </insert>
     
     <!-- 비밀번호 확인 -->
     <select id="checkPassword" resultType="integer">
         select count(*) 
         from users 
-        where id = #{id} and password = #{password}
+        where user_key = #{userKey} and user_password = #{userPassword}
     </select>
     
     <!-- 활성 사용자 확인 -->
     <select id="checkUserIsActive" resultType="integer">
         select count(*)
         from users
-        where user_id = #{userId} and user_state = 0
+        where user_id = #{userId} and user_state = 1
     </select>
      
     <!-- 로그인 시 비활성화 기간 확인 -->
     <select id="checkDeactivationPeriod" resultType="integer">
         select count(*)
         from users
-        where user_id = #{userId} and deactivated_until > sysdate
+        where user_id = #{userId} and deactiveuntil > sysdate
     </select>
 
 </mapper>

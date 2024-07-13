@@ -161,34 +161,37 @@ public class UserService {
 		return null;
 	}
 
+	
 	// 회원탈퇴 관련
 	@Transactional
-    public boolean deactivateAccount(Integer id, String password) {
+    public boolean deactivateAccount(Integer userKey, String userPassword) {
+		log.debug("Checking password for userKey: {}", userKey);
         // 비밀번호 확인
-    	Integer count = userDao.checkPassword(id, password);
+    	Integer count = userDao.checkPassword(userKey, userPassword);
         if (count == 0) {
+        	log.debug("Password does not match for userKey: {}", userKey);
             return false; // 비밀번호가 일치하지 않으면 false 반환
         }
         
         // 회원 비활성화
-        userDao.deactivateUser(id);
+        userDao.deactivateUser(userKey);
         
         // 탈퇴 회원 정보 저장
-        userDao.insertDeletedUser(id);
+        userDao.insertDeletedUser(userKey);
         
         return true; // 비활성화 성공 시 true 반환
     }
     
     public boolean checkUserIsActive(String userId) {
-        return userDao.checkUserIsActive(userId) == 1; // 1이면 활성, 0이면 비활성
+        return userDao.checkUserIsActive(userId) == 1; // 1이면 활성(로그인가능), 0이면 비활성(탈퇴 & 계정 정지)
     }
     
     public boolean checkDeactivationPeriod(String userId) {
-        return userDao.checkDeactivationPeriod(userId) == 0; // 0이면 비활성화 기간 종료, 1이면 기간 중
+        return userDao.checkDeactivationPeriod(userId) == 0; // 1이면 비활성화 기간 종료(로그인가능), 0이면 기간 중(아직 비활성화)
     }
     
-    public User getUserById(Integer id) {
-        return userDao.selectUserById(id);
+    public User getUserById(Integer userKey) {
+        return userDao.selectUserById(userKey);
     }
 
 	

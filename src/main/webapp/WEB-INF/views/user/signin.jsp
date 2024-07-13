@@ -36,10 +36,18 @@
 							<h2>로그인</h2>
 						</div>
 						<div class="card-body">
-							<form method="post">
+							<form method="post" >
 								<c:if test="${not empty param.result && param.result eq 'f'}">
 									<div class="text-danger">아이디와 패스워드를 확인하세요.</div>
 								</c:if>
+								
+								 <c:if test="${not empty param.result && param.result eq 'inactive'}">
+                                    <div class="text-danger">이 계정이 비활성화되었습니다.</div>
+                                </c:if>
+                                <c:if test="${not empty param.result && param.result eq 'deactivated'}">
+                                    <div class="text-danger">비활성화 기간이 남아있습니다.</div>
+                                </c:if>
+								
 
 								<div class="form-group mt-5 d-flex align-items-center">
 									<label for="userid" class="form-label text-center">아이디</label>

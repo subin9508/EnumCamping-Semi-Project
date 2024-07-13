@@ -44,28 +44,24 @@
 					<br>
 					<h3>
 						삭제되는 정보
-						</h5>
+						</h3>
 						<h5>· 계정 및 프로필 정보</h5>
 						<h5>· 예약 정보</h5>
 
 						<br>
 						<br>
 
-						<h3>
-							유지되는 정보
-							</h5>
+							<h3>유지되는 정보</h3>
 							<h5>· 리뷰 및 사진</h5>
 							<h5>(작성자 정보 없이 노출)</h5>
 							<hr />
-							<h3>
-								탈퇴 진행 시
-								</h3>
+							<h3>탈퇴 진행 시</h3>
 								<h3>삭제된 정보는 복구가 불가합니다.</h3>
 								<h5>상기 내용을 모두 확인하셨다면 본인 인증을 해주세요.</h5>
 								<button>이메일 계정 인증하기</button>
 								<br>
 								<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-								data-bs-target="#deleteAccountMadal">다음</button>
+								data-bs-target="#deleteAccountModal">다음</button>
 				</div>
 				<br>
 				<br>
