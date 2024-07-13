@@ -21,17 +21,19 @@
 
 </head>
 <body>
+	<div class="wrapper">
 	<%@ include file="../fragments/header.jspf"%>
+	
+	<div class="footer-main-content">
 	<%@ include file="../fragments/mypage-sidebar.jspf"%>
 
 	<div class="content">
-		<main class="main-content">
+		<main class="main-content" style="margin-left: 300px; margin-top: 50px;">
 			<div class="slider">
-
 				<div class="content-1">
 					<br>
 					<h1>
-						<strong>@@님!</strong>
+						<strong>${sessionScope.signedInUser}님!</strong>
 					</h1>
 					<h1>
 						<strong>탈퇴하면 enum 캠핑장과의 추억이</strong>
@@ -52,9 +54,10 @@
 						<br>
 
 							<h3>유지되는 정보</h3>
-							<h5>· 리뷰 및 사진</h5>
-							<h5>(작성자 정보 없이 노출)</h5>
+							<h5>· 작성한 글 및 사진</h5>
+							<br>
 							<hr />
+							<br>
 							<h3>탈퇴 진행 시</h3>
 								<h3>삭제된 정보는 복구가 불가합니다.</h3>
 								<h5>상기 내용을 모두 확인하셨다면 회원 탈퇴 버튼을 눌러주세요.</h5>
@@ -74,7 +77,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger">경고: 회원 탈퇴 시 30일 동안 재가입이 불가능합니다.</p>
+                    <p class="text-danger">경고: 회원 탈퇴 시 60일 동안 재가입이 불가능합니다.</p>
                     <form id="deactivateForm">
                         <!-- hidden input 필드로 사용자 ID 전달 -->
                         <input type="hidden" id="id" name="id" value="${loginUserId}">
@@ -95,14 +98,15 @@
             </div>
         </div>
     </div>
-				
-				
+		</div>
 			</div>
+				
+				
+	<%@ include file="../fragments/footer.jspf"%>
 		</main>
 	</div>
 		
-	<%@ include file="../fragments/footer.jspf"%>
-
+	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

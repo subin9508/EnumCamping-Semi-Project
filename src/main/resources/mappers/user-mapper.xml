@@ -58,7 +58,7 @@
     <update id="deactivateUser">
         update users 
         set user_state = 0,
-            deactiveuntil = sysdate + interval '30' day
+            deactiveuntil = sysdate + interval '60' day
         where user_key = #{userKey}
     </update>
     
