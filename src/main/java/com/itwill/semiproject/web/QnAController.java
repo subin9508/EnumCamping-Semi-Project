@@ -41,17 +41,34 @@ public class QnAController {
 //		model.addAttribute("qnas",list);
 //	}
 	
+//    @GetMapping("/list")
+//    public String list(Model model, Pager pager) {
+//        log.debug("list(pager={})", pager);
+//        
+//        Long totalCount = qnaDao.selectTotalCount(); // 총 게시글 수 조회
+//        List<QnAListDto> list = qnaService.selectPagedQnAList(pager);
+//        log.debug("list()={}", list);
+//        
+//        model.addAttribute("qnas", list);
+//        model.addAttribute("totalCount", totalCount);
+//        model.addAttribute("pager", pager);
+//        
+//        return "/community/qna/list";
+//    }
+	
     @GetMapping("/list")
-    public String list(Model model, Pager pager) {
-        log.debug("list(pager={})", pager);
+    public String list(@RequestParam(defaultValue = "1") Long page, Model model) {
+        log.debug("list(page={})", page);
         
-        Long totalCount = qnaDao.selectTotalCount(); // 총 게시글 수 조회
-        List<QnAListDto> list = qnaService.selectPagedQnAList(pager);
-        log.debug("list()={}", list);
+        Pager pager = new Pager();
+        pager.setPage(page);
+
+        List<QnAListDto> qnas = qnaService.selectPagedQnAList(pager);
+        long totalCount = qnaService.getTotalCount(new QnASearchDto());
         
-        model.addAttribute("qnas", list);
-        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("qnas", qnas);
         model.addAttribute("pager", pager);
+        model.addAttribute("totalCount", totalCount);
         
         return "/community/qna/list";
     }
@@ -66,6 +83,15 @@ public class QnAController {
 		model.addAttribute("qna", qna); 
 	}
 	
+	
+	@GetMapping("/create")
+	public String createForm(HttpSession session, Model model) {
+	    if (session.getAttribute("signedInUser") == null) {
+	        return "redirect:/user/signin";
+	    }
+	    model.addAttribute("qnaCreateDto", new QnACreateDto());
+	    return "/community/qna/create";
+	}
 	
 	@PostMapping("/create")
 	public String create(QnACreateDto dto, HttpSession session) {
@@ -104,11 +130,42 @@ public class QnAController {
 		return "redirect:/community/qna/details?qnaPostId=" + dto.getQnaPostId();
 	}
 	
-	@GetMapping("/search")
-	public void search(QnASearchDto dto, Model model) {
-		log.debug("search(dto={}", dto);
+//	@GetMapping("/search")
+//	public void search(QnASearchDto dto, Model model) {
+//		log.debug("search(dto={}", dto);
+//		
+//		List<QnAListDto> list = qnaService.search(dto);
+//		model.addAttribute("qnas", list);
+//	}
+	
+    @GetMapping("/search")
+    public String search(QnASearchDto dto, @RequestParam(defaultValue = "1") Long page, Model model) {
+        log.debug("search(dto={}, page={})", dto, page);
+        
+        Pager pager = new Pager();
+        pager.setPage(page);
+
+        List<QnAListDto> qnas = qnaService.search(dto, pager);
+        long totalCount = qnaService.getTotalCount(dto);
+        
+        pager.setNum(totalCount); // 전체 글의 개수를 설정
+        pager.setRow(); // 페이징 계산을 수행
+        
+        if (totalCount == 0) {
+            // 검색 결과가 없을 때는 1 페이지로 설정
+            pager.setTotalPage(1L);
+            pager.setStartNum(1L);
+            pager.setLastNum(1L);
+            pager.setPage(1L); // 현재 페이지를 1로 설정
+        } else {
+            pager.calculatePaging(); // 페이징 계산을 수행
+        }
+        
+        model.addAttribute("qnas", qnas);
+        model.addAttribute("pager", pager);
+        model.addAttribute("totalCount", totalCount);
+        
+        return "/community/qna/list";
+    }
 		
-		List<QnAListDto> list = qnaService.search(dto);
-		model.addAttribute("qnas", list);
-	}
 }

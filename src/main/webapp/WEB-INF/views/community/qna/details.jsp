@@ -26,7 +26,7 @@
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>Q&A 상세보기</h2>
+                    <h2>Q&A 상세</h2>
                 </div>
                 <div class="card-body">
                     <form>
@@ -53,15 +53,15 @@
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="qnaCreatedTime" class="form-label">작성
+                            <label for="qnaCreatedTime" class="form-label" hidden>작성
                                 시간</label> <input id="qnaCreatedTime"
-                                class="form-control" type="text"
+                                class="form-control" type="hidden"
                                 value="${qna.qnaCreatedTime}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="qnaModifiedTime" class="form-label">최종
+                            <label for="qnaModifiedTime" class="form-label" hidden>최종
                                 수정 시간</label> <input id="qnaModifiedTime"
-                                class="form-control" type="text"
+                                class="form-control" type="hidden"
                                 value="${qna.qnaModifiedTime}" readonly />
                         </div>
                     </form>

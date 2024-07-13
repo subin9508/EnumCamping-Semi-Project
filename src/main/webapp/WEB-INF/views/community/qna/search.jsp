@@ -13,18 +13,31 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
+    
+<style>
+ul.pagination {
+	display: flex;
+	justify-content: center;
+	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
+	padding: 0;
+}
+</style>
+
 </head>
 <body>
 <div class="wrapper">
-    <div class="container-fluid">
         <c:set var="pageTitle" value="QnA List" />
         <%@ include file="../../fragments/header.jspf" %>
-        
+        <div class="footer-main-content">
         <%@ include file="../../fragments/community-sidebar.jspf"%>
         
-        <main>
-            <div class="mt-2 card">
-                <div class="card-header">
+   	 <div class="container-fluid">
+  		      <main>
+				<div>
+					<h6 style="text-align: right">총 게시글 수: ${totalCount}</h6>
+				</div>
+				<div class="mt-2 card" style="text-align: center">
+                 <div class="card-header">
                         <c:url var="qnaSearchPage" value="/community/qna/search" />
                     <form method="get" action="${qnaSearchPage}">
                         <div class="row"> <!--  화면을 1:2:1로 나눔 (기본 12개) -->
@@ -40,7 +53,7 @@
                                 <input type="text" class="form-control" name="keyword" placeholder="검색어 입력" required />
                             </div>
                             <div class="col-2">
-                                <input type="submit" class="form-control btn btn-outline-secondary" value="검색" />
+                                <input type="submit" class="form-control btn btn-outline-info" value="검색" />
                             </div>
                         </div>
                     </form>
@@ -53,6 +66,7 @@
                                 <th>제목</th>
                                 <th>작성자</th>
                                 <th>수정시간</th>
+                                <th>조회수</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,17 +81,41 @@
                                     </td>
                                     <td>${qna.qnaUserId}</td>
                                     <td>${qna.qnaModifiedTime}</td>
+                                    <td>${qna.qnaViewCnt}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+
+		<div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item ${pager.page == 1 ? 'disabled' : ''}">
+            <a class="page-link" href="?page=${pager.page - 1}&category=${category}&keyword=${keyword}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <c:forEach var="i" begin="${pager.startNum}" end="${pager.lastNum}">
+            <li class="page-item ${pager.page == i ? 'active' : ''}">
+                <a class="page-link" href="?page=${i}&category=${category}&keyword=${keyword}">${i}</a>
+            </li>
+        </c:forEach>
+        <li class="page-item ${pager.page == pager.lastNum ? 'disabled' : ''}">
+            <a class="page-link" href="?page=${pager.page + 1}&category=${category}&keyword=${keyword}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
+            </div>
                 </div>
             </div>
         </main>
     </div>
-    
-    		<%@ include file="../../fragments/footer.jspf"%>
+		</div>
     </div>
+		<%@ include file="../../fragments/footer.jspf"%>
+	</div>
+	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>

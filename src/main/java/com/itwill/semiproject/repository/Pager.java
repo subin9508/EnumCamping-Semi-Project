@@ -35,47 +35,23 @@ public class Pager {
 	}
 	
 	public void setNum(Long totalCount) {
-    	// 게시판 글의 총 갯수로 전체페이지의 수를 구함
-		this.totalPage = totalCount%this.getPerPage()==0 ? totalCount/this.getPerPage() : totalCount/this.getPerPage()+1;
-        // 전체 페이지수로 전체블록의 수를 구함
-		Long totalBlock = totalPage%this.getPerBlock()==0 ? totalPage/this.getPerBlock() : totalPage/this.getPerBlock()+1;
-        
-		/* 현재페이지에 해당하는 현재블록을 구함
-          page	curBlcok
-		 	1		1
-		 	2		1
-		 	3		1
-		 	4		1
-		 	5		1
-		 	6		2*/
-		Long curBlock = this.getPage()%this.getPerBlock()==0 ? this.getPage()/this.getPerBlock() : this.getPage()/this.getPerBlock()+1; 
+		this.totalPage = totalCount % this.getPerPage() == 0 ? totalCount / this.getPerPage() : totalCount / this.getPerPage() + 1;
+		calculatePaging();
+	}
+
+	public void calculatePaging() {
+		Long totalBlock = totalPage % this.getPerBlock() == 0 ? totalPage / this.getPerBlock() : totalPage / this.getPerBlock() + 1;
+		Long curBlock = this.getPage() % this.getPerBlock() == 0 ? this.getPage() / this.getPerBlock() : this.getPage() / this.getPerBlock() + 1;
 		
-        /* 현재블록의 startNum, lastNum을 구함
-	 	curBlock	startNum	lastNum
-	 	1			1			5
-	 	2			6			10
-	 	3			11			16
-		*/
-		this.startNum= (curBlock-1)*this.getPerBlock() + 1;
-		this.lastNum= curBlock*this.getPerBlock();
+		this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
+		this.lastNum = curBlock * this.getPerBlock();
 		
-        //현재블록이 마지막블록이면 lastNum은 마지막페이지번호임
-		if(curBlock==totalBlock) {
-			this.lastNum=totalPage;
-		}
-        // 2번 페이지이상 부터 이전버튼 활성화
-		if(this.page>1) {
-			pre=true;
-		}else{
-			pre=false;
-		}
-		//현재블록이 마지막블록보다 작으면 다음버튼 활성화
-		if(curBlock<totalBlock) {
-			next=true;
-		}else{
-			next=false;
+		if (curBlock == totalBlock) {
+			this.lastNum = totalPage;
 		}
 		
+		this.pre = this.page > 1;
+		this.next = curBlock < totalBlock;
 	}
 
 	public Long getPerPage() {
@@ -91,6 +67,10 @@ public class Pager {
 			this.page=1L;
 		}
 		return page;
+	}
+	
+	public void setTotalPage(Long totalPage) {
+		this.totalPage = totalPage;
 	}
 	
 }
