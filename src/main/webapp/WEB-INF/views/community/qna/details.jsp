@@ -26,7 +26,7 @@
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>Q&A 상세보기</h2>
+                    <h2>Q&A 상세</h2>
                 </div>
                 <div class="card-body">
                     <form>
@@ -53,20 +53,24 @@
                                 readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="qnaCreatedTime" class="form-label">작성
+                            <label for="qnaCreatedTime" class="form-label" hidden>작성
                                 시간</label> <input id="qnaCreatedTime"
-                                class="form-control" type="text"
+                                class="form-control" type="hidden"
                                 value="${qna.qnaCreatedTime}" readonly />
                         </div>
                         <div class="mt-2">
-                            <label for="qnaModifiedTime" class="form-label">최종
+                            <label for="qnaModifiedTime" class="form-label" hidden>최종
                                 수정 시간</label> <input id="qnaModifiedTime"
-                                class="form-control" type="text"
+                                class="form-control" type="hidden"
                                 value="${qna.qnaModifiedTime}" readonly />
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
+                <c:url var="qnaListPage" value="/community/qna/list" />
+                    <a class="btn btn-outline-info"
+                        href="${qnaListPage}">목록보기</a>
+                
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
                     <c:if test="${signedInUser eq qna.qnaUserId}">
                     <c:url var="qnaModifyPage" value="/community/qna/modify">

@@ -22,7 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		//결제 정보를 조회하는 비동기 함수 호출
         try {
             const paymentInfo = await getPaymentInfo(resId);
-            console.log("결제 금액 확인",paymentInfo.amount);
+
+            if(paymentInfo.res_state === 1) {
+				alert('이미 결제가 완료된 예약입니다.');
+				return;
+			}
+  console.log("결제 금액 확인",paymentInfo.amount);
+            console.log(paymentInfo);
+
             requestPayment(paymentInfo, resId);
         } catch (error) {
             console.error("결제 정보 조회 중 오류:", error);
@@ -35,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		//I'mport 결제 라이브러리 초기화
         const IMP = window.IMP;
         IMP.init('imp53143455');
-
         IMP.request_pay({ //요청 전문양식을 그대로 가지고와서 우리 입맛에 맞게 넣음
+
             pg: 'html5_inicis',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(), //우리 상점에서 이런 결제를 할거라고 알림
@@ -45,40 +52,41 @@ document.addEventListener('DOMContentLoaded', function() {
             buyer_email: paymentInfo.email, //구매자 이메일
             buyer_name: paymentInfo.buyerName, //구매자 이름
             buyer_tel: paymentInfo.phoneNumber //구매자 핸드폰 번호
+
         }, function(rsp) {
             handlePaymentResponse(rsp, resId); //응답함수를 실행
         });
     }
     
     
-	//결제 응답 처리 비동기 함수
-    async function handlePaymentResponse(rsp, resId) {
-		//결제 응답 로깅
-        console.log('Payment Response:', rsp);
-        if (rsp.success) {
-            console.log("결제 성공, 검증 시작");
-            try {
-				//결제 검증 및 정보 저장 함수 호출
-                const result = await verifyAndSavePayInfo(rsp.imp_uid, resId); //
-                console.log("검증 결과:", result);
-                if (result && (result.status === "paid")) {
-                    alert('결제가 완료되었습니다.');
-                    //주문번호 추출 및 로깅
-                    const orderNum = result.merchant_uid || (result.payment && result.payment.merchantUid) || 'unknown';
-                    console.log("이동할 주문번호:", orderNum);
-                    window.location.href = `/semiproject/reservation/succeeded/${orderNum}`; //결제 성공페이지로감
-                } else {
-                    throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
-                }
-            } catch (error) {
-                console.error("결제 검증 및 저장 중 오류:", error);
-                alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
+
+	// 결제 응답 처리 비동기 함수
+async function handlePaymentResponse(rsp, resId) {
+    // 결제 응답 로깅
+    console.log('Payment Response:', rsp);
+    if (rsp.success) {
+        console.log("결제 성공, 검증 시작");
+        try {
+            // 결제 검증 및 정보 저장 함수 호출
+            const result = await verifyAndSavePayInfo(rsp.imp_uid, resId);
+            console.log("검증 결과:", result);
+            if (result && (result.status === "paid")) {
+                alert('결제가 완료되었습니다.');
+                // resId 로깅
+                console.log("이동할 예약 ID:", resId);
+                window.location.href = `/semiproject/reservation/succeeded/${resId}`; // 결제 성공 페이지로 이동
+            } else {
+                throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
             }
-        } else {
-            console.log('Payment Failed:', rsp);
-            alert('결제에 실패했습니다. 다시 시도해 주세요.');
+        } catch (error) {
+            console.error("결제 검증 및 저장 중 오류:", error);
+            alert('결제 검증 중 오류가 발생했습니다. 오류 내용: ' + error.message);
         }
+    } else {
+        console.log('Payment Failed:', rsp);
+        alert('결제에 실패했습니다. 다시 시도해 주세요.');
     }
+}
 
 //결제 정보 조회함수
     async function getPaymentInfo(resId) {
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			//서버에 결제 정보 조회 요청
             const response = await $.ajax({
                 type: "GET",
-                url: "/semiproject/reservation/paymentInfo?resId=" + resId,
+                url: "/semiproject/reservation/paymentInfo/" + resId,
                 dataType: 'json'
             });
             return response;

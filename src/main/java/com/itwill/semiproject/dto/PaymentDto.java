@@ -1,6 +1,8 @@
 package com.itwill.semiproject.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.itwill.semiproject.repository.Payments;
 
 import lombok.Data;
@@ -15,7 +17,7 @@ public class PaymentDto {
 
 	private Integer resTotalPrice; // 결제 금액
 
-	private LocalDate payDate; // 결제 날짜
+	private LocalDateTime payDate; // 결제 날짜
 	private String payMethod; // 결제 방법
 	private String payStatus; // 결제 상태
 	private String buyerEmail; // 구매자 이메일

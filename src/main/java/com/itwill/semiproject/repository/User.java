@@ -1,5 +1,7 @@
 package com.itwill.semiproject.repository;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,6 @@ public class User {
 	private String userPhone; //핸드폰
 	private String userRole; //일반유저인지 관리자인지
 	private String profilePictureUrl; // 프로필 사진 URL
-	
+	private Integer userState;
+	private Date deactiveUntil;
 }

@@ -44,6 +44,8 @@ header a {
     font-size: 1.2rem; /* 네비게이션 바 링크의 폰트 크기 */
     padding: 10px 20px; /* 네비게이션 바 링크의 패딩 */
     width: 200px; /* 고정된 넓이 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    display: block; /* 블록 레벨 요소로 변경 */
 }
 
 

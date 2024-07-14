@@ -1,6 +1,7 @@
 package com.itwill.semiproject.repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,10 +18,8 @@ public class Payments { //데이터베이스 테이블 payments 테이블의 모
 	private String impUid;
 	private String pgTid;
 	private Integer resId;
-
 	private Integer resTotalPrice;
-
-	private LocalDate payDate;
+	private LocalDateTime payDate;
 	private String payMethod;
 	private String payStatus;
 	private String buyerEmail;

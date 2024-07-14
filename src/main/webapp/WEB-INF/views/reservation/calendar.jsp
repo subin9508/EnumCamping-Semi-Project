@@ -17,7 +17,7 @@
 
 <body>
     <div class="wrapper">
-    <%@ include file="../fragments/header.jspf"%>
+        <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content">
 
             <div>
@@ -44,141 +44,198 @@
                 </table>
 
                 <div id="date" style="display: none;"></div>
-                
-                <c:url value="/images/calendar/calendar_campingzone1.gif" var="calendar_campingzone1"/>
-                <c:url value="/images/calendar/calendar_campingzone2.gif" var="calendar_campingzone2"/>
-                <c:url value="/images/calendar/calendar_campingzone3.gif" var="calendar_campingzone3"/>
+
+                <c:url
+                    value="/images/calendar/calendar_campingzone1.gif"
+                    var="calendar_campingzone1" />
+                <c:url
+                    value="/images/calendar/calendar_campingzone2.gif"
+                    var="calendar_campingzone2" />
+                <c:url
+                    value="/images/calendar/calendar_campingzone3.gif"
+                    var="calendar_campingzone3" />
                 <!-- radio -->
                 <div class="area-card" style="display: none;">
                     <div class="card p-2" id="area1">
-                        <label class="radio_label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                            <input class="area-radio" type="radio" id="area1_radio" name="area" value="1">
-                            <span class="radio_icon"></span>
-                            <img alt="campingzone1" src="${calendar_campingzone1}" height="150px" width="200px" style="margin: 0 10px;">
-                            <span class="radio_text" style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-1</strong></span>
+                        <label class="radio_label"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <input class="area-radio" type="radio"
+                            id="area1_radio" name="area" value="1">
+                            <span class="radio_icon"></span> <img
+                            alt="campingzone1"
+                            src="${calendar_campingzone1}"
+                            height="150px" width="200px"
+                            style="margin: 0 10px;"> <span
+                            class="radio_text"
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-1</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
                     <div class="card p-2" id="area2">
-                        <label class="radio_label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                            <input class="area-radio" type="radio" id="area2_radio" name="area" value="2">
-                            <span class="radio_icon"></span>
-                            <img alt="campingzone2" src="${calendar_campingzone1}" height="150px" width="200px" style="margin: 0 10px;">
-                            <span class="radio_text" style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-2</strong></span>
+                        <label class="radio_label"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <input class="area-radio" type="radio"
+                            id="area2_radio" name="area" value="2">
+                            <span class="radio_icon"></span> <img
+                            alt="campingzone2"
+                            src="${calendar_campingzone1}"
+                            height="150px" width="200px"
+                            style="margin: 0 10px;"> <span
+                            class="radio_text"
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-2</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
                     <div class="card p-2" id="area3">
-                        <label class="radio_label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                            <input class="area-radio" type="radio" id="area3_radio" name="area" value="3">
-                            <span class="radio_icon"></span>
-                            <img alt="campingzone3" src="${calendar_campingzone2}" height="150px" width="200px" style="margin: 0 10px;">
-                            <span class="radio_text" style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-1</strong></span>
+                        <label class="radio_label"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <input class="area-radio" type="radio"
+                            id="area3_radio" name="area" value="3">
+                            <span class="radio_icon"></span> <img
+                            alt="campingzone3"
+                            src="${calendar_campingzone2}"
+                            height="150px" width="200px"
+                            style="margin: 0 10px;"> <span
+                            class="radio_text"
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-1</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
                     <div class="card p-2" id="area4">
-                        <label class="radio_label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                            <input class="area-radio" type="radio" id="area4_radio" name="area" value="4">
-                            <span class="radio_icon"></span>
-                            <img alt="campingzone4" src="${calendar_campingzone2}" height="150px" width="200px" style="margin: 0 10px;">
-                            <span class="radio_text" style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-2</strong></span>
+                        <label class="radio_label"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <input class="area-radio" type="radio"
+                            id="area4_radio" name="area" value="4">
+                            <span class="radio_icon"></span> <img
+                            alt="campingzone4"
+                            src="${calendar_campingzone2}"
+                            height="150px" width="200px"
+                            style="margin: 0 10px;"> <span
+                            class="radio_text"
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-2</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
                     <div class="card p-2" id="area5">
-                        <label class="radio_label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                            <input class="area-radio" type="radio" id="area5_radio" name="area" value="5">
-                            <span class="radio_icon"></span>
-                            <img alt="campingzone5" src="${calendar_campingzone3}" height="150px" width="200px" style="margin: 0 10px;">
-                            <span class="radio_text" style="font-size: 18px; margin-right: auto;"><strong>캠핑존C</strong></span>
+                        <label class="radio_label"
+                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                            <input class="area-radio" type="radio"
+                            id="area5_radio" name="area" value="5">
+                            <span class="radio_icon"></span> <img
+                            alt="campingzone5"
+                            src="${calendar_campingzone3}"
+                            height="150px" width="200px"
+                            style="margin: 0 10px;"> <span
+                            class="radio_text"
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존C</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
                 </div>
-                <div class="card mt-2 p-2" id="night-card" style="display:none;">
-                    <label class="radio_label" id="night-radio-label"> 
-
-                            <input class="night-radio" type="radio" name="night" checked> 
-                            <span class="radio_icon"></span> 
-                            <span class="radio_text">1박 2일</span>
-
-                            <input class="night-radio" type="radio" name="night"> 
-                            <span class="radio_icon"></span> 
-                            <span class="radio_text">2박 3일</span>
-
-                    </label>
+                <div class="card mt-2 p-2" id="night-card"
+                    style="display: none;">
+                    <div class="night-radio_label"
+                        id="night-radio_label">
+                        <h5> <strong>체류기간<strong> </h5>
+                        <div class="radio-options">
+                        <label> <input class="night-radio"
+                            type="radio" name="night" value="1">
+                            <span class="night-radio_text">1박 2일</span>
+                        </label> <label> <input class="night-radio"
+                            type="radio" name="night" value="2">
+                            <span class="night-radio_text">2박 3일</span>
+                        </label>
+                        </div>
+                    </div>
                 </div>
                 <!-- // radio -->
-                
+
                 <div id="price" style="display: none;">
-                    <span id="price-label">가격: </span>
-                    <span id="price-value"></span>원
+                    <span id="price-label">가격: </span> <span
+                        id="price-value"></span>원
                 </div>
+
+
+                <div class="m-3" id="items-table" style="display: none;">
+                    <div
+                        class="container-fluid d-flex justify-content-center"
+                        style="margin-bottom: 30px;">
+                        <h3><strong>대여 및 판매 물품</strong></h3>
+                    </div>
+                    <div
+                        class="container-fluid d-flex justify-content-center">
+                        <table class="table">
+                            <tbody>
+                                <c:forEach var="i" items="${items}">
+                                    <tr>
+                                        <td class="img-container"
+                                            style="width: 20%;"><c:url
+                                                value="${i.itemImg}"
+                                                var="itemImgUrl" /> <img
+                                            alt="${i.itemName}"
+                                            src="${itemImgUrl}"
+                                            class="img"
+                                            id="itemImg-${i.itemId}"
+                                            style="height: 150px; width: 150px;" />
+                                        </td>
+                                        <td
+                                            style="width: 20%; height: 10%;">
+                                            <h5>${i.itemName}</h5>
+                                        </td>
+                                        <td
+                                            style="width: 20%; height: 10%;">${i.itemDesc}</td>
+                                        <td
+                                            style="width: 20%; height: 10%; text-align: center;">${i.itemPrice}원</td>
+                                        <td class="narrow"
+                                            style="width: 20%; height: 10%; text-align: center;">
+                                            <div
+                                                class="quantity-controls">
+                                                <select
+                                                    id="quantity-${i.itemId}"
+                                                    onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <!-- 필요한 경우 수량 옵션을 더 추가 -->
+                                                </select>
+                                            </div>
+                                            <p />
+                                            <div id="total-${i.itemId}"
+                                                class="total-price">0원</div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    <!-- 요청사항 입력 -->
+                    <div class="container-fluid d-flex justify-content-center mt-3 row" id="requirement">
+                        <h3 class="col-2">요청사항</h3>
+                        <textarea class="form-control col-10 m-3" id="special-requests" rows="3" placeholder="요청사항을 입력하세요"></textarea>
+                    </div>
+
+                    <!-- 전체 총 가격을 표시할 공간 -->
+                    <div class="m-3" id="totalAllItems"
+                        style="display: none; justify-content: center; align-items: center; font-size: 24px; 
+                        font-weight: bold; text-align: center;"></div>
+                </div>
+
+                <!-- 선택된 아이템들 리스트를 표시할 공간 -->
+                <div id="selectedItemsList" style="display: none;"></div>
+
+                <div
+                    class="container-fluid d-flex justify-content-center mt-3">
+                    <button onclick="addNextPageEventListeners()"
+                        class="btn btnNextPage">다음
+                        단계</button>
+                </div>
+
             </div>
         </div>
-        
-        <div class="m-5" id="items-table" style="display: none;">
-        <div class="container-fluid d-flex justify-content-center">
-                    <h3>대여 및 판매 물품</h3>
-        </div>
-        <div class="container-fluid d-flex justify-content-center">
-            <table class="table" style="width: 70%;">
-                <tbody>
-                    <c:forEach var="i" items="${items}">
-                        <tr>
-                            <td class="img-container"
-                                style="width: 20%;"><c:url
-                                    value="${i.itemImg}"
-                                    var="itemImgUrl" /> <img
-                                alt="${i.itemName}" src="${itemImgUrl}"
-                                class="img" id="itemImg-${i.itemId}"
-                                style="height: 150px; width: 150px;" />
-                            </td>
-                            <td style="width: 20%; height: 10%;">
-                                <h5>${i.itemName}</h5>
-                            </td>
-                            <td style="width: 20%; height: 10%;">${i.itemDesc}</td>
-                            <td
-                                style="width: 20%; height: 10%; text-align: center;">${i.itemPrice}원</td>
-                            <td class="narrow"
-                                style="width: 20%; height: 10%; text-align: center;">
-                                <div class="quantity-controls">
-                                    <select id="quantity-${i.itemId}"
-                                        onchange="updateQuantity('${i.itemId}', ${i.itemPrice})">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <!-- 필요한 경우 수량 옵션을 더 추가 -->
-                                    </select>
-                                </div>
-                                <p />
-                                <div id="total-${i.itemId}"
-                                    class="total-price">0원</div>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-
-       
-        <!-- 전체 총 가격을 표시할 공간 -->
-         <div id="totalAllItems" style="display: none; justify-content: center; align-items: center; font-size: 24px; font-weight: bold; text-align: center;"></div>
-        </div>
-        
-        <!-- 선택된 아이템들 리스트를 표시할 공간 -->
-        <div id="selectedItemsList" style="display: none;"></div>
-
-        <div class="container-fluid d-flex justify-content-center mt-3">
-            <button onclick="addNextPageEventListeners()"
-                class="btn btn-primary btnNextPage">다음 단계</button>
-        </div>
-
-
         <%@ include file="../fragments/footer.jspf"%>
-   </div> 
-    
+    </div>
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

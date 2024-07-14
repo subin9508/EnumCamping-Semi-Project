@@ -7,4 +7,5 @@ public interface PaymentCancelDao {
 	// 취소 테이블 삽입
 	int insertPaymentCancel(PaymentCancelDto cancelDto);
 	
+	
 }
