@@ -136,7 +136,7 @@
                     style="display: none;">
                     <div class="night-radio_label"
                         id="night-radio_label">
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                         <label> <input class="night-radio"
                             type="radio" name="night" value="1">
@@ -147,13 +147,12 @@
                         </label>
                         </div>
                     </div>
+                    <div id="price">
+                    <span id="price-label">캠핑존 가격: </span> <span
+                        id="price-value"></span>원
+                	</div>
                 </div>
                 <!-- // radio -->
-
-                <div id="price" style="display: none;">
-                    <span id="price-label">가격: </span> <span
-                        id="price-value"></span>원
-                </div>
 
 
                 <div class="m-3" id="items-table" style="display: none;">

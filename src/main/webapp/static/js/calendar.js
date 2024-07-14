@@ -353,7 +353,7 @@
                 if (checkedDateAndArea.length === 0) {
                     // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
                     nightRadioLabel.innerHTML = `
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                             <label>
                                 <input class="night-radio" type="radio" name="night" value="1">
@@ -368,7 +368,7 @@
                 } else {
                     // 다음날 예약이 있는 경우 1박 옵션만 표시
                     nightRadioLabel.innerHTML = `
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                             <label>
                                 <input class="night-radio" type="radio" name="night" value="1">
@@ -542,7 +542,7 @@
                     resCheckIn: date,
                     resCheckOut: calculateCheckOutDate(date, selectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
                     resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')), // 총 가격 추가
-                    requirement: requirement
+                    requirement: requirement || '요청없음'
                 };
                 console.log('reservationMaster: {}', reservationMaster);
 
