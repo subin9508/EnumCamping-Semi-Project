@@ -109,7 +109,7 @@ public class ReservationService {
         return reservationDetailDao.selectDetailsByUserId(userId);
     }
     
-    public List<ReservationMaster> getReservationMasterByUserId(String userId) {
+    public ReservationMaster getReservationMasterByUserId(String userId) {
     	return reservationMasterDao.selectMasterByUserId(userId);
     }
     

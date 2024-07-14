@@ -19,13 +19,10 @@
     </select>
     
     <!-- userId에 해당하는 reservation_detail -->
-    <select id="selectDetailsByUserId" parameterType="string" resultType="ReservationDetail">
-        select rd.res_id, rd.item_id, rd.item_quantity,
-        rd.item_amount, i.item_name, i.item_img
-        from reservation_detail rd
-        join items i on rd.item_id = i.item_id
-        where rd.res_id = (select res_id from reservation_master where user_id = #{userId} order by res_check_in desc fetch first 1 row only)
-        order BY rd.item_id ASC      
+    <select id="selectDetailsByUserId" resultType="ReservationDetail">
+        select rd.* from reservation_detail rd
+        join reservation_master rm on rd.res_id = rm.res_id
+         where rm.user_id = #{userId} and rm.res_state = 0        
     </select>
     
     <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->  

@@ -99,9 +99,8 @@ public class ReservationController {
 	public String showOrderPage(HttpSession session, Model model) {
 	    String userId = (String) session.getAttribute("signedInUser");
 	    User user = userService.read(userId);
-	    List<ReservationMaster> reservationMasters = reservationService.getReservationMasterByUserId(userId);
 	    
-	    ReservationMaster reservationMaster = reservationMasters.isEmpty() ? null : reservationMasters.get(0);
+	    ReservationMaster reservationMaster = reservationService.getReservationMasterByUserId(userId);
 	    List<ReservationDetail> reservationDetails = reservationService.getReservationDetailsByUserId(userId);
 
 	    model.addAttribute("user", user);
@@ -171,15 +170,13 @@ public class ReservationController {
 	    reservationService.makeReservation(reservationMaster, reservationDetails);
 
 	    // 예약정보 가져오기
-	    List<ReservationMaster> reservationMasters = reservationService.getReservationMasterByUserId(userId);
-	    
-	    reservationMaster = reservationMasters.isEmpty() ? null : reservationMasters.get(0);
-	 		
+	    reservationMaster = reservationService.getReservationMasterByUserId(userId);
+	 	 		
 	 	// 예약 상세정보 가져오기
-	 	reservationDetails = reservationService.getReservationDetailsByUserId(userId);
-	 	
-	 	model.addAttribute("reservationMaster", reservationMaster);
-	    model.addAttribute("reservationDetails", reservationDetails);
+	 	 reservationDetails = reservationService.getReservationDetailsByUserId(userId);
+	 	 	
+	 	 model.addAttribute("reservationMaster", reservationMaster);
+	 	 model.addAttribute("reservationDetails", reservationDetails);
 	    
 	    return "/reservation/order";
 	}

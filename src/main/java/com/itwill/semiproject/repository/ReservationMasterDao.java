@@ -18,5 +18,5 @@ public interface ReservationMasterDao {
 	void insertReservationMaster(ReservationMaster reservationMaster);
 	void insertReservationDetail(ReservationDetail reservationDetail);
 	int deleteByUserId(String userId);
-	List<ReservationMaster> selectMasterByUserId(String userId);
+	ReservationMaster selectMasterByUserId(String userId);
 }
