@@ -64,7 +64,7 @@
 								<div class="mb-3 row">
 									<label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="userPassword"
+										<input type="password" class="form-control" id="userPassword"
 											name="userPassword" value="${user.userPassword}" readonly>
 									</div>
 								</div>

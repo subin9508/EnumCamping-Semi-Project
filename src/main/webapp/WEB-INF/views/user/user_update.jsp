@@ -70,13 +70,27 @@
                                     <input id="userId" type="text" class="form-control" name="userId" value="${user.userId}" readonly>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
-                                <div class="col-sm-10">
-                                    <input id="userPassword" type="text" class="form-control" name="userPassword" value="${user.userPassword}">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
+
+
+
+								<div class="mb-3 row">
+									<label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
+									<div class="col-sm-10">
+										<!-- 성공 메시지 표시 -->
+										<c:if test="${not empty message}">
+											<div class="alert alert-success">${message}</div>
+
+										</c:if>
+
+										<!-- 에러 메시지 표시 -->
+										<c:if test="${not empty error}">
+											<div class="alert alert-danger">${error}</div>
+										</c:if>
+										<input id="userPassword" type="password" class="form-control"
+											name="userPassword" value="${user.userPassword}">
+									</div>
+								</div>
+								<div class="mb-3 row">
                                 <label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
                                 <div class="col-sm-10">
                                     <input id="userEmail" type="text" class="form-control" name="userEmail"value="${user.userEmail}" readonly>

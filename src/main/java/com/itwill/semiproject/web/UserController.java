@@ -12,7 +12,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
@@ -232,18 +233,33 @@ public class UserController {
 	}
 
 	@PostMapping("/user_update")
-	public String user_update(UserUpdateDto dto, HttpSession session) {
+	public String user_update(UserUpdateDto dto, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		log.debug("user_update(dto={})", dto);
-
+		
+		// 비밀번호 길이 검사
+		if(dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
+			if(dto.getUserPassword().length() < 8) {
+				model.addAttribute("passwordError", "비밀번호는 8자리 이상이어야 합니다.");
+				model.addAttribute("user", dto);
+				return "user/user_update";
+			}
+			
+		}
 		User user = (User) session.getAttribute("user");
-
+		
+		try {
 		userService.update(dto);
-
+		} catch (Exception e) {
+			log.error("사용자 정보 업데이트 중 오류 발생", e);
+			redirectAttributes.addFlashAttribute("error", "사용자 정보 업데이트에 실패했습니다.");
+			return "redirect:/user/user_update";
+		}
 		// 업데이트된 사용자 정보를 세션에 다시 저장
 		User updatedUser = userService.read(dto.getUserId());
 		log.info("updatedUser: {}", updatedUser);
 		session.setAttribute("user", updatedUser);
-
+		
+		redirectAttributes.addFlashAttribute("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
 		return "redirect:/user/myPage?userId=" + dto.getUserId();
 	}
 
