@@ -98,9 +98,9 @@
                             <div class="col-10">
                                 <!-- 댓글 입력 -->
                                 <textarea class="form-control" rows="3"
-                                    id="ctext" placeholder="댓글 내용"></textarea>
+                                    id="qcContent" placeholder="댓글 내용"></textarea>
                                 <!-- 댓글 작성자 아이디를 로그인한 사용자의 아이디로 설정 -->
-                                <input class="d-none" id="username" value="${signedInUser}" />
+                                <input class="d-none" id="qcUserId" value="${signedInUser}" />
                             </div>
                             <div class="col-2">
                                 <button class="btn btn-outline-success"
@@ -110,7 +110,7 @@
                     </div>
                     
                     <!-- 포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
-                    <div class="mt-2" id="comments"></div>
+                    <div class="mt-2" id="QnAComment"></div>
                 </div>
             </div>
         </section>
@@ -159,8 +159,8 @@
     </script>
     
     <!-- 우리가 만드는 JS 파일 -->
-    <!-- <c:url var="commentsJS" value="/js/comments.js" />
-    <script src="${commentsJS}"></script> -->
+    <c:url var="commentsJS" value="/js/comments.js" />
+    <script src="${commentsJS}"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    	<c:url var="weatherJS" value="/js/weather.js" />

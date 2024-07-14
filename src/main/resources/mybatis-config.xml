@@ -25,6 +25,7 @@
         <typeAlias type="com.itwill.semiproject.repository.PaymentCancelDao" alias="PaymentCancel"/>
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
         <typeAlias type="com.itwill.semiproject.dto.QnASearchDto" alias="QnASearchDto" />
-
+		<typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" />
+		
     </typeAliases>
 </configuration>
