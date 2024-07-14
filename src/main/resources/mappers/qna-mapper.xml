@@ -117,5 +117,12 @@
 	<update id="updateViewCount">
 		UPDATE QNA SET qna_view_cnt = qna_view_cnt + 1 WHERE qna_post_id = #{qnaPostId}
 	</update>
+	
+	<!-- userId에 해당하는 qna -->
+    <select id="selectQnAByUserId" resultType="QnA">
+        select * from qna q
+        where qna_user_id = #{userId}
+         
+    </select>
 
 </mapper>

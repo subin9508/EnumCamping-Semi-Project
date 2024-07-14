@@ -24,15 +24,19 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itwill.semiproject.dto.QnAUpdateDto;
 import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserDeactivateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.QnA;
+import com.itwill.semiproject.repository.QnADao;
 import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.User;
+import com.itwill.semiproject.service.QnAService;
 import com.itwill.semiproject.service.UserService;
 
 import jakarta.servlet.http.Cookie;
@@ -49,6 +53,8 @@ public class UserController {
 
 	private final UserService userService;
 	private final String uploadDirectory = "path/to/upload/directory"; // 실제 업로드 경로로 수정
+	private final QnAService qnaService;
+	private final QnADao qnaDao;
 
 	@GetMapping("/signin")
 	public void signin(HttpSession session) {
@@ -365,6 +371,69 @@ public class UserController {
     	model.addAttribute("resDetail", resDetail);
     	
     }
+    
+    @GetMapping("/qna_list")
+	public void qnaList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
+		log.debug("qna_list(userId={})", userId);
+
+		User user = userService.read(userId);
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+		 List<QnA> list = qnaService.selectByUserId(userId);
+		 log.debug("list=({})", list);
+	     model.addAttribute("qnalist", list);
+	     model.addAttribute("user", user); // 모델에 사용자 정보 추가
+	}
+    
+    @GetMapping({"/qna_details", "/qna_modify"})
+	public void details(@RequestParam(name = "qnaPostId") int qnaPostId, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
+		log.debug("details(qnaPostId={})", qnaPostId);
+		
+		User user = userService.read(userId);
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+		
+		qnaDao.updateViewCount(qnaPostId); // 조회수 증가 메서드 호출
+		QnA qna = qnaService.read(qnaPostId);
+
+		model.addAttribute("qnaDetails", qna); 
+		model.addAttribute("user", user); // 모델에 사용자 정보 추가
+	}
+    
+    @GetMapping("/qna_delete")
+    public String delete(@RequestParam(name="qnaPostId") int id, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
+        log.debug("delete(qnaPostId={})", id);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
+        
+        User user = userService.read(userId);
+        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+        
+        qnaService.delete(id);
+        
+        model.addAttribute("user", user); // 모델에 사용자 정보 추가
+        
+        return "redirect:/user/qna_list?userId=" + userId;
+    }
+    
+    @PostMapping("/qna_update")
+	public String update(@RequestParam(name="userId") String userId, Model model, QnAUpdateDto dto, HttpSession session) {
+		log.debug("update(dto={})", dto);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
+        User user = userService.read(userId);
+        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+        
+		qnaService.update(dto);
+		
+		model.addAttribute("user", user); // 모델에 사용자 정보 추가
+		
+		log.debug("postid",dto.getQnaPostId());
+		return "redirect:/user/qna_details?qnaPostId=" + dto.getQnaPostId() + "&userId=" + userId;
+	}
+	
 
     // 회원 탈퇴 
     @GetMapping("/deactivateUser")

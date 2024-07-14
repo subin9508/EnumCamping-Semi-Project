@@ -37,8 +37,13 @@
         <filter-name>authFilter</filter-name>
         <url-pattern>/user/myPage</url-pattern>
         <url-pattern>/user/reservation_list</url-pattern>
+        <url-pattern>/user/reservation_details</url-pattern>
+        <url-pattern>/user/qna_list</url-pattern>
+        <url-pattern>/user/qna_details</url-pattern>
+        <url-pattern>/user/qna_modify</url-pattern>
         <url-pattern>/user/user_update</url-pattern>
         <url-pattern>/reservation/calendar</url-pattern>
+        <url-pattern>/reservation/order</url-pattern>
         <!-- 
         <url-pattern>/post/update</url-pattern>
         <url-pattern>/post/delete</url-pattern>
