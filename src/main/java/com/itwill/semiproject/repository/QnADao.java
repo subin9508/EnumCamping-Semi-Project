@@ -28,5 +28,6 @@ public interface QnADao {
     List<QnA> searchQnA(Map<String, Object> params);
     
     long selectTotalCount(QnASearchDto dto);  // 검색 조건에 맞는 전체 글의 갯수 조회
-    
+ 
+    int updateQnaState(Integer qnaPostId, Integer qnaState);
 }

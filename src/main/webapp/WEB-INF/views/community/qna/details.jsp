@@ -24,6 +24,17 @@
         
     <div class="container-fluid">
         <main>
+        
+            <!-- 알림 메시지 표시 -->
+            <c:if test="${not empty sessionScope.message}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    ${sessionScope.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <c:remove var="message" scope="session"/>
+            </c:if>
+        
+        
             <div class="mt-2 card">
                 <div class="card-header">
                     <h2>Q&A 상세</h2>
@@ -64,6 +75,13 @@
                                 class="form-control" type="hidden"
                                 value="${qna.qnaModifiedTime}" readonly />
                         </div>
+                        <div class="mt-2 form-check">
+                            <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" <c:if test="${qna.qnaLock}">checked</c:if> disabled>
+                            <label class="form-check-label" for="qnaLock">
+                                비밀글
+                            </label>
+                        </div>
+                         <input type="hidden" id="userRole" value="${userRole}">
                     </form>
                 </div>
                 <div class="card-footer">
@@ -81,6 +99,36 @@
                     </c:if>
                 </div>
             </div>
+            
+            
+ <!-- 답변 등록 폼 -->
+ <c:if test="${userRole eq '0'}">
+                <div class="mt-2 card">
+                    <div class="card-header">
+                        <h2>답변 등록</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-2 row">
+                            <div class="col-10">
+                                <textarea class="form-control" rows="3" id="answerContent" placeholder="답변 내용"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </c:if>
+                <!-- 답변 목록 -->
+                <div class="mt-2 card">
+                    <div class="card-header">
+                        <h2>답변 목록</h2>
+                    </div>
+                    <div class="card-body" id="answersContainer">
+                        <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
+                    </div>
+                </div>
+            
         </main>
         
         <section>
@@ -156,11 +204,14 @@
     // 세션에 저장된 로그인 사용자 아이디를 자바스크립트 변수에 저장
     // -> comment.js 파일에서 이용할 수 있도록 하기 위해.
     const signedInUser = '${signedInUser}';
+    const userRole = '${userRole}';
     </script>
+
+	<c:url var="qnaanswersJS" value="/js/qnaanswers.js" />
+  	<script src="${qnaanswersJS}"></script>
     
-    <!-- 우리가 만드는 JS 파일 -->
     <c:url var="commentsJS" value="/js/comments.js" />
-    <script src="${commentsJS}"></script>
+    <script src="${commentsJS}"></script>    
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    	<c:url var="weatherJS" value="/js/weather.js" />

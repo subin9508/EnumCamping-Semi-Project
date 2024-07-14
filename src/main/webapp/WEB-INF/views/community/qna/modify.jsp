@@ -43,8 +43,13 @@
                                 <label for="qnaContent" class="form-label">내용</label>
                                 <textarea id="qnaContent" class="form-control"
                                     name="qnaContent" rows="5">${qna.qnaContent}</textarea>
-                    </div>
-                            <div class="d-none">
+                    		</div>
+    <!-- 비밀글 체크박스 -->
+    <div class="mt-2 form-check">
+        <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" >
+        <label class="form-check-label" for="qnaLock">비밀글로 설정</label>
+    </div>
+								<div class="d-none">
                                 <label for="qnaUserId" class="form-label">작성자</label>
                                 <input id="qnaUserId" class="form-control" type="text"
                                     value="${qna.qnaUserId}" readonly />

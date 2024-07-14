@@ -69,6 +69,13 @@ ul.pagination {
 							</form>
 						</div>
 						<div class="card-body">
+							<!-- 알림 메시지 표시 -->
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-warning" role="alert">
+                                    ${message}
+                                </div>
+                            </c:if>
+						
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
@@ -76,7 +83,9 @@ ul.pagination {
 										<th>제목</th>
 										<th>작성자</th>
 										<th>수정시간</th>
+										<th>답변상태</th>
 										<th>조회수</th>
+										
 									</tr>
 								</thead>
 								<tbody>
@@ -89,6 +98,16 @@ ul.pagination {
 												</c:url> <a href="${qnaDetailsPage}">${qna.qnaTitle}</a></td>
 											<td>${qna.qnaUserId}</td>
 											<td>${qna.qnaModifiedTime}</td>
+											<td>
+                                                <c:choose>
+                                                    <c:when test="${qna.qnaState == 0}">
+                                                        답변 대기
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        답변 완료
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
 											<td>${qna.qnaViewCnt}</td>
 										</tr>
 									</c:forEach>
