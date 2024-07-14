@@ -88,5 +88,14 @@
         from users
         where user_id = #{userId} and deactiveuntil > sysdate
     </select>
+    
+    
+    <!-- 프로필 이미지 수정 -->
+    <update id="updateProfileImage">
+    	update profile_image set
+    	profile_img = #{profileImage}
+    	where user_key = #{userKey}
+    
+    </update>
 
 </mapper>
