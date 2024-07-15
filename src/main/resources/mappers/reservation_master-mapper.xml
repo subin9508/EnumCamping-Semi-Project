@@ -6,16 +6,21 @@
 
     <!-- 예약 내역 -->
     <select id="selectByUserId" resultType="ReservationListDto">
-        select 
-            user_id,
-            res_id,
-            res_check_in,
-            res_state,
-            res_created_time
-        from 
-            reservation_master
-        where 
-            user_id = #{userId}
+
+            
+        SELECT 
+            rm.user_id,
+            rm.res_id,
+            rm.res_state,
+            rm.res_check_in,
+            rd.item_id
+        FROM 
+            reservation_master rm
+        JOIN 
+            reservation_detail rd ON rm.res_id = rd.res_id
+        WHERE 
+            rm.user_id = #{userId}
+            
     </select>
     
     <!-- 예약 상세 내역 -->
