@@ -33,9 +33,24 @@
 	font-family: 'hanna';
 }
 
+
 .nanum {
 	font-family: 'Nanum Barun Gothic';
 }
+
+:root {
+	--bs-gutter-x: 0 !important;
+}
+
+.container, .container-fluid {
+	--bs-gutter-x: 0 !important;
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+	width: 100% !important;
+}
+
 </style>
 <c:url value="/css/home.css" var="homeCSS" />
 <link rel="stylesheet" href="${homeCSS}">
@@ -49,8 +64,8 @@
 		<jsp:include page="./main/popup.jsp" />
 		<%@ include file="./fragments/header.jspf"%>
 		<section id="gallery" class="gallery">
-			<div class="container-fluid">
-				<div id="carouselExampleIndicators"
+			<div class="container-fluid ">
+				<div id="carouselExampleIndicators "
 					class="carousel slide carousel-fade" data-bs-pause="false"
 					data-bs-ride="carousel">
 					<div class="carousel-indicators">
@@ -66,40 +81,39 @@
 						<button type="button" data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="4" aria-label="Slide 5"></button>
 					</div>
-					<div class="carousel-inner noto-sans-kr">
+					<div class="carousel-inner noto-sans-kr ">
 						<div class="carousel-item active">
 							<img src="images/main/camp1.jpg" class="d-block w-100 "
-								alt="Camping site 1 " height=850px;>
+								alt="Camping site 1 " height=900px;>
 							<div class="carousel-caption d-md-black my-5">
-								<h1>캠핑장 전경</h1>
+								
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp2.jpg" class="d-block w-100 "
-								alt="Camping site 2" height=850px;>
+								alt="Camping site 2" height=900px;>
 							<div class="carousel-caption d-md-black my-5">
-								<h1>캠핑장 전경</h1>
+								
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp3.jpg" class="d-block w-100 "
-								alt="Camping site 3" height=850px;>
+								alt="Camping site 3" height=900px;>
 							<div class="carousel-caption d-md-black my-5">
-								<h1>별</h1>
+								
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp4.jpg" class="d-block w-100 "
-								alt="Camping site 4" height=850px;>
+								alt="Camping site 4" height=900px;>
 							<div class="carousel-caption d-md-black my-5 ">
-								<h1>계곡 전경</h1>
+								
 							</div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp5.jpg" class="d-block w-100 "
-								alt="Camping site 5" height=850px;>
+								alt="Camping site 5" height=900px;>
 							<div class="carousel-caption d-md-black my-5">
-								<h1>캠핑장 전경</h1>
 							</div>
 						</div>
 					</div>
@@ -120,11 +134,11 @@
 		<!-- 캠핑장 간단소개 -->
 		<section class="content">
 			<div
-				style="padding-top: 100px; padding-left: 50px; padding-right: 50px; font-family: nanum">
+				style="padding-top: 200px; padding-left: 50px; padding-right: 50px; font-family: nanum">
 				<div class="row">
 					<div class="col-md-4">
 						<img src="images/main/main-camp.jpg"
-							style="width: 500px; height: 400px;" alt="Main Camping Image">
+							style="margin-top: 10px;width: 500px; height: 400px;" alt="Main Camping Image">
 					</div>
 					<div class="col-md-8 rounded-content noto-sans-kr with-background">
 						<h2>자연 속에서의 휴식</h2>
@@ -155,12 +169,12 @@
 		<!-- Notice Section -->
 
 		<section id="notice" class="section"
-			style="padding-top: 200px; padding-bottom: 200px;">
+			style="margin-left: 300px; padding-top: 100px; padding-bottom: 100px;">
 
-			<div class="container noto-sans-kr" style="color: white;">
+			<div class="container noto-sans-kr" style="color: black; margin-left: 200px;">
 				<h2>공지사항</h2>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-6 mt-3">
 						<div class="card border-3 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title">공지사항</h5>
@@ -171,7 +185,7 @@
 
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 mt-3" >
 						<div class="card border-3 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title">이벤트 소식</h5>
