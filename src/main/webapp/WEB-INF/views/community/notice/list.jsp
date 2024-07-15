@@ -11,6 +11,8 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
+    <c:url value="../../css/reservation_list.css" var="reservationListCss" />
+    <link rel="stylesheet" href="${reservationListCss}">
 </head>
 <body>
 <div class="wrapper">
@@ -22,13 +24,13 @@
         
         <main>
             <div>
-                <h1 class="align-center mt-2">공지사항</h1>
             </div>
         
         
         
-            <div class="mt-10 card">
+            <div class="mt-10 card" style="margin-right:50px;">
                 <div class="card-header">
+                <h1 class="card-title align-center mt-2">공지사항</h1>
                     <c:url var="noticeSearchPage" value="/community/notice/search" />
                     <form action="${noticeSearchPage }">
                         <div class="row">
@@ -43,7 +45,7 @@
                                 <input class="form-control" type="text" name="keyword" placeholder="검색어 입력" required/>
                             </div>
                             <div class="col-2">
-                                <input type="submit" class="form-control btn btn-secondary" value="검색"/>
+                                <input type="submit" class="form-control btn btn-outline-info" value="검색"/>
                             </div>
                             <div class="col-2">
                                 <button type="button" class="form-control btn btn-secondary"
@@ -56,9 +58,9 @@
                     
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr style="text-align: center;">
                                 <th>번호</th>
                                 <th>제목</th>
                                 <th>수정시간</th>
@@ -66,13 +68,11 @@
                         </thead>
                         <tbody>
                             <c:forEach var="n" items="${notices}">
-                                <tr>
-                                    <td class="col-3">${n.id}</td>
-                                    <td class="col-6">
-                                        <c:url var="noticeDetailsPage" value="/community/notice/details">
-                                            <c:param name="id" value="${n.id}"></c:param>
-                                        </c:url>
-                                        <a href="${noticeDetailsPage}">${n.title}</a>
+                                <tr onclick="location.href='${pageContext.request.contextPath}/community/notice/details?id=${n.id}'" 
+                                                style="cursor:pointer; text-align: center;">
+                                    <td class="col-2">${n.id}</td>
+                                    <td class="col-7">
+                                        ${n.title}
                                     </td>
                                     <td class="col-3">${n.modifiedTime}</td>
                                 </tr>
