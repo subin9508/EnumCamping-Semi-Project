@@ -30,6 +30,7 @@ nav {
     margin-bottom: 30px; /* 수정된 부분: 오타 수정 */
     padding: 20px; /* 이미지 주위에 여백 추가 */
     width: 60%; /* 원하는 너비를 지정합니다. 예: 80% */
+    margin-left: -233px;
 }
 
 
@@ -47,6 +48,7 @@ nav {
     border-radius: 15px;
     flex-wrap: wrap;
     width: 70%; /* 박스가 전체 너비를 차지하도록 설정 */
+    margin-left: -215px;
 }
 
 .left-content, .right-content {

@@ -42,7 +42,6 @@ import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.QnAService;
 import com.itwill.semiproject.service.UserService;
 
-import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
