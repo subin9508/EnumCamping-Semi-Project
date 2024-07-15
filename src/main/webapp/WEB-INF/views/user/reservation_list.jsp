@@ -36,23 +36,40 @@
                         <thead>
                             <tr>
                                 <th>예약 번호</th>
-                                <th>숙박일</th>
-                                <th>예약 일시</th>
+                                <th>숙박 구역</th>
+                                <th>숙박 일자</th>
                                 <th>예약 상태</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <c:set var="hasReservations" value="false" />
                            <c:forEach items="${reservations}" var="r">
-                           
-                                <tr>
+                        <c:if test="${r.resState != 0 && r.itemId <= 20}">
+                           <c:set var="hasReservations" value="true" />
+                                <tr onclick="location.href='${pageContext.request.contextPath}/user/reservation_details?resId=${r.resId}'" 
+                                style="cursor:pointer;">
+                                    <td>${r.resId}</td>
                                     <td>
-                                    <c:url var="reservationListDetails" value="/user/reservation_details">
-                                    <c:param name="resId" value="${r.resId}"></c:param>
-                                    </c:url>
-                                    <a href="${reservationListDetails}">${r.resId}</a>
+                                        <c:choose>
+                                            <c:when test="${r.itemId ge 1 and r.itemId le 4}">
+                                                1구역
+                                            </c:when>
+                                            <c:when test="${r.itemId ge 5 and r.itemId le 8}">
+                                                2구역
+                                            </c:when>
+                                            <c:when test="${r.itemId ge 9 and r.itemId le 12}">
+                                                3구역
+                                            </c:when>
+                                            <c:when test="${r.itemId ge 13 and r.itemId le 16}">
+                                                4구역
+                                            </c:when>
+                                            <c:when test="${r.itemId ge 17 and r.itemId le 20}">
+                                                5구역
+                                            </c:when>
+                                        </c:choose>
                                     </td>
+
                                     <td>${r.resCheckIn}</td>
-                                    <td>${r.resCreatedTime}</td>  
                                               
                                     <td>
                                         <c:if test="${r.resState == 0}">
@@ -67,8 +84,13 @@
                                     </td>
                                 </tr>
                                 
+                                </c:if>
                             </c:forEach>
-                        
+                            <c:if test="${!hasReservations}">
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">예약 내역이 없습니다.</td>
+                                </tr>
+                            </c:if>
                         </tbody>
                     </table>
                 </div>
