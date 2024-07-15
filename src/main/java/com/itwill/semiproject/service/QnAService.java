@@ -57,13 +57,20 @@ public class QnAService {
 		return result;
 	}
 	
-	public int update(QnAUpdateDto dto) {
-		log.debug("update()", dto);
-		
-		int result = qnaDao.updateQnA(dto.toEntity());
-		log.debug("update 결과 = {}", result);
-		
-		return result;
+//	public int update(QnAUpdateDto dto) {
+//		log.debug("update()", dto);
+//		
+//		int result = qnaDao.updateQnA(dto.toEntity());
+//		log.debug("update 결과 = {}", result);
+//		
+//		return result;
+//	}
+	
+	public void update(QnAUpdateDto dto) {
+	    if (dto.getQnaLock() == null) {
+	        dto.setQnaLock(0); // 기본값 설정
+	    }
+	    qnaDao.updateQnA(dto.toEntity());
 	}
 	
 //	public List<QnAListDto> search(QnASearchDto dto) {

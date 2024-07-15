@@ -28,24 +28,28 @@
         
         
             <div class="mt-10 card">
-                  <div class="card-header">
-                    <c:url var="noticeSearchPage" value="/notice/search" />
+                <div class="card-header">
+                    <c:url var="noticeSearchPage" value="/community/notice/search" />
                     <form action="${noticeSearchPage }">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <select class="form-control" name= "category">
                                     <option value="t">제목</option>
                                     <option value="c">내용</option>
                                     <option value="tc">제목+내용</option>
-                                    <option value="a">작성자</option>
                                 </select>
                             </div>
-                            <div class="col-7">
+                            <div class="col-6">
                                 <input class="form-control" type="text" name="keyword" placeholder="검색어 입력" required/>
                             </div>
                             <div class="col-2">
                                 <input type="submit" class="form-control btn btn-secondary" value="검색"/>
                             </div>
+                            <div class="col-2">
+                                <button type="button" class="form-control btn btn-secondary"
+                                onclick="location.href='/semiproject/community/notice/list'">전체 목록</button>
+                            </div>
+
                         
                         </div>
                     </form>

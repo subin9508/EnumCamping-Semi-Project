@@ -29,7 +29,7 @@
             <main>
                 <div class="mt-2 card">
                     <div class="card-header">
-                        <h2>예약내역 상세보기</h2>
+                        <h2>상세 예약내역</h2>
                     </div>
                     <div class="card-body">
                         <form>
@@ -64,8 +64,6 @@
                                 </div>
                             </div>
 
-
-                            
                       <div class="mt-2">
                         <label for="resArea" class="form-label">예약 구역, 금액</label>
                         <c:forEach items="${resDetail}" var="item">
@@ -127,14 +125,6 @@
                                 </table>
                             </div>
 
-
-
-
-
-
-
-
-    
                             <div class="mt-2">
                                 <label for="resTotalPrice"
                                     class="form-label">총 가격</label> <input
@@ -178,16 +168,16 @@
                         </form>
                     </div>
 
+                            <c:if test="${resMaster.resState == 1}">
                     <div class="card-footer d-flex justify-content-end">
                         <div>
-                            <!--                             <button class="btn btn-primary">예약 변경</button> -->
-                            <c:if test="${resMaster.resState != 2}">
+                            <!-- <button class="btn btn-primary">예약 변경</button> -->
                                 <button id="btnPayCancel"
                                     class="btn btn-danger">예약취소</button>
-                            </c:if>
 
                         </div>
                     </div>
+                            </c:if>
 
                 </div>
             </main>

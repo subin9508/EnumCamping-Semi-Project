@@ -58,21 +58,38 @@
                                         readonly />
                                 </div>
                             </div>
-
+                            
+                            <div class="mt-2">
+                        <label for="resArea" class="form-label">예약 구역</label>
+                        <c:forEach items="${resDetail}" var="item">
+                            <c:choose>
+                                <c:when test="${item.itemId ge 1 and item.itemId le 4}">
+                                    <c:set var="area" value="1구역" />
+                                    
+                                </c:when>
+                                <c:when test="${item.itemId ge 5 and item.itemId le 8}">
+                                    <c:set var="area" value="2구역" />
+                                   
+                                </c:when>
+                                <c:when test="${item.itemId ge 9 and item.itemId le 12}">
+                                    <c:set var="area" value="3구역" />
+                                   
+                                </c:when>
+                                <c:when test="${item.itemId ge 13 and item.itemId le 16}">
+                                    <c:set var="area" value="4구역" />
+                                   
+                                </c:when>
+                                <c:when test="${item.itemId ge 17 and item.itemId le 20}">
+                                    <c:set var="area" value="5구역" />
+                                    
+                                </c:when>
+                            </c:choose>
+                        </c:forEach>
+                            <input readonly class="form-control" type="text" name="resArea" value="${area}" />
+                    </div>
 
 
                             <div class="mt-2">
-                                <label for="resCreatedTime"
-                                    class="form-label">예약 일시</label> <input
-                                    id="resCreatedTime"
-                                    class="form-control" type="text"
-                                    value="${resMaster.resCreatedTime}"
-                                    readonly />
-                            </div>
-
-                            <div class="mt-2">
-                                <label for="resItems" class="form-label">구매/대여
-                                    물품</label>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -107,6 +124,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                            
+                            
 
                             <div class="mt-2">
                                 <label for="resTotalPrice"
@@ -116,6 +135,16 @@
                                     value="${resMaster.resTotalPrice}"
                                     readonly />
                             </div>
+                            
+                             <div class="mt-2">
+                                <label for="resCreatedTime"
+                                    class="form-label">예약 일시</label> <input
+                                    id="resCreatedTime"
+                                    class="form-control" type="text"
+                                    value="${resMaster.resCreatedTime}"
+                                    readonly />
+                            </div>
+                            
                         </form>
 
                     </div>

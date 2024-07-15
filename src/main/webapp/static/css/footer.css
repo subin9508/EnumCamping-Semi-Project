@@ -32,9 +32,9 @@ footer {
     width: 100%;
     background-color: #001522;
     color: white;
-    padding: 10px 0;
+    /*padding: 10px 0;*/
     box-sizing: border-box; /* 패딩 포함하여 크기 계산 */
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     /*position:relative;
     transform:translateY(-100 %)*/
 }
@@ -51,9 +51,9 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     /*padding-bottom: 15px;  푸터 내용이 푸터 영역 내에 있도록 패딩 추가 */
-    padding-top: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     
 }
 

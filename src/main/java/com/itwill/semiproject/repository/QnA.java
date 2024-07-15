@@ -21,7 +21,7 @@ public class QnA {
 	private LocalDateTime qnaModifiedTime;
 	private Integer qnaViewCnt;
 	private Integer qnaState;
-	private boolean qnaLock;
+	private Integer qnaLock;
 	private String qcText;
 	private LocalDateTime qcCreatedTime;
 	private LocalDateTime qcModifiedTime;
