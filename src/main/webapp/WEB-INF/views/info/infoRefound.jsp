@@ -18,13 +18,19 @@
 
 <c:url value="../css/footer.css" var="footerCss" />
 <link rel="stylesheet" href="${footerCss}">
-
+<style>
+        .table th, .table td {
+            width: 5%
+        }
+    </style>
 </head>
 <body>
-    <%@ include file="../fragments/header.jspf"%>
-    <%@ include file="../fragments/info-sidebar.jspf"%>
+   <div class="wrapper">
+        <%@ include file="../fragments/header.jspf"%>
 
-    <div class="content">
+        <div class="footer-main-content">
+            <%@ include file="../fragments/info-sidebar.jspf"%>
+
         <main main class="main-content"
             style="margin-left: 300px; margin-top: 50px;">
             <div class="slider">
@@ -50,11 +56,12 @@
                     </div>
                 </div>
                 <br>
+                <br/>
                 <table class="table table-strped table-hover"
                     style="width: 70%">
                     <thead>
                         <tr
-                            style="word-spacing: 40px; text-align: center">
+                            style="word-spacing: 50px; text-align: center">
                             <th>이용 당일</th>
                             <th>이용 1일전</th>
                             <th>이용 2일전</th>
@@ -84,14 +91,23 @@
                         </tr>
                     </tbody>
                 </table>
-                <br>
-                <br> <br>
-                <br>
+                <br/>
+                <br/> 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
             </div>
+          
         </main>
+          <%@ include file="../fragments/footer.jspf"%>
+    
     </div>
-
-    <%@ include file="../fragments/footer.jspf"%>
+</div>
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

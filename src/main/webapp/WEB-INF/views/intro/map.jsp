@@ -75,8 +75,7 @@
                             <div class="background2">
                                 <div class="container1">
 
-                                    <div class="div7">주소: 강원도 홍천군
-                                        동면 덕치리</div>
+                                    <div class="div7">주소: 강원 홍천군 영귀미면 수타사로 227-18 수타사 계곡</div>
                                 </div>
                             </div>
                             <div class="horizontal-border">
@@ -86,9 +85,9 @@
                                     </div>
                                     <div class="details3">
                                         <div class="div6">
-                                            홍천터미널 -> 수타사행 버스(30~35분 소요)
-                                            -> 수타사 하차 -> 도보로 650m(약 11분
-                                            소요) <br /> <br /> 홍천 터미널
+                                            홍천 터미널 -> 수타사행 버스(30~35분 소요)
+                                            -> 수타사 하차 -> 도보로 650m(약 11분 소요)
+                                             <br /> <br /> 홍천 터미널
                                             -> 신봉행 버스(30~35분 소요) -> 구종점
                                             하차 -> 도보로 1.4KM(약 23분 소요)
                                         </div>
