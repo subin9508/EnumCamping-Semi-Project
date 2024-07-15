@@ -69,10 +69,8 @@
 								type="email" name="user_email" class="form-control"
 								id="user_email" placeholder="이메일" required>
 						</div>
-						<button type="submit" class="btn btn-outline-success"
+						<button type="submit" class="btn btn-success"  style="float: right;"
 							id="submitBtn" disabled>찾기</button>
-						<a href="/semiproject" class="btn btn-outline-primary btn-custom">홈페이지로
-							이동</a>
 					</form>
 				</div>
 				<div id="messageContainer" class="mt-3">
