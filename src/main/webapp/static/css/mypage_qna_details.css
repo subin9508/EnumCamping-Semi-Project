@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* qna-details.css */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
@@ -24,16 +23,11 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.qna-title {
+.qna-details-container h2 {
     color: #0056b3;
     margin-bottom: 1.5rem;
     border-bottom: 2px solid #0056b3;
     padding-bottom: 0.5rem;
-    font-size: 1.5rem;
-}
-
-.card-body {
-    padding: 20px;
 }
 
 .form-label {
@@ -45,9 +39,8 @@ body {
     margin-bottom: 1rem;
 }
 
-.form-control[readonly] {
+.form-control:read-only {
     background-color: #e9ecef;
-    opacity: 1;
 }
 
 #qnaContent {
@@ -58,7 +51,8 @@ body {
     background-color: transparent;
     border-top: none;
     padding-top: 1rem;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
 }
 
 .btn {
@@ -79,4 +73,37 @@ body {
 
 .navbar-nav .nav-link:hover {
     color: red;
+}
+
+.answer {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.qna-answers-container,
+.qna-comment-container {
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.qna-answers-container h2,
+.qna-comment-container h2 {
+    color: #0056b3;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 0.5rem;
+}
+
+#answersContainer .answer {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
 }
