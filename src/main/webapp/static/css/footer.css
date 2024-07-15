@@ -34,7 +34,7 @@ footer {
     color: white;
     /*padding: 10px 0;*/
     box-sizing: border-box; /* 패딩 포함하여 크기 계산 */
-    /*margin-top: 20px;*/
+    margin-top: 10px;
     /*position:relative;
     transform:translateY(-100 %)*/
 }

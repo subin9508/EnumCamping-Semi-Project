@@ -20,7 +20,8 @@
             reservation_detail rd ON rm.res_id = rd.res_id
         WHERE 
             rm.user_id = #{userId}
-            
+        order by 
+            rm.res_created_time desc
     </select>
     
     <!-- 예약 상세 내역 -->
