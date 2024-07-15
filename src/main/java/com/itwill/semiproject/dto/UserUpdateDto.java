@@ -12,6 +12,7 @@ public class UserUpdateDto {
 	private String userPhone;
 	
 	
+	
 	public User toEntity() {
 		return User.builder().userId(userId).userPassword(userPassword).userPhone(userPhone).build();
 	}

@@ -28,7 +28,7 @@
             <div class="container-fluid">
                 <main>
                     <div class="qna-modify-container">
-                        <h2 class="qna-title">Q&A 수정</h2>
+                        <h2 class="qna-title">문의내역 수정</h2>
                         <form id="modifyForm" method="post"
                             action="../user/qna_update">
                             <div class="mb-3">

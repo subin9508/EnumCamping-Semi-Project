@@ -42,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSignUp = document.querySelector('button#btnSignUp');
 
     // 회원가입 버튼 클릭 시 최종 유효성 검사
-    btnSignUp.addEventListener('click', validateBeforeSignUp);
+    btnSignUp.addEventListener('click', (event) => {
+        if (validateBeforeSignUp(event)) {
+            alert('회원가입을 축하합니다');
+        }
+    });
 
     /* -------------------- 함수 선언 -------------------- */
     

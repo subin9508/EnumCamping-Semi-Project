@@ -8,7 +8,7 @@ var selectedNight = null;
 var finalYear, finalMonth, finalDay, finalItemId, finalSelectedNight;
  
  document.addEventListener("DOMContentLoaded", function() {
-	selectedDate = null;
+    selectedDate = null;
     selectedNight = null;
         buildCalendar();
         
@@ -397,7 +397,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
         
         if (!dateSelected || !areaSelected || !nightSelected) {
             alert("날짜, 구역, 숙박 일수를 선택해 주세요.");
-            event.preventDefault;
+            event.preventDefault();
             return false;
         }
         
