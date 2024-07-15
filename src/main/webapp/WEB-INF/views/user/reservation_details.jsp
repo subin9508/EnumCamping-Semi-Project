@@ -95,7 +95,8 @@
 
 
                             <div class="mt-2">
-                                <label for="resItems" class="form-label">구매/대여 물품</label>
+                            <!-- 
+                                <label for="resItems" class="form-label">구매/대여 물품</label> -->
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -127,9 +128,9 @@
 
                             <div class="mt-2">
                                 <label for="resTotalPrice"
-                                    class="form-label">총 가격</label> <input
+                                    class="form-label fs-5">총 가격</label> <input
                                     id="resTotalPrice"
-                                    class="form-control" type="text"
+                                    class="form-control fs-5" type="text"
                                     value="${resMaster.resTotalPrice}원"
                                     readonly />
                             </div>

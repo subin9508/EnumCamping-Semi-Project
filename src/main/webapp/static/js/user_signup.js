@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 아이디 입력 필드에 변화가 생겼을 때 중복 체크 결과 초기화
     inputUserid.addEventListener('input', () => {
         useridChecked = false; // 아이디 입력 필드에 변화가 생기면 중복 체크 결과 초기화
-        checkUseridResult.innerHTML = '';
-        checkUseridResult.classList.remove('text-success', 'text-danger');
+        checkUseridResult.innerHTML = '아이디 중복 확인을 해주세요.';
+        checkUseridResult.classList.add('text-danger');
+        checkUseridResult.classList.remove('text-success');
         changeButtonState();
     });
 

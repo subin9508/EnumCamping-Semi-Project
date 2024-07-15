@@ -12,12 +12,12 @@
             <div class="column " style="flex: 0.2;"></div>
             <div class="column " style="flex: 1.7;">
                 <h5>주소</h5>
-                <p class="footer-content">강원 홍천군 영귀미면 수타사로 227-18<br/>수타사 계곡</p>
+                <p class="footer-content">강원 홍천군 영귀미면 수타사로 227-18<br/>수타사 계곡 앞</p>
             </div>
             <div class="column" style="flex: 1.5;">
                 <h5>연락처</h5>
-                <p class="footer-content">전화: 02-1234-5678</p>
-                <p class="footer-content">팩스: 02-1234-5679</p>
+                <p class="footer-content">전화: 033-1234-5678</p>
+                <p class="footer-content">팩스: 033-1234-5679</p>
             </div>
             <div class="column" style="flex: 1;">
                 <h5>영업시간</h5>

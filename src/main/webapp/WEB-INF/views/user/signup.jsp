@@ -54,8 +54,7 @@
                         style="width: 100%; max-width: 700px;">
                         <c:url var="signUpPage" value="/user/signup" />
                         <form action="${signUpPage}" method="post">
-                            <div
-                                class="container-fluid d-flex justify-content-center"
+                            <div  class="container-fluid d-flex justify-content-center"
                                 style="margin-top: 2%; margin-bottom: 5%;'">
                                 <h1>회원가입</h1>
                             </div>
@@ -79,6 +78,7 @@
 
                                 <!-- userid 중복 체크 결과 표시할 영역 -->
                                 <div id="checkUseridResult"></div>
+                                <div id="useridValidationMessage"></div>
                             </div>
 
 
@@ -162,7 +162,6 @@
                     </div>
                     -->
 
-
                             <div class="my-2">
                                 <button id="btnSignUp"
                                     class="form-control btn btn-outline-success disabled">가입하기</button>
@@ -178,15 +177,17 @@
                                     style="display: inline-block;">로그인</a>
                             </div>
                         </form>
+                        <br />
+                        <br />
                     </div>
                 </div>
 
             </main>
-            <div class="container-fluid" id="wrap">
-                <%@ include file="../fragments/footer.jspf"%>
-            </div>
+            <%@ include file="../fragments/footer.jspf"%>
         </div>
     </div>
+              
+    
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

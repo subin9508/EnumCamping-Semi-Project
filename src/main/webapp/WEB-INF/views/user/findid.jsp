@@ -51,9 +51,9 @@
 	<div class="wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
-			<div class="card mt-5"  style="width: 40rem; margin: auto;">
+			<div class="card mt-5" style="width: 50rem; margin: auto;">
 				<div class="card-header ">
-					<h2 class="mt-5">아이디 찾기</h2>
+					<h2 class="mt-2">아이디 찾기</h2>
 				</div>
 				<div class="card-body">
 					<c:url var="findIdPage" value="/user/findid" />
@@ -69,8 +69,10 @@
 								type="email" name="user_email" class="form-control"
 								id="user_email" placeholder="이메일" required>
 						</div>
-						<button type="submit" class="btn btn-success"  style="float: right;"
-							id="submitBtn" disabled>찾기</button>
+						<button type="submit" class="btn btn-success"
+							style="float: right;" id="submitBtn" disabled>찾기</button>
+						<c:url var="SignInPage" value="/user/signin" />
+						<a href="${SignInPage}" class="btn btn-outline-primary ">로그인</a>
 					</form>
 				</div>
 				<div id="messageContainer" class="mt-3">
