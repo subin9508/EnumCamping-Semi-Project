@@ -72,10 +72,33 @@ public class QnAAnswerController {
         return ResponseEntity.ok(result);
     }
     
-    // 답변 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteAnswer(@PathVariable int id) {
-        int result = qnaanswerService.deleteAnswer(id);
-        return ResponseEntity.ok(result);
+//    // 답변 삭제
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Integer> deleteAnswer(@PathVariable int id) {
+//        int result = qnaanswerService.deleteAnswer(id);
+//        return ResponseEntity.ok(result);
+//    }
+    
+    @PostMapping("/answer/delete")
+    public String deleteAnswer(@RequestParam("answerId") int answerId, HttpSession session) {
+        log.debug("deleteAnswer(answerId={})", answerId);
+
+        // 세션에서 사용자 역할을 확인합니다.
+        String userRoleStr = (String) session.getAttribute("userRole");
+        int userRole = userRoleStr != null ? Integer.parseInt(userRoleStr) : -1;
+
+        if (userRole != 0) {
+            session.setAttribute("message", "답변을 삭제할 권한이 없습니다.");
+            return "redirect:/community/qna/list";
+        }
+
+        try {
+            qnaanswerService.deleteAnswer(answerId);
+        } catch (IllegalArgumentException e) {
+            session.setAttribute("message", e.getMessage());
+            return "redirect:/community/qna/list";
+        }
+
+        return "redirect:/community/qna/list";
     }
 }

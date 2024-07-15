@@ -46,7 +46,7 @@
                     		</div>
     <!-- 비밀글 체크박스 -->
     <div class="mt-2 form-check">
-        <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" >
+        <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" value="1" <c:if test="${qna.qnaLock == 1}">checked</c:if>>
         <label class="form-check-label" for="qnaLock">비밀글로 설정</label>
     </div>
 								<div class="d-none">

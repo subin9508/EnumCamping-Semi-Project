@@ -37,7 +37,7 @@
         
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>Q&A 상세</h2>
+                    <h2>문의</h2>
                 </div>
                 <div class="card-body">
                     <form>
@@ -76,7 +76,7 @@
                                 value="${qna.qnaModifiedTime}" readonly />
                         </div>
                         <div class="mt-2 form-check">
-                            <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" <c:if test="${qna.qnaLock}">checked</c:if> disabled>
+                            <input class="form-check-input" type="checkbox" id="qnaLock" name="qnaLock" <c:if test="${qna.qnaLock ==1}">checked</c:if> disabled>
                             <label class="form-check-label" for="qnaLock">
                                 비밀글
                             </label>
@@ -90,7 +90,7 @@
                         href="${qnaListPage}">목록보기</a>
                 
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
-                    <c:if test="${signedInUser eq qna.qnaUserId}">
+                     <c:if test="${signedInUser != null && signedInUser == qna.qnaUserId}">
                     <c:url var="qnaModifyPage" value="/community/qna/modify">
                         <c:param name="qnaPostId" value="${qna.qnaPostId}" />
                     </c:url>
@@ -98,11 +98,10 @@
                         href="${qnaModifyPage}">수정하기</a>
                     </c:if>
                 </div>
-            </div>
-            
+                    
             
  <!-- 답변 등록 폼 -->
- <c:if test="${userRole eq '0'}">
+ <c:if test="${userRole == 0}">
                 <div class="mt-2 card">
                     <div class="card-header">
                         <h2>답변 등록</h2>
@@ -113,80 +112,89 @@
                                 <textarea class="form-control" rows="3" id="answerContent" placeholder="답변 내용"></textarea>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록</button>
+                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 </c:if>
+                <br/> <br/>
                 <!-- 답변 목록 -->
                 <div class="mt-2 card">
                     <div class="card-header">
-                        <h2>답변 목록</h2>
+                        <h2>Comment</h2>
                     </div>
                     <div class="card-body" id="answersContainer">
                         <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
+                             <c:forEach var="answer" items="${answers}">
+                            <div class="answer">
+                                <p>${answer.content}</p>
+                                <small>작성자: ${answer.userId}</small><br>
+                                <small>작성시간: ${answer.createdTime}</small>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
+            </div>
             
         </main>
         
-        <section>
-            <div class="mt-2 card">
-                <div class="card-header d-inline-flex gap-1">
-                    <!-- 댓글 접기/펼치기 기능 버튼 -->
-                    <button class="btn btn-secondary"
-                        id="btnToggleComment">댓글 보기</button>
-                </div>
-                <!-- 댓글 토글 버튼에 의해서 접기/펼치기를 할 영역 -->
-                <div class="card-body collapse" id="collapseComments">
-                    <!-- 댓글 등록 -->
-                    <div class="mt-2 card card-body">
-                        <div class="mt-2 row">
-                            <div class="col-10">
-                                <!-- 댓글 입력 -->
-                                <textarea class="form-control" rows="3"
-                                    id="qcContent" placeholder="댓글 내용"></textarea>
-                                <!-- 댓글 작성자 아이디를 로그인한 사용자의 아이디로 설정 -->
-                                <input class="d-none" id="qcUserId" value="${signedInUser}" />
-                            </div>
-                            <div class="col-2">
-                                <button class="btn btn-outline-success"
-                                    id="btnRegisterComment">등록</button>
-                            </div>
-                        </div>
-                    </div>
+<!--         <section> -->
+<!--             <div class="mt-2 card"> -->
+<!--                 <div class="card-header d-inline-flex gap-1"> -->
+<!--                     댓글 접기/펼치기 기능 버튼 -->
+<!--                     <button class="btn btn-secondary" -->
+<!--                         id="btnToggleComment">댓글 보기</button> -->
+<!--                 </div> -->
+<!--                 댓글 토글 버튼에 의해서 접기/펼치기를 할 영역 -->
+<!--                 <div class="card-body collapse" id="collapseComments"> -->
+<!--                     댓글 등록 -->
+<!--                     <div class="mt-2 card card-body"> -->
+<!--                         <div class="mt-2 row"> -->
+<!--                             <div class="col-10"> -->
+<!--                                 댓글 입력 -->
+<!--                                 <textarea class="form-control" rows="3" -->
+<!--                                     id="qcContent" placeholder="댓글 내용"></textarea> -->
+<!--                                 댓글 작성자 아이디를 로그인한 사용자의 아이디로 설정 -->
+<%--                                 <input class="d-none" id="qcUserId" value="${signedInUser}" /> --%>
+<!--                             </div> -->
+<!--                             <div class="col-2"> -->
+<!--                                 <button class="btn btn-outline-success" -->
+<!--                                     id="btnRegisterComment">등록</button> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
                     
-                    <!-- 포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
-                    <div class="mt-2" id="QnAComment"></div>
-                </div>
-            </div>
-        </section>
+<!--                     포스트에 달려 있는 댓글 목록을 보여줄 영역 -->
+<!--                     <div class="mt-2" id="QnAComment"></div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </section> -->
         
-        <!-- 댓글 업데이트 모달(다이얼로그) -->
-        <div id="commentModal" class="modal" tabindex="-1"> 
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">댓글 업데이트</h5>
-                        <button type="button" class="btn-close"
-                            data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- 수정할 댓글 아이디(번호) -->
-                        <input class="d-none" id="modalCommentId" />
-                        <!-- 수정할 댓글 내용 -->
-                        <textarea class="form-control" id="modalCommentText"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary"
-                            data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-outline-primary"
-                            id="btnUpdateComment">저장</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--         댓글 업데이트 모달(다이얼로그) -->
+<!--         <div id="commentModal" class="modal" tabindex="-1">  -->
+<!--             <div class="modal-dialog"> -->
+<!--                 <div class="modal-content"> -->
+<!--                     <div class="modal-header"> -->
+<!--                         <h5 class="modal-title">댓글 업데이트</h5> -->
+<!--                         <button type="button" class="btn-close" -->
+<!--                             data-bs-dismiss="modal" aria-label="Close"></button> -->
+<!--                     </div> -->
+<!--                     <div class="modal-body"> -->
+<!--                         수정할 댓글 아이디(번호) -->
+<!--                         <input class="d-none" id="modalCommentId" /> -->
+<!--                         수정할 댓글 내용 -->
+<!--                         <textarea class="form-control" id="modalCommentText"></textarea> -->
+<!--                     </div> -->
+<!--                     <div class="modal-footer"> -->
+<!--                         <button type="button" class="btn btn-outline-secondary" -->
+<!--                             data-bs-dismiss="modal">취소</button> -->
+<!--                         <button type="button" class="btn btn-outline-primary" -->
+<!--                             id="btnUpdateComment">저장</button> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
         
     </div>
 	</div>

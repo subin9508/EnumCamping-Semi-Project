@@ -9,7 +9,7 @@ public class QnACreateDto {
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaUserId;
-	private boolean qnaLock;
+	private Integer qnaLock = 0;
 	
 	public QnA toEntity() {
 		return QnA.builder().qnaTitle(qnaTitle).qnaContent(qnaContent).qnaUserId(qnaUserId).qnaLock(qnaLock).build();

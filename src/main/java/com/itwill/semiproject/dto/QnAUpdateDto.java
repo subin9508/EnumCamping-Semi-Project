@@ -9,7 +9,7 @@ public class QnAUpdateDto {
 	private int qnaPostId;
 	private String qnaTitle;
 	private String qnaContent;
-	private boolean qnaLock;
+	private Integer qnaLock = 0;
 	
 	public QnA toEntity() {
 		return QnA.builder().qnaPostId(qnaPostId).qnaTitle(qnaTitle).qnaContent(qnaContent).qnaLock(qnaLock).build();

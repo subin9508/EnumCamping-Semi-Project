@@ -20,13 +20,13 @@
     <!-- stmt.setString(1, "-") 와 같음 -->
     <insert id="insertQnA" >
         insert into QnA (qna_title, qna_content, qna_user_id, qna_lock) 
-        values (#{qnaTitle}, #{qnaContent}, #{qnaUserId}, #{qnaLock})
+        values (#{qnaTitle}, #{qnaContent}, #{qnaUserId}, #{qnaLock, jdbcType=INTEGER})
     </insert>
     
     <!-- qna 테이블에서 해당 id의 제목, 내용, 수정시간 업데이트 -->
     <update id="updateQnA">
         update QnA 
-        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_lock = #{qnaLock}, qna_modified_time = sysdate 
+        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_lock = #{qnaLock, jdbcType=INTEGER}, qna_modified_time = sysdate 
         where qna_post_id = #{qnaPostId}
     </update>
        

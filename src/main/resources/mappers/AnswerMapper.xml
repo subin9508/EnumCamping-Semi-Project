@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.semiproject.repository.QnAAnswerDao">
 
-    <resultMap id="AnswerDtoMap" type="QnAAnswer">
+    <resultMap id="AnswerDtoMap" type="com.itwill.semiproject.dto.QnAAnswerDto">
         <id column="id" property="id"/>
         <result column="qna_post_id" property="qnaPostId"/>
         <result column="content" property="content"/>
@@ -14,15 +14,16 @@
     </resultMap>
 
     <select id="selectAnswersByQnaPostId" resultMap="AnswerDtoMap">
-        SELECT * FROM QnAanswers WHERE qna_post_id = #{qnaPostId} ORDER BY id DESC
+        SELECT id, qna_post_id, content, user_id, created_time, modified_time 
+        FROM QnAanswers WHERE qna_post_id = #{qnaPostId} ORDER BY id DESC
     </select>
 
-    <insert id="insertAnswer" parameterType="QnAAnswer">
+    <insert id="insertAnswer" parameterType="com.itwill.semiproject.dto.QnAAnswerDto">
         INSERT INTO QnAanswers (qna_post_id, content, user_id)
         VALUES (#{qnaPostId}, #{content}, #{userId})
     </insert>
 
-    <update id="updateAnswer" parameterType="QnAAnswer">
+    <update id="updateAnswer" parameterType="com.itwill.semiproject.dto.QnAAnswerDto">
         UPDATE QnAanswers SET content = #{content}, modified_time = CURRENT_TIMESTAMP
         WHERE id = #{id}
     </update>
@@ -34,5 +35,17 @@
         <select id="selectAnswerById" resultMap="AnswerDtoMap">
         SELECT * FROM QnAanswers WHERE id = #{id}
     </select>
+
+    <select id="selectByanwserId" parameterType="int"
+        resultType="QnAAnswer">
+        SELECT id, qna_post_id AS qnaPostId, content, user_id AS userId,
+        created_time AS createdTime, modified_time AS modifiedTime
+        FROM QnAAnswer
+        WHERE id = #{answerId}
+    </select>
+
+    <delete id="deleteByanswerId" parameterType="int">
+        DELETE FROM QnAAnswer WHERE id = #{answerId}
+    </delete>
 
 </mapper>

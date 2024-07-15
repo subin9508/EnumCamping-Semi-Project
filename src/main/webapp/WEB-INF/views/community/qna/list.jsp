@@ -16,12 +16,28 @@
 <link rel="stylesheet" href="../../css/footer.css">
 
 <style>
+    .status-waiting {
+        color: red !important;
+        font-weight: bold;
+    }
+    .status-completed {
+        color: blue !important;
+        font-weight: bold;
+    }
+    .secret-icon {
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
 ul.pagination {
 	display: flex;
 	justify-content: center;
 	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
 	padding: 0;
 }
+    
 </style>
 </head>
 <body>
@@ -92,13 +108,21 @@ ul.pagination {
 									<c:forEach var="qna" items="${qnas}">
 										<tr>
 											<td>${qna.qnaPostId}</td>
-											<td><c:url var="qnaDetailsPage"
-													value="/community/qna/details">
-													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
-												</c:url> <a href="${qnaDetailsPage}">${qna.qnaTitle}</a></td>
-											<td>${qna.qnaUserId}</td>
-											<td>${qna.qnaModifiedTime}</td>
 											<td>
+                                            <c:url var="secretIconUrl" value="/images/community/secret.png" />
+                                            <c:url var="qnaDetailsPage"	value="/community/qna/details">
+													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
+												</c:url>
+											<a href="${qnaDetailsPage}">
+                                                    ${qna.qnaTitle}
+                                                    <c:if test="${qna.qnaLock == 1}">
+                                                        <img src="${secretIconUrl}" class="secret-icon" alt="비밀글">
+                                                    </c:if>
+                                                </a>
+                                            </td>
+                                            <td>${qna.qnaUserId}</td>
+											<td>${qna.qnaModifiedTime}</td>
+											<td class="${qna.qnaState == 0 ? 'status-waiting' : 'status-completed'}">
                                                 <c:choose>
                                                     <c:when test="${qna.qnaState == 0}">
                                                         답변 대기
