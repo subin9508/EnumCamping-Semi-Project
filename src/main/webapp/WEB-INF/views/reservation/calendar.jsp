@@ -161,7 +161,8 @@
                     style="display: none;">
                     <div class="night-radio_label"
                         id="night-radio_label">
-                        <h3> <strong>체류기간<strong> </h3>
+                        <h3> <strong>이용 기간<strong> </h3>
+                        <br />
                         <div class="radio-options">
                         <label> <input class="night-radio"
                             type="radio" name="night" value="1">
@@ -259,7 +260,8 @@
                         class="btn btnNextPage">다음
                         단계</button>
                 </div>
-
+                <br/>
+                <br/>
             </div>
         </div>
         <%@ include file="../fragments/footer.jspf"%>
