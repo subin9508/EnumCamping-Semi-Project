@@ -43,18 +43,3 @@ body {
     display: flex;
 }
 
-#top {
-    background-color: #001522;
-}
-
-#top .nav-link {
-    color: white;
-}
-
-.navbar-nav .nav-link:hover {
-    color: red;
-}
-
-a:hover {
-    font-weight: bold;
-}
