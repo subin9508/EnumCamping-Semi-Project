@@ -167,7 +167,7 @@
                         </label>
                         </div>
                     </div>
-                    <div id="price" style="text-align: right;">
+                    <div id="price" style="text-align: right; color: #0056b3; font-size: 20px;">
                     <span id="price-label">캠핑존 가격: </span> <span
                         id="price-value"></span>원
                 	</div>
