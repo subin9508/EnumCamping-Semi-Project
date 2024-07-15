@@ -318,7 +318,10 @@
 			const totalAmountElement = document.getElementById('totalAmount');
 			totalAmountElement.textContent = totalAmount + '원';
 		}
+		
+        
 	</script>
+    
 
 </body>
 </html>

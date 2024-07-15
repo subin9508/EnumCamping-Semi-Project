@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     let useridChecked = false; // 사용자 아이디 중복 체크 결과. true: 사용할 수 있는 아이디.
-    
     let passwordChecked = false; // 비밀번호 필드 작성 여부 체크.
     let confirmpasswordChecked = false; // 비밀번호 확인 필드 작성 여부 체크.
     let emailChecked = false; // 이메일 필드 작성 여부 체크.
