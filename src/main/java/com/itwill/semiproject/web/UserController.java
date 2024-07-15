@@ -262,47 +262,56 @@ public class UserController {
 	}
 
 	@PostMapping("/user_update")
-	public String userUpdate(@ModelAttribute UserUpdateDto dto, 
-	                         @RequestParam(value = "profileImage", required = false) MultipartFile file,
-	                         HttpSession session, RedirectAttributes redirectAttributes,
-	                         HttpServletRequest request) throws IllegalStateException, IOException {
-	    log.debug("user_update(dto={})", dto);
-
-	    User user = (User) session.getAttribute("user");
-
-	    if (dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
-	        if (dto.getUserPassword().length() < 8) {
-	            redirectAttributes.addFlashAttribute("error", "비밀번호는 8자리 이상이어야 합니다.");
-	            return "redirect:/user/user_update";
-	        }
-	    }
-
-	    try {
-	        userService.update(dto);
-
-	        if (file != null && !file.isEmpty()) {
-	            String webPath = "/static/images/user/";
-	            String filePath = request.getServletContext().getRealPath(webPath);
-	            int result = userService.updateProfile(file, webPath, filePath, user);
+	public String user_update(@ModelAttribute UserUpdateDto dto, 
+			@RequestParam(value = "profileImage", required = false) MultipartFile file,
+			HttpSession session, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("user_update(dto={})", dto);
+		
+		User user = (User) session.getAttribute("user");
+		
+		// 비밀번호 길이 검사
+		if(dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
+			if(dto.getUserPassword().length() < 8) {
+				redirectAttributes.addFlashAttribute("error", "비밀번호는 8자리 이상이어야 합니다.");
+				return "redirect:/user/user_update";
+			}
+			
+		}
+		
+		
+		try {
+			// 사용자 정보 업데이트 
+		userService.update(dto);
+		
+		// 프로필 이미지 업데이트
+		if(file != null && !file.isEmpty()) {
+			// 웹 접근 경로
+			String webPath = "/static/images/user/";
+			
+			// 실제로 이미지 파일이 저장되어야 하는 서버 컴퓨터 경로
+			String filePath = request.getServletContext().getRealPath(webPath);
+			
+			 int result = userService.updateProfile(file, webPath, filePath, user);
 	            if (result <= 0) {
 	                redirectAttributes.addFlashAttribute("error", "프로필 이미지 업데이트에 실패했습니다.");
 	                return "redirect:/user/user_update";
 	            }
 	        }
-	    } catch (Exception e) {
-	        log.error("사용자 정보 업데이트 중 오류 발생", e);
-	        redirectAttributes.addFlashAttribute("error", "사용자 정보 업데이트에 실패했습니다.");
-	        return "redirect:/user/user_update";
-	    }
-
-	    User updatedUser = userService.read(dto.getUserId());
-	    log.info("updatedUser: {}", updatedUser);
-	    session.setAttribute("user", updatedUser);
-
-	    redirectAttributes.addFlashAttribute("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
-	    return "redirect:/user/myPage?userId=" + dto.getUserId();
+					
+		} catch (Exception e) {
+			log.error("사용자 정보 업데이트 중 오류 발생", e);
+			redirectAttributes.addFlashAttribute("error", "사용자 정보 업데이트에 실패했습니다.");
+			return "redirect:/user/user_update";
+		}
+		// 업데이트된 사용자 정보를 세션에 다시 저장
+		User updatedUser = userService.read(dto.getUserId());
+		log.info("updatedUser: {}", updatedUser);
+		session.setAttribute("user", updatedUser);
+		
+		redirectAttributes.addFlashAttribute("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
+		return "redirect:/user/myPage?userId=" + dto.getUserId();
 	}
-
 
 
 	@GetMapping("/findid")
