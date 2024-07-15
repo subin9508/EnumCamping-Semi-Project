@@ -6,15 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileImage = document.getElementById('profileImage');
     const deleteImage = document.getElementById('deleteImage');
 
+    // 서버에서 반환된 에러 메시지 표시
+    const errorMessage = document.querySelector('.alert-danger');
+    if(errorMessage) {
+        alert(errorMessage.textContent);
+    }
+
+    // 서버에서 반환된 성공 메시지 표시
+    const successMessage = document.querySelector('.alert-success');
+    if(successMessage) {
+        alert(successMessage.textContent);
+    }
+
     // 이미지 파일 선택 시 미리보기 기능
     imageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if(file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                profileImage.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
+            profileImage.src = URL.createObjectURL(file);
         }
     });
 
@@ -42,8 +50,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 업데이트 내용 저장 확인
         const result = confirm('입력하신 내용으로 저장할까요?');
-        if(result) {
-            updateForm.submit(); // 폼 양식 데이터 제출(서버로 요청 보냄)
-        }
-    });
-});
+        if (result) {
+            const formData = new FormData(updateForm);
+
+            fetch(updateForm.action, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json();
+                    } else {
+                        return response.text().then(text => {
+                            console.log("Server response:", text);
+                            throw new Error("Server didn't return JSON");
+                        });
+                    }
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert('프로필이 성공적으로 업데이트되었습니다.');
+                        window.location.reload();
+                    } else {
+                        alert('프로필 업데이트에 실패했습니다: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('프로필 업데이트 중 오류가 발생했습니다.');
+                });

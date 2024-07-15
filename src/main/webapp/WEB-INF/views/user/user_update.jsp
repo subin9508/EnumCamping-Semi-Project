@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body text-center">
                             <form id="updateForm" method="post"
-                                action="<c:url value='/user/user_update' />"
+                                action="${pageContext.request.contextPath}/user/user_update"
                                 enctype="multipart/form-data">
                                 <!-- Profile Picture Upload Section -->
                                 <div class="mb-3">
@@ -62,7 +62,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <img
-                                                    src="${pageContext.request.contextPath}/${user.profileImage}"
+                                                    src="${user.profileImage}"
                                                     id="profileImage"
                                                     alt="프로필 이미지">
                                             </c:otherwise>
