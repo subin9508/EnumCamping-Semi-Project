@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +45,6 @@ import com.itwill.semiproject.repository.User;
 import com.itwill.semiproject.service.QnAService;
 import com.itwill.semiproject.service.UserService;
 
-import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -240,6 +242,23 @@ public class UserController {
 		model.addAttribute("user", user);
 
 		return "user/user_update";
+	}
+	
+	
+	@GetMapping("/images/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	    try {
+	        Path file = Paths.get("C:/study/workspace_semiproject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/semi_project/static/images/user/" + filename);
+	        Resource resource = new UrlResource(file.toUri());
+	        if (resource.exists() || resource.isReadable()) {
+	            return ResponseEntity.ok().body(resource);
+	        } else {
+	            return ResponseEntity.notFound().build();
+	        }
+	    } catch (IOException e) {
+	        return ResponseEntity.internalServerError().build();
+	    }
 	}
 
 	@PostMapping("/user_update")
