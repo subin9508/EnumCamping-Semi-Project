@@ -13,10 +13,10 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
     <c:url value="../css/header.css" var="headerCss" />
-	<link rel="stylesheet" href="${headerCss}">
+    <link rel="stylesheet" href="${headerCss}">
 
-	<c:url value="../css/footer.css" var="footerCss" />
-	<link rel="stylesheet" href="${footerCss}">
+    <c:url value="../css/footer.css" var="footerCss" />
+    <link rel="stylesheet" href="${footerCss}">
     
     <c:url value="../css/mypage_qna_details.css" var="qnaDetailsCss" />
     <link rel="stylesheet" href="${qnaDetailsCss}">
@@ -81,57 +81,52 @@
                                     readonly />
                             </div>
                         </form>
-                    </div>
-                    <div class="card-footer">
-                        <c:url var="qnaListPage" value="/user/qna_list">
-                            <c:param name="userId"
-                                value="${user.userId}" />
-                        </c:url>
-                        <a class="btn btn-outline-info"
-                            href="${qnaListPage}">목록보기</a>
-
-                        <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
-                        <c:if
-                            test="${signedInUser eq qnaDetails.qnaUserId}">
-                            <c:url var="qnaModifyPage"
-                                value="/user/qna_modify">
-                                <c:param name="qnaPostId"
-                                    value="${qnaDetails.qnaPostId}" />
+                        <div class="card-footer">
+                            <c:url var="qnaListPage" value="/user/qna_list">
                                 <c:param name="userId"
                                     value="${user.userId}" />
                             </c:url>
-                            <a class="btn btn-outline-primary"
-                                href="${qnaModifyPage}">수정하기</a>
-                        </c:if>
+                            <a class="btn btn-outline-info"
+                                href="${qnaListPage}">목록보기</a>
+
+                            <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
+                            <c:if
+                                test="${signedInUser eq qnaDetails.qnaUserId}">
+                                <c:url var="qnaModifyPage"
+                                    value="/user/qna_modify">
+                                    <c:param name="qnaPostId"
+                                        value="${qnaDetails.qnaPostId}" />
+                                    <c:param name="userId"
+                                        value="${user.userId}" />
+                                </c:url>
+                                <a class="btn btn-outline-primary"
+                                    href="${qnaModifyPage}">수정하기</a>
+                            </c:if>
+                        </div>
                     </div>
+
                     <!-- 답변 등록 폼 -->
                     <c:if test="${user.userRole == 0}">
-                        <div class="mt-2 card">
-                            <div class="card-header">
-                                <h2>답변 등록</h2>
-                            </div>
-                            <div class="card-body">
-                                <div class="mt-2 row">
-                                    <div class="col-10">
-                                        <textarea class="form-control"
-                                            rows="3" id="answerContent"
-                                            placeholder="답변 내용"></textarea>
-                                    </div>
-                                    <div class="col-2">
-                                        <button
-                                            class="btn btn-outline-success"
-                                            id="btnRegisterAnswer">등록하기</button>
-                                    </div>
+                        <div class="mt-2 qna-answers-container">
+                            <h2>답변 등록</h2>
+                            <div class="mt-2 row">
+                                <div class="col-10">
+                                    <textarea class="form-control"
+                                        rows="3" id="answerContent"
+                                        placeholder="답변 내용"></textarea>
+                                </div>
+                                <div class="col-2">
+                                    <button
+                                        class="btn btn-outline-success"
+                                        id="btnRegisterAnswer">등록하기</button>
                                 </div>
                             </div>
                         </div>
                     </c:if>
-                    <br /> <br />
+
                     <!-- 답변 목록 -->
-                    <div class="mt-2 card">
-                        <div class="card-header">
-                            <h2>Comment</h2>
-                        </div>
+                    <div class="mt-2 qna-comment-container">
+                        <h2>Comment</h2>
                         <div class="card-body" id="answersContainer">
                             <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
                             <c:forEach var="answer" items="${answers}">
@@ -145,12 +140,9 @@
                         </div>
                     </div>
                 </main>
-
-
-
             </div>
-	</div>
-	<%@ include file="../fragments/footer.jspf"%>
+    </div>
+    <%@ include file="../fragments/footer.jspf"%>
 </div>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -171,7 +163,7 @@
     <script src="${commentsJS}"></script> -->
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-   	<c:url var="weatherJS" value="/js/weather.js" />
-  	<script src="${weatherJS}"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>

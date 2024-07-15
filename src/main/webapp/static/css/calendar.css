@@ -141,7 +141,7 @@ img {
 }
 
 .night-radio:checked + .night-radio_text {
-    background-color: #4CAF50;
+    background-color: #0056b3;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
@@ -153,7 +153,7 @@ img {
 }
 
 .night-radio:checked + .night-radio_text:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .night-radio_text:active {
@@ -172,14 +172,14 @@ img {
     border: none;
     border-radius: 25px;
     color: #fff;
-    background-color: #4CAF50; /* 밝은 녹색 */
+    background-color: #0056b3; /* 밝은 녹색 */
     transition: all 0.3s ease;
     margin-top: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btnNextPage:hover {
-    background-color: #45a049; /* 조금 더 어두운 녹색 */
+    background-color: #0056b3; /* 조금 더 어두운 녹색 */
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
@@ -191,5 +191,5 @@ img {
 
 .btnNextPage:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5);
+    box-shadow: 0 0 0 3px #0056b3;
 }

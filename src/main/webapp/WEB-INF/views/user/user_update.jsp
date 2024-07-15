@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -44,86 +45,119 @@
 							<h2>내 정보 수정</h2>
 						</div>
 						<div class="card-body text-center">
-							<form id="updateForm" method="post"
-								action="<c:url value='/user/user_update' />" enctype="multipart/form-data">
+                            <form id="updateForm" method="post"
+                                action="<c:url value='/user/user_update' />"
+                                enctype="multipart/form-data">
 
-								<!-- Profile Picture Upload Section -->
-								<div class="mb-3">
-									<div class="profile-image-area">
-										<c:choose>
-											<c:when test="${empty user.profileImage}">
-												<img
-													src="${pageContext.request.contextPath}/images/user/user.png"
-													id="profileImage" alt="프로필 이미지">
-											</c:when>
-											<c:otherwise>
-												<img
-													src="${pageContext.request.contextPath}/${user.profileImage}"
-													id="profileImage" alt="프로필 이미지">
-											</c:otherwise>
-										</c:choose>
-									</div>
+                                <!-- Profile Picture Upload Section -->
+                                <div class="mb-3">
+                                    <div class="profile-image-area">
+                                        <c:choose>
+                                            <c:when
+                                                test="${empty user.profileImage}">
+                                                <img
+                                                    src="${pageContext.request.contextPath}/static/images/user/user.png"
+                                                    id="profileImage"
+                                                    alt="프로필 이미지">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img
+                                                    src="${pageContext.request.contextPath}/${user.profileImage}"
+                                                    id="profileImage"
+                                                    alt="프로필 이미지">
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
 
-									<span id="deleteImage">x</span>
+                                    <span id="deleteImage">x</span>
 
-									<div class="profile-btn-area">
-										<label for="imageInput">이미지 선택</label> <input type="file"
-											name="profileImage" id="imageInput" accept="image/*">
-									</div>
-								</div>
-								<!-- End of Profile Picture Upload Section -->
+                                    <div class="profile-btn-area">
+                                        <label for="imageInput">이미지
+                                            선택</label> <input type="file"
+                                            name="profileImage"
+                                            id="imageInput"
+                                            accept="image/*">
+                                    </div>
+                                </div>
+                                <!-- End of Profile Picture Upload Section -->
 
-								<div class="mb-3 row">
-									<label for="userName" class="col-sm-2 col-form-label">이름</label>
-									<div class="col-sm-10">
-										<input id="userName" type="text" class="form-control"
-											name="userName" value="${user.userName}" readonly>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userId" class="col-sm-2 col-form-label">아이디</label>
-									<div class="col-sm-10">
-										<input id="userId" type="text" class="form-control"
-											name="userId" value="${user.userId}" readonly>
-									</div>
-								</div>
+                                <div class="mb-3 row">
+                                    <label for="userName"
+                                        class="col-sm-2 col-form-label">이름</label>
+                                    <div class="col-sm-10">
+                                        <input id="userName" type="text"
+                                            class="form-control"
+                                            name="userName"
+                                            value="${user.userName}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="userId"
+                                        class="col-sm-2 col-form-label">아이디</label>
+                                    <div class="col-sm-10">
+                                        <input id="userId" type="text"
+                                            class="form-control"
+                                            name="userId"
+                                            value="${user.userId}"
+                                            readonly>
+                                    </div>
+                                </div>
 
 
 
-								<div class="mb-3 row">
-									<label for="userPassword" class="col-sm-2 col-form-label">비밀번호</label>
-									<div class="col-sm-10">
-										<!-- 성공 메시지 표시 -->
-										<c:if test="${not empty message}">
-											<div class="alert alert-success">${message}</div>
+                                <div class="mb-3 row">
+                                    <label for="userPassword"
+                                        class="col-sm-2 col-form-label">비밀번호</label>
+                                    <div class="col-sm-10">
+                                        <!-- 성공 메시지 표시 -->
+                                        <c:if
+                                            test="${not empty message}">
+                                            <div
+                                                class="alert alert-success">${message}</div>
 
-										</c:if>
+                                        </c:if>
 
-										<!-- 에러 메시지 표시 -->
-										<c:if test="${not empty error}">
-											<div class="alert alert-danger">${error}</div>
-										</c:if>
-										<input id="userPassword" type="password" class="form-control"
-											name="userPassword" value="${user.userPassword}">
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
-									<div class="col-sm-10">
-										<input id="userEmail" type="text" class="form-control"
-											name="userEmail" value="${user.userEmail}" readonly>
-									</div>
-								</div>
-								<div class="mb-3 row">
-									<label for="userPhone" class="col-sm-2 col-form-label">전화번호</label>
-									<div class="col-sm-10">
-										<input id="userPhone" type="text" class="form-control"
-											name="userPhone" value="${user.userPhone}">
-									</div>
-								</div>
-								<button type="submit" class="btn btn-primary">수정 완료</button>
-							</form>
-						</div>
+                                        <!-- 에러 메시지 표시 -->
+                                        <c:if test="${not empty error}">
+                                            <div
+                                                class="alert alert-danger">${error}</div>
+                                        </c:if>
+                                        <input id="userPassword"
+                                            type="password"
+                                            class="form-control"
+                                            name="userPassword"
+                                            value="${user.userPassword}">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="userEmail"
+                                        class="col-sm-2 col-form-label">이메일</label>
+                                    <div class="col-sm-10">
+                                        <input id="userEmail"
+                                            type="text"
+                                            class="form-control"
+                                            name="userEmail"
+                                            value="${user.userEmail}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="userPhone"
+                                        class="col-sm-2 col-form-label">전화번호</label>
+                                    <div class="col-sm-10">
+                                        <input id="userPhone"
+                                            type="text"
+                                            class="form-control"
+                                            name="userPhone"
+                                            value="${user.userPhone}">
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-primary">수정
+                                    완료</button>
+                            </form>
+                        </div>
 
 					</div>
 				</div>

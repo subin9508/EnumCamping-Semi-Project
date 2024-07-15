@@ -92,8 +92,8 @@
     
     <!-- 프로필 이미지 수정 -->
     <update id="updateProfileImage">
-    	update profile_image set
-    	profile_img = #{profileImage}
+    	update users set
+    	profile_image = #{profileImage}
     	where user_key = #{userKey}
     
     </update>
