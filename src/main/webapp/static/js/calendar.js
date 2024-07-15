@@ -1,10 +1,15 @@
  /**
   *  /reservation/calendar.jsp에 포함
   */
+var selectedDate = null;
+var selectedArea= null;
+var selectedNight = null;
+// 전역 변수 추가
+var finalYear, finalMonth, finalDay, finalItemId, finalSelectedNight;
  
  document.addEventListener("DOMContentLoaded", function() {
-        selectedDate = null;
-        selectedNight = null;
+	selectedDate = null;
+    selectedNight = null;
         buildCalendar();
         
         document.getElementById("btnPrevCalendar").addEventListener("click", function(event) {
@@ -16,13 +21,11 @@
         });
         
         addAreaRadioEventListeners();
-    });
+        addNextPageEventListeners();
+});
 
-    var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
-    var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
-    var selectedDate = null;
-    var selectedArea= null;
-    var selectedNight = null;
+var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
+var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정값
 
     function prevCalendar() {
         this.toDay = new Date(toDay.getFullYear(), toDay.getMonth() - 1, toDay.getDate());
@@ -353,7 +356,7 @@
                 if (checkedDateAndArea.length === 0) {
                     // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
                     nightRadioLabel.innerHTML = `
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                             <label>
                                 <input class="night-radio" type="radio" name="night" value="1">
@@ -368,7 +371,7 @@
                 } else {
                     // 다음날 예약이 있는 경우 1박 옵션만 표시
                     nightRadioLabel.innerHTML = `
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                             <label>
                                 <input class="night-radio" type="radio" name="night" value="1">
@@ -430,8 +433,13 @@
                 document.getElementById('price-value').innerText = price;
                 updateTotalAllItems();
                 
-                // addNextPageEventListeners 함수에 itemId 전달
-                addNextPageEventListeners(year, month, day, itemId, selectedNight);
+                // 전역 변수 업데이트
+            finalYear = year;
+            finalMonth = month;
+            finalDay = day;
+            finalItemId = itemId;
+            finalSelectedNight = selectedNight;
+            
             })
             .catch(error => {
                 console.error("There was an error fetching the price!", error);
@@ -448,7 +456,7 @@
         return date.toISOString().split('T')[0];
     }
     
-    var selectedItems = [];
+var selectedItems = [];
 
     function updateQuantity(itemId, itemPrice) {
         var quantity = document.getElementById('quantity-' + itemId).value;
@@ -497,6 +505,7 @@
     // night 라디오 버튼에 이벤트 리스너 추가
     function addNightRadioEventListeners() {
         console.log('addNightRadioEventListeners()');
+
         document.querySelectorAll('.night-radio').forEach(radio => {
             radio.addEventListener('change', function() {
                 if (this.checked) {
@@ -519,7 +528,7 @@
         });
     }
     
-    // 예약하기 버튼에 이벤트 리스너 추가
+   // 예약하기 버튼에 이벤트 리스너 추가
     function addNextPageEventListeners(year, month, day, itemId, selectedNight) {
         console.log('addNextPageEventListeners()');
 
@@ -536,18 +545,18 @@
                     return;
                 }
             
-                const date = `${year}-${month}-${day}`;
+                const date = `${finalYear}-${finalMonth}-${finalDay}`;
                 const requirement = document.getElementById("special-requests").value;
                 const reservationMaster = {
                     resCheckIn: date,
-                    resCheckOut: calculateCheckOutDate(date, selectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
+                    resCheckOut: calculateCheckOutDate(date, finalSelectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
                     resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')), // 총 가격 추가
-                    requirement: requirement
+                    requirement: requirement || '요청없음'
                 };
                 console.log('reservationMaster: {}', reservationMaster);
 
                 const mainReservationDetail = {
-                    itemId: itemId,
+                    itemId: finalItemId,
                     itemQuantity: 1,
                     itemAmount: document.getElementById('price-value').innerText
                 };

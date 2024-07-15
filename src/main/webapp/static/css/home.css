@@ -41,11 +41,6 @@ body {
 	cursor: pointer;
 }
 
-.container {
-	width: 1500px;
-	object-fit: cover;
-}
-
 .with-background {
 	background-image: url('../images/main/sun.jpg');
 	background-size: cover;

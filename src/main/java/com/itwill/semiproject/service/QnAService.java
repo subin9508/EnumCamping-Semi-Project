@@ -125,6 +125,11 @@ public class QnAService {
         return list.stream().map(QnAListDto::fromEntity).toList();
     }
     
+    public List<QnA> selectByUserId(String userId) {
+    	List<QnA> list = qnaDao.selectQnAByUserId(userId);
+    	return list;
+    }
+    
     public long getTotalCount(QnASearchDto dto) {
         return qnaDao.selectTotalCount(dto);
     }

@@ -24,7 +24,7 @@
         rd.item_amount, i.item_name, i.item_img
         from reservation_detail rd
         join items i on rd.item_id = i.item_id
-        where rd.res_id = (select res_id from reservation_master where user_id = #{userId})
+        where rd.res_id = (select res_id from reservation_master where user_id = #{userId} and res_state = 0)
         order BY rd.item_id ASC      
     </select>
     

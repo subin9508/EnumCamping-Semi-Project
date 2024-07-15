@@ -17,9 +17,6 @@ public interface UserDao {
 	@Update("update users set user_password = #{userPassword}, user_phone = #{userPhone} where user_id = #{userId}")
 	int updateUser(User user);
 
-	@Update("UPDATE users SET profile_picture_url = #{profilePictureUrl} WHERE user_id = #{userId}")
-	int updateProfilePicture(User user);
-
 	String findIdByNameAndEmail(@Param("user_name") String name, @Param("user_email") String email);
 
 	String findPasswordByNameAndEmailAndId(@Param("user_name") String name, @Param("user_email") String email,
@@ -37,5 +34,6 @@ public interface UserDao {
     Integer checkUserIsActive(String userId); // 회원 활성 확인 여부 메서드
     
     Integer checkDeactivationPeriod(String userId); // 비활성화 기간 확인 메서드
-
+    
+    int updateProfileImage(User user);
 }

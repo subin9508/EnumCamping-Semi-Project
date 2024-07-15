@@ -13,6 +13,26 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/calendar.css">
 
+<style>
+
+    .item-name {
+        font-size: 24px; /* 원하는 크기로 조정 */
+        font-weight: bold; /* 글씨 두껍게 설정 */
+    }
+
+    .item-description {
+        font-size: 18px; /* 원하는 크기로 조정 */
+    }
+
+    .item-price {
+        font-size: 20px; /* 원하는 크기로 조정 */
+    }
+    
+    .total-price {
+        font-size: 18px; /* 원하는 크기로 조정 */
+    }
+    
+</style>
 </head>
 
 <body>
@@ -136,7 +156,7 @@
                     style="display: none;">
                     <div class="night-radio_label"
                         id="night-radio_label">
-                        <h5> <strong>체류기간<strong> </h5>
+                        <h3> <strong>체류기간<strong> </h3>
                         <div class="radio-options">
                         <label> <input class="night-radio"
                             type="radio" name="night" value="1">
@@ -147,13 +167,12 @@
                         </label>
                         </div>
                     </div>
+                    <div id="price" style="text-align: right;">
+                    <span id="price-label">캠핑존 가격: </span> <span
+                        id="price-value"></span>원
+                	</div>
                 </div>
                 <!-- // radio -->
-
-                <div id="price" style="display: none;">
-                    <span id="price-label">가격: </span> <span
-                        id="price-value"></span>원
-                </div>
 
 
                 <div class="m-3" id="items-table" style="display: none;">
@@ -176,16 +195,21 @@
                                             src="${itemImgUrl}"
                                             class="img"
                                             id="itemImg-${i.itemId}"
-                                            style="height: 150px; width: 150px;" />
+                                            style="height: 170px; width: 170px;" />
                                         </td>
                                         <td
                                             style="width: 20%; height: 10%;">
-                                            <h5>${i.itemName}</h5>
+                                            <h5 class="item-name">${i.itemName}</h5>
+                                            <!-- 여기서 클래스를 추가 -->
                                         </td>
                                         <td
-                                            style="width: 20%; height: 10%;">${i.itemDesc}</td>
+                                            style="width: 20%; height: 10%;"
+                                            class="item-description">${i.itemDesc}</td>
+                                        <!-- 여기서 클래스를 추가 -->
                                         <td
-                                            style="width: 20%; height: 10%; text-align: center;">${i.itemPrice}원</td>
+                                            style="width: 20%; height: 10%; text-align: center;"
+                                            class="item-price">${i.itemPrice}원</td>
+                                        <!-- 여기서 클래스를 추가 -->
                                         <td class="narrow"
                                             style="width: 20%; height: 10%; text-align: center;">
                                             <div

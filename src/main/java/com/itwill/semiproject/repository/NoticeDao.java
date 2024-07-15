@@ -2,6 +2,8 @@ package com.itwill.semiproject.repository;
 
 import java.util.List;
 
+import com.itwill.semiproject.dto.NoticeSearchDto;
+
 public interface NoticeDao {
 	
 	List<Notice> selectAllNotice();
@@ -14,5 +16,7 @@ public interface NoticeDao {
 	int deleteNotice(int id);
 	
 	int updateNotice(Notice notice);
-
+	
+	
+	List<Notice> search(NoticeSearchDto dto);
 }

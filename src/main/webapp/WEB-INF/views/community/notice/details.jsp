@@ -21,10 +21,12 @@
         <main>
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>공지사항 상세보기</h2>
+
+                    <h2>${notice.notTitle}</h2>
                 </div>
                 <div class="card-body">
                     <form>
+                    <!-- 
                         <div class="mt-2">
                             <label for="id" class="form-label">번호</label>
                             <input id="id" class="form-control"
@@ -36,6 +38,7 @@
                                 type="text" value="${notice.notTitle}"
                                 readonly />
                         </div>
+                     -->
                         <div class="mt-2">
                             <label for="content" class="form-label">내용</label>
                             <textarea id="content" class="form-control"

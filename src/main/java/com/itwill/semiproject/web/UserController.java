@@ -8,11 +8,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,19 +25,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwill.semiproject.dto.QnAUpdateDto;
 import com.itwill.semiproject.dto.ReservationDetailListDto;
 import com.itwill.semiproject.dto.ReservationListDto;
 import com.itwill.semiproject.dto.UserCreateDto;
 import com.itwill.semiproject.dto.UserDeactivateDto;
 import com.itwill.semiproject.dto.UserSignInDto;
 import com.itwill.semiproject.dto.UserUpdateDto;
+import com.itwill.semiproject.repository.QnA;
+import com.itwill.semiproject.repository.QnADao;
 import com.itwill.semiproject.repository.ReservationDetail;
 import com.itwill.semiproject.repository.ReservationMaster;
 import com.itwill.semiproject.repository.User;
+import com.itwill.semiproject.service.QnAService;
 import com.itwill.semiproject.service.UserService;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +58,8 @@ public class UserController {
 
 	private final UserService userService;
 	private final String uploadDirectory = "path/to/upload/directory"; // 실제 업로드 경로로 수정
+	private final QnAService qnaService;
+	private final QnADao qnaDao;
 
 	@GetMapping("/signin")
 	public void signin(HttpSession session) {
@@ -232,73 +243,57 @@ public class UserController {
 	}
 
 	@PostMapping("/user_update")
-	public String user_update(UserUpdateDto dto, HttpSession session) {
+	public String user_update(@ModelAttribute UserUpdateDto dto, 
+			@RequestParam(value = "profileImage", required = false) MultipartFile file,
+			HttpSession session, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) throws IllegalStateException, IOException {
 		log.debug("user_update(dto={})", dto);
-
+		
 		User user = (User) session.getAttribute("user");
-
+		
+		// 비밀번호 길이 검사
+		if(dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
+			if(dto.getUserPassword().length() < 8) {
+				redirectAttributes.addFlashAttribute("error", "비밀번호는 8자리 이상이어야 합니다.");
+				return "redirect:/user/user_update";
+			}
+			
+		}
+		
+		
+		try {
+			// 사용자 정보 업데이트 
 		userService.update(dto);
-
+		
+		// 프로필 이미지 업데이트
+		if(file != null && !file.isEmpty()) {
+			// 웹 접근 경로
+			String webPath = "/static/images/user/";
+			
+			// 실제로 이미지 파일이 저장되어야 하는 서버 컴퓨터 경로
+			String filePath = request.getServletContext().getRealPath(webPath);
+			
+			 int result = userService.updateProfile(file, webPath, filePath, user);
+	            if (result <= 0) {
+	                redirectAttributes.addFlashAttribute("error", "프로필 이미지 업데이트에 실패했습니다.");
+	                return "redirect:/user/user_update";
+	            }
+	        }
+					
+		} catch (Exception e) {
+			log.error("사용자 정보 업데이트 중 오류 발생", e);
+			redirectAttributes.addFlashAttribute("error", "사용자 정보 업데이트에 실패했습니다.");
+			return "redirect:/user/user_update";
+		}
 		// 업데이트된 사용자 정보를 세션에 다시 저장
 		User updatedUser = userService.read(dto.getUserId());
 		log.info("updatedUser: {}", updatedUser);
 		session.setAttribute("user", updatedUser);
-
+		
+		redirectAttributes.addFlashAttribute("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
 		return "redirect:/user/myPage?userId=" + dto.getUserId();
 	}
 
-	@PostMapping("/uploadProfilePicture")
-	public String uploadProfilePicture(@RequestPart("profilePicture") MultipartFile file, HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		if (user == null || file.isEmpty()) {
-			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-		}
-
-		try {
-			String fileName = user.getUserId() + "_" + file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드
-			Path path = Paths.get(uploadDirectory, fileName);
-			Files.write(path, file.getBytes());
-
-			// 기존 프로필 사진 삭제 (if needed)
-			if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
-				Path oldPath = Paths.get(uploadDirectory, user.getProfilePictureUrl());
-				Files.deleteIfExists(oldPath);
-			}
-
-			user.setProfilePictureUrl(fileName);
-			userService.updateProfilePicture(user);
-
-			session.setAttribute("user", user);
-		} catch (IOException e) {
-			log.error("Profile picture upload failed", e);
-		}
-
-		return "redirect:/user/user_update";
-	}
-
-	@PostMapping("/deleteProfilePicture")
-	public String deleteProfilePicture(HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-		}
-
-		try {
-			if (user.getProfilePictureUrl() != null && !user.getProfilePictureUrl().isEmpty()) {
-				Path path = Paths.get(uploadDirectory, user.getProfilePictureUrl());
-				Files.deleteIfExists(path);
-			}
-
-			user.setProfilePictureUrl(null);
-			userService.updateProfilePicture(user);
-
-			session.setAttribute("user", user);
-		} catch (IOException e) {
-			log.error("Profile picture delete failed", e);
-		}
-
-		return "redirect:/user/user_update";
-	}
 
 	@GetMapping("/findid")
 	public String findIdForm() {
@@ -365,6 +360,69 @@ public class UserController {
     	model.addAttribute("resDetail", resDetail);
     	
     }
+    
+    @GetMapping("/qna_list")
+	public void qnaList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
+		log.debug("qna_list(userId={})", userId);
+
+		User user = userService.read(userId);
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+		 List<QnA> list = qnaService.selectByUserId(userId);
+		 log.debug("list=({})", list);
+	     model.addAttribute("qnalist", list);
+	     model.addAttribute("user", user); // 모델에 사용자 정보 추가
+	}
+    
+    @GetMapping({"/qna_details", "/qna_modify"})
+	public void details(@RequestParam(name = "qnaPostId") int qnaPostId, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
+		log.debug("details(qnaPostId={})", qnaPostId);
+		
+		User user = userService.read(userId);
+		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+
+		
+		qnaDao.updateViewCount(qnaPostId); // 조회수 증가 메서드 호출
+		QnA qna = qnaService.read(qnaPostId);
+
+		model.addAttribute("qnaDetails", qna); 
+		model.addAttribute("user", user); // 모델에 사용자 정보 추가
+	}
+    
+    @GetMapping("/qna_delete")
+    public String delete(@RequestParam(name="qnaPostId") int id, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
+        log.debug("delete(qnaPostId={})", id);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
+        
+        User user = userService.read(userId);
+        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+        
+        qnaService.delete(id);
+        
+        model.addAttribute("user", user); // 모델에 사용자 정보 추가
+        
+        return "redirect:/user/qna_list?userId=" + userId;
+    }
+    
+    @PostMapping("/qna_update")
+	public String update(@RequestParam(name="userId") String userId, Model model, QnAUpdateDto dto, HttpSession session) {
+		log.debug("update(dto={})", dto);
+        if (session.getAttribute("signedInUser") == null) {
+            return "redirect:/user/signin";
+        }
+        User user = userService.read(userId);
+        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+        
+		qnaService.update(dto);
+		
+		model.addAttribute("user", user); // 모델에 사용자 정보 추가
+		
+		log.debug("postid",dto.getQnaPostId());
+		return "redirect:/user/qna_details?qnaPostId=" + dto.getQnaPostId() + "&userId=" + userId;
+	}
+	
 
     // 회원 탈퇴 
     @GetMapping("/deactivateUser")
