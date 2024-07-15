@@ -1,19 +1,19 @@
 /* styles.css */
 
 header {
-    background-color: #001522 ; /* 로고 배경색상 */
+    background-color: #8baf6f ; /* 로고 배경색상  #001522*/
     padding:0 20; /* 상하 여백 추가 */
 }
 
 header a {
     font-size: 2.5rem; /* 제목 크기 */
-    color: white; /* 헤더 텍스트 색상 */
+    color: black; /* 헤더 텍스트 색상 */
     text-decoration: none; /* 링크 밑줄 제거 */
 }
 
 #top {
     height: 100px;
-    color: white;
+    color:black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,19 +21,20 @@ header a {
 }
 
 #top .nav-link {
-    color: white;
+    color:black;
     font-size: 1.2rem;
     margin-right: 30px;
 }
 
 #top .nav-link:last-child {
-    color: white;
+    color:black;
     font-size: 1.2rem;
     margin-right: 0px;
 }
 
 #top .nav-link:hover {
     color: red;
+    font-weight: bold;
 }
 
 
@@ -68,6 +69,7 @@ header a {
 
 .navbar-nav .nav-link:hover {  
     color : red;  /*메인메뉴들도 빨간색으로*/
+    font-weight: bold;
 }
 
 
