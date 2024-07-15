@@ -42,10 +42,10 @@
 					<%@ include file="../fragments/mypage-sidebar.jspf"%>
 				</div>
 				<div class="col-md-9 main-content">
-					<div class="card mt-2">
-						<div class="card-header">
-							<h2>내 정보</h2>
-						</div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h2>내 정보</h2>
+                        </div>
                         <div class="card-body text-center">
                             <form id="updateForm" method="post"
                                 action="<c:url value='/user/user_update' />"
@@ -64,7 +64,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <img
-                                                    src="${pageContext.request.contextPath}/${user.profileImage}"
+                                                    src="${user.profileImage}"
                                                     id="profileImage"
                                                     alt="프로필 이미지">
                                             </c:otherwise>
@@ -152,7 +152,7 @@
 
 
                     </div>
-				</div>
+                </div>
 			</div>
 		</main>
 

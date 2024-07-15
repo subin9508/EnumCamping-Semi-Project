@@ -11,18 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Configuration
-@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-    private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String location = "file:C:/study/workspace_semiproject/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/semi_project/static/";
-        logger.info("Resource location: {}", location);
         registry.addResourceHandler("/static/**")
-                .addResourceLocations(location)
-                .setCachePeriod(3600)
-                .resourceChain(true)
-                .addResolver(new PathResourceResolver());
+                .addResourceLocations("classpath:/static/");
     }
 }

@@ -99,58 +99,42 @@ public class UserService {
 
 	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, User signedInUser) throws IllegalStateException, IOException {
 	    String originalProfileImage = signedInUser.getProfileImage();
-	    String renamedFilename = null;
 
 	    if (profileImage != null && !profileImage.isEmpty()) {
-	        renamedFilename = fileRename(profileImage.getOriginalFilename());
-	        signedInUser.setProfileImage(webPath + renamedFilename);
-	    } else {
-	        signedInUser.setProfileImage(null);
-	    }
+	        String filename = profileImage.getOriginalFilename();
+	        signedInUser.setProfileImage(webPath + filename);
 
-	    int result = userDao.updateProfileImage(signedInUser);
+	        int result = userDao.updateProfileImage(signedInUser);
 
-	    if (result > 0) {
-	        if (renamedFilename != null) {
+	        if (result > 0) {
 	            // 실제 파일 저장
-	            File targetFile = new File(filePath, renamedFilename);
+	            File targetFile = new File(filePath, filename);
 	            profileImage.transferTo(targetFile);
 
 	            // 이전 프로필 이미지가 있고, 기본 이미지가 아니라면 삭제
 	            if (originalProfileImage != null && !originalProfileImage.endsWith("user.png")) {
 	                new File(filePath, new File(originalProfileImage).getName()).delete();
 	            }
-	        } else if (signedInUser.getProfileImage() == null) {
-	            // 프로필 이미지를 삭제한 경우, 이전 이미지 파일 삭제 
-	            if (originalProfileImage != null && !originalProfileImage.endsWith("user.png")) {
-	                new File(filePath, new File(originalProfileImage).getName()).delete();
-	            }
 	        } else {
-	            // 변경 사항이 없는 경우, 원래 이미지로 복원
+	            // 업데이트 실패 시 원래 이미지로 복원
 	            signedInUser.setProfileImage(originalProfileImage);
 	        }
+
+	        return result;
 	    } else {
-	        // 업데이트 실패 시 원래 이미지로 복원
-	        signedInUser.setProfileImage(originalProfileImage);
+	        // 프로필 이미지를 삭제하는 경우
+	        signedInUser.setProfileImage(null);
+	        int result = userDao.updateProfileImage(signedInUser);
+
+	        if (result > 0 && originalProfileImage != null && !originalProfileImage.endsWith("user.png")) {
+	            // 이전 이미지 파일 삭제
+	            new File(filePath, new File(originalProfileImage).getName()).delete();
+	        }
+
+	        return result;
 	    }
-
-	    return result;
 	}
 
-	public static String fileRename(String originalFileName) {
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-	    String date = sdf.format(new java.util.Date(System.currentTimeMillis()));
-
-	    int ranNum = (int) (Math.random() * 100000);
-
-	    String str = "_" + String.format("%05d", ranNum);
-
-	    String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
-
-	    return date + str + ext;
-	}
-
-    
 	// 예약내역 read 메서드 추가
     public List<ReservationListDto> readReservationList(String userId) {
 		List<ReservationListDto> list = reservationMasterDao.selectByUserId(userId);
