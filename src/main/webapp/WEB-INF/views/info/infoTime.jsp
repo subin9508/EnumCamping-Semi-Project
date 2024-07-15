@@ -66,14 +66,14 @@
                                 </div>
                             </div>
                         </div>
-                        <br> <br>
+                        <br> <br> <br>
                         <h1>
                             <strong>[이용요금]</strong>
                         </h1>
                         <br>
                         <table class="table table-striped table-hover"
                             style="width: 40%">
-                            <thead>
+                            <thead style="font-size : 20px">
                                 <tr>
                                     <th style="width: 30%">비성수기 /
                                         평일</th>
