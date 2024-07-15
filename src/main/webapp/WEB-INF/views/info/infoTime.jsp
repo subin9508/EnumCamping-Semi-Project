@@ -75,21 +75,21 @@
                             style="width: 40%">
                             <thead>
                                 <tr>
-                                    <th style="width: 20%">비성수기 /
+                                    <th style="width: 30%">비성수기 /
                                         평일</th>
                                     <td>40,000</td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 20%">비성수기 /
+                                    <th style="width: 30%">비성수기 /
                                         주말</th>
                                     <td>45,000</td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 20%">성수기 / 평일</th>
+                                    <th style="width: 30%">성수기 / 평일</th>
                                     <td>50,000</td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 20%">성수기 / 주말</th>
+                                    <th style="width: 30%">성수기 / 주말</th>
                                     <td>55,000</td>
                                 </tr>
                             </thead>
@@ -99,13 +99,11 @@
                         <br> <br>
                     </div>
                 </main>
+            <%@ include file="../fragments/footer.jspf"%>
             </div>
 
-            <%@ include file="../fragments/footer.jspf"%>
-            </main>
         </div>
 
-    </div>
     </div>
 
     <script
