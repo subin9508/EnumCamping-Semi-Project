@@ -176,24 +176,27 @@
 
 		<section id="notice" class="section"
 			style="margin-left: 240px; padding-top: 100px; padding-bottom: 100px;">
-			<div class="container noto-sans-kr" style="margin-left: 200px;">
+			<div class="container noto-sans-kr " style="margin-left: 200px;">
 				<div class="row">
-					<div class="col-md-6 mt-3 " style="color: #8baf6f;">
-						<h2>공지사항</h2>
-						<div class="card border-5 border-light mt-15">
+					<div class="col-md-5 mt-3 justify-content-md-center"
+						style="color: #8baf6f;">
+						<h2 class="notice-h">공지사항</h2>
+						<div class=" card border-0 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title">공지사항</h5>
 								<p class="card-text">중요공지입니다</p>
+								<br/>
 								<a href="/semiproject/community/notice/details?id=1"
 									class="stretched-link" /></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6 mt-3" style="color: #8baf6f;">
-						<h2>이벤트</h2>
-						<div class="card border-5 border-light mt-15">
+					<div class="col-md-2"></div>
+					<div class="col-md-5 mt-3" style="color: #8baf6f;">
+						<h2 class=" notice-h">이벤트</h2>
+						<div class="card border-0 border-light mt-15">
 							<div class="card-body">
-								<h5 class="card-title">이넘 캠핑장 오픈 이벤트</h5>
+								<h5 class="card-title ">이넘 캠핑장 오픈 이벤트</h5>
 								<p class="card-text">오픈 특가! 상시 30% 할인, 회원가입 후 첫 예약 고객님께 50%
 									할인해드립니다!</p>
 								<a href="/semiproject/community/notice/details?id=41"
@@ -204,6 +207,8 @@
 				</div>
 			</div>
 		</section>
+
+
 		<%@ include file="./fragments/footer.jspf"%>
 	</div>
 	<!-- Bootstrap Bundle JS -->

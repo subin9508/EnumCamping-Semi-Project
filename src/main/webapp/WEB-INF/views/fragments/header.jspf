@@ -2,6 +2,26 @@
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 
+<head>
+<!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
+	rel="stylesheet">
+<link href="//fonts.googleapis.com/earlyaccess/hanna.css"
+	rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+</head>
+<style>
+	
+</style>
 <header class="text-white text-center">
     
 

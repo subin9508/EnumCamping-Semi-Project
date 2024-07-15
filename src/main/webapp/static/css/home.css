@@ -1,16 +1,5 @@
 @charset "UTF-8";
 
-body {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	background-color: #212529;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	
-}
-
 .rounded-content {
 	border-radius: 20px;
 	padding: 10px;
@@ -94,10 +83,4 @@ body {
 }
 
 
-  
-.noto-sans-kr{
-  font-family: "Noto Sans KR", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
+
