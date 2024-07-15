@@ -24,9 +24,9 @@ body {
 }
 
 .qna-details-container h2 {
-    color: #0056b3;
+    color: #7C9C63;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 2px solid #7C9C63;
     padding-bottom: 0.5rem;
 }
 
@@ -94,9 +94,9 @@ body {
 
 .qna-answers-container h2,
 .qna-comment-container h2 {
-    color: #0056b3;
+    color: #7C9C63;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 2px solid #7C9C63;
     padding-bottom: 0.5rem;
 }
 

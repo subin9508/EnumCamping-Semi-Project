@@ -38,12 +38,13 @@
 
 #trHead {
     font-size: 25px;
-    background-color: #001522;
+    background-color: #7C9C63;
     color: white;
 }
 
 #weekDays {
     color: gray;
+    font-weight: bold;
 }
 
 .card, .table, #requirement {
