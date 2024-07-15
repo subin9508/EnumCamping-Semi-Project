@@ -6,6 +6,7 @@
     <settings>
         <!-- 테이블 컬럼 이름의 밑줄(underscore)를 자바 클래스의 카멜 표기법 필드로 변환. -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
+        
          
     </settings>
 
@@ -25,6 +26,8 @@
         <typeAlias type="com.itwill.semiproject.repository.PaymentCancelDao" alias="PaymentCancel"/>
         <typeAlias type="com.itwill.semiproject.repository.User" alias="User" />
         <typeAlias type="com.itwill.semiproject.dto.QnASearchDto" alias="QnASearchDto" />
-
+		<typeAlias type="com.itwill.semiproject.repository.Comment" alias="Comment" />
+		<typeAlias type="com.itwill.semiproject.dto.QnAAnswerDto" alias="QnAAnswer" />
+		
     </typeAliases>
 </configuration>

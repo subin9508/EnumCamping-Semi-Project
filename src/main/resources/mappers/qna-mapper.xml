@@ -19,21 +19,27 @@
     <!-- qna 테이블에 행 삽입. 새 글 작성. -->
     <!-- stmt.setString(1, "-") 와 같음 -->
     <insert id="insertQnA" >
-        insert into QnA (qna_title, qna_content, qna_user_id) 
-        values (#{qnaTitle}, #{qnaContent}, #{qnaUserId})
+        insert into QnA (qna_title, qna_content, qna_user_id, qna_lock) 
+        values (#{qnaTitle}, #{qnaContent}, #{qnaUserId}, #{qnaLock, jdbcType=INTEGER})
     </insert>
     
     <!-- qna 테이블에서 해당 id의 제목, 내용, 수정시간 업데이트 -->
     <update id="updateQnA">
         update QnA 
-        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_modified_time = sysdate 
+        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_lock = #{qnaLock, jdbcType=INTEGER}, qna_modified_time = sysdate 
         where qna_post_id = #{qnaPostId}
     </update>
        
     <delete id="deleteQnA">
     	delete from QnA where qna_post_id = #{qnaPostId}
     </delete>   
-       
+      
+    <!-- qna 상태 업데이트 -->
+    <update id="updateQnaState">
+        update QnA set qna_state = #{qnaState} where qna_post_id = #{qnaPostId}
+    </update>  
+      
+      
     <!-- qna 테이블에서 제목/내용/작성자로 검색 -->
     <select id = "searchQnA" resultType="QnA" parameterType="map" > <!-- id = dao 메소드아이디  -->
         <bind name="searchKeyword" value="dto.keyword == null ? '%' : '%' + dto.keyword + '%'"  /> <!-- bind: 묶음. 0변수선언. like 검색할 때 % 붙인 것처럼, 검색어에 포함된 것을 찾음-->
@@ -74,13 +80,14 @@
 <!-- 	</select> -->
 
 <!-- 페이징된 목록 가져오기 -->
-    <select id="selectPagedQnAList" parameterType="Pager" resultType="QnA">
-        SELECT * FROM (
-            SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt, 
-                   ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum
-            FROM QNA
-        ) WHERE rnum BETWEEN #{startRow} AND #{lastRow}
-    </select>
+<select id="selectPagedQnAList" parameterType="Pager" resultType="QnA">
+    SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt, qna_lock, qna_state
+    FROM (
+        SELECT ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum, qna.*
+        FROM QnA qna
+    )
+    WHERE rnum BETWEEN #{startRow} AND #{lastRow}
+</select>
 
 	<!--  검색된 글의 총 갯수 -->
 	<select id="selectTotalCount" parameterType="QnASearchDto" resultType="Long">

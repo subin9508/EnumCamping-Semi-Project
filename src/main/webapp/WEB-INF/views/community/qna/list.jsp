@@ -16,12 +16,28 @@
 <link rel="stylesheet" href="../../css/footer.css">
 
 <style>
+    .status-waiting {
+        color: red !important;
+        font-weight: bold;
+    }
+    .status-completed {
+        color: blue !important;
+        font-weight: bold;
+    }
+    .secret-icon {
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
 ul.pagination {
 	display: flex;
 	justify-content: center;
 	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
 	padding: 0;
 }
+    
 </style>
 </head>
 <body>
@@ -69,6 +85,13 @@ ul.pagination {
 							</form>
 						</div>
 						<div class="card-body">
+							<!-- 알림 메시지 표시 -->
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-warning" role="alert">
+                                    ${message}
+                                </div>
+                            </c:if>
+						
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
@@ -76,19 +99,39 @@ ul.pagination {
 										<th>제목</th>
 										<th>작성자</th>
 										<th>수정시간</th>
+										<th>답변상태</th>
 										<th>조회수</th>
+										
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="qna" items="${qnas}">
 										<tr>
 											<td>${qna.qnaPostId}</td>
-											<td><c:url var="qnaDetailsPage"
-													value="/community/qna/details">
+											<td>
+                                            <c:url var="secretIconUrl" value="/images/community/secret.png" />
+                                            <c:url var="qnaDetailsPage"	value="/community/qna/details">
 													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
-												</c:url> <a href="${qnaDetailsPage}">${qna.qnaTitle}</a></td>
-											<td>${qna.qnaUserId}</td>
+												</c:url>
+											<a href="${qnaDetailsPage}">
+                                                    ${qna.qnaTitle}
+                                                    <c:if test="${qna.qnaLock == 1}">
+                                                        <img src="${secretIconUrl}" class="secret-icon" alt="비밀글">
+                                                    </c:if>
+                                                </a>
+                                            </td>
+                                            <td>${qna.qnaUserId}</td>
 											<td>${qna.qnaModifiedTime}</td>
+											<td class="${qna.qnaState == 0 ? 'status-waiting' : 'status-completed'}">
+                                                <c:choose>
+                                                    <c:when test="${qna.qnaState == 0}">
+                                                        답변 대기
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        답변 완료
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
 											<td>${qna.qnaViewCnt}</td>
 										</tr>
 									</c:forEach>

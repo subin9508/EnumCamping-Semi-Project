@@ -36,7 +36,14 @@
 							<h2>로그인</h2>
 						</div>
 						<div class="card-body">
-							<form method="post" >
+                        
+                            <!-- 알림 메시지 표시 -->
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-warning"
+                                    role="alert">${message}</div>
+                            </c:if>
+                            
+                            <form method="post" >
 								<c:if test="${not empty param.result && param.result eq 'f'}">
 									<div class="text-danger">아이디와 패스워드를 확인하세요.</div>
 								</c:if>

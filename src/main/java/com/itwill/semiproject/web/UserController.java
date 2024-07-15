@@ -136,7 +136,7 @@ public class UserController {
 
 		// 로그아웃 이후 타겟 페이지로 이동
 		String redirectUrl = "redirect:/";
-		if (!target.isEmpty() && !target.contains("/reservation_details")) {
+		if (!target.isEmpty() && !target.contains("/reservation_details") && !target.contains("/community/qna/details")) {
 			redirectUrl = "redirect:" + target;
 		}
 		return redirectUrl;
