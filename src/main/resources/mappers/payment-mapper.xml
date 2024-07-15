@@ -20,7 +20,7 @@
 	<!-- 결제 정보 삽입 -->
 
 	<insert id="insertPayment" parameterType="Payments">
-		insert into payments (imp_uid, pg_tid, res_id, amount, pay_date, pay_method,
+		insert into payments (imp_uid, pg_tid, res_id, res_total_price, pay_date, pay_method,
 		pay_status, buyer_email)
 		values (#{impUid}, #{pgTid}, #{resId}, #{resTotalPrice}, #{payDate}, #{payMethod},
 		#{payStatus}, #{buyerEmail})
