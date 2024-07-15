@@ -16,60 +16,71 @@
 
 	<c:url value="../css/footer.css" var="footerCss" />
 	<link rel="stylesheet" href="${footerCss}">
+    <c:url value="../css/mypage_qna_modify.css" var="qnaModifyCss"/>
+    <link rel="stylesheet" href="${qnaModifyCss}">
 	</head>
 	<body>
-	<div class="wrapper">
-            <c:set var="pageTitle" value="QnA Modify" />
-            <%@ include file="../fragments/header.jspf" %>
-    <div class="footer-main-content">            
-        <%@ include file="../fragments/mypage-sidebar.jspf"%>
-		<div class="containere-fluid">
-            <main>
-                <div class="mt-2 card">
-                    <div class="card-header">
-                        <h2> Q&A 수정 페이지</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="modifyForm" method="post" action="../user/qna_update">
-                            <div class="mt-2">
-                                <label for="qnaPostId" class="form-label">번호</label>
-                                <input id="qnaPostId" class="form-control" type="text"
-                                    name="qnaPostId" value="${qnaDetails.qnaPostId}" readonly />
+    <div class="wrapper">
+        <c:set var="pageTitle" value="QnA Modify" />
+        <%@ include file="../fragments/header.jspf"%>
+        <div class="footer-main-content">
+            <%@ include file="../fragments/mypage-sidebar.jspf"%>
+            <div class="container-fluid">
+                <main>
+                    <div class="qna-modify-container">
+                        <h2 class="qna-title">Q&A 수정</h2>
+                        <form id="modifyForm" method="post"
+                            action="../user/qna_update">
+                            <div class="mb-3">
+                                <label for="qnaPostId"
+                                    class="form-label">번호</label> <input
+                                    id="qnaPostId" class="form-control"
+                                    type="text" name="qnaPostId"
+                                    value="${qnaDetails.qnaPostId}"
+                                    readonly />
                             </div>
-                            <div class="mt-2">
+                            <div class="mb-3">
                                 <label for="qnaTitle" class="form-label">제목</label>
-                                <input id="qnaTitle" class="form-control" type="text"
-                                    name="qnaTitle" value="${qnaDetails.qnaTitle}" />
+                                <input id="qnaTitle"
+                                    class="form-control" type="text"
+                                    name="qnaTitle"
+                                    value="${qnaDetails.qnaTitle}" />
                             </div>
-                            <div class="mt-2">
-                                <label for="qnaContent" class="form-label">내용</label>
-                                <textarea id="qnaContent" class="form-control"
+                            <div class="mb-3">
+                                <label for="qnaContent"
+                                    class="form-label">내용</label>
+                                <textarea id="qnaContent"
+                                    class="form-control"
                                     name="qnaContent" rows="5">${qnaDetails.qnaContent}</textarea>
                             </div>
-                            <div class="d-none">
-                                <label for="qnaUserId" class="form-label">작성자</label>
-                                <input id="qnaUserId" class="form-control" type="text"
-                                    name="qnaUserId" value="${qnaDetails.qnaUserId}" readonly />
-                            </div>
-                            <input type="hidden" name="userId" value="${user.userId}" />
+                            <input id="qnaUserId" type="hidden"
+                                name="qnaUserId"
+                                value="${qnaDetails.qnaUserId}" /> <input
+                                type="hidden" name="userId"
+                                value="${user.userId}" />
                         </form>
+                        <c:if
+                            test="${signedInUser eq qnaDetails.qnaUserId}">
+                            <div class="card-footer text-end">
+                                <button type="submit" form="modifyForm"
+                                    class="btn btn-outline-success btnUpdate">업데이트</button>
+                                <c:url var="qnaDeletePage"
+                                    value="/user/qna_delete">
+                                    <c:param name="qnaPostId"
+                                        value="${qnaDetails.qnaPostId}" />
+                                    <c:param name="userId"
+                                        value="${user.userId}" />
+                                </c:url>
+                                <a
+                                    class="btn btn-outline-danger btnDelete"
+                                    href="${qnaDeletePage}">삭제하기</a>
+                            </div>
+                        </c:if>
                     </div>
-                    <!-- 로그인 사용자 아이디와 글 작성자가 같은 경우에만 버튼을 보여줌. -->
-                    <c:if test="${signedInUser eq qnaDetails.qnaUserId}">
-                        <div class="card-footer">
-                            <button type="submit" form="modifyForm" class="btn btn-outline-success btnUpdate">업데이트</button>
-                            <c:url var="qnaDeletePage" value="/user/qna_delete">
-                                <c:param name="qnaPostId" value="${qnaDetails.qnaPostId}" />
-                                <c:param name="userId" value="${user.userId}" />
-                            </c:url>
-                            <a class="btn btn-outline-danger btnDelete" href="${qnaDeletePage}">삭제하기</a>
-                        </div>
-                    </c:if>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
-    </div>
-    <%@ include file="../fragments/footer.jspf"%>
+        <%@ include file="../fragments/footer.jspf"%>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
