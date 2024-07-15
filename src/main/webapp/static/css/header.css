@@ -12,7 +12,7 @@ header a {
 }
 
 #top {
-    height: 150px;
+    height: 100px;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -36,8 +36,10 @@ header a {
     color: red;
 }
 
+
+
 .main {
-    height: 80px; /* 네비게이션 바의 높이 */
+    height: 50px; /* 네비게이션 바의 높이 */
     padding: 20px 0;
 }
 .main .nav-link {
