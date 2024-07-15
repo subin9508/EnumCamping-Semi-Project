@@ -149,6 +149,12 @@
 							</c:if>
 						</tbody>
 					</table>
+                        <div class="mt-2">
+                                <label for="requirement" class="form-label">요청사항</label>
+                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty reservationMaster.requirement ? '요청없음' : reservationMaster.requirement}" />
+                                ${requirementValue}
+                                </textarea>
+                            </div>
 					<br /> <br />
 				</div>
 
