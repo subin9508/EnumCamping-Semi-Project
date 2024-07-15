@@ -99,26 +99,7 @@
                     </c:if>
                 </div>
                     
-            
- <!-- 답변 등록 폼 -->
- <c:if test="${userRole == 0}">
-                <div class="mt-2 card">
-                    <div class="card-header">
-                        <h2>답변 등록</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="mt-2 row">
-                            <div class="col-10">
-                                <textarea class="form-control" rows="3" id="answerContent" placeholder="답변 내용"></textarea>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </c:if>
-                <br/> <br/>
+            <br/>
                 <!-- 답변 목록 -->
                 <div class="mt-2 card">
                     <div class="card-header">
@@ -135,6 +116,25 @@
                         </c:forEach>
                     </div>
                 </div>
+                <!-- 답변 등록 폼 -->
+            <c:if test="${userRole == 0}">
+                <div class="mt-2 card">
+                    <div class="card-header">
+                        <h3>Comment 등록</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-2 row">
+                            <div class="col-10">
+                                <textarea class="form-control" rows="1" id="answerContent" placeholder="답변 내용"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </c:if>
+                
             </div>
             
         </main>
