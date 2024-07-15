@@ -14,7 +14,7 @@ public class NoticeListDto {
 
 	private Integer id;
 	private String title;
-	private LocalDateTime modifiedTime;
+	private String modifiedTime;
 	
 	//Notice에서 필요한 내용 뽑아오기
 	public static NoticeListDto fromEntity(Notice notice) {

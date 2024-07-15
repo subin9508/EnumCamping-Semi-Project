@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
+import com.itwill.semiproject.dto.NoticeSearchDto;
 import com.itwill.semiproject.dto.NoticeUpdateDto;
 import com.itwill.semiproject.repository.Notice;
 import com.itwill.semiproject.repository.NoticeDao;
@@ -52,4 +53,14 @@ public class NoticeService {
 		return result;
 	}
 
+	
+	public List<NoticeListDto> search(NoticeSearchDto dto) {
+		log.debug("search()");
+		
+		List<Notice> list =  dao.search(dto);
+		
+		return list.stream().map(NoticeListDto::fromEntity).toList();
+		
+		
+	}
 }

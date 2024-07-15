@@ -25,5 +25,29 @@
     <delete id="deleteNotice">
         delete from notices where not_post_id = #{id}
     </delete>
+    
+    <!-- notice 테이블에서 제목/내용/작성자로 검색 -->
+    <select id="search" resultType="Notice">
+        <bind name="searchKeyWord" value="'%' + keyword + '%'"/>
+        select * from notices
+        <where>
+            <choose>
+                <when test='category.equals("t")'>
+                    upper(not_title) like upper(#{searchKeyWord})
+                </when>
+                <when test='category.equals("c")'>
+                    upper(not_content) like upper(#{searchKeyWord})
+                </when>
+                <when test='category.equals("tc")'>
+                    upper(not_title) like upper(#{searchKeyWord}) or upper(not_content) like upper(#{searchKeyWord})
+                </when>
+            </choose>
+        </where>
+        order by not_post_id desc
+    </select>
+    
+    
+    
+    
 
 </mapper>

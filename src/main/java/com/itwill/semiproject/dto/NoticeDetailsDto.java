@@ -14,8 +14,8 @@ public class NoticeDetailsDto {
 	private Integer notPostId;
 	private String notTitle;
 	private String notContent;
-	private LocalDateTime notCreatedTime;
-	private LocalDateTime notModifiedTime;
+	private String notCreatedTime;
+	private String notModifiedTime;
 	
 	//Notice에서 필요한 내용 뽑아오기
 	public static NoticeDetailsDto fromEntity(Notice notice) {

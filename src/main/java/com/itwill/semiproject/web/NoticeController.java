@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.semiproject.dto.NoticeCreateDto;
 import com.itwill.semiproject.dto.NoticeDetailsDto;
 import com.itwill.semiproject.dto.NoticeListDto;
+import com.itwill.semiproject.dto.NoticeSearchDto;
 import com.itwill.semiproject.dto.NoticeUpdateDto;
 import com.itwill.semiproject.repository.Notice;
 import com.itwill.semiproject.service.NoticeService;
@@ -81,6 +82,17 @@ public class NoticeController {
 	
 		return "redirect:list";
 	}
+	
+    @GetMapping("/search")
+    public String search(NoticeSearchDto dto, Model model) {
+    	log.debug("search(dto = {})",dto);
+    	
+    	List<NoticeListDto> list = noticeService.search(dto);
+    	model.addAttribute("notices",list);
+    	
+    	return "/community/notice/list";
+    }
+	
 	
 
 }    

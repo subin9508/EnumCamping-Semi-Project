@@ -17,6 +17,9 @@
 
 	<c:url value="../css/footer.css" var="footerCss" />
 	<link rel="stylesheet" href="${footerCss}">
+    
+    <c:url value="../css/mypage_qna_details.css" var="qnaDetailsCss" />
+    <link rel="stylesheet" href="${qnaDetailsCss}">
 </head>
 <body>
 <div class="wrapper">
@@ -27,11 +30,9 @@
         
     <div class="container-fluid">
         <main>
-            <div class="mt-2 card">
-                <div class="card-header">
-                    <h2>Q&A 상세</h2>
-                </div>
-                <div class="card-body">
+            <div class="qna-details-container">
+                    <h2>문의내역 상세</h2>
+
                     <form>
                         <div class="mt-2">
                             <label for="qnaPostId" class="form-label">번호</label>
@@ -86,7 +87,6 @@
                         href="${qnaModifyPage}">수정하기</a>
                     </c:if>
                 </div>
-            </div>
         </main>
         
         
