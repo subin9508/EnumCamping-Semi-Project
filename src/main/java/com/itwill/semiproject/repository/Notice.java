@@ -14,8 +14,8 @@ public class Notice {
 	Integer notPostId;
 	String notTitle;
 	String notContent;
-	LocalDateTime notCreatedTime;
-	LocalDateTime notModifiedTime;
+	String notCreatedTime;
+	String notModifiedTime;
 	Integer notCertify;
 	
 	/*

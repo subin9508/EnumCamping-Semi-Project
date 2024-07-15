@@ -15,7 +15,7 @@ public class NoticeUpdateDto {
 	private int notPostId;
 	private String notTitle;
 	private String notContent;
-	private LocalDateTime notModifiedTime;
+	private String notModifiedTime;
 	
 	//Notice에 dto 내용 넣기
 	 public Notice toEntity() {
