@@ -6,15 +6,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="../css/header.css">
-<link rel="stylesheet" href="../css/footer.css">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
-<title>Find ID</title>
+<link rel="stylesheet" href="../css/header.css" />
+<link rel="stylesheet" href="../css/footer.css" />
+
+<title>Find PASSWORD</title>
 <style>
 .container {
 	background: #fff;
@@ -51,7 +51,9 @@
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
 			<div class="card mt-5" style="width: 50rem; margin: auto;">
-				<h2 class="card-header">패스워드찾기</h2>
+				<div class="card-header">
+					<h2 class="mt-2"style="font-weight: bold;">패스워드찾기</h2>
+				</div>
 				<c:url var="findIdPage" value="/user/findpassword" />
 				<form class="form-horizontal" role="form" method="POST"
 					action="${findIdPage}">
@@ -73,10 +75,9 @@
 								type="text" name="user_id" class="form-control" id="user_id"
 								placeholder="아이디" required>
 						</div>
-						<button type="submit" class="btn btn-outline-success mt-3"
-							id="submitBtn" disabled>찾기</button>
-						<a href="/semiproject"
-							class="btn btn-outline-primary btn-custom mt-3">홈페이지로 이동</a>
+						<a href="/semiproject" class="btn btn-outline-primary mt-3">로그인</a>
+						<button type="submit" class="btn btn-success mt-3" id="submitBtn"
+							style="float: right" disabled>찾기</button>
 					</div>
 				</form>
 				<div id="messageContainer" class="mt-3">

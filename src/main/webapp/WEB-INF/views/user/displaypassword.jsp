@@ -43,10 +43,8 @@
 					</p>
 				</div>
 				<div class="mb-3">
-					<a href="/semiproject" class="btn btn-outline-primary btn-custom">홈페이지로
-						이동</a>
 					<c:url var="SignInPage" value="/user/signin" />
-					<a href="${SignInPage}" class="btn btn-outline-success btn-custom">로그인</a>
+					<a href="${SignInPage}" class="btn btn-outline-success ">로그인</a>
 				</div>
 			</div>
 		</div>
