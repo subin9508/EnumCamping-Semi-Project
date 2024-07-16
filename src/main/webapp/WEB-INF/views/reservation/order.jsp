@@ -54,6 +54,24 @@
 	padding-right: 0;
 }
 
+.btn-payment {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+
+.btn-payment:hover {
+    background-color: #708b58;
+    color: white;
+}
+
+.btn-payment:disabled {
+    background-color: #a5bd95; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #a5bd95;
+    color: white;
+}
+
 </style>
 
 </head>
@@ -256,7 +274,7 @@
                         method="get">  -->
 					<input type="hidden" name="resId" id="resId"
 						value="${reservationMaster.resId}" />
-					<button id="btnPayment" class="btn btn-outline-success" disabled>결제하기</button>
+					<button id="btnPayment" class="btn btn-payment" disabled>결제하기</button>
 					<!-- </form>  -->
 				</div>
 			</main>

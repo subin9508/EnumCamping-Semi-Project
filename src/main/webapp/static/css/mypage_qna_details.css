@@ -1,10 +1,6 @@
 @charset "UTF-8";
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-}
 
-.wrapper {
+.qna-wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -16,6 +12,7 @@ body {
 }
 
 .qna-details-container {
+    margin: 2rem auto;
     padding: 2rem;
     background-color: #fff;
     border-radius: 10px;
@@ -60,20 +57,14 @@ body {
     margin-left: 0.5rem;
 }
 
-.footer-main-content {
-    display: flex;
+.btn-list {
+    color: #6B8B56;
+    border-color: #6B8B56;
 }
 
-#top {
-    background-color: #001522;
-}
-
-#top .nav-link {
+.btn-list:hover {
     color: white;
-}
-
-.navbar-nav .nav-link:hover {
-    color: red;
+    background-color: #6B8B56;
 }
 
 .answer {
@@ -108,3 +99,7 @@ body {
     border: 1px solid #dee2e6;
     border-radius: 10px;
 }
+
+.qna-content {
+        display: flex;
+    }

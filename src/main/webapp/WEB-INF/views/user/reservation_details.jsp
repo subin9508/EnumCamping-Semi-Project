@@ -18,7 +18,7 @@
 <body>
     <div class="wrapper">
         <%@ include file="../fragments/header.jspf"%>
-        <div class="footer-main-content">
+        <div class="footer-main-content reservation-content">
             <%@ include file="../fragments/mypage-sidebar.jspf"%>
             <main>
                 <div class="card">
@@ -108,12 +108,12 @@
                                 </tbody>
                             </table>
                         </div>
-                            <div class="mt-2">
+                            <div class="mt-2 total-price">
                                 <label for="resTotalPrice"
-                                    class="form-label fs-5">총 가격</label> <input
+                                    class="form-label fs-5" style="color: #0056b3;">총 가격</label> <input
                                     id="resTotalPrice"
                                     class="form-control fs-5" type="text"
-                                    value="${resMaster.resTotalPrice}원"
+                                    value="${resMaster.resTotalPrice}원" style="color: #0056b3;"
                                     readonly />
                             </div>
                             <div class="mt-2">
