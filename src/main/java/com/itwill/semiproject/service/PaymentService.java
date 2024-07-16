@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itwill.semiproject.dto.ReservationMasterDto;
 import com.itwill.semiproject.dto.PaymentCancelDto;
@@ -285,8 +286,26 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 //		            return "Error during cancellation: " + e.getMessage();
 //		        }
 //		    }
-	//	
-
+	
+			// 웹훅시 사용 
+//		    /**
+//		     * imp_uid를 사용하여 결제 정보에 연결된 예약 ID를 조회합니다.
+//		     * 
+//		     * @param impUid 결제 고유 ID
+//		     * @return 연결된 예약 ID, 없으면 null
+//		     * @throws ServiceException 데이터 조회 중 예외 발생 시
+//		     */
+//			public Integer getResIdByImpUid(String impUid) throws ServiceException {
+//			    try {
+//			        Integer resId = paymentDao.findResIdByImpUid(impUid);
+//			        if (resId == null) {
+//			            throw new ServiceException("No reservation found for the provided impUid");
+//			        }
+//			        return resId;
+//			    } catch (Exception e) {
+//			        throw new ServiceException("Failed to retrieve reservation ID for impUid: " + impUid, e);
+//			    }
+//			}
 		
 		
 	}

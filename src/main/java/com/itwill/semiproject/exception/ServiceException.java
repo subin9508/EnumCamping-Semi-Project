@@ -13,5 +13,21 @@ public class ServiceException extends Exception {
 	public ServiceException(Exception e) {
 		super(e);
 	} // constructor #2	
+	
+	
+    // 기본 생성자
+    public ServiceException() {
+        super();
+    }
+
+    // 메시지와 원인 예외를 포함하는 생성자
+    public ServiceException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    // 원인 예외만 포함하는 생성자
+    public ServiceException(Throwable cause) {
+        super(cause);
+    }
 
 } // end class
