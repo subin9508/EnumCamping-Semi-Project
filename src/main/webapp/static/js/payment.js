@@ -13,40 +13,69 @@ document.addEventListener('DOMContentLoaded', function() {
         
         //예약 ID 로깅
         console.log(resId);
+        
         //예약 ID가 없으면 경고 메시지 표시 후 함수 종로
         if (!resId) {
-            alert("예약 아이디 값이 있어야 합니다.");
+            alert("예약 ID가 필요합니다.");
             return;
         }
-
-		//결제 정보를 조회하는 비동기 함수 호출
+        
         try {
             const paymentInfo = await getPaymentInfo(resId);
-
-            if(paymentInfo.res_state === 1) {
-				alert('이미 결제가 완료된 예약입니다.');
-				return;
-			}
-  console.log("결제 금액 확인",paymentInfo.amount);
-            console.log(paymentInfo);
-
-            requestPayment(paymentInfo, resId);
+            if (paymentInfo.resState === 1) {
+                alert('이미 결제가 완료된 예약입니다.');
+            } else {
+                requestPayment(paymentInfo, resId);
+            }
         } catch (error) {
             console.error("결제 정보 조회 중 오류:", error);
             alert('결제 정보를 가져오는 중 오류가 발생했습니다. 다시 시도해 주세요.');
         }
     }
 
-	//결제 요청 함수
+    async function getPaymentInfo(resId) {
+        const response = await fetch(`/reservation/paymentInfo/${resId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('서버에서 결제 정보를 가져오는데 실패했습니다.');
+        }
+        return await response.json();
+    }
+    
+//		//결제 정보를 조회하는 비동기 함수 호출
+//        try {
+//            const paymentInfo = await getPaymentInfo(resId);
+//            console.log("결제 정보:", paymentInfo);
+//            
+//            if(paymentInfo.res_state === 1) {
+//				alert('이미 결제가 완료된 예약입니다.');
+//				return; // 여기서 함수를 종료해서 결제창이 열리지 않음.
+//			}
+//            console.log("결제 금액 확인",paymentInfo.amount);
+//            console.log(paymentInfo);
+//            
+//            // 결제창 요청 함수 호출
+//            requestPayment(paymentInfo, resId);
+//        } catch (error) {
+//            console.error("결제 정보 조회 중 오류:", error);
+//            alert('결제 정보를 가져오는 중 오류가 발생했습니다. 다시 시도해 주세요.');
+//        }
+//    }
+
+	// 결제 요청 함수
     function requestPayment(paymentInfo, resId) {
 		//I'mport 결제 라이브러리 초기화
         const IMP = window.IMP;
         IMP.init('imp53143455');
         IMP.request_pay({ //요청 전문양식을 그대로 가지고와서 우리 입맛에 맞게 넣음
 
-            pg: 'html5_inicis',
+            pg: 'html5_inicis', // pg사
             pay_method: 'card',
-            merchant_uid: 'merchant_' + new Date().getTime(), //우리 상점에서 이런 결제를 할거라고 알림
+            merchant_uid: 'merchant_' + new Date().getTime(), //우리 상점 주문 번호
             name: paymentInfo.name, //상품 이름
             amount: paymentInfo.amount, //상품 총가격
             buyer_email: paymentInfo.email, //구매자 이메일
