@@ -226,7 +226,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 		        	if (response != null && response.getResponse() != null) {
 		        		Payment paymentResponse = response.getResponse();
 		                if ("cancelled".equals(paymentResponse.getStatus())) {
-		                    payment.setPayStatus("CANCEL");
+		                    payment.setPayStatus("cancel");
 		                    paymentDao.updatePayment(payment);
 
 		                    PaymentCancelDto cancelDto = new PaymentCancelDto();
