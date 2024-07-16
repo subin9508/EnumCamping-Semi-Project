@@ -83,30 +83,30 @@
                                     정보</td>
                             </tr>
                             <tr>
-                                <td colspan="1"
-                                    style="text-align: right;"><label
+                                <td colspan="2"
+                                    style="text-align: center;"><label
                                     for="userName"
-                                    style="font-size: 18px;">이름:</label>
+                                    style="font-size: 18px;">이름</label>
                                 </td>
                                 <td colspan="5" style="font-size: 18px;">${user.userName}</td>
                             </tr>
                             <tr>
-                                <td>
-                                    <div style="text-align: right;">
+                                <td colspan="2">
+                                    <div style="text-align: center;">
                                         <label for="userEmail"
                                             style="font-size: 18px;"
-                                            class="text-left">이메일:</label>
+                                            class="text-left">이메일</label>
                                     </div>
                                 </td>
                                 <td colspan="5" style="font-size: 18px;">${user.userEmail}</td>
                             </tr>
                             <tr>
-                                <td>
-                                    <div style="text-align: right;">
+                                <td colspan="2">
+                                    <div style="text-align: center;">
                                         <label for="userPhone"
                                             style="font-size: 18px;"
                                             class="text-left">휴대폰
-                                            번호:</label>
+                                            번호</label>
                                     </div>
                                 </td>
                                 <td colspan="5" style="font-size: 18px;">${user.userPhone}</td>
@@ -256,16 +256,15 @@
                         method="get">  -->
 					<input type="hidden" name="resId" id="resId"
 						value="${reservationMaster.resId}" />
-					<button id="btnPayment" class="btn btn-primary" disabled>결제하기</button>
+					<button id="btnPayment" class="btn btn-outline-success" disabled>결제하기</button>
 					<!-- </form>  -->
 				</div>
 			</main>
 
-			<div class="container-fluid" id="wrap">
 				<%@ include file="../fragments/footer.jspf"%>
 			</div>
 		</div>
-	</div>
+	
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

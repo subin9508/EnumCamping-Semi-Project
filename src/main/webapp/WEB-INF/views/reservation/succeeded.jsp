@@ -32,16 +32,17 @@
             <main
                 style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
                 <div class="mt-2 card">
-                    <div class="card-header">
-                        <h2>예약내역</h2>
-                    </div>
+                    
                     <div class="card-body">
+                    <div>
+                        <h1>예약내역</h1>
+                    </div>
+                    <br />
                         <form>
                             <div class="d-flex">
                                 <div class="mt-2 flex-fill me-2">
-                                    <label for="resCheckIn"
-                                        class="form-label">체크인
-                                        날짜</label> <input id="resCheckIn"
+                                    <label for="resCheckIn" class="form-label" style="font-size: 21px; font-weight: bold;">체크인 날짜</label>
+                                    <input id="resCheckIn"
                                         class="form-control" type="text"
                                         value="${resMaster.resCheckIn}"
                                         readonly />
@@ -51,16 +52,17 @@
                                 <div></div>
                                 <div class="mt-2 flex-fill ms-2">
                                     <label for="resCheckOut"
-                                        class="form-label">체크아웃
+                                        class="form-label" style="font-size: 21px; font-weight: bold;">체크아웃
                                         날짜</label> <input id="resCheckOut"
                                         class="form-control" type="text"
                                         value="${resMaster.resCheckOut}"
                                         readonly />
                                 </div>
                             </div>
+                            <br/>
                             
                             <div class="mt-2">
-                        <label for="resArea" class="form-label">예약 구역</label>
+                        <label for="resArea" class="form-label" style="font-size: 21px; font-weight: bold;">예약 구역</label>
                         <c:forEach items="${resDetail}" var="item">
                             <c:choose>
                                 <c:when test="${item.itemId ge 1 and item.itemId le 4}">
@@ -87,15 +89,15 @@
                         </c:forEach>
                             <input readonly class="form-control" type="text" name="resArea" value="${area}" />
                     </div>
-
+                    <br/>
 
                             <div class="mt-2">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">물품 이름</th>
-                                            <th scope="col">물품 수량</th>
-                                            <th scope="col">물품 가격</th>
+                                            <th scope="col" style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">물품 이름</th>
+                                            <th scope="col" style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">물품 수량</th>
+                                            <th scope="col" style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">물품 가격</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,21 +126,21 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <br/>
                             
-                            
-
                             <div class="mt-2">
                                 <label for="resTotalPrice"
-                                    class="form-label">총 가격</label> <input
+                                    class="form-label" style="font-size: 21px; font-weight: bold;">총 가격</label> <input
                                     id="resTotalPrice"
                                     class="form-control" type="text"
                                     value="${resMaster.resTotalPrice}"
                                     readonly />
                             </div>
+                            <br/>
                             
                              <div class="mt-2">
                                 <label for="resCreatedTime"
-                                    class="form-label">예약 일시</label> <input
+                                    class="form-label" style="font-size: 21px; font-weight: bold;">예약 일시</label> <input
                                     id="resCreatedTime"
                                     class="form-control" type="text"
                                     value="${resMaster.resCreatedTime}"
@@ -154,14 +156,14 @@
                     class="container-fluid d-flex justify-content-center">
                     <!-- 결제 완료 메시지 -->
                     <div class="text-center mt-5">
-                        <h2>결제가 완료되었습니다</h2>
+                        <h2>예약 및 결제가 완료되었습니다</h2>
                         <p>이용해 주셔서 감사합니다.</p>
 <!--                         <a  href="../../user/reservation_list?userId=${userId}" class="btn btn-primary mt-3">예약 상세내역으로 가기</a> -->
-                        <a href="/semiproject/" class="btn btn-primary mt-3">홈으로 가기</a>
+                        <a href="/semiproject/" class="btn btn-outline-success mt-3">홈으로 가기</a>
                     </div>
                 </div>
             </main>
-
+ <%@ include file="../fragments/footer.jspf"%>
 
         </div>
 
@@ -170,5 +172,8 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <c:url var="weatherJS" value="/js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>
