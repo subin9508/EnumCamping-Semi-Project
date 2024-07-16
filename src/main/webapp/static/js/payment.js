@@ -22,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         try {
             const paymentInfo = await getPaymentInfo(resId);
+            console.log("결제 정보:", paymentInfo);
             if (paymentInfo.resState === 1) {
                 alert('이미 결제가 완료된 예약입니다.');
             } else {
                 requestPayment(paymentInfo, resId);
+                console.log("결제 금액 확인",paymentInfo.amount);
             }
         } catch (error) {
             console.error("결제 정보 조회 중 오류:", error);
@@ -33,18 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    async function getPaymentInfo(resId) {
-        const response = await fetch(`/reservation/paymentInfo/${resId}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (!response.ok) {
-            throw new Error('서버에서 결제 정보를 가져오는데 실패했습니다.');
-        }
-        return await response.json();
-    }
+//    async function getPaymentInfo(resId) {
+//        const response = await fetch(`/semiproject/reservation/paymentInfo/${resId}`, {
+//            method: 'GET',
+//            headers: {
+//                'Content-Type': 'application/json'
+//            }
+//        });
+//        if (!response.ok) {
+//            throw new Error('서버에서 결제 정보를 가져오는데 실패했습니다.');
+//        }
+//        return await response.json();
+//    }
     
 //		//결제 정보를 조회하는 비동기 함수 호출
 //        try {
@@ -134,6 +136,7 @@ async function handlePaymentResponse(rsp, resId) {
             throw error;
         }
     }
+    
 //결제 검증 및 정보 저장 함수
     async function verifyAndSavePayInfo(imp_uid, resId) { //결제 검증, 저장 
         try {

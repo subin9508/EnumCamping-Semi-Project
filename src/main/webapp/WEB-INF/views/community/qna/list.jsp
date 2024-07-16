@@ -20,20 +20,20 @@
 
 
 <style>
-    .status-waiting {
-        color: red !important;
-        
-    }
-    .status-completed {
-        color: blue !important;
-        
-    }
-    .secret-icon {
-        width: 16px;
-        height: 16px;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
+.status-waiting {
+	color: red !important;
+}
+
+.status-completed {
+	color: blue !important;
+}
+
+.secret-icon {
+	width: 16px;
+	height: 16px;
+	margin-left: 5px;
+	vertical-align: middle;
+}
 
 ul.pagination {
 	display: flex;
@@ -41,19 +41,22 @@ ul.pagination {
 	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
 	padding: 0;
 }
+.pagination .page-link {
+            color: #000000; /* 기본 글자색 검정 */
+        }
 
-     .pagination .page-link:hover {
-        background-color: #000000; /* 호버 시 배경색 초록 */
-        color: #fff; /* 호버 시 글자색 흰색 */
-    }
-    
-        .pagination .page-item.active .page-link {
-        background-color: #000000; /* 활성화된 페이지 배경색 초록 */
-        border-color: #000000; /* 활성화된 페이지 테두리 색상 초록 */
-        color: #fff; /* 활성화된 페이지 글자색 흰색 */
-    }
+.pagination .page-link:hover {
+	background-color: #28a745; /* 호버 시 배경색 초록 */
+	color: #fff; /* 호버 시 글자색 흰색 */
+}
 
+.pagination .page-item.active .page-link {
+	background-color: #28a745; /* 활성화된 페이지 배경색 초록 */
+	border-color: #28a745; /* 활성화된 페이지 테두리 색상 초록 */
+	color: #fff; /* 활성화된 페이지 글자색 흰색 */
+}
 </style>
+
 </head>
 <body>
 	<div class="wrapper">
