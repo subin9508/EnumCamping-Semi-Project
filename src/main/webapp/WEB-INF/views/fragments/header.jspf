@@ -36,7 +36,7 @@
         <div class="col-6 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
             	<img alt="logo"
-                src="<c:url value='/images/main/logo_horizontal.jpg'/>"
+                src="<c:url value='/images/main/logo_horizontal.png'/>"
                 style="height: 60px; width: 200px;">
                 
             </a>
