@@ -276,11 +276,20 @@ public class UserController {
 
 	    User user = (User) session.getAttribute("user");
 
-	    // 비밀번호 길이 검사
-	    if(dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
-	        if(dto.getUserPassword().length() < 8) {
+	    // 비밀번호 길이 및 형식 검사
+	    if (dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
+	        String password = dto.getUserPassword();
+	        if (password.length() < 8) {
 	            response.put("success", false);
 	            response.put("message", "비밀번호는 8자리 이상이어야 합니다.");
+	            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
+	        }
+
+	        // 영문, 숫자, 특수문자 혼용 검사
+	        String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()_+=<>?{}\\[\\]~]).{8,}$";
+	        if (!password.matches(passwordPattern)) {
+	            response.put("success", false);
+	            response.put("message", "비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.");
 	            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
 	        }
 	    }
@@ -290,7 +299,7 @@ public class UserController {
 	        userService.update(dto);
 
 	        // 프로필 이미지 업데이트
-	        if(file != null && !file.isEmpty()) {
+	        if (file != null && !file.isEmpty()) {
 	            // 웹 접근 경로
 	            String webPath = "/static/images/user/";
 
@@ -310,9 +319,10 @@ public class UserController {
 	        log.info("updatedUser: {}", updatedUser);
 	        session.setAttribute("user", updatedUser);
 
+	        String contextPath = request.getContextPath();
 	        response.put("success", true);
 	        response.put("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
-	        response.put("redirectUrl", "/user/myPage?userId=" + dto.getUserId());
+	        response.put("redirectUrl", contextPath + "/user/myPage?userId=" + dto.getUserId());
 	        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
 
 	    } catch (Exception e) {
@@ -322,6 +332,8 @@ public class UserController {
 	        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
 	    }
 	}
+
+
 	@GetMapping("/findid")
 	public String findIdForm() {
 		return "user/findid"; // 아이디 찾기 입력 폼으로 이동
