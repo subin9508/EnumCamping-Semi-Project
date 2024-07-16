@@ -530,82 +530,82 @@ var selectedItems = [];
     }
     
    // 예약하기 버튼에 이벤트 리스너 추가
-    function addNextPageEventListeners(year, month, day, itemId, selectedNight) {
-        console.log('addNextPageEventListeners()');
+    function handleNextPageClick(event) {
+        console.log('handleNextPageClick');
+    event.preventDefault();
 
-        // 기존 이벤트 리스너 제거
-        const btnNextPage = document.querySelector('.btnNextPage');
-        if (btnNextPage) { // 요소가 존재하는지 확인
-            btnNextPage.removeEventListener('click', handleNextPageClick);
-        
-            function handleNextPageClick(event) {
-                event.preventDefault();
-                console.log('Button clicked'); // 버튼 클릭 로그
-            
-                if (!validateForm(event)) {
-                    return;
-                }
-            
-                const date = `${finalYear}-${finalMonth}-${finalDay}`;
-                const requirement = document.getElementById("special-requests").value;
-                const reservationMaster = {
-                    resCheckIn: date,
-                    resCheckOut: calculateCheckOutDate(date, finalSelectedNight), // 실제로는 종료 날짜를 계산해야 합니다.
-                    resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')), // 총 가격 추가
-                    requirement: requirement || '요청없음'
-                };
-                console.log('reservationMaster: {}', reservationMaster);
-
-                const mainReservationDetail = {
-                    itemId: finalItemId,
-                    itemQuantity: 1,
-                    itemAmount: document.getElementById('price-value').innerText
-                };
-                
-                // 디버깅을 위한 로그 추가
-                console.log('mainReservationDetail:', mainReservationDetail);
-                
-                const additionalItems = selectedItems.map(function(item) {
-                    return {
-                        itemId: parseInt(item.itemId),
-                        itemQuantity: parseInt(item.itemQuantity) || 0,
-                        itemAmount: parseInt(item.itemAmount)
-                    };
-                });
-                
-                const reservationDetails = [mainReservationDetail, ...additionalItems];
-                
-                
-                const data = {
-                    reservationMaster: reservationMaster,
-                    reservationDetail: reservationDetails
-                };
-            
-                console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
-
-                const uri = '../reservation/order';
-
-                axios.post(uri, data, {
-                    headers: {
-                    'Content-Type': 'application/json'
-                    }   
-                })
-                .then(response => {
-                    console.log('Response status:', response.status);
-                    console.log('Response data:', response.data);
-                    window.location.href = uri; // 페이지 리디렉션
-                })
-                .catch(error => {
-                    console.error('Error details:', error.response ? error.response.data : error.message);
-                    console.error('Error status:', error.response ? error.response.status : 'Unknown');
-                    alert('예약 처리 중 오류가 발생하였습니다.');
-                });
-            }
-            btnNextPage.addEventListener('click', handleNextPageClick);
-        } else {
-                console.error("btnNextPage element not found");
-        }
+    if (!validateForm()) {
+        return;
     }
+
+    console.log('Button clicked'); // 버튼 클릭 로그
+    const date = `${finalYear}-${finalMonth}-${finalDay}`;
+    const requirement = document.getElementById("special-requests").value;
+    const reservationMaster = {
+        resCheckIn: date,
+        resCheckOut: calculateCheckOutDate(date, finalSelectedNight),
+        resTotalPrice: parseInt(document.getElementById('totalAllItems').innerText.replace(/[^0-9]/g, '')),
+        requirement: requirement || '요청없음'
+    };
+    console.log('reservationMaster: {}', reservationMaster);
+
+    const mainReservationDetail = {
+        itemId: finalItemId,
+        itemQuantity: 1,
+        itemAmount: document.getElementById('price-value').innerText
+    };
+
+    console.log('mainReservationDetail:', mainReservationDetail);
+
+    const additionalItems = selectedItems.map(function(item) {
+        return {
+            itemId: parseInt(item.itemId),
+            itemQuantity: parseInt(item.itemQuantity) || 0,
+            itemAmount: parseInt(item.itemAmount)
+        };
+    });
+
+    const reservationDetails = [mainReservationDetail, ...additionalItems];
+
+    const data = {
+        reservationMaster: reservationMaster,
+        reservationDetail: reservationDetails
+    };
+
+    console.log('Data to be sent:', JSON.stringify(data, null, 2)); // 전송할 데이터 로그
+
+    const uri = '../reservation/order';
+
+    axios.post(uri, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        console.log('Response data:', response.data);
+        window.location.href = uri; // 페이지 리디렉션
+    })
+    .catch(error => {
+        console.error('Error details:', error.response ? error.response.data : error.message);
+        console.error('Error status:', error.response ? error.response.status : 'Unknown');
+        alert('예약 처리 중 오류가 발생하였습니다.');
+    });
+}
+
+function addNextPageEventListeners() {
+    console.log('addNextPageEventListeners()');
+
+    const btnNextPage = document.querySelector('.btnNextPage');
+    if (btnNextPage) { // 요소가 존재하는지 확인
+    console.log(btnNextPage);
+        //btnNextPage.removeEventListener('click', handleNextPageClick);
+        btnNextPage.addEventListener('click', handleNextPageClick);
+    } else {
+        console.error("btnNextPage element not found");
+    }
+}
+
     
 
     /**
