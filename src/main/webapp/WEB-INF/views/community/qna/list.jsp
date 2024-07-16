@@ -24,11 +24,11 @@
 <style>
     .status-waiting {
         color: red !important;
-        font-weight: bold;
+        
     }
     .status-completed {
         color: blue !important;
-        font-weight: bold;
+        
     }
     .secret-icon {
         width: 16px;
@@ -45,15 +45,16 @@ ul.pagination {
 }
 
      .pagination .page-link:hover {
-        background-color: #7C9C63; /* 호버 시 배경색 초록 */
+        background-color: #000000; /* 호버 시 배경색 초록 */
         color: #fff; /* 호버 시 글자색 흰색 */
     }
     
         .pagination .page-item.active .page-link {
-        background-color: #7C9C63; /* 활성화된 페이지 배경색 초록 */
-        border-color: #7C9C63; /* 활성화된 페이지 테두리 색상 초록 */
+        background-color: #000000; /* 활성화된 페이지 배경색 초록 */
+        border-color: #000000; /* 활성화된 페이지 테두리 색상 초록 */
         color: #fff; /* 활성화된 페이지 글자색 흰색 */
     }
+
 </style>
 </head>
 <body>
@@ -73,7 +74,7 @@ ul.pagination {
 
 					<div class="mt-2 card" style="margin-right:50px;">
 						<div class="card-header">
-                        <h1 class="card-title align-center mt-2">Q&A</h1>
+                        <h1 class="card-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
 
 							<c:url var="qnaSearchPage" value="/community/qna/search" />
 							<form method="get" action="${qnaSearchPage}">
