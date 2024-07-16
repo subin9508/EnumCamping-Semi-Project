@@ -21,7 +21,7 @@ var finalYear, finalMonth, finalDay, finalItemId, finalSelectedNight;
         });
         
         addAreaRadioEventListeners();
-        addNextPageEventListeners();
+        //addNextPageEventListeners();
 });
 
 var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
@@ -398,7 +398,6 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
         
         if (!dateSelected || !areaSelected || !nightSelected) {
             alert("날짜, 구역, 숙박 일수를 선택해 주세요.");
-            event.preventDefault();
             return false;
         }
         
@@ -532,19 +531,20 @@ var selectedItems = [];
    // 예약하기 버튼에 이벤트 리스너 추가
     function addNextPageEventListeners(year, month, day, itemId, selectedNight) {
         console.log('addNextPageEventListeners()');
-
+        if (!validateForm(event)) {
+            return;
+        }
+        
         // 기존 이벤트 리스너 제거
         const btnNextPage = document.querySelector('.btnNextPage');
+        console.log(btnNextPage);
         if (btnNextPage) { // 요소가 존재하는지 확인
             btnNextPage.removeEventListener('click', handleNextPageClick);
         
-            function handleNextPageClick(event) {
+            function handleNextPageClick(event) {                
                 event.preventDefault();
                 console.log('Button clicked'); // 버튼 클릭 로그
             
-                if (!validateForm(event)) {
-                    return;
-                }
             
                 const date = `${finalYear}-${finalMonth}-${finalDay}`;
                 const requirement = document.getElementById("special-requests").value;

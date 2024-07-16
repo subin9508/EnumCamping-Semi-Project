@@ -17,6 +17,14 @@
 <c:url value="../../css/reservation_details.css"
 	var="reservationdetailsCss" />
 <link rel="stylesheet" href="${reservationdetailsCss}">
+<style>
+.card h2 {
+    color: #7C9C63;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #7C9C63;
+    padding-bottom: 0.5rem;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -38,8 +46,6 @@
 						</div>
 						<c:remove var="message" scope="session" />
 					</c:if>
-
-
 					<div class="mt-2 card">
 						<div class="card-header">
 							<h2>${qna.qnaTitle}</h2>
@@ -87,7 +93,7 @@
 						</div>
 						<div class="card-footer">
 							<c:url var="qnaListPage" value="/community/qna/list" />
-							<a class="btn btn-outline-info" href="${qnaListPage}">목록보기</a>
+							<a class="btn btn-outline-primary" href="${qnaListPage}">목록보기</a>
 
 							<!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
 							<c:if

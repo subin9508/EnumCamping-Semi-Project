@@ -28,95 +28,105 @@
 @charset "UTF-8";
 
 .login-container {
-    display: flex;
-    justify-content: center; /*수평 중앙 정렬 */
-    height: 100vh; /* 뷰포트 높이 100% */
-    margin-top: 2%;
-    margin-bottpm: 2%;
+	display: flex;
+	justify-content: center; /*수평 중앙 정렬 */
+	height: 100vh; /* 뷰포트 높이 100% */
+	margin-top: 2%;
+	margin-bottpm: 2%;
 }
 
 .fixed-size-form {
-    width: 400px; /* 고정 너비 설정 */
-    margin: 0 auto; /* 수평 중앙 정렬 */
-    padding: 10px;
+	width: 400px; /* 고정 너비 설정 */
+	margin: 0 auto; /* 수평 중앙 정렬 */
+	padding: 10px;
 }
 
 input.write {
-    border-radius: 5px;
-    border-color: #7C9C63;
+	border-radius: 5px;
+	border-color: #7C9C63;
 }
 
 .form-group {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .form-label {
-    margin-right: 10px; /* label과 input 사이의 간격 조정 */
-    width: 20%;
-    font-size: 12pt;
+	margin-right: 10px; /* label과 input 사이의 간격 조정 */
+	width: 20%;
+	font-size: 12pt;
 }
 
 .write {
-    flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
+	flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
 }
 
 input.btn-login {
-    border-radius: 5px;
-    border-color: #7C9C63;
-    background-color: #7C9C63;
-    color: white;
+	border-radius: 5px;
+	border-color: #7C9C63;
+	background-color: #7C9C63;
+	color: white;
 }
 
 input.btn-login:hover {
-    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
-    border-color: #708b58;
-    color: red;
+	background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+	border-color: #708b58;
+	color: red;
 }
 
 a.signup {
-    border-radius: 5px;
-    border-color: #7C9C63;
-    background-color: #7C9C63;
-    color: white;
+	border-radius: 5px;
+	border-color: #7C9C63;
+	background-color: #7C9C63;
+	color: white;
 }
 
-a.signup:hover  {
-    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
-    border-color: #708b58;
-    color: red;
+a.signup:hover {
+	background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+	border-color: #708b58;
+	color: red;
 }
 
 .no-border {
-    border-width: 0;
+	border-width: 0;
 }
 
 .right-border {
-    border-width: 0 0 1px;
-    border-color: #7C9C63;
+	border-width: 0 0 1px;
+	border-color: #7C9C63;
 }
 
 .d-flex {
-    display: flex;
+	display: flex;
 }
 
 .align-items-center {
-    align-items: center;
+	align-items: center;
 }
 
 .justify-content-center {
-    justify-content: center;
+	justify-content: center;
 }
 
 .btn-custom {
-    border-color: #7C9C63;
-    color: #7C9C63;
+	border-color: #7C9C63;
+	color: #7C9C63;
 }
 
 .btn-custom:hover {
-    border-color: #7C9C63;
-    background-color: #7C9C63;
-    color: white;
+	border-color: #7C9C63;
+	background-color: #7C9C63;
+	color: white;
+}
+
+.link-style {
+	text-decoration: none; /* 기본 밑줄 제거 */
+	color: inherit; /* 부모 요소의 색상 상속 */
+	background: none; /* 버튼 배경 제거 */
+	border: none; /* 버튼 테두리 제거 */
+	padding: 0; /* 기본 패딩 제거 */
+	font-size: 1rem; /* 원하는 폰트 크기로 조정 */
+	cursor: pointer; /* 커서를 포인터로 변경 */
 }
 </style>
 </head>
@@ -132,25 +142,29 @@ a.signup:hover  {
 							<h2 style="color: #7C9C63;">로그인</h2>
 						</div>
 						<div class="card-body">
-                        
-                            <!-- 알림 메시지 표시 -->
-                            <c:if test="${not empty message}">
-                                <div class="alert alert-warning"
-                                    role="alert">${message}</div>
-                            </c:if>
-                            
-                            <form method="post" >
+
+							<!-- 알림 메시지 표시 -->
+							<c:if test="${not empty message}">
+								<div class="alert alert-warning" role="alert">${message}</div>
+							</c:if>
+
+							<form method="post">
 								<c:if test="${not empty param.result && param.result eq 'f'}">
-									<div class="text-danger" style="text-align: center;">아이디와 패스워드를 확인하세요.</div>
+									<div class="text-danger" style="text-align: center;">아이디와
+										패스워드를 확인하세요.</div>
 								</c:if>
-								
-								 <c:if test="${not empty param.result && param.result eq 'inactive'}">
-                                    <div class="text-danger" style="text-align: center;">이 계정이 비활성화되었습니다.</div>
-                                </c:if>
-                                <c:if test="${not empty param.result && param.result eq 'deactivated'}">
-                                    <div class="text-danger" style="text-align: center;">비활성화 기간이 남아있습니다.</div>
-                                </c:if>
-								
+
+								<c:if
+									test="${not empty param.result && param.result eq 'inactive'}">
+									<div class="text-danger" style="text-align: center;">이
+										계정이 비활성화되었습니다.</div>
+								</c:if>
+								<c:if
+									test="${not empty param.result && param.result eq 'deactivated'}">
+									<div class="text-danger" style="text-align: center;">비활성화
+										기간이 남아있습니다.</div>
+								</c:if>
+
 
 								<div class="form-group mt-5 d-flex align-items-center">
 									<label for="userid" class="form-label text-center">아이디</label>
@@ -166,29 +180,30 @@ a.signup:hover  {
 									<input class="form-control btn btn-login mt-2" id="btnSignIn"
 										type="submit" value="로그인" />
 								</div>
-								<div class="mt-2 center" style="text-align: center;">
+								<div class="mt-2" style="text-align: center;">
 									<div class="d-flex align-items-center justify-content-center">
-										<a href="/semiproject/user/findid"
-											class="btn btn-custom">아이디찾기</a>
-										<h3 style="margin: 0 10px; color: #7C9C63;">|</h3>
-										<a href="/semiproject/user/findpassword"
-											class="btn btn-custom">비밀번호찾기</a>
+										<a href="/semiproject/user/findid" class="link-style">아이디
+											찾기</a>
+										<h3 style="margin: 0 10px;">|</h3>
+										<a href="/semiproject/user/findpassword" class="link-style">비밀번호
+											찾기</a>
 									</div>
 								</div>
-								<div class="mt-2" style="text-align: right;">
-									<div class="m-3" style="display: inline-block;">
-										<h6>계정이 없으신가요?</h6>
-									</div>
-									<a href="signup" id="btnUpdate" class="btn signup"
-										style="display: inline-block;">회원가입</a>
-								</div>
-							</form>
 						</div>
+						<div class="mt-2" style="text-align: right;">
+							<div class="m-3" style="display: inline-block;">
+								<h6>계정이 없으신가요?</h6>
+							</div>
+							<a href="signup" id="btnUpdate" class="btn signup"
+								style="display: inline-block;">회원가입</a>
+						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%@ include file="../fragments/footer.jspf"%>
+	</div>
+	<%@ include file="../fragments/footer.jspf"%>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
