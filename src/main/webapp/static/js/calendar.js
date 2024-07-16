@@ -356,16 +356,17 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
                 if (checkedDateAndArea.length === 0) {
                     // 다음날 예약이 없는 경우 1박 2박 옵션 모두 표시
                     nightRadioLabel.innerHTML = `
-                        <h3> <strong>체류기간<strong> </h3>
+                        <h3> <strong>이용 기간</strong> </h3>
+                        <br />
                         <div class="radio-options">
-                            <label>
-                                <input class="night-radio" type="radio" name="night" value="1">
-                                <span class="night-radio_text">1박 2일</span>
-                            </label>
-                            <label>
-                                <input class="night-radio" type="radio" name="night" value="2">
-                                <span class="night-radio_text">2박 3일</span>
-                            </label>
+                        <label style="margin-right: 30px;">
+                            <input class="night-radio" type="radio" name="night" value="1">
+                            <span class="night-radio_text" style="font-size: 1.3em;">1박 2일</span>
+                        </label>
+                        <label>
+                            <input class="night-radio" type="radio" name="night" value="2">
+                            <span class="night-radio_text" style="font-size: 1.3em;">2박 3일</span>
+                        </label>
                         </div>
                     `;
                 } else {

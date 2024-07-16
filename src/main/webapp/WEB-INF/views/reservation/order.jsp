@@ -70,39 +70,42 @@
 				style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
 
 
-                <div class="form-container">
+                <div class="form-container" >
                     <form class="custom-form">
                         <table class="table table-borderless">
                             <tr>
                                 <td>
-                                    <div style="text-align: left;">
-                                        <label for="userName" style="font-size: 20px; font-weight: bold;">이름:</label>
+                                    <div style="text-align: right;">
+                                        <label for="userName"
+                                            style="font-size: 20px; font-weight: bold;">이름:</label>
                                     </div>
                                 </td>
-                                <td><input type="text"
+                                <td colspan="6"><input type="text"
                                     class="form-control text-left"
                                     id="userName"
-                                    value="${user.userName}" readonly></td>
+                                    value="${user.userName}" readonly>
+                                </td>
+                               
                             </tr>
                             <tr>
                                 <td>
-                                <div style="text-align: left;">
+                                <div style="text-align: right;">
                                 <label for="userEmail" style="font-size: 20px; font-weight: bold;"
                                     class="text-left">이메일:</label>
                                     </div>
                                     </td>
-                                <td><input type="text"
+                                <td colspan="6"><input type="text"
                                     class="form-control text-left"
                                     id="userEmail"
                                     value="${user.userEmail}" readonly></td>
                             </tr>
                             <tr>
                                 <td>
-                                <div style="text-align: left;">
+                                <div style="text-align: right;">
                                 <label for="userPhone" style="font-size: 20px; font-weight: bold;"
                                     class="text-left">휴대폰 번호:</label>
                                     </div></td>
-                                <td><input type="text"
+                                <td colspan="6"><input type="text"
                                     class="form-control text-left"
                                     id="userPhone"
                                     value="${user.userPhone}" readonly></td>
