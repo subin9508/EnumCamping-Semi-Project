@@ -128,7 +128,7 @@
 						<tbody id="areaOrder">
 							<c:forEach items="${reservationDetails}" var="item">
 								<c:choose>
-									<c:when test="${item.itemId ge 1 and item.itemId le 4} style="font-size: 18px;"">
+									<c:when test="${item.itemId ge 1 and item.itemId le 4}">
 										<c:set var="area" value="1구역"  />
 										<c:set var="price" value="${item.itemAmount}" />
 									</c:when>
