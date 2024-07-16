@@ -59,7 +59,7 @@
                     style="width: 70%">
                     <thead>
                         <tr
-                            style="word-spacing: 50px; text-align: center">
+                            style="word-spacing: 57px; text-align: center">
                             <th>이용 당일</th>
                             <th>이용 1일전</th>
                             <th>이용 2일전</th>
