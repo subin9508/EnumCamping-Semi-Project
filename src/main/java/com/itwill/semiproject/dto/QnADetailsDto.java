@@ -17,8 +17,8 @@ public class QnADetailsDto {
 		private String qnaTitle;
 		private String qnaContent;
 		private String qnaUserId;
-		private LocalDateTime qnaCreatedTime;
-		private LocalDateTime qnaModifiedTime;
+		private String qnaCreatedTime;
+		private String qnaModifiedTime;
 		
 		public static QnADetailsDto fromEntity(QnA qna) {
 			return QnADetailsDto.builder()
