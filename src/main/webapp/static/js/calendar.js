@@ -107,7 +107,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
 
                     // @details 현재일보다 이전인 경우이면서 현재월에 포함되는 일인경우
                     if(nowDate.getDate() > day && Math.sign(day) == 1) {
-                        column.style.backgroundColor = "#E5E5E5";
+                        column.style.backgroundColor = "#F6F7F8";
                     }
 
                     // @details 현재일보다 이후이면서 현재월에 포함되는 일인경우
@@ -191,7 +191,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
         }
 
         // @param 선택일 체크 표시
-        column.style.backgroundColor = "#FF9999";
+        column.style.backgroundColor = "#A4C392";
 
         // @param 선택일 클래스명 변경
         column.classList.add("choiceDay");

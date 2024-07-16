@@ -31,7 +31,7 @@
     <div class="container-fluid">
                 <main>
                     <div class="qna-details-container">
-                        <h2>문의내역 상세</h2>
+                        <h2>상세문의내역</h2>
 
                         <form>
                             <div class="mt-2">

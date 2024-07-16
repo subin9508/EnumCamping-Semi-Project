@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
@@ -10,23 +11,28 @@ body {
     min-height: 100vh;
 }
 
-.container-fluid {
+.footer-main-content {
+    display: flex;
+    flex: 1;
+}
+
+main {
     flex: 1;
     padding: 20px;
 }
 
-.qna-details-container {
+.card {
     margin: 2rem auto;
-    padding: 2rem;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 2rem;
 }
 
-.qna-details-container h2 {
-    color: #7C9C63;
+.card h2 {
+    color: #0056b3;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid #7C9C63;
+    border-bottom: 2px solid #0056b3;
     padding-bottom: 0.5rem;
 }
 
@@ -43,7 +49,7 @@ body {
     background-color: #e9ecef;
 }
 
-#qnaContent {
+textarea.form-control {
     min-height: 150px;
 }
 
@@ -52,15 +58,11 @@ body {
     border-top: none;
     padding-top: 1rem;
     display: flex;
-    justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+    justify-content: flex-end;
 }
 
 .btn {
     margin-left: 0.5rem;
-}
-
-.footer-main-content {
-    display: flex;
 }
 
 #top {
@@ -75,35 +77,23 @@ body {
     color: red;
 }
 
-.answer {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.qna-answers-container,
-.qna-comment-container {
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.qna-answers-container h2,
-.qna-comment-container h2 {
-    color: #7C9C63;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #7C9C63;
-    padding-bottom: 0.5rem;
-}
-
-#answersContainer .answer {
+.table {
     margin-bottom: 1rem;
-    padding: 1rem;
+}
+
+.table th {
     background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
+    color: #495057;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.row {
+    margin-bottom: 1rem;
 }

@@ -36,7 +36,7 @@
                 <main>
                     <div class="qna-list-container">
                         <h2 class="qna-title">문의내역</h2>
-                        <table class="table table-striped table-hover">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>문의 번호</th>
@@ -45,20 +45,23 @@
                                     <th>답변 상태</th>
                                 </tr>
                             </thead>
+                           
                             <tbody>
                                 <c:forEach items="${qnalist}" var="q">
-                                    <tr>
-                                        <td><c:url var="qnaDetails"
-                                                value="/user/qna_details">
-                                                <c:param
-                                                    name="qnaPostId"
-                                                    value="${q.qnaPostId}"></c:param>
-                                                <c:param name="userId"
-                                                    value="${user.userId}" />
-                                            </c:url> <a href="${qnaDetails}">${q.qnaPostId}</a>
-                                        </td>
+                                    <c:url var="qnaDetails"
+                                        value="/user/qna_details">
+                                        <c:param name="qnaPostId"
+                                            value="${q.qnaPostId}"></c:param>
+                                        <c:param name="userId"
+                                            value="${user.userId}" />
+                                    </c:url>
+                                    <tr onclick="location.href='${qnaDetails}'">
+                                        <td>${q.qnaPostId}</td>
                                         <td>${q.qnaTitle}</td>
-                                        <td>${q.qnaModifiedTime}</td>
+                                        <td>
+                                            <fmt:parseDate value="${q.qnaModifiedTime}" var="parsedDate" pattern="yyyy-MM-dd'T'HH:mm:ss" />
+                                            <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+                                        </td>
                                         <td><c:if
                                                 test="${q.qnaState == 0}">
                                             답변대기

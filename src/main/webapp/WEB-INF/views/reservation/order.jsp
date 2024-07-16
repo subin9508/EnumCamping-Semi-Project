@@ -121,8 +121,8 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="background-color: #003366; color: white;">선택 구역</th>
-								<th style="background-color: #003366; color: white;">가격</th>
+								<th style="background-color: #7C9C63; color: white;">선택 구역</th>
+								<th style="background-color: #7C9C63; color: white;">가격</th>
 							</tr>
 						</thead>
 						<tbody id="areaOrder">
@@ -163,10 +163,10 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="background-color: #003366; color: white;">물품 이름</th>
-								<th style="background-color: #003366; color: white;">물품 사진</th>
-								<th style="background-color: #003366; color: white;">수량</th>
-								<th style="background-color: #003366; color: white;">총가격</th>
+								<th style="background-color: #7C9C63; color: white;">물품 이름</th>
+								<th style="background-color: #7C9C63; color: white;">물품 사진</th>
+								<th style="background-color: #7C9C63; color: white;">수량</th>
+								<th style="background-color: #7C9C63; color: white;">총가격</th>
 							</tr>
 						</thead>
 						<tbody id="orderDetails">
