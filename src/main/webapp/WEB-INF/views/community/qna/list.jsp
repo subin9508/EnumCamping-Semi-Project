@@ -137,7 +137,7 @@ ul.pagination {
 									</c:forEach>
 									<c:if test="${empty qnas}">
                                 <tr>
-                                    <td colspan="5" style="text-align: center;">검색 결과가 없습니다.</td>
+                                    <td colspan="6" style="text-align: center;">검색 결과가 없습니다.</td>
                                 </tr>
                             </c:if>
 								</tbody>

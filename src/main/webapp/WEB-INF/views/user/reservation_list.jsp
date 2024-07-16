@@ -31,7 +31,8 @@
                     <div class="card">
                         <h2 class="card-title">예약 내역 리스트</h2>
                         <div class="card-body">
-                            <table class="table table-hover">
+
+                            <table class="table  table-hover">
                                 <thead>
                                     <tr>
                                         <th>예약 번호</th>

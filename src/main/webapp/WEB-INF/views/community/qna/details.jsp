@@ -86,7 +86,7 @@
                 </div>
                 <div class="card-footer">
                 <c:url var="qnaListPage" value="/community/qna/list" />
-                    <a class="btn btn-outline-info"
+                    <a class="btn btn-outline-info" 
                         href="${qnaListPage}">목록보기</a>
                 
                     <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
@@ -94,37 +94,18 @@
                     <c:url var="qnaModifyPage" value="/community/qna/modify">
                         <c:param name="qnaPostId" value="${qna.qnaPostId}" />
                     </c:url>
-                    <a class="btn btn-outline-primary"
+                    <a class="btn btn-outline-primary" style="float:right"
                         href="${qnaModifyPage}">수정하기</a>
                     </c:if>
+                                        
                 </div>
                     
-            
- <!-- 답변 등록 폼 -->
- <c:if test="${userRole == 0}">
-                <div class="mt-2 card">
-                    <div class="card-header">
-                        <h2>답변 등록</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="mt-2 row">
-                            <div class="col-10">
-                                <textarea class="form-control" rows="3" id="answerContent" placeholder="답변 내용"></textarea>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </c:if>
-                <br/> <br/>
                 <!-- 답변 목록 -->
-                <div class="mt-2 card">
-                    <div class="card-header">
-                        <h2>Comment</h2>
-                    </div>
-                    <div class="card-body" id="answersContainer">
+<!--                 <div class="mt-2 card"> -->
+<!--                     <div class="card-header"> -->
+<!--                         <h2>Comment</h2> -->
+<!--                     </div> -->
+                    <div id="answersContainer">
                         <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
                              <c:forEach var="answer" items="${answers}">
                             <div class="answer">
@@ -134,9 +115,26 @@
                             </div>
                         </c:forEach>
                     </div>
-                </div>
-            </div>
+                <!-- 답변 등록 폼 -->
+                <c:if test="${userRole == 0}">
+<!--                 <div class="mt-2 card"> -->
+<!--                     <div class="card-body"> -->
+                        <div class="mt-2 row">
+                            <div class="col-10">
+                                <textarea class="form-control" rows="1" id="answerContent" placeholder="답변 내용"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
+                            </div>
+                        </div>
+<!--                     </div> -->
+<!--                 </div> -->
+                </c:if>
+                    
+<!--                 </div> -->
+                
             
+            </div>
         </main>
         
 <!--         <section> -->

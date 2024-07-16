@@ -53,6 +53,7 @@
 	padding-left: 0;
 	padding-right: 0;
 }
+
 </style>
 
 </head>
@@ -67,7 +68,51 @@
 
 			<main
 				style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
-				<div class="container-fluid d-flex justify-content-center">
+
+
+                <div class="form-container">
+                    <form class="custom-form">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <div style="text-align: left;">
+                                        <label for="userName" style="font-size: 20px; font-weight: bold;">이름:</label>
+                                    </div>
+                                </td>
+                                <td><input type="text"
+                                    class="form-control text-left"
+                                    id="userName"
+                                    value="${user.userName}" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <div style="text-align: left;">
+                                <label for="userEmail" style="font-size: 20px; font-weight: bold;"
+                                    class="text-left">이메일:</label>
+                                    </div>
+                                    </td>
+                                <td><input type="text"
+                                    class="form-control text-left"
+                                    id="userEmail"
+                                    value="${user.userEmail}" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <div style="text-align: left;">
+                                <label for="userPhone" style="font-size: 20px; font-weight: bold;"
+                                    class="text-left">휴대폰 번호:</label>
+                                    </div></td>
+                                <td><input type="text"
+                                    class="form-control text-left"
+                                    id="userPhone"
+                                    value="${user.userPhone}" readonly></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                
+                
+                <div class="container-fluid d-flex justify-content-center">
 					<h1>예약 및 주문</h1>
 				</div>
 				<br /> <br />
@@ -160,27 +205,6 @@
 
 
 				<div class="container">
-					<div class="form-container">
-						<form class="custom-form">
-
-
-							<div class="mt-2 form-group">
-								<label for="userName">이름:</label> <input type="text"
-									class="form-control" id="userName" value="${user.userName}"
-									readonly>
-							</div>
-							<div class="mt-2 form-group">
-								<label for="userEmail">이메일:</label> <input type="text"
-									class="form-control" id="userEmail" value="${user.userEmail}"
-									readonly>
-							</div>
-							<div class="mt-2 form-group">
-								<label for="userPhone">휴대폰 번호:</label> <input type="text"
-									class="form-control" id="userPhone" value="${user.userPhone}"
-									readonly>
-							</div>
-						</form>
-					</div>
 
 					<!-- 두 번째 폼 -->
 					<div class="form-container">

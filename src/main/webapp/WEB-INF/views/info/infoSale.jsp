@@ -4,117 +4,235 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>semiproject</title>
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous" />
+    <c:url value="/css/facilities.css" var="facilitiesCSS" />
+    <link rel="stylesheet" href="${facilitiesCSS}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enum Semi-Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+        crossorigin="anonymous" />       
     
     <c:url value="../css/header.css" var="headerCss"/>
     <link rel="stylesheet" href="${headerCss}">
-    
     <c:url value="../css/footer.css" var="footerCss"/>
     <link rel="stylesheet" href="${footerCss}">
     
-<style>
-.info-section {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-.info-card {
-    width: 30%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-}
-
-.info-card img {
-    width: 80%;
-    height: auto;
-    border-radius: 5px;
-}
-</style>
-
 </head>
 <body>
-            <%@ include file="../fragments/header.jspf"%>
-            <%@ include file="../fragments/info-sidebar.jspf"%>
+<div class="wrapper">
 
-        <div class="content">
-        <main main class="main-content" style="margin-left: 300px; margin-top: 50px;">
-            <div class="slider">
+    <%@ include file="../fragments/header.jspf"%>
+<div class="footer-main-content">
+    <%@ include file="../fragments/info-sidebar.jspf"%>
+
+    <main class="main-content"
+                style="margin-left: 300px; margin-top: 50px;">
+    <div class="content-1">
+        <br>
+        <h1>
+            <strong>[물품 판매 리스트]</strong>
+        </h1>
+        <br>
+        <div class="content-2" style="margin-right: 35px;">
+        <div class="facilities-section">        
             
-            <div class="content-1"> 
-            <br>
-                <h1><strong>[물품 판매 리스트]</strong></h1>
+            <div class="facilities-card">
+                <h5>바베큐세트</h5>
+                <div class="img-container">
+                    <c:url value="/images/info/bbqset.png"
+                        var="info2_bbqset" />
+                    <img alt="bbqset" src="${info2_bbqset}" class="img"
+                        height=400px width=500px id="bbqImage" />
                 </div>
-                <br>
-            
-            <div class="info-section">
-                <div class="info-card">
-                    <c:url var="bbqset" value="/images/info/bbqset.png" />
-                    <img alt = "바베큐세트" src="${bbqset}"/>
-                    <h3>바베큐 세트</h3>
-                    <p>(삼겹살200g + 소세지 + 채소 + 장작 + 집게 + 불판)</p>
-                    <p>35,000원</p>
+            </div>
+            <div class="facilities-card">
+                <h5>고구마</h5>
+                <div class="img-container">
+                    <c:url value="/images/info/sweetpotato.png"
+                        var="info2_sweetpotato" />
+                    <img alt="sweetpotato" src="${info2_sweetpotato}" class="img"
+                        height=400px width=500px id="sweetImage" />
                 </div>
-                <div class="info-card">
-                    <c:url var="sweetpotato" value="/images/info/sweetpotato.png" />
-                    <img alt = "고구마" src="${sweetpotato}"/>
-                    <h3>고구마</h3>
-                    <p>(200g)</p>
-                    <p>5,000원</p>
+            </div>
+            <div class="facilities-card">
+                <h5>마시멜로우</h5>
+                <div class="img-container">
+                    <c:url value="/images/info/marshmallow.png"
+                        var="info2_marshmallow" />
+                    <img alt="marshmallow" src="${info2_marshmallow}" class="img"
+                        height=400px width=500px id="marshImage" />
                 </div>
-                <div class="info-card">
-                    <c:url var="marshmallow" value="/images/info/marshmallow.png" />
-                    <img alt = "마시멜로우" src="${marshmallow}"/>
-                    <h3>마시멜로우</h3>
-                    <p>(1봉지-10개입 + 꼬치 5개)</p>
-                    <p>6,000원</p>
-                </div>
-                </div>
-            <div class="info-section">
-                <div class="info-card">
-                    <c:url var="firewood" value="/images/info/firewood.png" />
-                    <img alt = "장작" src="${firewood}"/>
-                    <h3>장작</h3>
-                    <p>(1kg)</p>
-                    <p>11,000원</p>
-                </div>
-                <div class="info-card">
-                    <c:url var="butangas" value="/images/info/butangas.png" />
-                    <img alt = "부탄가스" src="${butangas}"/>
-                    <h3>부탄가스</h3>
-                    <p>(1개)</p>
-                    <p>2,000원</p>
-                </div>
-                <div class="info-card">
-                    <c:url var="aurorapowder" value="/images/info/aurorapowder.png" />
-                    <img alt = "오로라가루" src="${aurorapowder}"/>
-                    <h3>오로라가루</h3>
-                    <p>(1개)</p>
-                    <p>불에 뿌리면 멋진 오로라를 볼 수 있어요</p>
-                    <p>1,500원</p>
-                </div>
-                </div>
-                </div>
-                </main>
+
             </div>
 
-            <%@ include file="../fragments/footer.jspf"%>
+        </div>
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+
+        <div class="facilities-section">
+            <div class="facilities-card">
+                <h5>장작</h5>
+                <div class="img-container">
+                    <c:url value="/images/info/firewood.png"
+                        var="info2_firewood" />
+                    <img alt="firewood" src="${info2_firewood}"
+                        class="img" height=400px width=500px
+                        id="firewoodImage" />
+
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>부탄가스</h5>
+                <div class="img-container">
+                    <c:url value="/images/info/butangas.png"
+                        var="info2_butangas" />
+                    <img alt="butangas" src="${info2_butangas}" class="img"
+                        height=400px width=500px id="butangasImage" />
+                </div>
+            </div>
+            <div class="facilities-card">
+                <h5>오로라가루</h5>
+                <div class="img-container">
+                <c:url value="/images/info/aurorapowder.png"
+                    var="info2_aurorapowder" />
+                <img alt="aurorapowder" src="${info2_aurorapowder}" class="img"
+                    height=400px width=500px id="aurorapowderImage" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Modal Structure -->
+    <div class="modal" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">물품 판매 리스트</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item" data-title="바베큐 세트">
+                                <c:url value="/images/info/bbqset.png" var="info2_bbqset"/>
+                                <img src="${info2_bbqset}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
+                                <div class="d-flex flex-column align-items-center mt-2" >
+                                <h5 style="color: black;">35,000원</h5>
+                                <p style="color: gray;">삼겹살200g+소세지+채소+장작+집게+불판</p>
+                            </div>
+                            </div>
+                            <div class="carousel-item" data-title="고구마">
+                                <c:url value="/images/info/sweetpotato.png" var="info2_sweetpotato"/>
+                                <img src="${info2_sweetpotato}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                <h5 style="color: black;">5,000원</h5>
+                                <p style="color: gray;">*200g</p>
+                            </div>
+                            </div>
+                            <div class="carousel-item" data-title="마시멜로우">
+                                <c:url value="/images/info/marshmallow.png" var="info2_marshmallow"/>
+                                <img src="${info2_marshmallow}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                <h5 style="color: black;">6,000원</h5>
+                                <p style="color: gray;">1봉지(10개입)+나무막대 5개</p>
+                            </div>
+                            </div>
+                            
+                            <div class="carousel-item active" data-title="장작">
+                                <c:url value="/images/info/firewood.png" var="info2_firewood" />
+                                <img src="${info2_firewood}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                <h5 style="color: black;">11,000원</h5>
+                                <p style="color: gray;">*1kg</p>
+                            </div>
+                            </div>
+                            <div class="carousel-item" data-title="부탄가스">
+                                <c:url value="/images/info/butangas.png" var="info2_butangas"/>
+                                <img src="${info2_butangas}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                <h5 style="color: black;">2,000원</h5>
+                                <p style="color: gray;">*1개</p>
+                            </div>
+                            </div>
+                            <div class="carousel-item" data-title="오로라가루">
+                                <c:url value="/images/info/aurorapowder.png" var="info2_aurorapowder"/>
+                                <img src="${info2_aurorapowder}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Store">
+                                <div class="d-flex flex-column align-items-center mt-2">
+                                <h5 style="color: black;">1,500원</h5>
+                                <p style="color: gray;">1개</p>
+                            </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </main>
+</div>
+    <%@ include file="../fragments/footer.jspf"%>
+</div>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous"></script>
+    <!-- JavaScript 코드 -->
+    <c:url var="infoRental_js" value="/js/infoRental.js" />
+    <script src="${infoRental_js}"></script>
+    
+    <!-- JavaScript to handle image clicks and update modal title on slide change -->
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // 모든 이미지 요소를 가져오기
+        const images = document.querySelectorAll('.img');
         
-           <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        // 이미지 클릭 이벤트 핸들러 추가
+        images.forEach((image, index) => {
+            image.addEventListener('click', (event) => {
+                // 클릭된 이미지의 인덱스 가져오기
+                const imgIndex = index;
+
+                // Bootstrap Carousel 인스턴스 가져오기
+                const carouselElement = document.getElementById('carouselExampleControls');
+                const carousel = new bootstrap.Carousel(carouselElement);
+
+                // 슬라이더를 클릭된 이미지로 이동
+                carousel.to(imgIndex);
+
+                // 모달 띄우기
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+
+                // 초기 modal-title 설정
+                const activeItem = carouselElement.querySelector('.carousel-item.active');
+                const newTitle = activeItem.getAttribute('data-title');
+                document.getElementById('modalTitle').textContent = newTitle;
+            });
+        });
+
+        // Carousel 슬라이드 변경 시 modal-title 업데이트
+        var carouselElement = document.getElementById('carouselExampleControls');
+        carouselElement.addEventListener('slid.bs.carousel', function (e) {  // 'slid.bs.carousel' 이벤트로 변경
+            var activeItem = e.relatedTarget;
+            var newTitle = activeItem.getAttribute('data-title');
+            document.getElementById('modalTitle').textContent = newTitle;
+        });
+    });
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
+
 </body>
 </html>

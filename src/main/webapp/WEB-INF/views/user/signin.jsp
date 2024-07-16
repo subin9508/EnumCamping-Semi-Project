@@ -45,14 +45,14 @@
                             
                             <form method="post" >
 								<c:if test="${not empty param.result && param.result eq 'f'}">
-									<div class="text-danger">아이디와 패스워드를 확인하세요.</div>
+									<div class="text-danger" style="text-align: center;">아이디와 패스워드를 확인하세요.</div>
 								</c:if>
 								
 								 <c:if test="${not empty param.result && param.result eq 'inactive'}">
-                                    <div class="text-danger">이 계정이 비활성화되었습니다.</div>
+                                    <div class="text-danger" style="text-align: center;">이 계정이 비활성화되었습니다.</div>
                                 </c:if>
                                 <c:if test="${not empty param.result && param.result eq 'deactivated'}">
-                                    <div class="text-danger">비활성화 기간이 남아있습니다.</div>
+                                    <div class="text-danger" style="text-align: center;">비활성화 기간이 남아있습니다.</div>
                                 </c:if>
 								
 
@@ -73,10 +73,10 @@
 								<div class="mt-2 center" style="text-align: center;">
 									<div class="d-flex align-items-center justify-content-center">
 										<a href="/semiproject/user/findid"
-											class="btn btn-outline-secondary btn-custom">아이디찾기</a>
+											class="btn btn-outline-info btn-custom">아이디찾기</a>
 										<h3 style="margin: 0 10px;">|</h3>
 										<a href="/semiproject/user/findpassword"
-											class="btn btn-outline-secondary btn-custom">비밀번호찾기</a>
+											class="btn btn-outline-info btn-custom">비밀번호찾기</a>
 									</div>
 								</div>
 								<div class="mt-2" style="text-align: right;">

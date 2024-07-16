@@ -18,13 +18,19 @@
 
 <c:url value="../css/footer.css" var="footerCss" />
 <link rel="stylesheet" href="${footerCss}">
-
+<style>
+        .table th, .table td {
+            width: 5%
+        }
+    </style>
 </head>
 <body>
-    <%@ include file="../fragments/header.jspf"%>
-    <%@ include file="../fragments/info-sidebar.jspf"%>
+   <div class="wrapper">
+        <%@ include file="../fragments/header.jspf"%>
 
-    <div class="content">
+        <div class="footer-main-content">
+            <%@ include file="../fragments/info-sidebar.jspf"%>
+
         <main main class="main-content"
             style="margin-left: 300px; margin-top: 50px;">
             <div class="slider">
@@ -40,21 +46,20 @@
                 <div class="info-section">
                     <div class="info-text">
                         <br>
-                        <p>- 올바른 예약 문화를 위하여 저희 캠핑장에서는 예약 취소시 환불 기준을</p>
-                        <p style="text-indent: 10px;">아래와 같이 운영하고
-                            있으니 확인하시고 예약해 주시기 바랍니다.</p>
-                        <p>- 보호자 동반 없는 미성년자 예약 발견시, 환불 없이 예약취소됩니다.</p>
-                        <p>- 예약일 변경시 발생하는 수수료는 취소 수수료와 동일하게 적용되오니</p>
-                        <p style="text-indent: 10px;">예약시 신중히 생각하시고
-                            결정해 주시기 바랍니다.</p>
+                        <h5>- 올바른 예약 문화를 위하여 저희 캠핑장에서는 예약 취소시 환불 기준을 아래와 같이 운영하고 있으니 확인하시고 예약해 주시기 바랍니다.</h5>
+                        <br>
+                        <h5>- 보호자 동반 없는 미성년자 예약 발견시, 환불 없이 예약취소됩니다.</h5>
+                        <br>
+                        <h5>- 예약일 변경시 발생하는 수수료는 취소 수수료와 동일하게 적용되오니 예약시 신중히 생각하시고 결정해 주시기 바랍니다.</h5>
                     </div>
                 </div>
                 <br>
+                <br/> <br>
                 <table class="table table-strped table-hover"
                     style="width: 70%">
                     <thead>
                         <tr
-                            style="word-spacing: 40px; text-align: center">
+                            style="word-spacing: 57px; text-align: center">
                             <th>이용 당일</th>
                             <th>이용 1일전</th>
                             <th>이용 2일전</th>
@@ -84,14 +89,23 @@
                         </tr>
                     </tbody>
                 </table>
-                <br>
-                <br> <br>
-                <br>
+                <br/>
+                <br/> 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                
             </div>
+          
         </main>
+          <%@ include file="../fragments/footer.jspf"%>
+    
     </div>
-
-    <%@ include file="../fragments/footer.jspf"%>
+</div>
 
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

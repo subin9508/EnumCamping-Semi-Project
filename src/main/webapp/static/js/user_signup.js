@@ -19,8 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 아이디 입력 필드에 변화가 생겼을 때 중복 체크 결과 초기화
     inputUserid.addEventListener('input', () => {
         useridChecked = false; // 아이디 입력 필드에 변화가 생기면 중복 체크 결과 초기화
-        checkUseridResult.innerHTML = '';
-        checkUseridResult.classList.remove('text-success', 'text-danger');
+        checkUseridResult.innerHTML = '아이디 중복 확인을 해주세요.';
+        checkUseridResult.classList.add('text-danger');
+        checkUseridResult.classList.remove('text-success');
         changeButtonState();
     });
 
@@ -42,7 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSignUp = document.querySelector('button#btnSignUp');
 
     // 회원가입 버튼 클릭 시 최종 유효성 검사
-    btnSignUp.addEventListener('click', validateBeforeSignUp);
+    btnSignUp.addEventListener('click', (event) => {
+        if (validateBeforeSignUp(event)) {
+            alert('회원가입을 축하합니다');
+        }
+    });
 
     /* -------------------- 함수 선언 -------------------- */
     

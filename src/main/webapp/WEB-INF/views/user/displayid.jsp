@@ -36,7 +36,8 @@
 	<div class="wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
-			<div class="card mt-5 text-center"  style="width: 30rem; margin:auto;">	
+			<div class="card mt-5 text-center"
+				style="width: 30rem; margin: auto;">
 				<h2 class="card-header ">아이디 찾기 결과</h2>
 				<div class="card-body mt-3">
 					<p>
@@ -44,11 +45,11 @@
 					</p>
 				</div>
 				<div class="mb-3">
-					<a href="/semiproject" class="btn btn-outline-primary btn-custom">홈페이지로
-						이동</a>
 					<c:url var="findPasswordPage" value="/user/findpassword" />
-					<a href="${findPasswordPage}" class="btn btn-outline-secondary btn-custom">비밀번호
-						찾기</a>
+					<a href="${findPasswordPage}"
+						class="btn btn-outline-info ">비밀번호 찾기</a>
+					<c:url var="SignInPage" value="/user/signin" />
+					<a href="${SignInPage}" class="btn btn-outline-success">로그인</a>
 				</div>
 			</div>
 		</div>
@@ -63,8 +64,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<c:url var="weatherJS" value="/js/weather.js" />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<c:url var="weatherJS" value="/js/weather.js" />
 </body>
 
 </html>

@@ -70,22 +70,30 @@
                             </c:forEach>
                             <input readonly class="form-control" type="text" name="resArea" value="${area}, ${price}원">
                         </div>
-
-                        <div class="form-group">
-                            <label for="resItems" class="form-label">구매/대여 물품</label>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">물품 이름</th>
-                                        <th scope="col">물품 수량</th>
-                                        <th scope="col">물품 가격</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:set var="hasItems" value="false" />
-                                    <c:forEach var="rs" items="${resDetail}">
-                                        <c:if test="${rs.itemId gt 20}">
-                                            <c:set var="hasItems" value="true" />
+                            <div class="mt-2">
+                            <!-- 
+                                <label for="resItems" class="form-label">구매/대여 물품</label> -->
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">물품 이름</th>
+                                            <th scope="col">물품 수량</th>
+                                            <th scope="col">물품 가격</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:set var="hasItems" value="false" />
+                                        <c:forEach var="rs" items="${resDetail}">
+                                            <c:if test="${rs.itemId gt 20}">
+                                                <c:set var="hasItems" value="true" />
+                                                <tr>
+                                                    <td>${rs.itemName}</td>
+                                                    <td>${rs.itemQuantity}</td>
+                                                    <td>${rs.itemAmount}원</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${!hasItems}">
                                             <tr>
                                                 <td>${rs.itemName}</td>
                                                 <td>${rs.itemQuantity}</td>
@@ -101,34 +109,45 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="form-group">
-                            <label for="resTotalPrice" class="form-label">총 가격</label>
-                            <input id="resTotalPrice" class="form-control" type="text" value="${resMaster.resTotalPrice}원" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="requirement" class="form-label">요청사항</label>
-                            <textarea id="requirement" class="form-control" rows="5" readonly><c:out value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" /></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="resCreatedTime" class="form-label">예약 일시</label>
-                            <input id="resCreatedTime" class="form-control" type="text" value="${resMaster.resCreatedTime}" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="resState" class="form-label">예약 상태</label>
-                            <c:set var="resStateText">
-                                <c:choose>
-                                    <c:when test="${resMaster.resState == 0}">예약대기</c:when>
-                                    <c:when test="${resMaster.resState == 1}">예약완료</c:when>
-                                    <c:when test="${resMaster.resState == 2}">예약취소</c:when>
-                                    <c:otherwise>알 수 없음</c:otherwise>
-                                </c:choose>
-                            </c:set>
-                            <input id="resState" class="form-control" type="text" value="${resStateText}" readonly>
-                        </div>
+                            <div class="mt-2">
+                                <label for="resTotalPrice"
+                                    class="form-label fs-5">총 가격</label> <input
+                                    id="resTotalPrice"
+                                    class="form-control fs-5" type="text"
+                                    value="${resMaster.resTotalPrice}원"
+                                    readonly />
+                            </div>
+                            <div class="mt-2">
+                                <label for="requirement" class="form-label">요청사항</label>
+                                <textarea id="requirement" class="form-control" rows="5" readonly><c:set var="requirementValue" value="${empty resMaster.requirement ? '요청없음' : resMaster.requirement}" />
+                                ${requirementValue}
+                                </textarea>
+                            </div>
+                            <div class="mt-2">
+                                <label for="resCreatedTime" class="form-label">예약 일시</label>
+                                <input id="resCreatedTime"
+                                    class="form-control" type="text"
+                                    value="${resMaster.resCreatedTime}"
+                                    readonly />
+                            </div>
+                            <div class="mt-2">
+                                <label for="resState" class="form-label">예약
+                                    상태</label>
+                                <c:set var="resStateText">
+                                    <c:choose>
+                                        <c:when
+                                            test="${resMaster.resState == 0}">예약대기</c:when>
+                                        <c:when
+                                            test="${resMaster.resState == 1}">예약완료</c:when>
+                                        <c:when
+                                            test="${resMaster.resState == 2}">예약취소</c:when>
+                                        <c:otherwise>알 수 없음</c:otherwise>
+                                    </c:choose>
+                                </c:set>
+                                <input id="resState"
+                                    class="form-control" type="text"
+                                    value="${resStateText}" readonly />
+                            </div>
                     </form>
 
                     <c:if test="${resMaster.resState == 1}">
