@@ -80,6 +80,7 @@
                                     value="${qnaDetails.qnaModifiedTime}"
                                     readonly />
                             </div>
+                            <input type="hidden" id="userRole" value="${userRole}">
                         </form>
                         <div class="card-footer">
                             <c:url var="qnaListPage" value="/user/qna_list">
@@ -103,43 +104,38 @@
                                     href="${qnaModifyPage}">수정하기</a>
                             </c:if>
                         </div>
+                        <!-- 답변 목록 -->
+<!--                 <div class="mt-2 card"> -->
+<!--                     <div class="card-header"> -->
+<!--                         <h2>Comment</h2> -->
+<!--                     </div> -->
+                    <div id="answersContainer">
+                        <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
+                             <c:forEach var="answer" items="${answers}">
+                            <div class="answer">
+                                <p>${answer.content}</p>
+                                <small>작성자: ${answer.userId}</small><br>
+                                <small>작성시간: ${answer.createdTime}</small>
+                            </div>
+                        </c:forEach>
                     </div>
-
                     <!-- 답변 등록 폼 -->
-                    <c:if test="${user.userRole == 0}">
-                        <div class="mt-2 qna-answers-container">
-                            <h2>답변 등록</h2>
-                            <div class="mt-2 row">
-                                <div class="col-10">
-                                    <textarea class="form-control"
-                                        rows="3" id="answerContent"
-                                        placeholder="답변 내용"></textarea>
-                                </div>
-                                <div class="col-2">
-                                    <button
-                                        class="btn btn-outline-success"
-                                        id="btnRegisterAnswer">등록하기</button>
-                                </div>
+                <c:if test="${userRole == 0}">
+<!--                 <div class="mt-2 card"> -->
+<!--                     <div class="card-body"> -->
+                        <div class="mt-2 row">
+                            <div class="col-10">
+                                <textarea class="form-control" rows="1" id="answerContent" placeholder="답변 내용"></textarea>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
                             </div>
                         </div>
-                    </c:if>
-
-                    <!-- 답변 목록 -->
-                    <div class="mt-2 qna-comment-container">
-                        <h2>Comment</h2>
-                        <div class="card-body" id="answersContainer">
-                            <!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
-                            <c:forEach var="answer" items="${answers}">
-                                <div class="answer">
-                                    <p>${answer.content}</p>
-                                    <small>작성자: ${answer.userId}</small><br>
-                                    <small>작성시간:
-                                        ${answer.createdTime}</small>
-                                </div>
-                            </c:forEach>
-                        </div>
+<!--                     </div> -->
+<!--                 </div> -->
+                </c:if>
                     </div>
-                </main>
+              </main>
             </div>
     </div>
     <%@ include file="../fragments/footer.jspf"%>
@@ -158,9 +154,11 @@
     const signedInUser = '${signedInUser}';
     </script>
     
-    <!-- 우리가 만드는 JS 파일 -->
-    <!-- <c:url var="commentsJS" value="/js/comments.js" />
-    <script src="${commentsJS}"></script> -->
+    <c:url var="qnaanswersJS" value="/js/qnaanswers.js" />
+    <script src="${qnaanswersJS}"></script>
+    
+    <c:url var="commentsJS" value="/js/comments.js" />
+    <script src="${commentsJS}"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
