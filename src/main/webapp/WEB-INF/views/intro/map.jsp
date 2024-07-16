@@ -61,7 +61,7 @@
                                 <div class="details2">
                                     <div class="item">
                                         <div class="div3">
-                                            예약시 주차 등록한 차량만 주차 가능합니다. <br />
+                                            예약 시 주차 등록한 차량만 주차 가능합니다. <br />
                                             <br /> 들어오는 입구가 좁아 조심히
                                             들어오셔야 됩니다.
                                         </div>
@@ -75,13 +75,13 @@
                             <div class="background2">
                                 <div class="container1">
 
-                                    <div class="div7">주소: 강원 홍천군 영귀미면 수타사로 227-18 수타사 계곡</div>
+                                    <div class="div7">주소: 강원 홍천군 영귀미면 수타사로 227-18 수타사 계곡 앞  </div>
                                 </div>
                             </div>
                             <div class="horizontal-border">
                                 <div class="descriptions3">
                                     <div class="term2">
-                                        <div class="div2">대중교통 이용시</div>
+                                        <div class="div2">대중교통 이용 시</div>
                                     </div>
                                     <div class="details3">
                                         <div class="div6">

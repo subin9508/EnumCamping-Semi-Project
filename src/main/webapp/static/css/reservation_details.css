@@ -22,11 +22,12 @@ main {
 }
 
 .card {
-    margin: 2rem auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 2rem;
+    margin-right: 326px;
+    margin-left: 148px;
 }
 
 .card h2 {

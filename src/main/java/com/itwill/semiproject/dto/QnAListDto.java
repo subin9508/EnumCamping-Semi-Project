@@ -15,7 +15,7 @@ public class QnAListDto {
 	private Integer qnaPostId;
 	private String qnaTitle;
 	private String qnaUserId;
-	private LocalDateTime qnaModifiedTime;
+	private String qnaModifiedTime;
 	private Integer qnaViewCnt;
 	private Integer qnaState;
 	private Integer qnaLock;

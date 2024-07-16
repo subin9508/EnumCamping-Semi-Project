@@ -32,7 +32,7 @@
     <div class="content-1">
         <br>
         <h1>
-            <strong>[물품 판매 리스트]</strong>
+            <strong>[판매 물품 목록]</strong>
         </h1>
         <br>
         <div class="content-2" style="margin-right: 35px;">
@@ -121,7 +121,7 @@
                                 <img src="${info2_bbqset}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
                                 <div class="d-flex flex-column align-items-center mt-2" >
                                 <h5 style="color: black;">35,000원</h5>
-                                <p style="color: gray;">삼겹살200g+소세지+채소+장작+집게+불판</p>
+                                <p style="color: gray;">삼겹살(200g)+상추+버섯+파채+파채소스+쌈장+허브맛 솔트</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="고구마">

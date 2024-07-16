@@ -37,7 +37,7 @@
         
             <div class="mt-2 card">
                 <div class="card-header">
-                    <h2>문의</h2>
+                    <h2>${qna.qnaTitle}</h2>
                 </div>
                 <div class="card-body">
                     <form>
@@ -121,9 +121,9 @@
 <!--                     <div class="card-body"> -->
                         <div class="mt-2 row">
                             <div class="col-10">
-                                <textarea class="form-control" rows="1" id="answerContent" placeholder="답변 내용"></textarea>
+                                <textarea class="form-control" rows="1" id="answerContent" placeholder="답변을 작성해주세요"></textarea>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
                             </div>
                         </div>

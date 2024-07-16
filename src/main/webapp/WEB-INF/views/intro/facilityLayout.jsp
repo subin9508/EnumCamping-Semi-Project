@@ -24,6 +24,7 @@
 </head>
 <body>
     <div class="wrapper">
+        <c:set value="ENUM CAMPING" var="pageTitle" scope="page" />
         <%@ include file="../fragments/header.jspf"%>
 
         <div class="footer-main-content">
@@ -46,25 +47,26 @@
                         <div class="box">
                             <div class="left-content">
                                 <!-- 왼쪽 내용 -->
-                                <h2 class="h2">캠핑 A-1, A-2, B-2동</h2>
+                                <h2 class="bold">캠핑 A-1, A-2, B-2동</h2>
                                 <ul>
-                                    <li>전 구역 데크존으로 편안한 캠핑 가능</li>
-                                    <li>계곡과 인접하여 이동성 좋음</li>
-                                    <li>자연으로 둘러싸인 구조로 조용한 휴식 가능</li>
-                                    <li>중앙 벤치 무료 이용 가능 </li>
-                                    <li>캠핑장 주변 둘레길로 산책 가능</li>
+                                    <li>전 구역 데크존으로 편안한 캠핑 가능합니다.</li>
+                                    <li>계곡과 인접하여 이동성이 좋습니다.</li>
+                                    <li>자연으로 둘러싸인 구조로 조용한 휴식 가능합니다.</li>
+                                    <li>중앙 벤치 무료 이용 가능합니다. </li>
+                                    <li>캠핑장 주변 둘레길로 산책 가능합니다.</li>
                                 </ul>
                             </div>
                             <div class="right-content">
                                 <!-- 오른쪽 내용 -->
-                                <h2>편의 시설</h2>
+                                <h2 class="bold">편의 시설</h2>
                                 <ul>
-                                    <li>화장실, 샤워실, 식수대, 주차장 구비</li>
+                                    <li>화장실, 샤워실, 식수대, 주차장 구비되어있습니다.</li>
                                     <li>자체 매점 운영으로 식재료 및 필요한 용품 즉시
-                                        구매 가능</li>
-                                    <li>무료 수영장</li>
-                                    <li>추가 요금 없이 수영장 이용 가능</li>
-                                    <li>운영시간: 오전 11시 ~ 오후 4시</li>
+                                        구매 가능합니다.</li>
+                                    <li>야간 캠프파이어</li>
+                                    <li>(추가 요금 없이 캠프파이어 이용 가능)</li>
+                                    <li>(운영시간: 오후 8시 ~ 오후 10시)</li>
+                                    <li>*동절기는 오후 7시부터 이용 가능합니다.</li>
                                 </ul>
                             </div>
                         </div>
@@ -72,8 +74,9 @@
                
 
             </main>
-            <%@ include file="../fragments/footer.jspf"%>
+          
         </div>
+          <%@ include file="../fragments/footer.jspf"%>
     </div>
 
     <script

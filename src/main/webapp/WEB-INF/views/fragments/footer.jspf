@@ -5,7 +5,7 @@
 
     <footer>
         <div class="footer-container">
-            <div class="column image-container" style="flex: 0.3;">
+            <div class="column image-container ms-5" style="flex: 0.3;">
                 <a><img alt="logo"
                 src="<c:url value='/images/main/logo.png'/>"></a>
             </div>

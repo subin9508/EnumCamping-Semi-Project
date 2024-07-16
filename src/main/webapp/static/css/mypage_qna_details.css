@@ -16,11 +16,12 @@ body {
 }
 
 .qna-details-container {
-    margin: 2rem auto;
     padding: 2rem;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-right: 326px;
+    margin-left: 148px;
 }
 
 .qna-details-container h2 {
@@ -40,7 +41,7 @@ body {
 }
 
 .form-control:read-only {
-    background-color: #e9ecef;
+    background-color: #fff;
 }
 
 #qnaContent {
@@ -80,7 +81,7 @@ body {
     border: 1px solid #dee2e6;
     border-radius: 10px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .qna-answers-container,

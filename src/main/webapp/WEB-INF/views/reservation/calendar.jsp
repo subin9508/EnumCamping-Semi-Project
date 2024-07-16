@@ -195,8 +195,8 @@
                                 <c:forEach var="i" items="${items}">
                                     <tr>
                                         <td class="img-container"
-                                            style="width: 20%;"><c:url
-                                                value="${i.itemImg}"
+                                            style="width: 20%; font-weight: normal;">
+                                            <c:url value="${i.itemImg}"
                                                 var="itemImgUrl" /> <img
                                             alt="${i.itemName}"
                                             src="${itemImgUrl}"
@@ -205,20 +205,17 @@
                                             style="height: 170px; width: 170px;" />
                                         </td>
                                         <td
-                                            style="width: 20%; height: 10%;">
+                                            style="width: 20%; height: 10%; font-weight: normal;">
                                             <h5 class="item-name">${i.itemName}</h5>
-                                            <!-- 여기서 클래스를 추가 -->
                                         </td>
                                         <td
-                                            style="width: 20%; height: 10%;"
+                                            style="width: 20%; height: 10%; font-weight: normal;"
                                             class="item-description">${i.itemDesc}</td>
-                                        <!-- 여기서 클래스를 추가 -->
                                         <td
-                                            style="width: 20%; height: 10%; text-align: center;"
+                                            style="width: 20%; height: 10%; text-align: center; font-weight: normal;"
                                             class="item-price">${i.itemPrice}원</td>
-                                        <!-- 여기서 클래스를 추가 -->
                                         <td class="narrow"
-                                            style="width: 20%; height: 10%; text-align: center;">
+                                            style="width: 20%; height: 10%; text-align: center; font-weight: normal;">
                                             <div
                                                 class="quantity-controls">
                                                 <select
@@ -238,7 +235,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        
+
                     </div>
                     <!-- 요청사항 입력 -->
                     <div class="container-fluid d-flex justify-content-center mt-3 row" id="requirement">
