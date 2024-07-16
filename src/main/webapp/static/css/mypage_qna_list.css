@@ -1,7 +1,7 @@
  @charset "UTF-8";
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f8f9fa;
+        background-color: #fff;
     }
 
     .wrapper {
@@ -57,6 +57,6 @@
         font-weight: bold;
     }
 
-    .footer-main-content {
+    .qna-content {
         display: flex;
     }

@@ -297,11 +297,22 @@ public class UserController {
 	            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
 	        }
 
-	        // 영문, 숫자, 특수문자 혼용 검사
-	        String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()_+=<>?{}\\[\\]~]).{8,}$";
+	        // 영문과 숫자 포함 검사
+	        String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$";
 	        if (!password.matches(passwordPattern)) {
 	            response.put("success", false);
-	            response.put("message", "비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.");
+	            response.put("message", "비밀번호는 영문과 숫자를 포함해야 합니다.");
+	            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
+	        }
+	    }
+
+	    // 전화번호 형식 검사
+	    if (dto.getUserPhone() != null && !dto.getUserPhone().isEmpty()) {
+	        String phone = dto.getUserPhone();
+	        String phonePattern = "^01[0-9]-\\d{3,4}-\\d{4}$";
+	        if (!phone.matches(phonePattern) || phone.replace("-", "").length() > 11) {
+	            response.put("success", false);
+	            response.put("message", "전화번호는 형식에 맞게 입력하세요. 예: 010-1234-5678");
 	            return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
 	        }
 	    }

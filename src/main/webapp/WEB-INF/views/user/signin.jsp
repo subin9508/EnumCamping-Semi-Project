@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <c:url value="/css/signin.css" var="signinCSS" />
 <link rel="stylesheet" href="${signinCSS}" />
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Enum Semi-Project</title>
@@ -18,11 +16,109 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
 
+
+
 <c:url value="../css/header.css" var="headerCss" />
 <link rel="stylesheet" href="${headerCss}">
 
 <c:url value="../css/footer.css" var="footerCss" />
 <link rel="stylesheet" href="${footerCss}">
+
+<style>
+@charset "UTF-8";
+
+.login-container {
+    display: flex;
+    justify-content: center; /*수평 중앙 정렬 */
+    height: 100vh; /* 뷰포트 높이 100% */
+    margin-top: 2%;
+    margin-bottpm: 2%;
+}
+
+.fixed-size-form {
+    width: 400px; /* 고정 너비 설정 */
+    margin: 0 auto; /* 수평 중앙 정렬 */
+    padding: 10px;
+}
+
+input.write {
+    border-radius: 5px;
+    border-color: #7C9C63;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-label {
+    margin-right: 10px; /* label과 input 사이의 간격 조정 */
+    width: 20%;
+    font-size: 12pt;
+}
+
+.write {
+    flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
+}
+
+input.btn-login {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+
+input.btn-login:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: red;
+}
+
+a.signup {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+
+a.signup:hover  {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: red;
+}
+
+.no-border {
+    border-width: 0;
+}
+
+.right-border {
+    border-width: 0 0 1px;
+    border-color: #7C9C63;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.btn-custom {
+    border-color: #7C9C63;
+    color: #7C9C63;
+}
+
+.btn-custom:hover {
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -31,9 +127,9 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="fixed-size-form mb-5"
-						style="border: 1px solid black; padding: 10px; margin-top: 5%; margin-left: 200px; margin-right: 200px;">
+						style="border: 1px solid #7C9C63; padding: 10px; margin-top: 5%; margin-left: 200px; margin-right: 200px;">
 						<div class="card-header text-center mt-3">
-							<h2>로그인</h2>
+							<h2 style="color: #7C9C63;">로그인</h2>
 						</div>
 						<div class="card-body">
                         
@@ -73,10 +169,10 @@
 								<div class="mt-2 center" style="text-align: center;">
 									<div class="d-flex align-items-center justify-content-center">
 										<a href="/semiproject/user/findid"
-											class="btn btn-outline-info ">아이디찾기</a>
-										<h3 style="margin: 0 10px;">|</h3>
+											class="btn btn-custom">아이디찾기</a>
+										<h3 style="margin: 0 10px; color: #7C9C63;">|</h3>
 										<a href="/semiproject/user/findpassword"
-											class="btn btn-outline-info ">비밀번호 찾기</a>
+											class="btn btn-custom">비밀번호찾기</a>
 									</div>
 								</div>
 								<div class="mt-2" style="text-align: right;">
