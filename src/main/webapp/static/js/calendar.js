@@ -21,7 +21,7 @@ var finalYear, finalMonth, finalDay, finalItemId, finalSelectedNight;
         });
         
         addAreaRadioEventListeners();
-        //addNextPageEventListeners();
+        addNextPageEventListeners();
 });
 
 var toDay = new Date(); // @param 전역 변수, 오늘 날짜 / 내 컴퓨터 로컬을 기준으로 toDay에 Date 객체를 넣어줌
@@ -531,7 +531,7 @@ var selectedItems = [];
    // 예약하기 버튼에 이벤트 리스너 추
     function handleNextPageClick(event) {
         console.log('handleNextPageClick');
-    event.preventDefault();
+     event.preventDefault();
 
     if (!validateForm()) {
         return;
