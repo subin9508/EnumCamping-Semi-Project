@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -294,5 +295,31 @@ public class PaymentController {
 
 	    return "/user/reservation_list"; // 반환할 뷰의 이름
 	}
+	
+	// pg 사에서 결제 취소했을 경우, 웹훅 사용
+//	@PostMapping("/webhooks/payment/cancellation")
+//	public ResponseEntity<String> handlePaymentCancellation(@RequestBody Map<String, Object> payload) {
+//	    // 페이로드 검증 로직 (필요한 경우)
+//	    // 결제 취소 로직 실행
+//	    try {
+//	        String impUid = (String) payload.get("imp_uid"); // 예: 아임포트에서 전달받은 UID
+//	        log.info("Processing payment cancellation for impUid: {}", impUid);
+//	        
+//	        Integer resId = paymentService.getResIdByImpUid(impUid); // imp_uid를 사용하여 resId 조회
+//	        log.info("Found reservation ID: {}", resId);
+//	        
+//	        if (resId != null) {
+//	            paymentService.updateReservationState(resId, 2); // 상태를 '예약 취소'로 변경
+//	            log.info("Reservation status updated to canceled for resId: {}", resId);
+//	            return ResponseEntity.ok("Reservation status updated to canceled");
+//	        } else {
+//	        	log.warn("No reservation found for impUid: {}", impUid);
+//	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation not found");
+//	        }
+//	    } catch (Exception e) {
+//	        log.error("Error processing payment cancellation webhook", e);
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating reservation status");
+//	    }
+//	}
 	
 }
