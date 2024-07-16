@@ -167,7 +167,7 @@
                         </label>
                         </div>
                     </div>
-                    <div id="price" style="text-align: right; color: #0056b3; font-size: 20px;">
+                    <div class="m-3" id="price" style="text-align: right; color: #7C9C63; font-size: 25px;">
                     <span id="price-label">캠핑존 가격: </span> <span
                         id="price-value"></span>원
                 	</div>
@@ -249,7 +249,7 @@
                 <div id="selectedItemsList" style="display: none;"></div>
 
                 <div
-                    class="container-fluid d-flex justify-content-center mt-3">
+                    class="container-fluid d-flex justify-content-center mb-5">
                     <button onclick="addNextPageEventListeners()"
                         class="btn btnNextPage">다음
                         단계</button>

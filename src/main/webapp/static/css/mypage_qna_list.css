@@ -32,15 +32,18 @@
 
     .table {
         margin-bottom: 0;
+        text-align: center;
     }
 
     .table th {
         font-weight: bold;
+        text-align: center;
         color: #495057;
     }
 
     .table td {
         vertical-align: middle;
+        text-align: center;
     }
 
     a {
