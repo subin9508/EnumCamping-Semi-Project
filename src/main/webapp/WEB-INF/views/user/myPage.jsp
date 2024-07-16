@@ -178,7 +178,7 @@
     <script>
 	var contextPath = "${pageContext.request.contextPath}";
 </script>
-
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
 
