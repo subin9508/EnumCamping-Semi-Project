@@ -100,7 +100,6 @@
                                                 <td>${rs.itemAmount}원</td>
                                             </tr>
                                         </c:if>
-                                    </c:forEach>
                                     <c:if test="${!hasItems}">
                                         <tr>
                                             <td colspan="3" class="text-center">선택하신 구매/대여물품이 없습니다.</td>
