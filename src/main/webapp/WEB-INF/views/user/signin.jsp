@@ -170,7 +170,7 @@ a.signup:hover  {
 									<div class="d-flex align-items-center justify-content-center">
 										<a href="/semiproject/user/findid"
 											class="btn btn-custom">아이디찾기</a>
-										<h3 style="margin: 0 10px;">|</h3>
+										<h3 style="margin: 0 10px; color: #7C9C63;">|</h3>
 										<a href="/semiproject/user/findpassword"
 											class="btn btn-custom">비밀번호찾기</a>
 									</div>
