@@ -18,26 +18,7 @@
 
         <c:url value="../css/footer.css" var="footerCss" />
         <link rel="stylesheet" href="${footerCss}">
-        <style>
-        #checkUseridbutton, #login, #btnSignUp {
-            background-color: black;
-            color: white;
-            border: 1px solid black;
-        }
-
-        #checkUseridbutton:hover {
-            color: red;
-        }
-
-        #login:hover {
-            color: red;
-        }
-        
        
-        #btnSignUp:hover {
-            color: green;
-        }
-    </style> 
     </head>
 
     <body>
@@ -72,7 +53,7 @@
                                 <div class="col-3">
                                     <button type="button"
                                         id="checkUseridbutton"
-                                        class="form-control">중복
+                                        class="form-control btn btn-outline-success">중복
                                         확인</button>
                                 </div>
 
@@ -146,10 +127,11 @@
                                     <input type="email"
                                         class="form-control"
                                         id="user_email" name="userEmail"
-                                        placeholder="이메일" required />
+                                        placeholder="예) enum@enum.com" required />
                                 </div>
                                 <div id="checkUserEmailResult"></div>
                             </div>
+                            <br />
 
                             <!--  <button id="btnsendemail" class="btn btn-outline-success" style="display: inline-block;">인증하기</button>-->
 
@@ -173,7 +155,7 @@
                                     <h6>이미 계정이 있으신가요?</h6>
                                 </div>
                                 <a href="signin" 
-                                    id="login" class="btn"
+                                    id="login" class="btn btn btn-outline-success"
                                     style="display: inline-block;">로그인</a>
                             </div>
                         </form>
