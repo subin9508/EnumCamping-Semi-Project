@@ -129,21 +129,19 @@ public class UserController {
 	}
 
 	@GetMapping("/signout")
-	public String signout(HttpSession session, @RequestParam(name = "target", defaultValue = "") String target) {
-		log.debug("signout(session={})", session);
-
-		// 세션에 저장된 "signedInUser" 정보를 삭제.
-		session.removeAttribute("signedInUser");
-
-		// 세션을 만료시킴.
-		session.invalidate();
-
-		// 로그아웃 이후 타겟 페이지로 이동
-		String redirectUrl = "redirect:/";
-		if (!target.isEmpty() && !target.contains("/reservation_details") && !target.contains("/community/qna/details")) {
-			redirectUrl = "redirect:" + target;
-		}
-		return redirectUrl;
+	public String signout(HttpServletRequest request, HttpServletResponse response) {
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate();
+	    }
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            cookie.setMaxAge(0);
+	            response.addCookie(cookie);
+	        }
+	    }
+	    return "redirect:/";
 	}
 
 	@GetMapping("/signup") // GET 방식의 /user/signup 요청을 처리하는 컨트롤러 메서드
@@ -189,18 +187,23 @@ public class UserController {
 	}
 
 	@GetMapping("/myPage")
-	public String myPage(@RequestParam(name = "userId") String userId, Model model, HttpSession session) {
-		log.debug("myPage(userId={})", userId);
+	public String myPage(Model model, HttpSession session) {
+	    String userId = (String) session.getAttribute("signedInUser");
+	    if (userId != null) {
+	        User user = userService.read(userId);
+	        if (user != null) {
+	            model.addAttribute("user", user);
+	            log.debug("마이페이지에 표시될 사용자 정보: {}", user);
+	        } else {
+	            log.warn("세션에 있는 userId에 해당하는 사용자를 찾을 수 없습니다: {}", userId);
+	            return "redirect:/signin"; // 사용자를 찾을 수 없으면 로그인 페이지로 리다이렉트
+	        }
+	    } else {
+	        log.warn("세션에 로그인된 사용자 정보가 없습니다.");
+	        return "redirect:/signin"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+	    }
 
-		User user = userService.read(userId);
-
-		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
-		log.debug("세션에 저장된 사용자 정보: {}", session.getAttribute("user"));
-
-		model.addAttribute("user", user);
-
-		return "user/myPage";
-
+	    return "user/myPage";
 	}
 
 	@GetMapping("/password_check")
@@ -210,40 +213,49 @@ public class UserController {
 
 	@PostMapping("/password_check")
 	public String passwordCheck(@RequestParam("password") String password, HttpSession session, Model model) {
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			return "redirect:/user/signin";
-		}
+	    String userId = (String) session.getAttribute("signedInUser");
+	    if (userId == null) {
+	        return "redirect:/user/signin";
+	    }
 
-		UserSignInDto dto = new UserSignInDto();
-		dto.setUserId(user.getUserId());
-		dto.setUserPassword(password);
+	    User user = userService.read(userId);
+	    if (user == null) {
+	        return "redirect:/user/signin";
+	    }
 
-		User verifiedUser = userService.read(dto);
-		if (verifiedUser != null) {
-			// 비밀번호가 일치하는 경우 user_update 페이지로 리다이렉트
-			return "redirect:/user/user_update";
-		} else {
-			// 비밀번호가 일치하지 않는 경우 에러 메시지와 함께 password_check 페이지로 돌아감
-			model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-			return "user/password_check";
-		}
+	    UserSignInDto dto = new UserSignInDto();
+	    dto.setUserId(user.getUserId());
+	    dto.setUserPassword(password);
+
+	    User verifiedUser = userService.read(dto);
+	    if (verifiedUser != null) {
+	        // 비밀번호가 일치하는 경우 user_update 페이지로 리다이렉트
+	        return "redirect:/user/user_update";
+	    } else {
+	        // 비밀번호가 일치하지 않는 경우 에러 메시지와 함께 password_check 페이지로 돌아감
+	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	        return "user/password_check";
+	    }
 	}
 
 	@GetMapping("/user_update")
 	public String user_update(HttpSession session, Model model) {
-		log.debug("user_update");
-		User user = (User) session.getAttribute("user"); // 세션에서 사용자 정보 가져오기
-		log.debug("session user: {}", user);
+	    log.debug("user_update");
+	    String userId = (String) session.getAttribute("signedInUser");
+	    if (userId == null) {
+	        return "redirect:/user/signin";
+	    }
 
-		if (user == null) {
-			// 사용자 정보가 세션에 없는 경우 오류 처리
-			return "redirect:/user/signin"; // 로그인 페이지로 리다이렉트
-		}
+	    User user = userService.read(userId);
+	    log.debug("session user: {}", user);
 
-		model.addAttribute("user", user);
+	    if (user == null) {
+	        return "redirect:/user/signin";
+	    }
 
-		return "user/user_update";
+	    model.addAttribute("user", user);
+
+	    return "user/user_update";
 	}
 	
 	
