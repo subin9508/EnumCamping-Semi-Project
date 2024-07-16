@@ -49,9 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 비밀번호 형식 검사
-        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+=<>?{}[\]~]).{8,}$/;
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
         if (!inputUserPassword.value.match(passwordPattern)) {
-            alert('비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.');
+            alert('비밀번호는 영문과 숫자를 포함해야 합니다.');
+            return;
+        }
+
+        // 전화번호 형식 검사
+        const phonePattern = /^01[0-9]-\d{3,4}-\d{4}$/;
+        if (!inputUserPhone.value.match(phonePattern) || inputUserPhone.value.replace(/-/g, '').length > 11) {
+            alert('전화번호는 형식에 맞게 입력하세요. 예: 010-1234-5678');
+            return;
+        }
+
+        // 비밀번호 확인 검사
+        const confirmPassword = document.querySelector('input#userPasswordConfirm').value;
+        if (inputUserPassword.value !== confirmPassword) {
+           
             return;
         }
 
@@ -83,20 +97,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(data => {
                     if (data.success) {
-                        alert('프로필이 성공적으로 업데이트되었습니다.');
+                        alert('정보가 성공적으로 수정되었습니다.');
                         if (data.redirectUrl) {
                             window.location.href = data.redirectUrl; // 리다이렉트 URL로 이동
                         } else {
                             window.location.reload();
                         }
                     } else {
-                        alert('프로필 업데이트에 실패했습니다: ' + data.message);
+                        alert('정보 수정에 실패했습니다: ' + data.message);
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('프로필 업데이트 중 오류가 발생했습니다.');
+                    alert('정보 수정 중 오류가 발생했습니다.');
                 });
         }
+    });
+
+    // jQuery를 사용한 비밀번호 확인 기능 추가
+    $(document).ready(function() {
+        $('#updateForm').submit(function(e) {
+            var password = $('#userPassword').val();
+            var confirmPassword = $('#userPasswordConfirm').val();
+
+            if (password !== confirmPassword) {
+                e.preventDefault(); // 폼 제출 중지
+                alert('비밀번호가 일치하지 않습니다.');
+                return false;
+            }
+        });
+
+        $('#userPasswordConfirm').on('input', function() {
+            var password = $('#userPassword').val();
+            var confirmPassword = $(this).val();
+
+            if (password !== confirmPassword) {
+                $(this).addClass('is-invalid');
+                if (!$(this).next('.password-error').length) {
+                    $(this).after('<div class="password-error">비밀번호가 일치하지 않습니다.</div>');
+                }
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).next('.password-error').remove();
+            }
+        });
     });
 });

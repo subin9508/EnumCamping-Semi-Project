@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:url value="/css/myPage.css" var="myPageCSS" />
-<link rel="stylesheet" href="${myPageCSS}" />
+<c:url value="/css/user_update.css" var="user_updateCSS" />
+<link rel="stylesheet" href="${user_updateCSS}" />
 
 <c:url value="/css/header.css" var="headerCSS" />
 <link rel="stylesheet" href="${headerCSS}" />
@@ -26,6 +26,36 @@
     rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous" />
+      
+      
+       <style>
+        .btn-outline-success {
+            border: 1px solid green;
+            background-color: white;
+            color: green;
+            padding: 0.375rem 0.75rem; /* 기본 패딩 */
+            font-size: 1rem; /* 글자 크기 */
+            border-radius: 0.25rem; /* 테두리 둥글게 */
+            cursor: pointer; /* 마우스 커서 포인터로 변경 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        .btn-outline-success:hover {
+            background-color: green; /* 마우스 오버 시 배경색 초록색 */
+            color: white; /* 마우스 오버 시 글자색 흰색 */
+        }
+
+        .btn-link-custom {
+            text-decoration: none; /* 링크의 기본 밑줄 제거 */
+            color: green; /* 링크 글자 색 초록색 */
+        }
+
+        .btn-link-custom:hover {
+            color: white; /* 링크 마우스 오버 시 색상 변경 */
+        }
+    </style>
+    
+    
 </head>
 <body>
     <div class="wrapper">
@@ -41,11 +71,10 @@
                     <%@ include file="../fragments/mypage-sidebar.jspf"%>
                 </div>
                 <div class="col-md-9 main-content">
-                    <div class="card mt-2">
-                        <div class="card-header">
-                            <h2>내 정보 수정</h2>
-                        </div>
-                        <div class="card-body text-center">
+                    <div class="card card-reservation mt-2">
+                        <div class="card-reservation-header">내 정보
+                            수정</div>
+                        <div class="card-reservation-body text-center">
                             <form id="updateForm" method="post"
                                 action="${pageContext.request.contextPath}/user/user_update"
                                 enctype="multipart/form-data">
@@ -84,7 +113,7 @@
                                         class="col-sm-2 col-form-label">이름</label>
                                     <div class="col-sm-10">
                                         <input id="userName" type="text"
-                                            class="form-control"
+                                            class="form-control readonly-input"
                                             name="userName"
                                             value="${user.userName}"
                                             readonly>
@@ -95,7 +124,7 @@
                                         class="col-sm-2 col-form-label">아이디</label>
                                     <div class="col-sm-10">
                                         <input id="userId" type="text"
-                                            class="form-control"
+                                            class="form-control readonly-input"
                                             name="userId"
                                             value="${user.userId}"
                                             readonly>
@@ -103,7 +132,7 @@
                                 </div>
                                 <div class="mb-3 row">
                                     <label for="userPassword"
-                                        class="col-sm-2 col-form-label">비밀번호</label>
+                                        class="col-sm-2 col-form-label">PW</label>
                                     <div class="col-sm-10">
                                         <c:if
                                             test="${not empty message}">
@@ -121,13 +150,25 @@
                                             value="${user.userPassword}">
                                     </div>
                                 </div>
+                                <!-- 비밀번호 확인 필드 추가 -->
+                                <div class="mb-3 row">
+                                    <label for="userPasswordConfirm"
+                                        class="col-sm-2 col-form-label">PW
+                                        확인</label>
+                                    <div class="col-sm-10">
+                                        <input id="userPasswordConfirm"
+                                            type="password"
+                                            class="form-control"
+                                            name="userPasswordConfirm">
+                                    </div>
+                                </div>
                                 <div class="mb-3 row">
                                     <label for="userEmail"
                                         class="col-sm-2 col-form-label">이메일</label>
                                     <div class="col-sm-10">
                                         <input id="userEmail"
                                             type="text"
-                                            class="form-control"
+                                            class="form-control readonly-input"
                                             name="userEmail"
                                             value="${user.userEmail}"
                                             readonly>
@@ -144,17 +185,13 @@
                                             value="${user.userPhone}">
                                     </div>
                                 </div>
-                                <button type="submit"
-                                    class="btn btn-primary">수정
-                                    완료</button>
+                             <button type="submit" class="btn btn-outline-success">수정 완료</button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
         </main>
-
     </div>
 
     <script
@@ -166,17 +203,13 @@
     <script type="text/javascript"
         src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-    <script>
-					var contextPath = "${pageContext.request.contextPath}";
-				</script>
-
+    <script> var contextPath = "${pageContext.request.contextPath}";</script>
 
     <c:url var="user_update_js" value="/js/user_update.js" />
     <script src="${user_update_js}"></script>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
-
-
 </body>
 </html>
