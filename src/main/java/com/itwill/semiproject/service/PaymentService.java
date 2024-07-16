@@ -86,6 +86,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 			paymentInfo.put("email", user.getUserEmail()); // (유저)이메일 정보 설정
 			paymentInfo.put("buyerName", user.getUserName()); // (유저)구매자 이름 설정
 			paymentInfo.put("phoneNumber", user.getUserPhone()); // (유저)구매자 전화번호 설정
+			paymentInfo.put("resState", reservation.getResState()); // 예약 상태 설정
 
 			return paymentInfo; // paymentInfo 객체를 반환하여 결제 정보 담은 Map 객체 완성.
 		} catch (Exception e) {

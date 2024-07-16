@@ -48,13 +48,13 @@
                                 type="radio" name="slide" id="slide3">
                             <ul class="imgs">
                                 <li><img
-                                    src="https://cdn.pixabay.com/photo/2016/02/05/01/58/camping-1180234_1280.jpg"
+                                    src="https://cdn.pixabay.com/photo/2020/08/21/15/04/tent-5506381_1280.jpg"
                                     alt="Image 1"></li>
                                 <li><img
-                                    src="https://cdn.pixabay.com/photo/2020/03/15/03/07/camping-4932314_1280.jpg"
+                                    src="https://cdn.pixabay.com/photo/2017/08/06/02/32/camp-2587926_1280.jpg"
                                     alt="Image 2"></li>
                                 <li><img
-                                    src="https://cdn.pixabay.com/photo/2017/07/17/16/44/besides-the-cancer-time-to-nearby-lodging-2513008_1280.jpg"
+                                    src="https://cdn.pixabay.com/photo/2017/08/07/18/28/night-2606510_1280.jpg"
                                     alt="Image 3"></li>
                             </ul>
                             <div class="bullets">
@@ -88,8 +88,9 @@
                 </section>
                 
             </main>
-            <%@ include file="../fragments/footer.jspf"%>
+           
         </div>
+         <%@ include file="../fragments/footer.jspf"%>
     </div>
 
     <script

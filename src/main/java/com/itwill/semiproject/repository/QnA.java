@@ -17,14 +17,11 @@ public class QnA {
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaUserId;
-	private LocalDateTime qnaCreatedTime;
-	private LocalDateTime qnaModifiedTime;
+	private String qnaCreatedTime;
+	private String qnaModifiedTime;
 	private Integer qnaViewCnt;
 	private Integer qnaState;
 	private Integer qnaLock;
-	private String qcText;
-	private LocalDateTime qcCreatedTime;
-	private LocalDateTime qcModifiedTime;
-	
+
 	
 }

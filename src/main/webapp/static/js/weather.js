@@ -1,3 +1,4 @@
+
 /**
  * 날씨를. 구해보자!
  */
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${date}&base_time=${time}&nx=76&ny=129`;
 
 
-    console.log(uri)
+    //console.log(uri)
     axios.get(uri)
         .then((response) => {
             //console.log(response);
@@ -103,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         date = year + month + day;
 
-        console.log(time);
-        console.log(date);
+        console.log('예보 기준 시각 : ',time);
+        console.log('예보 기준 날짜 : ',date);
 
     }
     

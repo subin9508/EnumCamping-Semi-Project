@@ -87,70 +87,67 @@
 			<main
 				style="width: 70%; margin-left: auto; margin-right: auto; margin-bottom: 5%; margin-top: 5%">
 
-
-                <div class="form-container" >
-                    <form class="custom-form">
-                        <table class="table table-borderless">
-                            <tr>
-                                <td>
-                                    <div style="text-align: right;">
-                                        <label for="userName"
-                                            style="font-size: 20px; font-weight: bold;">이름:</label>
-                                    </div>
-                                </td>
-                                <td colspan="6"><input type="text"
-                                    class="form-control text-left"
-                                    id="userName"
-                                    value="${user.userName}" readonly>
-                                </td>
-                               
-                            </tr>
-                            <tr>
-                                <td>
-                                <div style="text-align: right;">
-                                <label for="userEmail" style="font-size: 20px; font-weight: bold;"
-                                    class="text-left">이메일:</label>
-                                    </div>
-                                    </td>
-                                <td colspan="6"><input type="text"
-                                    class="form-control text-left"
-                                    id="userEmail"
-                                    value="${user.userEmail}" readonly></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <div style="text-align: right;">
-                                <label for="userPhone" style="font-size: 20px; font-weight: bold;"
-                                    class="text-left">휴대폰 번호:</label>
-                                    </div></td>
-                                <td colspan="6"><input type="text"
-                                    class="form-control text-left"
-                                    id="userPhone"
-                                    value="${user.userPhone}" readonly></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-                
-                
                 <div class="container-fluid d-flex justify-content-center">
 					<h1>예약 및 주문</h1>
 				</div>
 				<br /> <br />
-				<div class="container">
+
+                <div class="form-container">
+                    <form class="custom-form">
+                        <table class="table">
+                            <tr>
+                                <td colspan="7"
+                                    style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">예약자
+                                    정보</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"
+                                    style="text-align: center;"><label
+                                    for="userName"
+                                    style="font-size: 18px;">이름</label>
+                                </td>
+                                <td colspan="5" style="font-size: 18px;">${user.userName}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="text-align: center;">
+                                        <label for="userEmail"
+                                            style="font-size: 18px;"
+                                            class="text-left">이메일</label>
+                                    </div>
+                                </td>
+                                <td colspan="5" style="font-size: 18px;">${user.userEmail}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div style="text-align: center;">
+                                        <label for="userPhone"
+                                            style="font-size: 18px;"
+                                            class="text-left">휴대폰
+                                            번호</label>
+                                    </div>
+                                </td>
+                                <td colspan="5" style="font-size: 18px;">${user.userPhone}</td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+
+                <div class="container">
 
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="background-color: #7C9C63; color: white;">선택 구역</th>
-								<th style="background-color: #7C9C63; color: white;">가격</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">선택 구역</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">가격</th>
 							</tr>
 						</thead>
 						<tbody id="areaOrder">
 							<c:forEach items="${reservationDetails}" var="item">
 								<c:choose>
 									<c:when test="${item.itemId ge 1 and item.itemId le 4}">
-										<c:set var="area" value="1구역" />
+										<c:set var="area" value="1구역"  />
 										<c:set var="price" value="${item.itemAmount}" />
 									</c:when>
 									<c:when test="${item.itemId ge 5 and item.itemId le 8}">
@@ -184,10 +181,10 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th style="background-color: #7C9C63; color: white;">물품 이름</th>
-								<th style="background-color: #7C9C63; color: white;">물품 사진</th>
-								<th style="background-color: #7C9C63; color: white;">수량</th>
-								<th style="background-color: #7C9C63; color: white;">총가격</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;" >물품 이름</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">물품 사진</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">수량</th>
+								<th style="font-size: 21px; font-weight: bold; background-color: #7C9C63; color: white;">총가격</th>
 							</tr>
 						</thead>
 						<tbody id="orderDetails">
@@ -282,11 +279,10 @@
 				</div>
 			</main>
 
-			<div class="container-fluid" id="wrap">
 				<%@ include file="../fragments/footer.jspf"%>
 			</div>
 		</div>
-	</div>
+	
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

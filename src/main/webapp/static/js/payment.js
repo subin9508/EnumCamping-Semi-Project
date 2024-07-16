@@ -73,8 +73,9 @@ async function handlePaymentResponse(rsp, resId) {
             if (result && (result.status === "paid")) {
                 alert('결제가 완료되었습니다.');
                 // resId 로깅
+ 
                 console.log("이동할 예약 ID:", resId);
-                window.location.href = `/semiproject/reservation/succeeded/${resId}`; // 결제 성공 페이지로 이동
+                //window.location.href = `/semiproject/reservation/succeeded/${resId}`; // 결제 성공 페이지로 이동
             } else {
                 throw new Error("서버 검증 실패" + (result.fail_reason || "알 수 없는 오류"));
             }

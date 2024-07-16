@@ -17,8 +17,8 @@
             <li><a href="infoRefound">환불규정</a></li>
             <li><a href="infoBooking">예약방법</a></li>
             <li><a href="infoRules">이용준수사항</a></li>
-            <li><a href="infoSale">물품판매리스트</a></li>
-            <li><a href="infoRental">물품대여리스트</a></li>
+            <li><a href="infoSale">판매물품목록</a></li>
+            <li><a href="infoRental">대여물품목록</a></li>
         </ul>
     </aside>
 

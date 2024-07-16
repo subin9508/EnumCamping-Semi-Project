@@ -37,8 +37,10 @@
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
 			<div class="card mt-5 text-center"
-				style="width: 30rem; margin: auto;">
-				<h2 class="card-header ">아이디 찾기 결과</h2>
+				style="width: 30rem; margin: auto; border-radius: 0;border-color: black;">
+				<h2 class="card-header "
+				style="text-align:center; border:none 1px; background-color:white; border-color: black;">
+				아이디 찾기 결과</h2>
 				<div class="card-body mt-3">
 					<p>
 						회원님의 아이디는 <strong>${userId}</strong> 입니다.

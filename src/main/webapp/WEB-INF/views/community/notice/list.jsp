@@ -45,10 +45,10 @@
                                 <input class="form-control" type="text" name="keyword" placeholder="검색어 입력" required/>
                             </div>
                             <div class="col-2">
-                                <input type="submit" class="form-control btn btn-outline-info" value="검색"/>
+                                <input type="submit" class="form-control btn btn-outline-success" value="검색"/>
                             </div>
                             <div class="col-2">
-                                <button type="button" class="form-control btn btn-secondary"
+                                <button type="button" class="form-control btn btn-outline-success"
                                 onclick="location.href='/semiproject/community/notice/list'">전체 목록</button>
                             </div>
 
@@ -80,15 +80,17 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            
-        
+                
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
                 <c:if test="${userRole eq 0}">
                 <button type="button" onclick="location.href ='create'"
-                class="btn btn-info">공지사항 작성</button>
+                class="btn btn-outline-success">공지사항 작성</button>
                 </c:if>
             </div>
+           
+            </div>
+            
+        
             
 
             

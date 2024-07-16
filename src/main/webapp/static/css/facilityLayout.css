@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
-/* 헤더 스타일 설정 */
-header {
-    width: 100%;
-    background-color: #000; /* 헤더의 배경색 설정 */
-}
+
 
 /* 네비게이션 스타일 설정 */
 nav {
@@ -36,6 +32,10 @@ nav {
     align-items: flex-start; /* 텍스트가 이미지의 위쪽에 정렬되도록 설정 */
     width: 100%;
     flex-direction: row; /* 가로 방향으로 정렬 */
+}
+
+.bold {
+     font-weight: bold;
 }
 
 /* 시설 이미지 스타일 설정 */

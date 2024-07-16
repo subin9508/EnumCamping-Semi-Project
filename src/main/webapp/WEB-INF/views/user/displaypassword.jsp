@@ -35,11 +35,13 @@
 	<div class="wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
-			<div class="card mt-5 text-center"  style="width: 40rem; margin:auto;">
-				<h2 class="card-header">비밀번호 찾기 결과</h2>
+			<div class="card mt-5 text-center"  style="width: 30rem; margin:auto; border-color: black; border-radius: 0;border-color: black;">
+				<h2 class="card-header"
+				style="text-align:center; border:none 1px; background-color:white;">
+				비밀번호 찾기 결과</h2>
 				<div class="card-body mt-3">
 					<p>
-						회원님의 비밀번호 <strong>${userPassword}</strong> 입니다.
+						회원님의 비밀번호는 <strong>${userPassword}</strong> 입니다.
 					</p>
 				</div>
 				<div class="mb-3">

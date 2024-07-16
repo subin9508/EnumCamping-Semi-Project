@@ -58,10 +58,11 @@
                                     <tr onclick="location.href='${qnaDetails}'">
                                         <td>${q.qnaPostId}</td>
                                         <td>${q.qnaTitle}</td>
-                                        <td>
-                                            <fmt:parseDate value="${q.qnaModifiedTime}" var="parsedDate" pattern="yyyy-MM-dd'T'HH:mm:ss" />
-                                            <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-                                        </td>
+                                        <td>${q.qnaModifiedTime}</td>
+<!--                                         <td> -->
+<%--                                             <fmt:parseDate value="${q.qnaModifiedTime}" var="parsedDate" pattern="yyyy-MM-dd'T'HH:mm:ss" /> --%>
+<%--                                             <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
+<!--                                         </td> -->
                                         <td><c:if
                                                 test="${q.qnaState == 0}">
                                             답변대기
