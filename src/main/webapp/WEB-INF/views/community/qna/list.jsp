@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="../../css/header.css">
 <link rel="stylesheet" href="../../css/footer.css">
 
+    <c:url value="../css/mypage_qna_list.css" var="qnaListCss"/>
+    <link rel="stylesheet" href="${qnaListCss}">
+    
+        <c:url value="../../css/reservation_list.css" var="reservationListCss" />
+    <link rel="stylesheet" href="${reservationListCss}">
+
 <style>
     .status-waiting {
         color: red !important;
@@ -37,7 +43,17 @@ ul.pagination {
 	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
 	padding: 0;
 }
+
+     .pagination .page-link:hover {
+        background-color: #7C9C63; /* 호버 시 배경색 초록 */
+        color: #fff; /* 호버 시 글자색 흰색 */
+    }
     
+        .pagination .page-item.active .page-link {
+        background-color: #7C9C63; /* 활성화된 페이지 배경색 초록 */
+        border-color: #7C9C63; /* 활성화된 페이지 테두리 색상 초록 */
+        color: #fff; /* 활성화된 페이지 글자색 흰색 */
+    }
 </style>
 </head>
 <body>
@@ -47,20 +63,18 @@ ul.pagination {
 		<div class="footer-main-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
 
+
 			<div class="container-fluid">
 				<main>
 					<div>
-						<h1 class="align-center mt-2">Q&A</h1>
-					</div>
-
-					<div>
-						<h6 style="text-align: right">총 게시글 수: ${totalCount}</h6>
 					</div>
 
 
 
-					<div class="mt-2 card" style="text-align: center">
+					<div class="mt-2 card" style="margin-right:50px;">
 						<div class="card-header">
+                        <h1 class="card-title align-center mt-2">Q&A</h1>
+
 							<c:url var="qnaSearchPage" value="/community/qna/search" />
 							<form method="get" action="${qnaSearchPage}">
 								<div class="row">
@@ -73,17 +87,23 @@ ul.pagination {
 											<option value="qu">작성자</option>
 										</select>
 									</div>
-									<div class="col-7">
+									<div class="col-5">
 										<input type="text" class="form-control" name="keyword"
 											placeholder="검색어 입력" required />
 									</div>
 									<div class="col-2">
 										<input type="submit"
-											class="form-control btn btn-outline-info" value="검색" />
+											class="form-control btn btn-outline-success" value="검색" />
 									</div>
-								</div>
+                                    <div class="col-2">
+                                <button type="button" class="form-control btn btn-outline-success"
+                                onclick="location.href='/semiproject/community/qna/list'">전체 목록</button>
+                                  </div>
+								
+                                </div>
 							</form>
 						</div>
+                        
 						<div class="card-body">
 							<!-- 알림 메시지 표시 -->
                             <c:if test="${not empty message}">
@@ -92,9 +112,9 @@ ul.pagination {
                                 </div>
                             </c:if>
 						
-							<table class="table table-striped table-hover">
+							<table class="table table-hover">
 								<thead>
-									<tr>
+									<tr style="text-align: center;">
 										<th>번호</th>
 										<th>제목</th>
 										<th>작성자</th>
@@ -106,9 +126,9 @@ ul.pagination {
 								</thead>
 								<tbody>
 									<c:forEach var="qna" items="${qnas}">
-										<tr>
-											<td>${qna.qnaPostId}</td>
-											<td>
+										<tr style="cursor:pointer; text-align: center;">
+											<td class="col-1">${qna.qnaPostId}</td>
+											<td class="col-3">
                                             <c:url var="secretIconUrl" value="/images/community/secret.png" />
                                             <c:url var="qnaDetailsPage"	value="/community/qna/details">
 													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
@@ -120,9 +140,9 @@ ul.pagination {
                                                     </c:if>
                                                 </a>
                                             </td>
-                                            <td>${qna.qnaUserId}</td>
-											<td>${qna.qnaModifiedTime}</td>
-											<td class="${qna.qnaState == 0 ? 'status-waiting' : 'status-completed'}">
+                                            <td class="col-2">${qna.qnaUserId}</td>
+											<td class="col-2">${qna.qnaModifiedTime}</td>
+											<td class="${qna.qnaState == 0 ? 'status-waiting' : 'status-completed'} col-2">
                                                 <c:choose>
                                                     <c:when test="${qna.qnaState == 0}">
                                                         답변 대기
@@ -132,7 +152,7 @@ ul.pagination {
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
-											<td>${qna.qnaViewCnt}</td>
+											<td class="col-2">${qna.qnaViewCnt}</td>
 										</tr>
 									</c:forEach>
 									<c:if test="${empty qnas}">
@@ -142,8 +162,12 @@ ul.pagination {
                             </c:if>
 								</tbody>
 							</table>
-
-							<div>
+                        <a style="text-align: left">총 게시글 수: ${totalCount} 개</a>
+                        <div class="text-end">
+                        <c:url var="qnaCreatePage" value="/community/qna/create"></c:url>
+                        <a class="btn btn-outline-success" href="${qnaCreatePage}" style="text-align: right">글작성</a>
+                        </div>
+							<div> 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item ${pager.page == 1 ? 'disabled' : ''}">
@@ -163,14 +187,13 @@ ul.pagination {
                 </li>
             </ul>
         </nav>
-							</div>
-
-						</div>
-						<c:url var="qnaCreatePage" value="/community/qna/create"></c:url>
-						<a class="btn btn-outline-primary" href="${qnaCreatePage}">글쓰기</a>
+		
+        </div>
+    </div>						
 					</div>
 				</main>
 			</div>
+            
 		</div>
 		<%@ include file="../../fragments/footer.jspf"%>
 	</div>
