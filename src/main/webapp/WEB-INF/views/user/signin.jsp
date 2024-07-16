@@ -69,8 +69,8 @@ input.btn-login {
 }
 
 input.btn-login:hover {
-    background-color: #a5bd95; /* hover 상태에서 약간 밝은 색상으로 변경 */
-    border-color: #a5bd95;
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
     color: red;
 }
 
@@ -82,8 +82,8 @@ a.signup {
 }
 
 a.signup:hover  {
-    background-color: #a5bd95; /* hover 상태에서 약간 밝은 색상으로 변경 */
-    border-color: #a5bd95;
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
     color: red;
 }
 
