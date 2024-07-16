@@ -51,8 +51,8 @@
 	<div class="wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
-			<div class="card mt-5" style="width: 50rem; margin: auto;">
-				<div class="card-header ">
+			<div class="card mt-5" style="width: 30rem; margin: auto;  border-color: black; border-radius: 0; ">
+				<div class="card-header "style="text-align:center; border:none 1px; background-color:white;">
 					<h2 class="mt-2">아이디 찾기</h2>
 				</div>
 				<div class="card-body">

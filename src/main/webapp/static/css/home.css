@@ -55,12 +55,16 @@
 
 /* Content section styles */
 .content {
+	font-family: "Noto Sans KR", sans-serif;
 	text-align: center;
 	color: black;
 	font-size: 1.3rem;
 	
 }
 
+.section-content{
+	font-family: "Noto Sans KR", sans-serif;
+}
 .content h2 {
 	margin-bottom: 20px;
 }
@@ -69,18 +73,5 @@
 	text-align: left;
 	line-height: 1.8;
 }
-
-.jua-regular {
-	font-family: "Jua", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.black-han-sans-regular {
-  font-family: "Black Han Sans", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
 
 

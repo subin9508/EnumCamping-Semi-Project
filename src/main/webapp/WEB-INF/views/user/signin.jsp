@@ -73,10 +73,10 @@
 								<div class="mt-2 center" style="text-align: center;">
 									<div class="d-flex align-items-center justify-content-center">
 										<a href="/semiproject/user/findid"
-											class="btn btn-outline-info btn-custom">아이디찾기</a>
+											class="btn btn-outline-info ">아이디찾기</a>
 										<h3 style="margin: 0 10px;">|</h3>
 										<a href="/semiproject/user/findpassword"
-											class="btn btn-outline-info btn-custom">비밀번호찾기</a>
+											class="btn btn-outline-info ">비밀번호 찾기</a>
 									</div>
 								</div>
 								<div class="mt-2" style="text-align: right;">

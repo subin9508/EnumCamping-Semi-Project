@@ -32,7 +32,7 @@
     <div class="content-1">
         <br>
         <h1>
-            <strong>[물품 대여 리스트]</strong>
+            <strong>[대여 물품 목록]</strong>
         </h1>
         <br>
         <div class="content-2" style="margin-right: 35px;">

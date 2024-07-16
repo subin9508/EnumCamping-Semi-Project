@@ -14,32 +14,18 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<!-- font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap"
-	rel="stylesheet">
-<link href="//fonts.googleapis.com/earlyaccess/hanna.css"
-	rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/earlyaccess/nanumgothic.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-	rel="stylesheet">
-<style type="text/css">
-.hanna {
-	font-family: 'hanna';
-}
 
-.nanum {
-	font-family: 'Nanum Barun Gothic';
-}
+<style>
 
 :root {
 	--bs-gutter-x: 0 !important;
+}
+
+.noto-sans-kr noto {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .container, .container-fluid {
@@ -87,7 +73,7 @@
 						<button type="button" data-bs-target="#carouselExampleIndicators"
 							data-bs-slide-to="4" aria-label="Slide 5"></button>
 					</div>
-					<div class="carousel-inner noto-sans-kr ">
+					<div class="carousel-inner ">
 						<div class="carousel-item active">
 							<img src="images/main/camp1.jpg" class="d-block w-100 "
 								alt="Camping site 1 " height=920px;>
@@ -133,9 +119,9 @@
 			<div
 				style="margin-left: 200px; padding-top: 200px; padding-left: 50px; padding-right: 50px;">
 				<div class="row">
-					<div class="noto-sans-kr">
+					<div>
 						<h2 class="notice-h"
-							style="width: 90%; text-align: start; padding-bottom: 10px; margin-left: 0px;">
+							style="width: 90%; text-align: start; padding-bottom: 10px; margin-left: 0px; font-weight: bold;">
 							소 개</h2>
 					</div>
 					<div class="col-md-4">
@@ -143,13 +129,13 @@
 							style="margin-top: 10px; width: 500px; height: 400px;"
 							alt="Main Camping Image"> <span class="border-end"></span>
 					</div>
-					<div class="col-md-8 noto-sans-kr">
-						<h1 style="text-align: start; color: #8baf6f;">자연 속에서의 휴식</h1>
+					<div class="col-md-8 ">
+						<h1 style="text-align: start; color: #8baf6f; font-weight: bold;">자연 속에서의 휴식</h1>
 						<br />
 						<p>Enum Camping은 자연 속에서 편안한 휴식을 제공합니다.</p>
 						<p>넓은 공간과 풍부한 자연 경관이 매력적인 이 캠핑장에서는 언제든지 편안하게 쉴 수 있습니다.
-						<p>캠프파이어를 즐기며 별빛 아 래에서 휴식을 취하거나, 아침 산책을 통해 상쾌한 시작을 맞이할 수 있습니다.</p>
-						<p>또한, 다양한 체험 프로그램이 마련되어 있어, 어린이와 어른 모두가 즐거운 시간을 보낼 수 있습니다.</p>
+						<p>캠프파이어를 즐기며 별빛 아래에서 휴식을 취하거나, 아침 산책을 통해 상쾌한 시작을 맞이할 수 있습니다.</p>
+						<p>또한, 다양한 체험 프로그램이 마련되어 있어, 방문객 여러분들 모두가 즐거운 시간을 보낼 수 있습니다.</p>
 						<p>Enum Camping은 환경 보호를 중요시하며, 지속 가능한 캠핑을 지향합니다.</p>
 						<p>방문객 여러분께서도 자연을 존중하며 즐거운 캠핑을 즐길 수 있도록 협조 부탁드립니다.</p>
 					</div>
@@ -174,13 +160,13 @@
 		 -->
 		<!-- Notice Section -->
 
-		<section id="notice" class="section"
+		<section id="notice" class="section-content"
 			style="margin-left: 240px; padding-top: 100px; padding-bottom: 100px;">
-			<div class="container noto-sans-kr " style="margin-left: 200px;">
-				<div class="row">
+			<div class="container" style="margin-left: 200px;">
+				<div class="row ">
 					<div class="col-md-5 mt-3 justify-content-md-center"
 						style="color: #8baf6f;">
-						<h2 class="notice-h">공지사항</h2>
+						<h2 class="notice-h" style=" font-weight: bold;">공지사항</h2>
 						<div class=" card border-0 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title">공지사항</h5>
@@ -193,7 +179,7 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="col-md-5 mt-3" style="color: #8baf6f;">
-						<h2 class=" notice-h">이벤트</h2>
+						<h2 class=" notice-h"style=" font-weight: bold;">이벤트</h2>
 						<div class="card border-0 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title ">이넘 캠핑장 오픈 이벤트</h5>

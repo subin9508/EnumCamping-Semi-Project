@@ -50,9 +50,10 @@
 	<div class="wrapper">
 		<%@ include file="../fragments/header.jspf"%>
 		<div class="footer-main-content">
-			<div class="card mt-5" style="width: 50rem; margin: auto;">
-				<div class="card-header">
-					<h2 class="mt-2"style="font-weight: bold;">패스워드찾기</h2>
+			<div class="card mt-5" style="width: 30rem; margin: auto; border-color: black; border-radius: 0;">
+				<div class="card-header"
+				style="text-align:center; border:none 1px; background-color:white;">
+					<h2 class="mt-2">패스워드찾기</h2>
 				</div>
 				<c:url var="findIdPage" value="/user/findpassword" />
 				<form class="form-horizontal" role="form" method="POST"
