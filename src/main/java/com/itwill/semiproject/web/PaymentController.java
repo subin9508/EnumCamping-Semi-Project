@@ -107,10 +107,13 @@ public class PaymentController {
 	        if ("paid".equals(payment.getStatus())) {
 	        	// 먼저 예약 상태를 확인
 	        	Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
+	        	log.debug("---------paymentInfoByResId = {}",paymentInfo);
 	        	if(paymentInfo != null) {
-	        		Object resStateObj = paymentInfo.get("res_state");
+	        		Object resStateObj = paymentInfo.get("resState");
+	        		log.debug("---------resStateObj = {}",resStateObj);
 	        			if(resStateObj != null) {
 	        				int resState = ((Number) resStateObj).intValue();
+	        				log.debug("-----------resState = {}",resState);
 	        					if(resState == 1) {
 	        						// 이미 결제가 완료된 예약이면 오류 반환
 	        						return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
