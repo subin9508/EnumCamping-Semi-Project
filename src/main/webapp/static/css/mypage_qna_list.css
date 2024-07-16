@@ -1,9 +1,4 @@
  @charset "UTF-8";
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #fff;
-    }
-
     .wrapper {
         display: flex;
         flex-direction: column;
