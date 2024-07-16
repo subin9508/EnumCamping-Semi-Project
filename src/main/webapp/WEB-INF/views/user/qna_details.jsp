@@ -22,10 +22,10 @@
     <link rel="stylesheet" href="${qnaDetailsCss}">
 </head>
 <body>
-<div class="wrapper">
+<div class="qna-wrapper">
         <c:set var="pageTitle" value="QnA Details" />
         <%@ include file="../fragments/header.jspf"%>
- <div class="footer-main-content">         
+ <div class="footer-main-content qna-content">         
         <%@ include file="../fragments/mypage-sidebar.jspf"%>
         
     <div class="container-fluid">
@@ -87,7 +87,7 @@
                                 <c:param name="userId"
                                     value="${user.userId}" />
                             </c:url>
-                            <a class="btn btn-outline-info"
+                            <a class="btn btn-list"
                                 href="${qnaListPage}">목록보기</a>
 
                             <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->

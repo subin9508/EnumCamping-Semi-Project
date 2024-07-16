@@ -23,7 +23,7 @@
     <div class="wrapper">
         <c:set var="pageTitle" value="QnA Modify" />
         <%@ include file="../fragments/header.jspf"%>
-        <div class="footer-main-content">
+        <div class="footer-main-content qna-content">
             <%@ include file="../fragments/mypage-sidebar.jspf"%>
             <div class="container-fluid">
                 <main>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #f8f9fa;
+        background-color: #fff;
     }
 
     .wrapper {
@@ -57,19 +57,7 @@
     .btn {
         margin-left: 0.5rem;
     }
-
-    .footer-main-content {
+    
+    .qna-content {
         display: flex;
-    }
-
-    #top {
-        background-color: #001522;
-    }
-
-    #top .nav-link {
-        color: white;
-    }
-
-    .navbar-nav .nav-link:hover {
-        color: red;
     }
