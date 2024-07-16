@@ -29,47 +29,47 @@
         <div class="footer-main-content">
             <%@ include file="../fragments/intro-sidebar.jspf"%>
 
-            <main class="main-content" style="margin-left: 300px; margin-top: 50px;">
-                    <div class="content-1">
-                        <br>
-                        <h1>
-                            <strong>[시설배치도]</strong>
-                        </h1>
-                    </div>
-                     <div class="container">
-                    <img class="facility-image"
-                        src="../images/facilityLayout.jpg"
+            <main class="main-content"
+                style="margin-left: 300px; margin-top: 50px;">
+                <div class="content-1">
+                    <br>
+                    <h1>
+                        <strong>[시설배치도]</strong>
+                    </h1>
+                </div>
+               
+                   
+                    <div class="info-section">
+                     <img class="facility-image"
+                        src="../images/intro-facilityLayout.webp"
                         alt="캠핑장 시설배치도" width="600" height="600">
-                    <section class="info-section">
                         <div class="box">
                             <div class="left-content">
-                                <div class="item">
-                                    <h4>캠핑 A, B, C동</h4>
-                                    <h5>- 전 구역 데크존으로 편안한 캠핑 가능</h5>
-                                    <h5>- 계곡 및 수영장과 인접하여 이동성 좋음</h5>
-                                    <h5>- 자연으로 둘러싸인 구조로 조용한 휴식 가능</h5>
-                                </div>
-                                <div class="item2">
-                                    <h4>산책로(화살표 방향)</h4>
-                                    <h5>- 캠핑장 주변 둘레길로 산책 가능</h5>
-                                </div>
+                                <!-- 왼쪽 내용 -->
+                                <h2 class="h2">캠핑 A-1, A-2, B-2동</h2>
+                                <ul>
+                                    <li>전 구역 데크존으로 편안한 캠핑 가능</li>
+                                    <li>계곡과 인접하여 이동성 좋음</li>
+                                    <li>자연으로 둘러싸인 구조로 조용한 휴식 가능</li>
+                                    <li>중앙 벤치 무료 이용 가능 </li>
+                                    <li>캠핑장 주변 둘레길로 산책 가능</li>
+                                </ul>
                             </div>
                             <div class="right-content">
-                                <div class="item3">
-                                    <h4>로뎀동, 카이로스동(관리동)</h4>
-                                    <h5>- 화장실, 샤워실, 식수대, 주차장 구비</h5>
-                                    <h5>- 자체 매점 운영으로 식재료 및 필요 용품 즉시
-                                        구매 가능</h5>
-                                </div>
-                                <div class="item4">
-                                    <h4>무료 수영장</h4>
-                                    <h5>- 추가 요금 없이 수영장 이용 가능</h5>
-                                    <h6>*운영시간: 오전 11시 ~ 오후 4시*</h6>
-                                </div>
+                                <!-- 오른쪽 내용 -->
+                                <h2>편의 시설</h2>
+                                <ul>
+                                    <li>화장실, 샤워실, 식수대, 주차장 구비</li>
+                                    <li>자체 매점 운영으로 식재료 및 필요한 용품 즉시
+                                        구매 가능</li>
+                                    <li>무료 수영장</li>
+                                    <li>추가 요금 없이 수영장 이용 가능</li>
+                                    <li>운영시간: 오전 11시 ~ 오후 4시</li>
+                                </ul>
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+               
 
             </main>
             <%@ include file="../fragments/footer.jspf"%>

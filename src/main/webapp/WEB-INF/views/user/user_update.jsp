@@ -155,9 +155,6 @@
             </div>
         </main>
 
-        <footer class="container-fluid no-padding" id="wrap">
-            <%@ include file="../fragments/footer.jspf"%>
-        </footer>
     </div>
 
     <script
@@ -165,13 +162,13 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-
+    <%@ include file="../fragments/footer.jspf"%>
     <script type="text/javascript"
         src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
     <script>
-	var contextPath = "${pageContext.request.contextPath}";
-</script>
+					var contextPath = "${pageContext.request.contextPath}";
+				</script>
 
 
     <c:url var="user_update_js" value="/js/user_update.js" />
