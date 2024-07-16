@@ -45,14 +45,14 @@
                             
                             <form method="post" >
 								<c:if test="${not empty param.result && param.result eq 'f'}">
-									<div class="text-danger">아이디와 패스워드를 확인하세요.</div>
+									<div class="text-danger" style="text-align: center;">아이디와 패스워드를 확인하세요.</div>
 								</c:if>
 								
 								 <c:if test="${not empty param.result && param.result eq 'inactive'}">
-                                    <div class="text-danger">이 계정이 비활성화되었습니다.</div>
+                                    <div class="text-danger" style="text-align: center;">이 계정이 비활성화되었습니다.</div>
                                 </c:if>
                                 <c:if test="${not empty param.result && param.result eq 'deactivated'}">
-                                    <div class="text-danger">비활성화 기간이 남아있습니다.</div>
+                                    <div class="text-danger" style="text-align: center;">비활성화 기간이 남아있습니다.</div>
                                 </c:if>
 								
 
