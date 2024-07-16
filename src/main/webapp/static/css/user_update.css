@@ -143,4 +143,22 @@ label.col-sm-2.col-form-label {
 }
 
 
+/* 읽기 전용 입력 필드 스타일 */
+.readonly-input {
+    background-color: #ddd !important;
+    cursor: not-allowed;
+}
+
+/* 비밀번호 확인 필드 스타일 */
+#userPasswordConfirm {
+    margin-top: 5px;
+}
+
+/* 에러 메시지 스타일 */
+.password-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
 

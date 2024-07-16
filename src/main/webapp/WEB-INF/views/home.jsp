@@ -76,27 +76,27 @@
 					<div class="carousel-inner ">
 						<div class="carousel-item active">
 							<img src="images/main/camp1.jpg" class="d-block w-100 "
-								alt="Camping site 1 " height=920px;>
+								alt="Camping site 1 " height=964px;>
 							<div class="carousel-caption d-md-black my-5"></div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp2.jpg" class="d-block w-100 "
-								alt="Camping site 2" height=920px;>
+								alt="Camping site 2" height=964px;>
 							<div class="carousel-caption d-md-black my-5"></div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp3.jpg" class="d-block w-100 "
-								alt="Camping site 3" height=920px;>
+								alt="Camping site 3" height=964px;>
 							<div class="carousel-caption d-md-black my-5"></div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp4.jpg" class="d-block w-100 "
-								alt="Camping site 4" height=920px;>
+								alt="Camping site 4" height=964px;>
 							<div class="carousel-caption d-md-black my-5 "></div>
 						</div>
 						<div class="carousel-item">
 							<img src="images/main/camp5.jpg" class="d-block w-100 "
-								alt="Camping site 5" height=920px;>
+								alt="Camping site 5" height=964px;>
 							<div class="carousel-caption d-md-black my-5"></div>
 						</div>
 					</div>

@@ -23,72 +23,28 @@
 	
 </style>
 <header class="text-white text-center">
-    
 
     <nav class="navbar navbar-expand-md" id="top">
-        <div class="col-3 d-flex justify-content-center">
-            <div id="weather-info">
-                <p style="margin:0;">현재 날씨: <span id="sky"></span></p>
-                <p style="margin:0;"><span id="rain"></span>기온: <span id="temp"></span>°C</p>
-            </div>
-        </div>
-
-        <div class="col-6 navbar-nav d-flex justify-content-center">
+    
+    <div class="col-2 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
-            	<img alt="logo"
+                <img alt="logo"
                 src="<c:url value='/images/main/logo_horizontal.png'/>"
                 style="height: 60px; width: 200px;">
                 
             </a>
         </div>
         
-        <div class="col-3 d-flex justify-content-center">
-            <ul class="navbar-nav ">
-                <c:if test="${not empty signedInUser}">
-                    <%-- 로그인 정보가 세션에 저장된 경우 --%>
-                    <li class="nav-item"><c:url var="myPage"
-                            value="/user/myPage">
-                            <c:param name="userId"
-                                value="${signedInUser}"></c:param>
-                        </c:url> <a class="nav-link" href="${myPage}">마이페이지</a></li>
-                    <li class="nav-item">
-                    <c:url var="signOutPage" value="/user/signout" /> 
-                            <a class="nav-link" href="#" onclick="confirmLogout('${signOutPage}')"><span>${signedInUser}</span>
-                            로그아웃</a>
-                    </li>
-                </c:if>
-
-                <c:if test="${empty signedInUser}">
-                    <li class="nav-item">
-                        <c:url var="signInPage" value="/user/signin" /> 
-                        <a class="nav-link" href="#" onclick="confirmLogin('${signInPage}')">로그인</a></li>
-                    <li class="nav-item"><c:url var="signUpPage"
-                            value="/user/signup" /> <a class="nav-link"
-                        href="${signUpPage}">회원가입</a></li>
-                </c:if>
-            </ul>
+        
+        <div class="col-1 d-flex justify-content-center">
+            <div id="weather-info">
+                <p style="margin:0; font-weight: bold;">현재 날씨: <span id="sky"></span></p>
+                <p style="margin:0; font-weight: bold;"><span id="rain"></span>기온: <span id="temp"></span>°C</p>
+            </div>
         </div>
-    </nav>
-
-    <script>
-    function confirmLogout(signOutPage) {
-        if (confirm("정말 로그아웃 하시겠습니까?")) {
-        	const targetUrl = window.location.href;
-            window.location.href = signOutPage + "?target=" + encodeURIComponent(targetUrl);
-        }
-    }
-    function confirmLogin(signInPage) {
-    	const currentUrl = window.location.href;
-        const targetUrl = encodeURIComponent(currentUrl);
-        window.location.href = signInPage + "?target=" + targetUrl;
-    }
-    </script>
-
-
-</header>
-
-<nav class="navbar navbar-expand-md main">
-    <div class="container-fluid">
+        
+        <nav class="col-6 navbar navbar-expand-md main">
+    <div class="col-12 container-fluid">
         <!-- 
             <c:url var="homePage"  value = "/"/>
             <a class="navbar-brand" href="${homePage}">Home</a>
@@ -103,7 +59,7 @@
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item">
                 <c:url value="/intro/introduce" var="introPage" />
-                <a class="nav-link menu" aria-current="page" href="${introPage}">캠핑장 소개</a>
+                <a class="nav-link menu" aria-current="page" href="${introPage}" style=" font-weight: bold;">캠핑장 소개</a>
                     <ul class="subMenu">
                         <li>
                             <c:url value="/intro/introduce" var="introPage1" />
@@ -137,7 +93,7 @@
                     
                   <li class="nav-item">
                    <c:url value="/info/infoTime" var="infoPage" /> 
-                   <a class="nav-link  menu" href="${infoPage}">이용안내</a>
+                   <a class="nav-link  menu" href="${infoPage}" style=" font-weight: bold;">이용안내</a>
                     <ul class="subMenu">
                         <li><c:url value="/info/infoTime" var="infoPage1" />
                             <a class="nav-link" aria-current="page" href="${infoPage1}">이용시간 및 요금</a></li>
@@ -156,10 +112,10 @@
                 </li>
                 <li class="nav-item"><c:url value="/reservation/calendar"
                         var="reservationPage" /> <a
-                    class="nav-link  menu" href="${reservationPage}">예약</a></li>
+                    class="nav-link  menu" href="${reservationPage}" style=" font-weight: bold;">예약</a></li>
                 <li class="nav-item"><c:url value="/community/notice/list"
                         var="communityPage" /> <a
-                    class="nav-link  menu" href="${communityPage}">커뮤니티</a>
+                    class="nav-link  menu" href="${communityPage}" style=" font-weight: bold;">커뮤니티</a>
                     <ul class="subMenu">
                         <li><c:url value="/community/notice/list"
                                 var="communityPage1" /> <a
@@ -184,3 +140,54 @@
     </div>
 
 </nav>
+
+
+        <div class="col-3 d-flex justify-content-center">
+            <ul class="navbar-nav">
+                <c:if test="${not empty signedInUser}">
+                    <%-- 로그인 정보가 세션에 저장된 경우 --%>
+                    <li class="nav-item"><c:url var="myPage"
+                            value="/user/myPage">
+                            <c:param name="userId"
+                                value="${signedInUser}"></c:param>
+                        </c:url> <a class="nav-link" href="${myPage}"
+                        style="font-weight: bold;"> 마이페이지 </a>
+                        <span></span><span></span><span></span><span></span>
+                        </li>
+                    <li class="nav-item"><c:url var="signOutPage"
+                            value="/user/signout" /> <a
+                        class="nav-link" href="#"
+                        onclick="confirmLogout('${signOutPage}')"
+                        style="font-weight: bold;"> <span>${signedInUser}</span>로그아웃</a></li>
+                </c:if>
+                <c:if test="${empty signedInUser}">
+                    <li class="nav-item"><c:url var="signInPage"
+                            value="/user/signin" /> <a class="nav-link"
+                        href="#" onclick="confirmLogin('${signInPage}')"> 로그인 </a>
+                        <span></span><span></span><span></span><span></span>
+                    </li>
+                    <li class="nav-item"><c:url var="signUpPage"
+                            value="/user/signup" /> <a class="nav-link"
+                        href="${signUpPage}"> 회원가입 </a></li>
+                </c:if>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+    function confirmLogout(signOutPage) {
+        if (confirm("정말 로그아웃 하시겠습니까?")) {
+        	const targetUrl = window.location.href;
+            window.location.href = signOutPage + "?target=" + encodeURIComponent(targetUrl);
+        }
+    }
+    function confirmLogin(signInPage) {
+    	const currentUrl = window.location.href;
+        const targetUrl = encodeURIComponent(currentUrl);
+        window.location.href = signInPage + "?target=" + targetUrl;
+    }
+    </script>
+
+
+</header>
+
