@@ -51,7 +51,7 @@
                                     <div class="div2">전화번호</div>
                                 </div>
                                 <div class="details">
-                                    <div class="_012-345-6789">012-345-6789</div>
+                                    <div class="_012-345-6789">033-1234-5678</div>
                                 </div>
                             </div>
                             <div class="descriptions2">
