@@ -162,7 +162,8 @@
                     <div class="night-radio_label"
                         id="night-radio_label">
                         <h3> <strong>이용 기간<strong> </h3>
-                        <br />
+                        <br/>
+                        <br/>
                         <div class="radio-options">
                         <label> <input class="night-radio"
                             type="radio" name="night" value="1">
@@ -173,7 +174,7 @@
                         </label>
                         </div>
                     </div>
-                    <div id="price" style="text-align: right; color: #0056b3; font-size: 20px;">
+                    <div id="price" style="text-align: right; color: #0056b3; font-size: 25px;">
                     <span id="price-label">캠핑존 가격: </span> <span
                         id="price-value"></span>원
                 	</div>
