@@ -74,16 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div>${answer.content}</div>`;
                         
-            if (answer.userId === signedInUser) {    
-                htmlStr += `
-                    <div>
-                        <button class="btnDeleteAnswer btn btn-outline-danger btn-sm"
-                            data-id="${answer.id}">삭제</button>
-                        <button class="btnModifyAnswer btn btn-outline-primary btn-sm"
-                            data-id="${answer.id}">수정</button>
-                    </div>
-                </div>`;
-            }
+//            if (answer.userId === signedInUser) {    
+//                htmlStr += `
+//                    <div>
+//                        <button class="btnDeleteAnswer btn btn-outline-danger btn-sm"
+//                            data-id="${answer.id}">삭제</button>
+//                        <button class="btnModifyAnswer btn btn-outline-primary btn-sm"
+//                            data-id="${answer.id}">수정</button>
+//                    </div>
+//                </div>`;
+//            }
             
             htmlStr += '</div>';
         }
