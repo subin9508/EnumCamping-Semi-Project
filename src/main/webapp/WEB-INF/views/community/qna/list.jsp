@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../../css/header.css">
 <link rel="stylesheet" href="../../css/footer.css">
 
-    <c:url value="../css/mypage_qna_list.css" var="qnaListCss"/>
+    <c:url value="../../css/mypage_qna_list.css" var="qnaListCss"/>
     <link rel="stylesheet" href="${qnaListCss}">
 
 
@@ -62,15 +62,13 @@ ul.pagination {
 	<div class="wrapper">
 		<c:set var="pageTitle" value="QnA List" />
 		<%@ include file="../../fragments/header.jspf"%>
-		<div class="footer-main-content">
+		<div class="footer-main-content qna-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
 
 
 			<div class="container-fluid" style="flex:1 padding: 20px;">
 				<main>
-					<div class="qna-list-container">
-					<div class="mt-10 card">
-						<div class="card-header">
+					<div class="qna-list-container mt-10 card">
                         <h1 class="card-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
 
 							<c:url var="qnaSearchPage" value="/community/qna/search" />
@@ -100,7 +98,6 @@ ul.pagination {
 								
                                 </div>
 							</form>
-						</div>
                         
 						<div class="card-body">
 							<!-- 알림 메시지 표시 -->
@@ -188,7 +185,6 @@ ul.pagination {
 		
         </div>
     </div>						
-					</div>
 					</div>
 				</main>
 			</div>

@@ -14,7 +14,7 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="../../css/header.css">
 <link rel="stylesheet" href="../../css/footer.css">
-    <c:url value="../css/mypage_qna_details.css" var="qnaDetailsCss" />
+    <c:url value="../../css/mypage_qna_details.css" var="qnaDetailsCss" />
     <link rel="stylesheet" href="${qnaDetailsCss}">
 <style>
 .card h2 {
@@ -47,11 +47,7 @@
 						</div>
 						<c:remove var="message" scope="session" />
 					</c:if>
-					<div class="mt-2 card">
-						<div class="card-header">
 							<h2>${qna.qnaTitle}</h2>
-						</div>
-						<div class="card-body">
 							<form>
 								<div class="mt-2">
 									<label for="qnaPostId" class="form-label">번호</label> <input
@@ -94,7 +90,6 @@
                                 </c:if>
 								<input type="hidden" id="userRole" value="${userRole}">
 							</form>
-						</div>
 						<div class="card-footer">
 							<c:url var="qnaListPage" value="/community/qna/list" />
 							<a class="btn btn-outline-primary" href="${qnaListPage}">목록보기</a>
@@ -145,7 +140,6 @@
 
 						<!--                 </div> -->
 
-					</div>
 					</div>
 				</main>
 
