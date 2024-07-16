@@ -23,7 +23,7 @@
     align-items: center;
     padding: 20px;
     position: relative;
-    margin-left: -215px;
+    margin-left: -100px;
 }
 
 .slider-container {
@@ -56,6 +56,7 @@ ul.imgs {
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-left: -63px;
 }
 
 ul.imgs li {
@@ -158,4 +159,9 @@ ul.imgs li .overlay {
     .box {
         flex: 1 1 100%; /* 작은 창에서는 한 개씩 배치 */
     }
+    
+
+    
+    
+    
 }
