@@ -23,6 +23,16 @@
     border-bottom: 2px solid #7C9C63;
     padding-bottom: 0.5rem;
 }
+.btn-register {
+    border-color: #7C9C63;
+    color: #7C9C63;
+}
+
+.btn-register:hover {
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
 
 </style>
 </head>
@@ -132,7 +142,7 @@
 										placeholder="답변을 작성해주세요" style="font-size:1.1em;"></textarea>
 										</div>
 								
-									<button class="btn btn-outline-success" style="font-size:1.5em;" id="btnRegisterAnswer" >답변 등록</button>
+									<button class="btn btn-register" style="font-size:1.5em;" id="btnRegisterAnswer" >답변 등록</button>
 							</div>
 							<!--                     </div> -->
 							<!--                 </div> -->

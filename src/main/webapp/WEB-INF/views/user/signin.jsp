@@ -73,6 +73,7 @@ input.write {
 	background-color: #198754; 
 	border-color: #198754;
 	color: #fff;
+    font-weight: bold;
 }
 
 a.signup {
@@ -86,6 +87,7 @@ a.signup:hover {
 	background-color: #198754; 
     border-color: #198754;
     color: #fff;
+    font-weight: bold;
 }
 
 .no-border {

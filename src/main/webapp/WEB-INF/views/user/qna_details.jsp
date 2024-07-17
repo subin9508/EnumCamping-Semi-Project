@@ -20,6 +20,19 @@
     
     <c:url value="../css/mypage_qna_details.css" var="qnaDetailsCss" />
     <link rel="stylesheet" href="${qnaDetailsCss}">
+
+<style>
+.btn-register {
+    border-color: #7C9C63;
+    color: #7C9C63;
+}
+
+.btn-register:hover {
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+</style>
 </head>
 <body>
 <div class="qna-wrapper">
@@ -87,7 +100,7 @@
                                 <c:param name="userId"
                                     value="${user.userId}" />
                             </c:url>
-                            <a class="btn btn-list"
+                            <a class="btn btn-outline-primary"
                                 href="${qnaListPage}">목록보기</a>
 
                             <!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
@@ -128,7 +141,7 @@
                                 <textarea class="form-control" rows="1" id="answerContent" placeholder="답변 내용"></textarea>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
+                                <button class="btn btn-register" id="btnRegisterAnswer">등록하기</button>
                             </div>
                         </div>
 <!--                     </div> -->
