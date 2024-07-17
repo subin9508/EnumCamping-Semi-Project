@@ -69,7 +69,7 @@ ul.pagination {
 			<div class="container-fluid" style="flex:1 padding: 20px;">
 				<main>
 					<div class="qna-list-container mt-10 card">
-                        <h1 class="card-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
+                        <h1 class="qna-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
 
 							<c:url var="qnaSearchPage" value="/community/qna/search" />
 							<form method="get" action="${qnaSearchPage}">

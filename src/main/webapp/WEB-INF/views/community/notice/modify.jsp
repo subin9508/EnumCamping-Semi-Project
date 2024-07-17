@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="${noticeModifyCss}">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="modify-wrapper">
     <%@ include file="../../fragments/header.jspf"%>
-    <div class="footer-main-content">
+    <div class="footer-main-content not-content">
     <%@ include file="../../fragments/community-sidebar.jspf"%>
     <div class="container-fluid">
         <main>
