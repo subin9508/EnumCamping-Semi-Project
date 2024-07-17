@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 rain.innerHTML = "비X, ";
             } else if (rainNow==1){
                 rain.innerHTML = "비, ";
-            } else if (rainNow==1){
+            } else if (rainNow==2){
                 rain.innerHTML = "비/눈, ";
-            } else if (rainNow==1){
+            } else if (rainNow==3){
                 rain.innerHTML = "눈, ";
             } else {
                 rain.innerHTML = "소나기, ";
