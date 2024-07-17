@@ -119,15 +119,19 @@ ul.pagination {
 										
 									</tr>
 								</thead>
+								
 								<tbody>
 									<c:forEach var="qna" items="${qnas}">
-										<tr style="cursor:pointer; text-align: center;">
+										<tr
+											onclick="location.href='${pageContext.request.contextPath}/community/qna/details?qnaPostId=${qna.qnaPostId}'"
+											style="cursor:pointer; text-align: center;">
 											<td class="col-1">${qna.qnaPostId}</td>
 											<td class="col-3">
                                             <c:url var="secretIconUrl" value="/images/community/secret.png" />
                                             <c:url var="qnaDetailsPage"	value="/community/qna/details">
 													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
 												</c:url>
+												
 											<a href="${qnaDetailsPage}">
                                                     ${qna.qnaTitle}
                                                     <c:if test="${qna.qnaLock == 1}">
