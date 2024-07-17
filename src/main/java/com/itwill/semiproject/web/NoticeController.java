@@ -63,9 +63,9 @@ public class NoticeController {
 	
 	
 	@GetMapping("/delete")
-	public String noticedelete(@RequestParam(name = "id") int id) {
+	public String noticedelete(@RequestParam(name = "notPostId") int notPostId) {
 		log.debug("GET: delete");
-		noticeService.deleteNotice(id);
+		noticeService.deleteNotice(notPostId);
 		return "redirect:list";
 	}
 	

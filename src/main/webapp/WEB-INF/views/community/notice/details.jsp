@@ -35,6 +35,11 @@
 						</div>
 						<div class="card-body">
 							<form>
+                            <div class="mt-2">
+                                <label for="notPostId" class="form-label">번호</label>
+                                <input id="notPostId" class="form-control" type="text"
+                                    name="notPostId" value="${notice.notPostId}" readonly />
+                            </div>
 								<div class="mt-2" >
 									<label for="content" class="form-label">내용</label>
 									<textarea id="content" class="form-control" rows="5" readonly>${notice.notContent}</textarea>
@@ -61,8 +66,7 @@
 
 						<c:if test="${userRole eq 0}">
 							<div class="card-footer">
-								<button id="btnDelete" type="button"
-									class="btn btn-outline-danger">삭제하기</button>
+								<button id="btnDelete" type="button" class="btn btn-outline-danger">삭제하기</button>
 								<c:url var="noticeModifyPage" value="/community/notice/modify">
 									<c:param name="id" value="${notice.notPostId}" />
 								</c:url>

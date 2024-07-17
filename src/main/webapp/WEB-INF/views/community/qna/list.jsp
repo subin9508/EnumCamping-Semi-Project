@@ -46,13 +46,13 @@ ul.pagination {
         }
 
 .pagination .page-link:hover {
-	background-color: #28a745; /* 호버 시 배경색 초록 */
+	background-color: #7C9C63; /* 호버 시 배경색 초록 */
 	color: #fff; /* 호버 시 글자색 흰색 */
 }
 
 .pagination .page-item.active .page-link {
-	background-color: #28a745; /* 활성화된 페이지 배경색 초록 */
-	border-color: #28a745; /* 활성화된 페이지 테두리 색상 초록 */
+	background-color: #7C9C63; /* 활성화된 페이지 배경색 초록 */
+	border-color: #7C9C63; /* 활성화된 페이지 테두리 색상 초록 */
 	color: #fff; /* 활성화된 페이지 글자색 흰색 */
 }
 </style>
