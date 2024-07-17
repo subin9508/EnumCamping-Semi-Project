@@ -26,7 +26,7 @@
 
     <nav class="navbar navbar-expand-md" id="top">
     
-    <div class="col-1.5 navbar-nav d-flex justify-content-center">
+    <div class="col-2 navbar-nav d-flex justify-content-center">
             <a href="/semiproject/">
                 <img alt="logo"
                 src="<c:url value='/images/main/logo_horizontal.png'/>"
@@ -43,8 +43,8 @@
             </div>
         </div>
         
-        <nav class="navbar navbar-expand-md main">
-    <div class="container-fluid">
+        <nav class="col-6 navbar navbar-expand-md main">
+    <div class="col-12 container-fluid">
         <!-- 
             <c:url var="homePage"  value = "/"/>
             <a class="navbar-brand" href="${homePage}">Home</a>
@@ -55,7 +55,7 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="col-12 collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" id="mainMenu">
                 <li class="nav-item">
                 <c:url value="/intro/introduce" var="introPage" />

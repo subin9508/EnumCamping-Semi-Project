@@ -33,6 +33,12 @@
                         <div class="card-body">
 
                             <table class="table  table-hover">
+                                <colgroup>
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>예약 번호</th>
@@ -71,13 +77,13 @@
                                                 <td>${r.resCheckIn}</td>
                                                 <td>
                                                     <c:if test="${r.resState == 0}">
-                                                        예약대기
+                                                        <span style="color: green;">예약대기</span>
                                                     </c:if>
                                                     <c:if test="${r.resState == 1}">
-                                                        예약완료
+                                                        <span style="color: blue;">예약완료</span>
                                                     </c:if>
                                                     <c:if test="${r.resState == 2}">
-                                                        예약취소
+                                                        <span style="color: red;">예약취소</span>
                                                     </c:if>
                                                 </td>
                                             </tr>

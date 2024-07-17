@@ -59,6 +59,9 @@ response.setDateHeader("Expires", 0); // Proxies.
     border-color: #7C9C63;
     background-color: #7C9C63;
     color: white;
+    padding: 10px 24px;
+    font-size: 18px;
+    transition: all 0.3s ease;
 }
 
 .btn-payment:hover {
