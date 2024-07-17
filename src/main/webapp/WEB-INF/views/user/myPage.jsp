@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="userPassword"
-                                            class="col-sm-2 col-form-label">비밀번호</label>
+                                            class="col-sm-2 col-form-label">PW</label>
                                         <div class="col-sm-10">
                                             <input type="password"
                                                 class="form-control"
