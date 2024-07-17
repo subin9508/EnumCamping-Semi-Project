@@ -43,17 +43,57 @@ ul.pagination {
 }
 .pagination .page-link {
             color: #000000; /* 기본 글자색 검정 */
+            
         }
 
 .pagination .page-link:hover {
-	background-color: #28a745; /* 호버 시 배경색 초록 */
+	background-color: #7C9C63; /* 호버 시 배경색 초록 */
 	color: #fff; /* 호버 시 글자색 흰색 */
 }
 
 .pagination .page-item.active .page-link {
-	background-color: #28a745; /* 활성화된 페이지 배경색 초록 */
-	border-color: #28a745; /* 활성화된 페이지 테두리 색상 초록 */
+	background-color: #7C9C63; /* 활성화된 페이지 배경색 초록 */
+	border-color: #7C9C63; /* 활성화된 페이지 테두리 색상 초록 */
 	color: #fff; /* 활성화된 페이지 글자색 흰색 */
+}
+
+.btnSearch {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnSearch:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
+.btnList {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnList:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
+.btnCreate {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnCreate:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
 }
 </style>
 
@@ -89,10 +129,10 @@ ul.pagination {
 									</div>
 									<div class="col-2">
 										<input type="submit"
-											class="form-control btn btn-outline-success" value="검색" />
+											class="form-control btn btnSearch" value="검색" />
 									</div>
                                     <div class="col-2">
-                                <button type="button" class="form-control btn btn-outline-success"
+                                <button type="button" class="form-control btn btnList"
                                 onclick="location.href='/semiproject/community/qna/list'">전체 목록</button>
                                   </div>
 								
@@ -164,7 +204,7 @@ ul.pagination {
                         <a style="text-align: left">총 게시글 수: ${totalCount} 개</a>
                         <div class="text-end">
                         <c:url var="qnaCreatePage" value="/community/qna/create"></c:url>
-                        <a class="btn btn-outline-success" href="${qnaCreatePage}" style="text-align: right">글작성</a>
+                        <a class="btn btnCreate" href="${qnaCreatePage}" style="text-align: right">글작성</a>
                         </div>
 							<div> 
         <nav aria-label="Page navigation example">
