@@ -88,7 +88,7 @@
                             id="area1_radio" name="area" value="1">
                             <span class="radio_icon"></span> <img
                             alt="campingzone1"
-                            src="${calendar_campingzone1}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
@@ -103,7 +103,7 @@
                             id="area2_radio" name="area" value="2">
                             <span class="radio_icon"></span> <img
                             alt="campingzone2"
-                            src="${calendar_campingzone1}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
@@ -148,7 +148,7 @@
                             id="area5_radio" name="area" value="5">
                             <span class="radio_icon"></span> <img
                             alt="campingzone5"
-                            src="${calendar_campingzone3}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
