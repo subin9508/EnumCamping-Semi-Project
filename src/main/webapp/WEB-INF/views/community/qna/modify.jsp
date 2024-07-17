@@ -18,12 +18,12 @@
 	</head>
 	
 	<body>
-	<div class="wrapper">
+	<div class="modify-wrapper">
             <c:set var="pageTitle" value="QnA Modify" />
             <%@ include file="../../fragments/header.jspf" %>
   <div class="footer-main-content qna-content">            
                     <%@ include file="../../fragments/community-sidebar.jspf"%>
-		<div class="containere-fluid">
+		<div class="container-fluid">
             
             <main>
                 <div class="qna-modify-container">

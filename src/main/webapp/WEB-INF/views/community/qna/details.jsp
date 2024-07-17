@@ -27,10 +27,10 @@
 </style>
 </head>
 <body>
-	<div class="wrapper">
+	<div class="qna-wrapper">
 		<c:set var="pageTitle" value="QnA Details" />
 		<%@ include file="../../fragments/header.jspf"%>
-		<div class="footer-main-content">
+		<div class="footer-main-content qna-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
 
 			<div class="container-fluid">
