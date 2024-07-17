@@ -175,5 +175,25 @@
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <c:url var="weatherJS" value="/js/weather.js" />
     <script src="${weatherJS}"></script>
+    
+         <pre id="responseDisplay"></pre>
+    <script>
+    
+       document.addEventListener('DOMContentLoaded', function() {
+          
+          const paymentResponse = localStorage.getItem('paymentResponse');
+          if(paymentResponse) {
+             const parsedResponse = JSON.parse(paymentResponse);
+             console.log('Restrived Payment Response: ', parsedResponse);
+             
+             document.getElementById('responseDisplay').innerText = JSON.stringfy(parseResponse, null, 2);
+             
+          }
+          
+       });
+    
+    </script>
+    
+    
 </body>
 </html>
