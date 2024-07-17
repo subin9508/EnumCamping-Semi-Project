@@ -25,67 +25,56 @@
 		<%@ include file="../../fragments/header.jspf"%>
 		<div class="footer-main-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
+			
+			<div class=" container-fluid">
+				<main style="margin-left:150px;">
+					<div class="mt-10 card">
+						<div class="card-header">
 
-			<main>
-				<div class="mt-2 card">
-					<div class="card-header">
-
-						<h2>${notice.notTitle}</h2>
-					</div>
-					<div class="card-body">
-						<form>
-							<!-- 
-                        <div class="mt-2">
-                            <label for="id" class="form-label">번호</label>
-                            <input id="id" class="form-control"
-                                type="text" value="${notice.notPostId}" readonly />
-                        </div>
-                        <div class="mt-2">
-                            <label for="title" class="form-label">제목</label>
-                            <input id="title" class="form-control"
-                                type="text" value="${notice.notTitle}"
-                                readonly />
-                        </div>
-                     -->
-							<div class="mt-2">
-								<label for="content" class="form-label">내용</label>
-								<textarea id="content" class="form-control" rows="5" readonly>${notice.notContent}</textarea>
-							</div>
-							<div class="mt-2">
-								<label for="createdTime" class="form-label">작성 시간</label> <input
-									id="createdTime" class="form-control" type="text"
-									value="${notice.notCreatedTime}" readonly />
-							</div>
-							<div class="mt-2">
-								<label for="modifiedTime" class="form-label">최종 수정 시간</label> <input
-									id="modifiedTime" class="form-control" type="text"
-									value="${notice.notModifiedTime}" readonly />
-							</div>
-							<c:url var="qnaListPage" value="/community/qna/list" />
-							<a class="btn btn-outline-primary" style="items-align:right" href="${qnaListPage}">목록보기</a>
-						</form>
-					</div>
-
-
-
-					<!-- signedUser 체크 -->
-
-					<c:if test="${userRole eq 0}">
-						<div class="card-footer">
-							<button id="btnDelete" type="button"
-								class="btn btn-outline-danger">삭제하기</button>
-							<c:url var="noticeModifyPage" value="/community/notice/modify">
-								<c:param name="id" value="${notice.notPostId}" />
-							</c:url>
-							<a class="btn btn-outline-primary" href="${noticeModifyPage}">수정하기</a>
+							<h2>${notice.notTitle}</h2>
 						</div>
-					</c:if>
+						<div class="card-body">
+							<form>
+								<div class="mt-2">
+									<label for="content" class="form-label">내용</label>
+									<textarea id="content" class="form-control" rows="5" readonly>${notice.notContent}</textarea>
+								</div>
+								<div class="mt-2">
+									<label for="createdTime" class="form-label">작성 시간</label> <input
+										id="createdTime" class="form-control" type="text"
+										value="${notice.notCreatedTime}" readonly />
+								</div>
+								<div class="mt-2">
+									<label for="modifiedTime" class="form-label">최종 수정 시간</label> <input
+										id="modifiedTime" class="form-control" type="text"
+										value="${notice.notModifiedTime}" readonly />
+								</div>
+								<c:url var="qnaListPage" value="/community/notice/list" />
+								<a class="btn btn-outline-primary" style="items-align: right"
+									href="${qnaListPage}">목록보기</a>
+							</form>
+						</div>
 
-				</div>
-			</main>
+
+
+						<!-- signedUser 체크 -->
+
+						<c:if test="${userRole eq 0}">
+							<div class="card-footer">
+								<button id="btnDelete" type="button"
+									class="btn btn-outline-danger">삭제하기</button>
+								<c:url var="noticeModifyPage" value="/community/notice/modify">
+									<c:param name="id" value="${notice.notPostId}" />
+								</c:url>
+								<a class="btn btn-outline-primary" href="${noticeModifyPage}">수정하기</a>
+							</div>
+						</c:if>
+
+					</div>
+				</main>
+			</div>
 		</div>
-
-		<%@ include file="../../fragments/footer.jspf"%>
+			<%@ include file="../../fragments/footer.jspf"%>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

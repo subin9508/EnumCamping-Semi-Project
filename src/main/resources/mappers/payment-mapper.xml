@@ -51,5 +51,11 @@
 		res_modified_time = SYSDATE
 		WHERE res_id = #{resId}
 	</update>
+    
+<!--     웹훅시 사용 -->
+<!--     <select id="findResIdByImpUid" resultType="integer" parameterType="string"> -->
+<!--     SELECT res_id FROM payments WHERE imp_uid = #{impUid} -->
+<!--     </select> -->
+  
   
 </mapper>
