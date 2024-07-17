@@ -46,7 +46,7 @@
                     </form>
 
                 <div class="card-footer">
-                    <button id="btnUpdate" class="btn btn-outline-success">업데이트</button>
+                    <button id="btnUpdate" class="btn btn-outline-primary">업데이트</button>
                 </div>
 
             </div>
