@@ -28,14 +28,14 @@
 			
 			<div class=" container-fluid">
 				<main style="margin-left:150px;">
-					<div class="mt-10 card">
-						<div class="card-header">
+					<div class="mt-10 card" >
+						<div class="card-header" style="background-color: white;">
 
 							<h2>${notice.notTitle}</h2>
 						</div>
 						<div class="card-body">
 							<form>
-								<div class="mt-2">
+								<div class="mt-2" >
 									<label for="content" class="form-label">내용</label>
 									<textarea id="content" class="form-control" rows="5" readonly>${notice.notContent}</textarea>
 								</div>

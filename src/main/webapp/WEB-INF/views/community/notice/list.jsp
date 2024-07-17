@@ -35,7 +35,7 @@ main {
 
 				<main>
 					<div class="mt-10 card" >
-						<div class="card-header">
+						<div class="card-header" style="background-color: white;">
 							<h1 class="card-title align-center mt-2">공지사항</h1>
 							<c:url var="noticeSearchPage" value="/community/notice/search" />
 							<form action="${noticeSearchPage }">
