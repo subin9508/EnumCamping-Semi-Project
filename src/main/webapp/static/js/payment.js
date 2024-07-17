@@ -95,6 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
 async function handlePaymentResponse(rsp, resId) {
     // 결제 응답 로깅
     console.log('Payment Response:', rsp);
+    
+     // 결제 응답 정보를 로컬 스토리지에 저장
+    localStorage.setItem('paymentResponse', JSON.stringify(rsp));
+
     if (rsp.success) {
         console.log("결제 성공, 검증 시작");
         try {
