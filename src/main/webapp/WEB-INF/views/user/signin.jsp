@@ -61,14 +61,14 @@ input.write {
 	flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
 }
 
-input.btn-login {
+.btn-login {
 	border-radius: 5px;
 	border-color: #7C9C63;
 	background-color: #7C9C63;
 	color: white;
 }
 
-input.btn-login:hover {
+.btn-login:hover {
 	background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
 	border-color: #708b58;
 	color: red;
@@ -108,22 +108,13 @@ a.signup:hover {
 	justify-content: center;
 }
 
-.btn-custom {
-	border-color: #7C9C63;
-	color: #7C9C63;
-}
-
-.btn-custom:hover {
-	border-color: #7C9C63;
-	background-color: #7C9C63;
-	color: white;
+.link-style:hover {
+	font-weight: bold;
 }
 
 .link-style {
+    color: black;
 	text-decoration: none; /* 기본 밑줄 제거 */
-	color: inherit; /* 부모 요소의 색상 상속 */
-	background: none; /* 버튼 배경 제거 */
-	border: none; /* 버튼 테두리 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	font-size: 1rem; /* 원하는 폰트 크기로 조정 */
 	cursor: pointer; /* 커서를 포인터로 변경 */
@@ -191,7 +182,7 @@ a.signup:hover {
 								</div>
 						</div>
 						<div class="mt-2" style="text-align: right;">
-							<div class="m-3" style="display: inline-block;">
+							<div class="m-3" style="display: inline-block; color: #7C9C63;">
 								<h6>계정이 없으신가요?</h6>
 							</div>
 							<a href="signup" id="btnUpdate" class="btn signup"

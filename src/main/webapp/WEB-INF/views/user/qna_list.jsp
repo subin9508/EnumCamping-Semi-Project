@@ -65,9 +65,9 @@
 <!--                                         </td> -->
                                         <td><c:if
                                                 test="${q.qnaState == 0}">
-                                            답변대기
+                                            <span style="color:red;">답변대기</span>
                                         </c:if> <c:if test="${q.qnaState == 1}">
-                                            답변완료
+                                            <span style="color:blue;">답변완료</span>
                                         </c:if></td>
                                     </tr>
                                 </c:forEach>
