@@ -118,5 +118,6 @@
 	</script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<c:url var="weatherJS" value="../js/weather.js" />
+    <script src="${weatherJS}"></script>
 </body>
 </html>
