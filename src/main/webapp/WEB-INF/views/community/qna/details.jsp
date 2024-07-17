@@ -34,6 +34,19 @@
     color: white;
 }
 
+.btnList {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnList:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
 </style>
 </head>
 <body>
@@ -102,7 +115,7 @@
 							</form>
 						<div class="card-footer">
 							<c:url var="qnaListPage" value="/community/qna/list" />
-							<a class="btn btn-outline-primary" href="${qnaListPage}">목록보기</a>
+							<a class="btn btnList" href="${qnaListPage}">목록보기</a>
 
 							<!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
 							<c:if
