@@ -11,7 +11,7 @@
         padding: 20px;
     }
 
-    .qna-list-container {
+    .card {
         margin: 2rem auto;
         padding: 2rem;
         background-color: #fff;
@@ -39,16 +39,16 @@
         vertical-align: middle;
        
     }
+    
+    .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
 
     a {
         color: #7C9C63;
         text-decoration: none;
     }
 
-    a:hover {
-        font-weight: bold;
-    }
-
-    .qna-content {
+    .footer-main-content {
         display: flex;
     }

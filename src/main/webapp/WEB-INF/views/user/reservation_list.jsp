@@ -33,6 +33,12 @@
                         <div class="card-body">
 
                             <table class="table  table-hover">
+                                <colgroup>
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th>예약 번호</th>
