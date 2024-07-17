@@ -58,19 +58,19 @@
                                                 <td>
                                                     <c:choose>
                                                         <c:when test="${r.itemId ge 1 and r.itemId le 4}">
-                                                            1구역
+                                                            캠핑존 A-1
                                                         </c:when>
                                                         <c:when test="${r.itemId ge 5 and r.itemId le 8}">
-                                                            2구역
+                                                            캠핑존 A-2
                                                         </c:when>
                                                         <c:when test="${r.itemId ge 9 and r.itemId le 12}">
-                                                            3구역
+                                                            캠핑존 B-1
                                                         </c:when>
                                                         <c:when test="${r.itemId ge 13 and r.itemId le 16}">
-                                                            4구역
+                                                            캠핑존 B-2
                                                         </c:when>
                                                         <c:when test="${r.itemId ge 17 and r.itemId le 20}">
-                                                            5구역
+                                                            캠핑존 C
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
