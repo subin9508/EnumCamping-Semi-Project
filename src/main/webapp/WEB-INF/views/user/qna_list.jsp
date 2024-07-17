@@ -20,12 +20,7 @@
     
     <c:url value="../css/mypage_qna_list.css" var="qnaListCss"/>
     <link rel="stylesheet" href="${qnaListCss}">
-    
-    <style>
-    a:hover {
-      font-weight: bold;
-    }
-    </style>
+
 </head>
 <body>
     <div class="wrapper">
@@ -36,6 +31,8 @@
                 <main>
                     <div class="qna-list-container">
                         <h2 class="qna-title">문의내역</h2>
+                        <div class="card-body">
+                        
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -55,7 +52,7 @@
                                         <c:param name="userId"
                                             value="${user.userId}" />
                                     </c:url>
-                                    <tr onclick="location.href='${qnaDetails}'">
+                                    <tr onclick="location.href='${qnaDetails}'" style="cursor:pointer;">
                                         <td>${q.qnaPostId}</td>
                                         <td>${q.qnaTitle}</td>
                                         <td>${q.qnaModifiedTime}</td>
@@ -73,6 +70,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </main>
             </div>

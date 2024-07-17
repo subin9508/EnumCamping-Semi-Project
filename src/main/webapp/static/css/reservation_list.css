@@ -30,6 +30,11 @@
     padding-bottom: 0.5rem;
 }
 
+.table {
+        margin-bottom: 0;
+        text-align: center;
+    }
+    
 .table th, .table td {
     text-align: center;
     vertical-align: middle;
