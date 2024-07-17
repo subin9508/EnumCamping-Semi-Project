@@ -121,7 +121,7 @@
                                 <img src="${info2_burner}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Sink">
                                 <div class="d-flex flex-column align-items-center mt-2" >
                                 <h5 style="color: black;">15,000원</h5>
-                                <p style="color: gray;">*이소가스 미포함</p>
+                                <p style="color: gray;">이소가스 미포함</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="랜턴">
@@ -137,7 +137,7 @@
                                 <img src="${info2_reel}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">3,000원</h5>
-                                <p style="color: gray;">*20m</p>
+                                <p style="color: gray;">20m</p>
                             </div>
                             </div>
                             
@@ -146,7 +146,7 @@
                                 <img src="${info2_fire}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">20,000원</h5>
-                                <p style="color: gray;">*기름 미포함</p>
+                                <p style="color: gray;">기름 미포함</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="전기장판">
@@ -154,7 +154,7 @@
                                 <img src="${info2_electric}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">4,000원</h5>
-                                <p style="color: gray;">*2인용</p>
+                                <p style="color: gray;">1인용</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="캠핑 의자">

@@ -129,7 +129,7 @@
                                 <img src="${info2_sweetpotato}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Shower">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">5,000원</h5>
-                                <p style="color: gray;">*200g</p>
+                                <p style="color: gray;">꿀 고구마(200g)</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="마시멜로우">
@@ -137,7 +137,7 @@
                                 <img src="${info2_marshmallow}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Toilet">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">6,000원</h5>
-                                <p style="color: gray;">1봉지(10개입)+나무막대 5개</p>
+                                <p style="color: gray;">1봉지(10개입) + 꼬치 5개</p>
                             </div>
                             </div>
                             
@@ -146,7 +146,7 @@
                                 <img src="${info2_firewood}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Barbecue">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">11,000원</h5>
-                                <p style="color: gray;">*1kg</p>
+                                <p style="color: gray;">10kg</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="부탄가스">
@@ -154,7 +154,7 @@
                                 <img src="${info2_butangas}" class="d-block w-100" style="width: 500px; height: 400px; object-fit: cover;" alt="Pool">
                                 <div class="d-flex flex-column align-items-center mt-2">
                                 <h5 style="color: black;">2,000원</h5>
-                                <p style="color: gray;">*1개</p>
+                                <p style="color: gray;">1개</p>
                             </div>
                             </div>
                             <div class="carousel-item" data-title="오로라가루">
