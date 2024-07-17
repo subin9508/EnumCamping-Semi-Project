@@ -183,9 +183,8 @@
 						<div class="card border-0 border-light mt-15">
 							<div class="card-body">
 								<h5 class="card-title ">이넘 캠핑장 오픈 이벤트</h5>
-								<p class="card-text">오픈 특가! 상시 30% 할인, 회원가입 후 첫 예약 고객님께 50%
-									할인해드립니다!</p>
-								<a href="/semiproject/community/notice/details?id=41"
+								<p class="card-text">오픈 특가! 회원가입 후 첫 예약 고객님께는 오로라 가루 1개를 증정해 드립니다!</p>
+								<a href="/semiproject/community/notice/details?id=2"
 									class="stretched-link" /></a>
 							</div>
 						</div>
