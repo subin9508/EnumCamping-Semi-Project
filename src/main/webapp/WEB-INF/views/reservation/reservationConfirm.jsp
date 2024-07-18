@@ -71,19 +71,19 @@
                         <c:forEach items="${resDetail}" var="item">
                             <c:choose>
                                 <c:when test="${item.itemId ge 1 and item.itemId le 4}">
-                                    <c:set var="area" value="1구역" />
+                                    <c:set var="area" value="캠핑존 A-1" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 5 and item.itemId le 8}">
-                                    <c:set var="area" value="2구역" />
+                                    <c:set var="area" value="캠핑존 A-2" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 9 and item.itemId le 12}">
-                                    <c:set var="area" value="3구역" />
+                                    <c:set var="area" value="캠핑존 B-1" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 13 and item.itemId le 16}">
-                                    <c:set var="area" value="4구역" />
+                                    <c:set var="area" value="캠핑존 B-2" />
                                 </c:when>
                                 <c:when test="${item.itemId ge 17 and item.itemId le 20}">
-                                    <c:set var="area" value="5구역" />
+                                    <c:set var="area" value="캠핑존 C" />
                                 </c:when>
                             </c:choose>
                         </c:forEach>

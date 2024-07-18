@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -90,10 +91,9 @@ public class PaymentController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
-
-	// 결제 검증을 수행하는 메서드
+	
+	
 	@ResponseBody
-
 	@PostMapping("/reservation/verifyIamport/{imp_uid}")
 	public ResponseEntity<?> paymentByImpUid(
 	        @PathVariable(value = "imp_uid") String imp_uid,
@@ -102,25 +102,26 @@ public class PaymentController {
 	    log.trace("paymentByImpUid({}, {}) invoked.", imp_uid, resId);
 
 	    try {
-	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 아임포트 API를 통해 결제 정보를 조회
+	        // 먼저 예약 상태를 확인
+	        Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
+	        log.debug("---------paymentInfoByResId = {}",paymentInfo);
+	        if(paymentInfo != null) {
+	            Object resStateObj = paymentInfo.get("resState");
+	            log.debug("---------resStateObj = {}",resStateObj);
+	            if(resStateObj != null) {
+	                int resState = ((Number) resStateObj).intValue();
+	                log.debug("-----------resState = {}",resState);
+	                if(resState == 1) {
+	                    // 이미 결제가 완료된 예약이면 오류 반환
+	                    return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
+	                }
+	            }
+	        }
+
+	        // 아임포트 API를 통해 결제 정보를 조회
+	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse();
 	        
 	        if ("paid".equals(payment.getStatus())) {
-	        	// 먼저 예약 상태를 확인
-	        	Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
-	        	log.debug("---------paymentInfoByResId = {}",paymentInfo);
-	        	if(paymentInfo != null) {
-	        		Object resStateObj = paymentInfo.get("resState");
-	        		log.debug("---------resStateObj = {}",resStateObj);
-	        			if(resStateObj != null) {
-	        				int resState = ((Number) resStateObj).intValue();
-	        				log.debug("-----------resState = {}",resState);
-	        					if(resState == 1) {
-	        						// 이미 결제가 완료된 예약이면 오류 반환
-	        						return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
-	        					}
-	        			}
-	        	}
-	        	
 	            String result = this.paymentService.savePayment(payment, resId);
 	            log.info("Payment saved successfully: {}", result);
 	            
@@ -142,10 +143,65 @@ public class PaymentController {
 	        log.error("결제 검증 중 오류 발생", e);
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("결제 검증 실패: " + e.getMessage());
 	    } catch (ServiceException e) {
-	    	log.error("결제 정보 저장 중 오류 발생", e);
+	        log.error("결제 정보 저장 중 오류 발생", e);
 	        throw new ControllerException(e); // 예외를 다시 던져서 처리
 	    }
 	}
+	
+//	// 결제 검증을 수행하는 메서드
+//	@ResponseBody
+//	@PostMapping("/reservation/verifyIamport/{imp_uid}")
+//	public ResponseEntity<?> paymentByImpUid(
+//	        @PathVariable(value = "imp_uid") String imp_uid,
+//	        @RequestParam("resId") Integer resId
+//	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
+//	    log.trace("paymentByImpUid({}, {}) invoked.", imp_uid, resId);
+//
+//	    try {
+//	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 아임포트 API를 통해 결제 정보를 조회
+//	        
+//	        if ("paid".equals(payment.getStatus())) {
+//	        	// 먼저 예약 상태를 확인
+//	        	Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
+//	        	log.debug("---------paymentInfoByResId = {}",paymentInfo);
+//	        	if(paymentInfo != null) {
+//	        		Object resStateObj = paymentInfo.get("resState");
+//	        		log.debug("---------resStateObj = {}",resStateObj);
+//	        			if(resStateObj != null) {
+//	        				int resState = ((Number) resStateObj).intValue();
+//	        				log.debug("-----------resState = {}",resState);
+//	        					if(resState == 1) {
+//	        						// 이미 결제가 완료된 예약이면 오류 반환
+//	        						return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
+//	        					}
+//	        			}
+//	        	}
+//	        	
+//	            String result = this.paymentService.savePayment(payment, resId);
+//	            log.info("Payment saved successfully: {}", result);
+//	            
+//	            // 결제 성공 시 예약 상태를 1로 업데이트
+//	            this.paymentService.updateReservationState(resId, 1);
+//	      
+//	            // 결제 정보를 그대로 반환
+//	            return ResponseEntity.ok(Map.of(
+//	                    "status", payment.getStatus(),
+//	                    "merchant_uid", payment.getMerchantUid(),
+//	                    "payment", payment
+//	                ));
+//	        } else if ("failed".equals(payment.getStatus())) { // 결제가 실패한 경우
+//	            return ResponseEntity.badRequest().body("결제 실패: " + payment.getFailReason());
+//	        } else { // 알 수 없는 결제 상태인 경우
+//	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알 수 없는 결제 상태");
+//	        }
+//	    } catch (IamportResponseException | IOException e) { // 예외 처리
+//	        log.error("결제 검증 중 오류 발생", e);
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("결제 검증 실패: " + e.getMessage());
+//	    } catch (ServiceException e) {
+//	    	log.error("결제 정보 저장 중 오류 발생", e);
+//	        throw new ControllerException(e); // 예외를 다시 던져서 처리
+//	    }
+//	}
 	
 	
 	/**
@@ -239,5 +295,31 @@ public class PaymentController {
 
 	    return "/user/reservation_list"; // 반환할 뷰의 이름
 	}
+	
+	// pg 사에서 결제 취소했을 경우, 웹훅 사용
+//	@PostMapping("/webhooks/payment/cancellation")
+//	public ResponseEntity<String> handlePaymentCancellation(@RequestBody Map<String, Object> payload) {
+//	    // 페이로드 검증 로직 (필요한 경우)
+//	    // 결제 취소 로직 실행
+//	    try {
+//	        String impUid = (String) payload.get("imp_uid"); // 예: 아임포트에서 전달받은 UID
+//	        log.info("Processing payment cancellation for impUid: {}", impUid);
+//	        
+//	        Integer resId = paymentService.getResIdByImpUid(impUid); // imp_uid를 사용하여 resId 조회
+//	        log.info("Found reservation ID: {}", resId);
+//	        
+//	        if (resId != null) {
+//	            paymentService.updateReservationState(resId, 2); // 상태를 '예약 취소'로 변경
+//	            log.info("Reservation status updated to canceled for resId: {}", resId);
+//	            return ResponseEntity.ok("Reservation status updated to canceled");
+//	        } else {
+//	        	log.warn("No reservation found for impUid: {}", impUid);
+//	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation not found");
+//	        }
+//	    } catch (Exception e) {
+//	        log.error("Error processing payment cancellation webhook", e);
+//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating reservation status");
+//	    }
+//	}
 	
 }

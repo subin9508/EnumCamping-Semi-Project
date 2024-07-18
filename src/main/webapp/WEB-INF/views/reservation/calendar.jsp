@@ -88,11 +88,11 @@
                             id="area1_radio" name="area" value="1">
                             <span class="radio_icon"></span> <img
                             alt="campingzone1"
-                            src="${calendar_campingzone1}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
-                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-1</strong></span>
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존 A-1</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
@@ -103,11 +103,11 @@
                             id="area2_radio" name="area" value="2">
                             <span class="radio_icon"></span> <img
                             alt="campingzone2"
-                            src="${calendar_campingzone1}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
-                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존A-2</strong></span>
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존 A-2</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
@@ -122,7 +122,7 @@
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
-                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-1</strong></span>
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존 B-1</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
@@ -137,7 +137,7 @@
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
-                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존B-2</strong></span>
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존 B-2</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>
@@ -148,11 +148,11 @@
                             id="area5_radio" name="area" value="5">
                             <span class="radio_icon"></span> <img
                             alt="campingzone5"
-                            src="${calendar_campingzone3}"
+                            src="${calendar_campingzone2}"
                             height="150px" width="200px"
                             style="margin: 0 10px;"> <span
                             class="radio_text"
-                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존C</strong></span>
+                            style="font-size: 18px; margin-right: auto;"><strong>캠핑존 C</strong></span>
                             <span style="text-align: right;">40,000원~</span>
                         </label>
                     </div>

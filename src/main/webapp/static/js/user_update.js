@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const updateForm = document.querySelector('form#updateForm');
     const inputUserPassword = document.querySelector('input#userPassword');
+    const inputUserPasswordConfirm = document.querySelector('input#userPasswordConfirm');
     const inputUserPhone = document.querySelector('input#userPhone');
-    const imageInput = document.getElementById('imageInput');
-    const profileImage = document.getElementById('profileImage');
-    const deleteImage = document.getElementById('deleteImage');
 
     // 서버에서 반환된 에러 메시지 표시
     const errorMessage = document.querySelector('.alert-danger');
@@ -18,88 +16,94 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(successMessage.textContent);
     }
 
-    // 이미지 파일 선택 시 미리보기 기능
-    imageInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            profileImage.src = URL.createObjectURL(file);
+    function showError(input, message) {
+        // 기존 에러 메시지 제거
+        const existingError = input.nextElementSibling;
+        if (existingError && existingError.classList.contains('error-message')) {
+            existingError.remove();
+        }
+        
+        // 새 에러 메시지 추가
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = message;
+        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+    }
+
+    function clearError(input) {
+        const errorDiv = input.nextElementSibling;
+        if (errorDiv && errorDiv.classList.contains('error-message')) {
+            errorDiv.remove();
+        }
+    }
+
+    inputUserPassword.addEventListener('input', function() {
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+        if (!this.value.match(passwordPattern)) {
+            showError(this, '비밀번호는 8자리 이상이며, 영문과 숫자를 포함해야 합니다.');
+        } else {
+            clearError(this);
         }
     });
 
-    // 이미지 삭제 기능
-    deleteImage.addEventListener('click', function () {
-        profileImage.src = `${contextPath}/static/images/user/user.png`;
-        imageInput.value = '';
+    inputUserPasswordConfirm.addEventListener('input', function() {
+        if (this.value !== inputUserPassword.value) {
+            showError(this, '비밀번호가 일치하지 않습니다.');
+        } else {
+            clearError(this);
+        }
+    });
+
+    inputUserPhone.addEventListener('input', function() {
+        const phonePattern = /^01[0-9]-\d{3,4}-\d{4}$/;
+        if (!this.value.match(phonePattern) || this.value.replace(/-/g, '').length > 11) {
+            showError(this, '전화번호 형식이 올바르지 않습니다. 예: 010-1234-5678');
+        } else {
+            clearError(this);
+        }
     });
 
     // 폼 제출 시 검증
     updateForm.addEventListener('submit', (event) => {
         event.preventDefault(); // 폼의 기본 제출 동작을 막음
 
-        // 비밀번호와 전화번호 칸이 비어있는지 체크
-        if (inputUserPassword.value === '' || inputUserPhone.value === '') {
-            alert('비밀번호와 전화번호는 반드시 입력하세요.');
-            return;
+        let isValid = true;
+
+        // 비밀번호 검증
+        if (!inputUserPassword.value.match(/^(?=.*[A-Za-z])(?=.*\d).{8,}$/)) {
+            showError(inputUserPassword, '비밀번호는 8자리 이상이며, 영문과 숫자를 포함해야 합니다.');
+            isValid = false;
         }
 
-        // 비밀번호 길이 검사
-        if (inputUserPassword.value.length < 8) {
-            alert('비밀번호는 8자리 이상이어야 합니다.');
-            return;
+        // 비밀번호 확인 검증
+        if (inputUserPassword.value !== inputUserPasswordConfirm.value) {
+            showError(inputUserPasswordConfirm, '비밀번호가 일치하지 않습니다.');
+            isValid = false;
         }
 
-        // 비밀번호 형식 검사
-        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
-        if (!inputUserPassword.value.match(passwordPattern)) {
-            alert('비밀번호는 영문과 숫자를 포함해야 합니다.');
-            return;
+        // 전화번호 검증
+        if (!inputUserPhone.value.match(/^01[0-9]-\d{3,4}-\d{4}$/)) {
+            showError(inputUserPhone, '전화번호 형식이 올바르지 않습니다. 예: 010-1234-5678');
+            isValid = false;
         }
 
-        // 전화번호 형식 검사
-        const phonePattern = /^01[0-9]-\d{3,4}-\d{4}$/;
-        if (!inputUserPhone.value.match(phonePattern) || inputUserPhone.value.replace(/-/g, '').length > 11) {
-            alert('전화번호는 형식에 맞게 입력하세요. 예: 010-1234-5678');
-            return;
-        }
+        if (isValid) {
+            // 업데이트 내용 저장 확인
+            const result = confirm('입력하신 내용으로 저장할까요?');
+            if (result) {
+                const formData = new FormData(updateForm);
 
-        // 비밀번호 확인 검사
-        const confirmPassword = document.querySelector('input#userPasswordConfirm').value;
-        if (inputUserPassword.value !== confirmPassword) {
-           
-            return;
-        }
-
-        // 업데이트 내용 저장 확인
-        const result = confirm('입력하신 내용으로 저장할까요?');
-        if (result) {
-            const formData = new FormData(updateForm);
-
-            fetch(updateForm.action, {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.text().then(text => {
-                            console.error('Server response:', text);
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        });
-                    }
-                    const contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
-                        return response.json();
-                    } else {
-                        return response.text().then(text => {
-                            console.log("Server response:", text);
-                            throw new Error("Server didn't return JSON");
-                        });
-                    }
+                fetch(updateForm.action, {
+                    method: 'POST',
+                    body: formData
                 })
+                .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('정보가 성공적으로 수정되었습니다.');
+                        alert(data.message);
                         if (data.redirectUrl) {
-                            window.location.href = data.redirectUrl; // 리다이렉트 URL로 이동
+                            window.location.href = data.redirectUrl;
                         } else {
                             window.location.reload();
                         }
@@ -111,35 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('Error:', error);
                     alert('정보 수정 중 오류가 발생했습니다.');
                 });
+            }
         }
-    });
-
-    // jQuery를 사용한 비밀번호 확인 기능 추가
-    $(document).ready(function() {
-        $('#updateForm').submit(function(e) {
-            var password = $('#userPassword').val();
-            var confirmPassword = $('#userPasswordConfirm').val();
-
-            if (password !== confirmPassword) {
-                e.preventDefault(); // 폼 제출 중지
-                alert('비밀번호가 일치하지 않습니다.');
-                return false;
-            }
-        });
-
-        $('#userPasswordConfirm').on('input', function() {
-            var password = $('#userPassword').val();
-            var confirmPassword = $(this).val();
-
-            if (password !== confirmPassword) {
-                $(this).addClass('is-invalid');
-                if (!$(this).next('.password-error').length) {
-                    $(this).after('<div class="password-error">비밀번호가 일치하지 않습니다.</div>');
-                }
-            } else {
-                $(this).removeClass('is-invalid');
-                $(this).next('.password-error').remove();
-            }
-        });
     });
 });

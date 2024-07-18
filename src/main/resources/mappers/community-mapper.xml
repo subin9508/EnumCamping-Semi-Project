@@ -10,7 +10,7 @@
     </select>
 
     <select id="selectNoticeById" resultType="Notice">
-        select * from notices where not_post_id = #{id}
+        select * from notices where not_post_id = #{notPostId}
     </select>
 
     <insert id="insertNotice">
@@ -23,7 +23,7 @@
     
 
     <delete id="deleteNotice">
-        delete from notices where not_post_id = #{id}
+        delete from notices where not_post_id = #{notPostId}
     </delete>
     
     <!-- notice 테이블에서 제목/내용/작성자로 검색 -->

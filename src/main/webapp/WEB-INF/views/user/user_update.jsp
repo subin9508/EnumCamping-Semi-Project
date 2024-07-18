@@ -53,6 +53,8 @@
         .btn-link-custom:hover {
             color: white; /* 링크 마우스 오버 시 색상 변경 */
         }
+
+       
     </style>
     
     
@@ -78,36 +80,7 @@
                             <form id="updateForm" method="post"
                                 action="${pageContext.request.contextPath}/user/user_update"
                                 enctype="multipart/form-data">
-                                <!-- Profile Picture Upload Section -->
-                                <div class="mb-3">
-                                    <div class="profile-image-area">
-                                        <c:choose>
-                                            <c:when
-                                                test="${empty user.profileImage}">
-                                                <img
-                                                    src="${pageContext.request.contextPath}/static/images/user/user.png"
-                                                    id="profileImage"
-                                                    alt="프로필 이미지">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img
-                                                    src="${user.profileImage}"
-                                                    id="profileImage"
-                                                    alt="프로필 이미지">
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                    <span id="deleteImage">x</span>
-                                    <div class="profile-btn-area">
-                                        <label for="imageInput">이미지
-                                            선택</label> <input type="file"
-                                            name="profileImage"
-                                            id="imageInput"
-                                            accept="image/*">
-                                    </div>
-                                </div>
-                                <!-- End of Profile Picture Upload Section -->
-
+                               
                                 <div class="mb-3 row">
                                     <label for="userName"
                                         class="col-sm-2 col-form-label">이름</label>
@@ -192,6 +165,8 @@
                 </div>
             </div>
         </main>
+
+        <%@ include file="../fragments/footer.jspf"%>
     </div>
 
     <script
@@ -199,7 +174,6 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    <%@ include file="../fragments/footer.jspf"%>
     <script type="text/javascript"
         src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 

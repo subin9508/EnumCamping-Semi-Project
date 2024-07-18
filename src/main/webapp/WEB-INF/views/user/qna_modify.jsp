@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${qnaModifyCss}">
 	</head>
 	<body>
-    <div class="wrapper">
+    <div class="modify-wrapper">
         <c:set var="pageTitle" value="QnA Modify" />
         <%@ include file="../fragments/header.jspf"%>
         <div class="footer-main-content qna-content">

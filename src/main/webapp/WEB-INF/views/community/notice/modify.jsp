@@ -14,44 +14,44 @@
     crossorigin="anonymous">
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/footer.css">
+        <c:url value="../../css/notice_modify.css" var="noticeModifyCss" />
+    <link rel="stylesheet" href="${noticeModifyCss}">
 </head>
 <body>
-    <div class="wrapper">
+    <div class="modify-wrapper">
     <%@ include file="../../fragments/header.jspf"%>
-    <div class="footer-main-content">
+    <div class="footer-main-content not-content">
     <%@ include file="../../fragments/community-sidebar.jspf"%>
+    <div class="container-fluid">
         <main>
-            <div class="mt-2 card"  style="margin-left: 10px">
-                <div class="card-header">
-                    <h2>공지 수정</h2>
-                </div>
+        <div class="not-modify-container">
+                    <h2 class="not-title">공지 수정</h2>
                 
-                <div class="card-body">
                     <form id="modifyForm">
-                        <div class="mt-2">
+                        <div class="mb-3">
                             <label for="id" class="form-label">번호</label>
                             <input id="id" class="form-control" type="text"
                                 name="notPostId" value="${notice.notPostId}" readonly />
                         </div>
-                        <div class="mt-2">
+                        <div class="mb-3">
                             <label for="title" class="form-label">제목</label>
                             <input id="title" class="form-control" type="text"
                                 name="notTitle" value="${notice.notTitle}" />
                         </div>
-                        <div class="mt-2">
+                        <div class="mb-3">
                             <label for="content" class="form-label">내용</label>
                             <textarea id="content" class="form-control" 
                                 name="notContent" rows="5">${notice.notContent}</textarea>
                         </div>
                     </form>
-                </div>
 
                 <div class="card-footer">
-                    <button id="btnUpdate" class="btn btn-outline-success">업데이트</button>
+                    <button id="btnUpdate" class="btn btn-outline-primary">업데이트</button>
                 </div>
 
             </div>
          </main>
+         </div>
     </div>
                 
     <%@ include file="../../fragments/footer.jspf"%>

@@ -40,7 +40,7 @@
                         </div>
                         <div class="mt-2">
                             <input
-                                class="form-control btn btn-outline-success"
+                                class="form-control btn btn-outline-primary"
                                 type="submit" value="저장" />
                         </div>
                     </form>

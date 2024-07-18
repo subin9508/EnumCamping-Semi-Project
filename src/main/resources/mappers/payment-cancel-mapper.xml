@@ -13,8 +13,7 @@
     AND NOT EXISTS (
         SELECT 1 FROM paymentcancel pc WHERE pc.pay_id = p.pay_id)
 </insert>
-	
-        
+    
 <!--     payId에 해당하는 paymentcancel -->
 <!--     <select id="selectPaycanByPayId" resultType="PaymentCancel"> -->
 <!--     	select pc.pay_id, pc.imp_id, pc.can_id, pc.can_price, pc.can_date, pc.can_role -->

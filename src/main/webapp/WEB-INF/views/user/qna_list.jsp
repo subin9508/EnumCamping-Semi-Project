@@ -20,59 +20,64 @@
     
     <c:url value="../css/mypage_qna_list.css" var="qnaListCss"/>
     <link rel="stylesheet" href="${qnaListCss}">
-    
-    <style>
-    a:hover {
-      font-weight: bold;
-    }
-    </style>
+
 </head>
 <body>
     <div class="wrapper">
         <%@ include file="../fragments/header.jspf"%>
-        <div class="footer-main-content qna-content">
+        <div class="footer-main-content">
             <%@ include file="../fragments/mypage-sidebar.jspf"%>
             <div class="container-fluid">
                 <main>
-                    <div class="qna-list-container">
+                    <div class="card">
                         <h2 class="qna-title">문의내역</h2>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>문의 번호</th>
-                                    <th>제목</th>
-                                    <th>수정시간</th>
-                                    <th>답변 상태</th>
-                                </tr>
-                            </thead>
-                           
-                            <tbody>
-                                <c:forEach items="${qnalist}" var="q">
-                                    <c:url var="qnaDetails"
-                                        value="/user/qna_details">
-                                        <c:param name="qnaPostId"
-                                            value="${q.qnaPostId}"></c:param>
-                                        <c:param name="userId"
-                                            value="${user.userId}" />
-                                    </c:url>
-                                    <tr onclick="location.href='${qnaDetails}'">
-                                        <td>${q.qnaPostId}</td>
-                                        <td>${q.qnaTitle}</td>
-                                        <td>${q.qnaModifiedTime}</td>
-<!--                                         <td> -->
-<%--                                             <fmt:parseDate value="${q.qnaModifiedTime}" var="parsedDate" pattern="yyyy-MM-dd'T'HH:mm:ss" /> --%>
-<%--                                             <fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss" /> --%>
-<!--                                         </td> -->
-                                        <td><c:if
-                                                test="${q.qnaState == 0}">
-                                            답변대기
-                                        </c:if> <c:if test="${q.qnaState == 1}">
-                                            답변완료
-                                        </c:if></td>
+                        <div class="card-body">
+
+                            <table class="table table-hover">
+                                <colgroup>
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                    <col style="width: 25%;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>문의 번호</th>
+                                        <th>제목</th>
+                                        <th>수정시간</th>
+                                        <th>답변 상태</th>
                                     </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${qnalist}"
+                                        var="q">
+                                        <c:url var="qnaDetails"
+                                            value="/user/qna_details">
+                                            <c:param name="qnaPostId"
+                                                value="${q.qnaPostId}"></c:param>
+                                            <c:param name="userId"
+                                                value="${user.userId}" />
+                                        </c:url>
+                                        <tr
+                                            onclick="location.href='${qnaDetails}'"
+                                            style="cursor: pointer;">
+                                            <td>${q.qnaPostId}</td>
+                                            <td>${q.qnaTitle}</td>
+                                            <td>${q.qnaModifiedTime}</td>
+                                            <td><c:if
+                                                    test="${q.qnaState == 0}">
+                                                    <span
+                                                        style="color: red;">답변대기</span>
+                                                </c:if> <c:if
+                                                    test="${q.qnaState == 1}">
+                                                    <span
+                                                        style="color: blue;">답변완료</span>
+                                                </c:if></td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </main>
             </div>

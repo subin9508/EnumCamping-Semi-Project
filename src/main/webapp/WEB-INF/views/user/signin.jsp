@@ -43,7 +43,7 @@
 
 input.write {
 	border-radius: 5px;
-	border-color: #7C9C63;
+	border-color: #001522;
 }
 
 .form-group {
@@ -59,32 +59,35 @@ input.write {
 
 .write {
 	flex: 1; /* input 요소가 가능한 많은 공간을 차지하도록 */
+    border-color: #DEE2E6;
 }
 
-input.btn-login {
+.btn-login {
 	border-radius: 5px;
-	border-color: #7C9C63;
-	background-color: #7C9C63;
-	color: white;
+	border-color: #198754;
+	background-color: #fff;
+	color: #198754;
 }
 
-input.btn-login:hover {
-	background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
-	border-color: #708b58;
-	color: red;
+.btn-login:hover {
+	background-color: #198754; 
+	border-color: #198754;
+	color: #fff;
+    font-weight: bold;
 }
 
 a.signup {
 	border-radius: 5px;
-	border-color: #7C9C63;
-	background-color: #7C9C63;
-	color: white;
+    border-color: #198754;
+    background-color: #fff;
+    color: #198754;
 }
 
 a.signup:hover {
-	background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
-	border-color: #708b58;
-	color: red;
+	background-color: #198754; 
+    border-color: #198754;
+    color: #fff;
+    font-weight: bold;
 }
 
 .no-border {
@@ -93,7 +96,7 @@ a.signup:hover {
 
 .right-border {
 	border-width: 0 0 1px;
-	border-color: #7C9C63;
+	border-color: #198754;
 }
 
 .d-flex {
@@ -108,22 +111,13 @@ a.signup:hover {
 	justify-content: center;
 }
 
-.btn-custom {
-	border-color: #7C9C63;
-	color: #7C9C63;
-}
-
-.btn-custom:hover {
-	border-color: #7C9C63;
-	background-color: #7C9C63;
-	color: white;
+.link-style:hover {
+	font-weight: bold;
 }
 
 .link-style {
+    color: black;
 	text-decoration: none; /* 기본 밑줄 제거 */
-	color: inherit; /* 부모 요소의 색상 상속 */
-	background: none; /* 버튼 배경 제거 */
-	border: none; /* 버튼 테두리 제거 */
 	padding: 0; /* 기본 패딩 제거 */
 	font-size: 1rem; /* 원하는 폰트 크기로 조정 */
 	cursor: pointer; /* 커서를 포인터로 변경 */
@@ -137,9 +131,10 @@ a.signup:hover {
 			<div class="row">
 				<div class="col-12">
 					<div class="fixed-size-form mb-5"
-						style="border: 1px solid #7C9C63; padding: 10px; margin-top: 5%; margin-left: 200px; margin-right: 200px;">
+						style="border: 1px solid #001522; padding: 10px; margin-top: 5%; margin-left: 200px; margin-right: 200px;
+                            border-radius: 5px;">
 						<div class="card-header text-center mt-3">
-							<h2 style="color: #7C9C63;">로그인</h2>
+							<h2 style="color: #001522; font-weight: bold;">로그인</h2>
 						</div>
 						<div class="card-body">
 
@@ -169,12 +164,12 @@ a.signup:hover {
 								<div class="form-group mt-5 d-flex align-items-center">
 									<label for="userid" class="form-label text-center">아이디</label>
 									<input type="text" name="userId" placeholder="아이디"
-										class="form-control write" id="userId" required autofocus />
+										class="form-control write" id="userId" style="border-color: #DEE2E6;"required autofocus />
 								</div>
 								<div class="form-group mt-3 d-flex align-items-center">
 									<label for="password" class="form-label text-center">비밀번호</label>
 									<input type="password" name="userPassword" placeholder="비밀번호"
-										class="form-control write" id="userPassword" required />
+										class="form-control write" id="userPassword" style="border-color: #DEE2E6;" required />
 								</div>
 								<div class="mt-2">
 									<input class="form-control btn btn-login mt-2" id="btnSignIn"
@@ -191,8 +186,8 @@ a.signup:hover {
 								</div>
 						</div>
 						<div class="mt-2" style="text-align: right;">
-							<div class="m-3" style="display: inline-block;">
-								<h6>계정이 없으신가요?</h6>
+							<div class="m-3" style="display: inline-block; color: #001522;">
+								<h6 style="font-weight: bold;">계정이 없으신가요?</h6>
 							</div>
 							<a href="signup" id="btnUpdate" class="btn signup"
 								style="display: inline-block;">회원가입</a>
@@ -202,9 +197,9 @@ a.signup:hover {
 				</div>
 			</div>
 		</div>
+        <%@ include file="../fragments/footer.jspf"%>
 	</div>
-	<%@ include file="../fragments/footer.jspf"%>
-	</div>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

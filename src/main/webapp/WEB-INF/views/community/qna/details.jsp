@@ -14,9 +14,8 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="../../css/header.css">
 <link rel="stylesheet" href="../../css/footer.css">
-<c:url value="../../css/reservation_details.css"
-	var="reservationdetailsCss" />
-<link rel="stylesheet" href="${reservationdetailsCss}">
+    <c:url value="../../css/mypage_qna_details.css" var="qnaDetailsCss" />
+    <link rel="stylesheet" href="${qnaDetailsCss}">
 <style>
 .card h2 {
     color: #7C9C63;
@@ -24,17 +23,42 @@
     border-bottom: 2px solid #7C9C63;
     padding-bottom: 0.5rem;
 }
+.btn-register {
+    border-color: #7C9C63;
+    color: #7C9C63;
+}
+
+.btn-register:hover {
+    border-color: #7C9C63;
+    background-color: #7C9C63;
+    color: white;
+}
+
+.btnList {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnList:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
 </style>
 </head>
 <body>
-	<div class="wrapper">
+	<div class="qna-wrapper">
 		<c:set var="pageTitle" value="QnA Details" />
 		<%@ include file="../../fragments/header.jspf"%>
-		<div class="footer-main-content">
+		<div class="footer-main-content qna-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
 
 			<div class="container-fluid">
 				<main>
+				<div class="qna-details-container">
 
 					<!-- 알림 메시지 표시 -->
 					<c:if test="${not empty sessionScope.message}">
@@ -46,11 +70,7 @@
 						</div>
 						<c:remove var="message" scope="session" />
 					</c:if>
-					<div class="mt-2 card">
-						<div class="card-header">
 							<h2>${qna.qnaTitle}</h2>
-						</div>
-						<div class="card-body">
 							<form>
 								<div class="mt-2">
 									<label for="qnaPostId" class="form-label">번호</label> <input
@@ -82,18 +102,20 @@
 										수정 시간</label> <input id="qnaModifiedTime" class="form-control"
 										type="hidden" value="${qna.qnaModifiedTime}" readonly />
 								</div>
-								<div class="mt-2 form-check">
-									<input class="form-check-input" type="checkbox" id="qnaLock"
-										name="qnaLock" <c:if test="${qna.qnaLock ==1}">checked</c:if>
-										disabled> <label class="form-check-label"
-										for="qnaLock"> 비밀글 </label>
-								</div>
+								<!-- 비밀글 체크박스, 관리자 또는 작성자인 경우에만 표시 -->
+								<c:if test="${userRole == 0 || signedInUser == qna.qnaUserId}">
+                                    <div class="mt-2 form-check">
+                                        <input class="form-check-input" type="checkbox" id="qnaLock"
+                                            name="qnaLock" <c:if test="${qna.qnaLock ==1}">checked</c:if>
+                                            disabled> 
+                                        <label class="form-check-label" for="qnaLock"> 비밀글 </label>
+                                    </div>
+                                </c:if>
 								<input type="hidden" id="userRole" value="${userRole}">
 							</form>
-						</div>
 						<div class="card-footer">
 							<c:url var="qnaListPage" value="/community/qna/list" />
-							<a class="btn btn-outline-primary" href="${qnaListPage}">목록보기</a>
+							<a class="btn btnList" href="${qnaListPage}">목록보기</a>
 
 							<!-- 로그인 사용자 아이디와 작성자 아이디가 같은 경우에만 수정하기 버튼을 보여줌 -->
 							<c:if
@@ -112,7 +134,7 @@
 						<!--                     <div class="card-header"> -->
 						<!--                         <h2>Comment</h2> -->
 						<!--                     </div> -->
-						<div id="answersContainer">
+						<div id="answersContainer" style="font-size: 1.2em;">
 							<!-- 답변 목록이 여기에 동적으로 추가됩니다. -->
 							<c:forEach var="answer" items="${answers}">
 								<div class="answer">
@@ -126,21 +148,20 @@
 						<c:if test="${userRole == 0}">
 							<!--                 <div class="mt-2 card"> -->
 							<!--                     <div class="card-body"> -->
-							<div class="mt-2 row">
-								<div class="col-10">
-									<textarea class="form-control" rows="1" id="answerContent"
-										placeholder="답변을 작성해주세요"></textarea>
-								</div>
-								<div class="col-6">
-									<button class="btn btn-outline-success" id="btnRegisterAnswer">등록하기</button>
-								</div>
+							<div class="mt-2 d-flex align-items-center">
+								
+								<div class="flex-grow-1 me-3" >
+									<textarea class="form-control flex-grow-1" rows="2" id="answerContent"
+										placeholder="답변을 작성해주세요" style="font-size:1.1em;"></textarea>
+										</div>
+								
+									<button class="btn btn-register" style="font-size:1.5em;" id="btnRegisterAnswer" >답변 등록</button>
 							</div>
 							<!--                     </div> -->
 							<!--                 </div> -->
 						</c:if>
 
 						<!--                 </div> -->
-
 
 					</div>
 				</main>

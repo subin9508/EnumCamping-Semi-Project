@@ -15,27 +15,25 @@
 <link rel="stylesheet" href="../../css/header.css">
 <link rel="stylesheet" href="../../css/footer.css">
 
-    <c:url value="../css/mypage_qna_list.css" var="qnaListCss"/>
+    <c:url value="../../css/mypage_qna_list.css" var="qnaListCss"/>
     <link rel="stylesheet" href="${qnaListCss}">
-    
-        <c:url value="../../css/reservation_list.css" var="reservationListCss" />
-    <link rel="stylesheet" href="${reservationListCss}">
+
 
 <style>
-    .status-waiting {
-        color: red !important;
-        
-    }
-    .status-completed {
-        color: blue !important;
-        
-    }
-    .secret-icon {
-        width: 16px;
-        height: 16px;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
+.status-waiting {
+	color: red !important;
+}
+
+.status-completed {
+	color: blue !important;
+}
+
+.secret-icon {
+	width: 16px;
+	height: 16px;
+	margin-left: 5px;
+	vertical-align: middle;
+}
 
 ul.pagination {
 	display: flex;
@@ -43,44 +41,81 @@ ul.pagination {
 	list-style-type: none; /* 순서 없는 리스트 스타일 제거 */
 	padding: 0;
 }
+.pagination .page-link {
+            color: #000000; /* 기본 글자색 검정 */
+            
+        }
 
-     .pagination .page-link:hover {
-        background-color: #000000; /* 호버 시 배경색 초록 */
-        color: #fff; /* 호버 시 글자색 흰색 */
-    }
-    
-        .pagination .page-item.active .page-link {
-        background-color: #000000; /* 활성화된 페이지 배경색 초록 */
-        border-color: #000000; /* 활성화된 페이지 테두리 색상 초록 */
-        color: #fff; /* 활성화된 페이지 글자색 흰색 */
-    }
+.pagination .page-link:hover {
+	background-color: #7C9C63; /* 호버 시 배경색 초록 */
+	color: #fff; /* 호버 시 글자색 흰색 */
+}
 
+.pagination .page-item.active .page-link {
+	background-color: #7C9C63; /* 활성화된 페이지 배경색 초록 */
+	border-color: #7C9C63; /* 활성화된 페이지 테두리 색상 초록 */
+	color: #fff; /* 활성화된 페이지 글자색 흰색 */
+}
+
+.btnSearch {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnSearch:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
+.btnList {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnList:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
+
+.btnCreate {
+    border-radius: 5px;
+    border-color: #7C9C63;
+    background-color: #white;
+    color: #7C9C63;
+}
+
+.btnCreate:hover {
+    background-color: #708b58; /* hover 상태에서 약간 밝은 색상으로 변경 */
+    border-color: #708b58;
+    color: white;
+}
 </style>
+
 </head>
 <body>
 	<div class="wrapper">
 		<c:set var="pageTitle" value="QnA List" />
 		<%@ include file="../../fragments/header.jspf"%>
-		<div class="footer-main-content">
+		<div class="footer-main-content qna-content">
 			<%@ include file="../../fragments/community-sidebar.jspf"%>
 
 
-			<div class="container-fluid">
+			<div class="container-fluid" style="flex:1 padding: 20px;">
 				<main>
-					<div>
-					</div>
-
-
-
-					<div class="mt-2 card" style="margin-right:50px;">
-						<div class="card-header">
-                        <h1 class="card-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
+					<div class="qna-list-container mt-10 card">
+                        <h1 class="qna-title align-center mt-2"style="color:#7C9C63; border-bottom: 2px solid #7C9C63;">Q&A</h1>
 
 							<c:url var="qnaSearchPage" value="/community/qna/search" />
 							<form method="get" action="${qnaSearchPage}">
 								<div class="row">
 									<!--  화면을 1:2:1로 나눔 (기본 12개) -->
-									<div class="col-3">
+									<div class="col-2">
 										<select class="form-control" name="category">
 											<option value="qt">제목</option>
 											<option value="qc">내용</option>
@@ -88,22 +123,21 @@ ul.pagination {
 											<option value="qu">작성자</option>
 										</select>
 									</div>
-									<div class="col-5">
+									<div class="col-6">
 										<input type="text" class="form-control" name="keyword"
 											placeholder="검색어 입력" required />
 									</div>
 									<div class="col-2">
 										<input type="submit"
-											class="form-control btn btn-outline-success" value="검색" />
+											class="form-control btn btnSearch" value="검색" />
 									</div>
                                     <div class="col-2">
-                                <button type="button" class="form-control btn btn-outline-success"
+                                <button type="button" class="form-control btn btnList"
                                 onclick="location.href='/semiproject/community/qna/list'">전체 목록</button>
                                   </div>
 								
                                 </div>
 							</form>
-						</div>
                         
 						<div class="card-body">
 							<!-- 알림 메시지 표시 -->
@@ -125,15 +159,19 @@ ul.pagination {
 										
 									</tr>
 								</thead>
+								
 								<tbody>
 									<c:forEach var="qna" items="${qnas}">
-										<tr style="cursor:pointer; text-align: center;">
+										<tr
+											onclick="location.href='${pageContext.request.contextPath}/community/qna/details?qnaPostId=${qna.qnaPostId}'"
+											style="cursor:pointer; text-align: center;">
 											<td class="col-1">${qna.qnaPostId}</td>
 											<td class="col-3">
                                             <c:url var="secretIconUrl" value="/images/community/secret.png" />
                                             <c:url var="qnaDetailsPage"	value="/community/qna/details">
 													<c:param name="qnaPostId" value="${qna.qnaPostId}"></c:param>
 												</c:url>
+												
 											<a href="${qnaDetailsPage}">
                                                     ${qna.qnaTitle}
                                                     <c:if test="${qna.qnaLock == 1}">
@@ -153,7 +191,7 @@ ul.pagination {
                                                     </c:otherwise>
                                                 </c:choose>
                                             </td>
-											<td class="col-2">${qna.qnaViewCnt}</td>
+											<td class="col-1">${qna.qnaViewCnt}</td>
 										</tr>
 									</c:forEach>
 									<c:if test="${empty qnas}">
@@ -166,7 +204,7 @@ ul.pagination {
                         <a style="text-align: left">총 게시글 수: ${totalCount} 개</a>
                         <div class="text-end">
                         <c:url var="qnaCreatePage" value="/community/qna/create"></c:url>
-                        <a class="btn btn-outline-success" href="${qnaCreatePage}" style="text-align: right">글작성</a>
+                        <a class="btn btnCreate" href="${qnaCreatePage}" style="text-align: right">글작성</a>
                         </div>
 							<div> 
         <nav aria-label="Page navigation example">

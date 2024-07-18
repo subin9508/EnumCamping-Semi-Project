@@ -21,4 +21,8 @@ public interface PaymentDao {
 		int updatePayment(Payments payment);
 		
 		int updateReservationState(Integer resId, Integer resState);
+		
+		
+		// imp_uid로 결제 정보 조회하여 결제에 연결된 예약 ID 반환 (웹훅시 사용)
+//	    Integer findResIdByImpUid(String impUid);
 }
