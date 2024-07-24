@@ -78,16 +78,18 @@ public class ReservationService {
 		}
 	}
 	
-	// items 테이블
+	 // item 정보를 읽어오는 메서드
     public Items readItem(ItemsDto dto) {
         log.debug("readItem(dto={})", dto);
         
+     // DAO를 사용하여 데이터베이스에서 아이템 정보를 가져옴
         Items items = itemsDao.selectOrderByItemsId(dto.toEntity());
         log.debug("상품 가격 ={}", items);
         
         return items;
     }
     
+    // 아이템 리스트를 가져오는 메서드
     public List<Items> getAllItems() {
         return itemsDao.selectAllItems();
     }
