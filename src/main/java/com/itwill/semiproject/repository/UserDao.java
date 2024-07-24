@@ -6,13 +6,13 @@ import org.apache.ibatis.annotations.Update;
 
 public interface UserDao {
 
-	User selectByUserid(String userId);
+	User selectByUserid(String userId); // userId로 사용자 조회
 
-	int insert(User user);
+	int insert(User user); // 사용자 데이터 베이스 삽입
 
-	User selectByUseridAndPassword(User user);
+	User selectByUseridAndPassword(User user); // 사용자 아이디 비밀번호 조회
 
-	User selectByUserEmail(String userEmail);
+	User selectByUserEmail(String userEmail); // 이메일로 사용자 조회
 
 	@Update("update users set user_password = #{userPassword}, user_phone = #{userPhone} where user_id = #{userId}")
 	int updateUser(User user);

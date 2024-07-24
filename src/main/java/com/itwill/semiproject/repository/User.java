@@ -19,7 +19,7 @@ public class User {
 	private String userEmail; //이메일
 	private String userPhone; //핸드폰
 	private String userRole; //일반유저인지 관리자인지
-	private Integer userState;
+	private Integer userState; 
 	private Date deactiveUntil;
 	private String profileImage; // 프로필 사진
 }
