@@ -10,7 +10,8 @@
     </insert>
     
     
-    <!-- 선택한 물품 리스트 (수정함.)  -->
+    <!-- 선택한 물품 리스트 -->
+    <!-- 특정 예약 ID(resId)에 해당하는 물품 리스트를 조회 -->
     <select id="selectItemsByResId" resultType="ReservationDetailListDto">
         select  i.item_name, rd.item_quantity, rd.item_amount,rd.item_id from reservation_detail rd
         join items i
@@ -19,6 +20,7 @@
     </select>
     
     <!-- userId에 해당하는 reservation_detail -->
+    <!-- 특정 사용자 ID(userId)에 해당하는 예약 상세 정보를 조회 -->
     <select id="selectDetailsByUserId" resultType="ReservationDetail">
         select rd.res_id, rd.item_id, rd.item_quantity,
         rd.item_amount, i.item_name, i.item_img
@@ -28,7 +30,8 @@
         order BY rd.item_id ASC      
     </select>
     
-    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->  
+    <!-- order 페이지에 넘어가기전 이전 내역 삭제 -->
+    <!-- 특정 사용자 ID(userId)에 해당하는 예약 상태가 0인 예약 상세 정보를 삭제 -->  
     <delete id="deleteByResId">
         delete from reservation_detail
         where res_id in (select res_id from reservation_master where user_id = #{userId} and res_state = 0)

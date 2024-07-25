@@ -5,6 +5,7 @@
 <mapper namespace="com.itwill.semiproject.repository.ItemsDao">
 
     <!-- 아이템 조회 -->
+    <!-- 특정 아이템을 아이템 ID와 아이템 가격으로 조회 -->
     <select id="selectByItemsId" resultType="Items">
         SELECT * FROM items WHERE item_id = #{itemId} AND item_price = #{itemPrice}
     </select>

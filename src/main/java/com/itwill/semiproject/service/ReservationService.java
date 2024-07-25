@@ -34,6 +34,7 @@ public class ReservationService {
 	private final ItemsDao itemsDao;
 	private final SqlSessionFactory sqlSessionFactory;
 	
+	// 특정 날짜에 예약된 지역을 읽기
 	public List<Integer> readReservedAreas(LocalDate date) {
 //		List<Integer> reservedArea = reservationAreaDao.selectReservedArea(date);
 		 String dateString = date.format(DateTimeFormatter.ISO_DATE);
@@ -42,15 +43,18 @@ public class ReservationService {
 //		return reservedArea;
 	}
 	
+	// 특정 날짜와 지역에 해당하는 예약 마스터 정보를 읽어오기
 	public List<ReservationMaster> readReservationMaster(LocalDate date, int area) {
 		String formattedDate = date.toString();
 		return reservationMasterDao.selectByItemIdAndResCheckIn(area, formattedDate);
 	}
 	
+	// 특정 아이템의 가격 조회
 	public Integer readItemPrice(int itemId) {
 		return itemsDao.selectItemPrice(itemId);
 	}
 	
+	// 예약 생성
 	@Transactional
 	public void makeReservation(ReservationMaster reservationMaster, List<ReservationDetail> reservationDetails) {
 		try (SqlSession session = sqlSessionFactory.openSession()) {
@@ -94,33 +98,38 @@ public class ReservationService {
         return itemsDao.selectAllItems();
     }
     
+    // resId에 해당하는 예약 상세 정보
     public List<ReservationDetailListDto> getReservationDeatil(Integer resId) {
     	return reservationDetailDao.selectItemsByResId(resId);
     }
     
+    // 예약 상세 정보 생성
     public int create(ReservationDetailCreateDto dto) {
         log.debug("create({})", dto);
         
        int result = reservationDetailDao.insert(dto.toEntity());
   
-        
         return result;
     }
     
+    // userId에 해당하는 예약 상세 정보
     public List<ReservationDetail> getReservationDetailsByUserId(String userId) {
         return reservationDetailDao.selectDetailsByUserId(userId);
     }
     
+    // userId에 해당한느 예약 마스터 정보
     public ReservationMaster getReservationMasterByUserId(String userId) {
     	return reservationMasterDao.selectMasterByUserId(userId);
     }
     
+    // userId에 해당하는 예약 마스터 정보 삭제
     public int deleteReservationMaster(String userId) {
     	int result = reservationMasterDao.deleteByUserId(userId);
     	
     	return result;
     }
     
+    // userId에 해당하는 예약 상세 정보 삭제
     public int deleteReservationDetail(String userId) {
     	int result = reservationDetailDao.deleteByResId(userId);
     	
