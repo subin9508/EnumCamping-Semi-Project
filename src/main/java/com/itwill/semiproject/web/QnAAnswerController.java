@@ -32,23 +32,8 @@ public class QnAAnswerController {
         log.debug("registerAnswer({})", dto);
 
         int result = qnaanswerService.createAnswer(dto);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(result); // 등록 결과 리턴
     }
-    
-    //    @PostMapping("/register")
-//    public ResponseEntity<Integer> registerAnswer(@RequestBody QnAAnswerDto dto, HttpSession session) {
-//        String userRole = (String) session.getAttribute("userRole");
-//
-//        // 사용자 역할 검증
-//        if (userRole == null || !userRole.equals(0)) {
-//            return ResponseEntity.status(403).build(); // 403 Forbidden
-//        }
-//
-//        log.debug("registerAnswer({})", dto);
-//
-//        int result = qnaanswerService.createAnswer(dto);
-//        return ResponseEntity.ok(result);
-//    }
     
     // 특정 QnA 게시물의 답변 목록 조회
     @GetMapping("/qna/{qnaPostId}")
@@ -57,12 +42,6 @@ public class QnAAnswerController {
         return ResponseEntity.ok(answers);
     }
     
-    // 답변 생성 (중복)
-//    @PostMapping
-//    public ResponseEntity<Integer> createAnswer(@RequestBody QnAAnswerDto answer) {
-//        int result = qnaanswerService.createAnswer(answer);
-//        return ResponseEntity.ok(result);
-//    }
     
     // 답변 업데이트
     @PutMapping("/{id}")
@@ -72,21 +51,16 @@ public class QnAAnswerController {
         return ResponseEntity.ok(result);
     }
     
-//    // 답변 삭제
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Integer> deleteAnswer(@PathVariable int id) {
-//        int result = qnaanswerService.deleteAnswer(id);
-//        return ResponseEntity.ok(result);
-//    }
-    
+    // 답변 삭제
     @PostMapping("/answer/delete")
     public String deleteAnswer(@RequestParam("answerId") int answerId, HttpSession session) {
         log.debug("deleteAnswer(answerId={})", answerId);
 
-        // 세션에서 사용자 역할을 확인합니다.
+        // 세션에서 사용자 역할 확인
         String userRoleStr = (String) session.getAttribute("userRole");
         int userRole = userRoleStr != null ? Integer.parseInt(userRoleStr) : -1;
-
+        
+        // 권한이 없으면 메세지 설정 후 리다이렉트
         if (userRole != 0) {
             session.setAttribute("message", "답변을 삭제할 권한이 없습니다.");
             return "redirect:/community/qna/list";
@@ -95,7 +69,7 @@ public class QnAAnswerController {
         try {
             qnaanswerService.deleteAnswer(answerId);
         } catch (IllegalArgumentException e) {
-            session.setAttribute("message", e.getMessage());
+            session.setAttribute("message", e.getMessage()); // 예외 발생 시 메세지 설정
             return "redirect:/community/qna/list";
         }
 

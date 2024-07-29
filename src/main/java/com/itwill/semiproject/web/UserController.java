@@ -423,27 +423,32 @@ public class UserController {
     	
     }
     
+    // 특정 사용자의 QnA 목록 조회
     @GetMapping("/qna_list")
 	public void qnaList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
 		log.debug("qna_list(userId={})", userId);
-
+		
+		// 사용자 정보를 조회하여 세선에 저장
 		User user = userService.read(userId);
-		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
-
+		session.setAttribute("user", user);
+		
+		// 해당 사용자의 QnA 목록 조회
 		 List<QnA> list = qnaService.selectByUserId(userId);
 		 log.debug("list=({})", list);
 	     model.addAttribute("qnalist", list);
 	     model.addAttribute("user", user); // 모델에 사용자 정보 추가
 	}
     
+    // QnA 게시글 상세 및 수정 페이지 조회
     @GetMapping({"/qna_details", "/qna_modify"})
 	public void details(@RequestParam(name = "qnaPostId") int qnaPostId, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
 		log.debug("details(qnaPostId={})", qnaPostId);
 		
+		// 사용자 정보 조회해서 세션에 저장
 		User user = userService.read(userId);
-		session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+		session.setAttribute("user", user); 
 
-		
+		// QnA 게시글 조회수 증가
 		qnaDao.updateViewCount(qnaPostId); // 조회수 증가 메서드 호출
 		QnA qna = qnaService.read(qnaPostId);
 
@@ -451,16 +456,21 @@ public class UserController {
 		model.addAttribute("user", user); // 모델에 사용자 정보 추가
 	}
     
+    // QnA 게시글 삭제
     @GetMapping("/qna_delete")
     public String delete(@RequestParam(name="qnaPostId") int id, @RequestParam(name="userId") String userId, Model model, HttpSession session) {
         log.debug("delete(qnaPostId={})", id);
+        
+        // 로그인된 사용자 확인
         if (session.getAttribute("signedInUser") == null) {
             return "redirect:/user/signin";
         }
         
+        // 사용자 정보를 조회하여 세션에 저장
         User user = userService.read(userId);
-        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
+        session.setAttribute("user", user);
         
+        // QnA 게시글 삭제
         qnaService.delete(id);
         
         model.addAttribute("user", user); // 모델에 사용자 정보 추가
@@ -468,15 +478,21 @@ public class UserController {
         return "redirect:/user/qna_list?userId=" + userId;
     }
     
+    // QnA 게시글 업데이트
     @PostMapping("/qna_update")
 	public String update(@RequestParam(name="userId") String userId, Model model, QnAUpdateDto dto, HttpSession session) {
 		log.debug("update(dto={})", dto);
+		
+		// 로그인된 사용자 확인
         if (session.getAttribute("signedInUser") == null) {
             return "redirect:/user/signin";
         }
-        User user = userService.read(userId);
-        session.setAttribute("user", user); // 사용자 정보를 세션에 저장
         
+        // 사용자 정보 조회해서 세션에 저장
+        User user = userService.read(userId);
+        session.setAttribute("user", user); 
+        
+        // QnA 게시글 업데이트
 		qnaService.update(dto);
 		
 		model.addAttribute("user", user); // 모델에 사용자 정보 추가
@@ -485,8 +501,7 @@ public class UserController {
 		return "redirect:/user/qna_details?qnaPostId=" + dto.getQnaPostId() + "&userId=" + userId;
 	}
 	
-
-    // 회원 탈퇴 
+    // 회원 탈퇴 페이지 조회
     @GetMapping("/deactivateUser")
     public String deactivateAccount(Model model, HttpSession session) {
         // 세션에서 사용자 ID 가져오기
@@ -504,6 +519,7 @@ public class UserController {
         return "user/deactivateUser";
     }
     
+    // 회원 탈퇴 처리
     @PostMapping("/deactivateUser")
     @ResponseBody
     public ResponseEntity<?> deactivateAccount(@RequestBody UserDeactivateDto dto, HttpSession session, HttpServletResponse response) {
@@ -516,10 +532,11 @@ public class UserController {
     	
         log.debug("Before calling service - userKey: {}, password: {}", userKey, userPassword);
         
+        // 회원 탈퇴 서비스 호출
     	boolean result = userService.deactivateAccount(userKey, userPassword);
         
         if (result) {
-            // 세션 삭제
+            // 성공적으로 탈퇴한 경우, 세션 무효화 및 세션 삭제
             session.invalidate();
             
             // 쿠키 삭제

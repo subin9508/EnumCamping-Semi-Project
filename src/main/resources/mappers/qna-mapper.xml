@@ -6,130 +6,128 @@
 <!-- namespace: id를 저장해두는 공간 -->
 <mapper namespace="com.itwill.semiproject.repository.QnADao">
 
-    <!-- qna 테이블 전체 검색. 목록 보기 -->
-    <select id="selectOrderByQnAPostIdDesc" resultType="QnA"> <!-- resultType: typeAliases의 별명. 리턴할 클래스 타입. -->
-        select * from QnA order by qna_post_id desc
-    </select>
-    
-    <!-- qna 테이블에서 q_post_id(PK)로 검색. 상세보기. -->
-    <select id="selectByQnAPostId" resultType="QnA">
-        select * from QnA where qna_post_id = #{qnaPostId} <!-- mybatis 에서는 ? 대신 #{} 사용 -->
-    </select>
-    
-    <!-- qna 테이블에 행 삽입. 새 글 작성. -->
-    <!-- stmt.setString(1, "-") 와 같음 -->
-    <insert id="insertQnA" >
-        insert into QnA (qna_title, qna_content, qna_user_id, qna_lock) 
-        values (#{qnaTitle}, #{qnaContent}, #{qnaUserId}, #{qnaLock, jdbcType=INTEGER})
-    </insert>
-    
-    <!-- qna 테이블에서 해당 id의 제목, 내용, 수정시간 업데이트 -->
-    <update id="updateQnA">
-        update QnA 
-        set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_lock = #{qnaLock, jdbcType=INTEGER}, qna_modified_time = sysdate 
-        where qna_post_id = #{qnaPostId}
-    </update>
-       
-    <delete id="deleteQnA">
-    	delete from QnA where qna_post_id = #{qnaPostId}
-    </delete>   
-      
-    <!-- qna 상태 업데이트 -->
-    <update id="updateQnaState">
-        update QnA set qna_state = #{qnaState} where qna_post_id = #{qnaPostId}
-    </update>  
-      
-      
-    <!-- qna 테이블에서 제목/내용/작성자로 검색 -->
-    <select id = "searchQnA" resultType="QnA" parameterType="map" > <!-- id = dao 메소드아이디  -->
-        <bind name="searchKeyword" value="dto.keyword == null ? '%' : '%' + dto.keyword + '%'"  /> <!-- bind: 묶음. 0변수선언. like 검색할 때 % 붙인 것처럼, 검색어에 포함된 것을 찾음-->
-        select * from (
-            SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt, 
-                   ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum
-            FROM QNA
-                    <where>
-                <if test="dto.category != null">
-                    <choose>
-                        <when test="dto.category.equals('qt')">
-                            upper(qna_title) like upper(#{searchKeyword})
-                        </when> 
-                        <when test="dto.category.equals('qc')">
-                            upper(qna_content) like upper(#{searchKeyword})
-                        </when>
-                        <when test="dto.category.equals('qtqc')">
-                            upper(qna_title) like upper(#{searchKeyword})
-                            or
-                            upper(qna_content) like upper(#{searchKeyword})
-                        </when>
-                        <when test="dto.category.equals('qu')">
-                            upper(qna_user_id) like upper(#{searchKeyword})                    
-                        </when>
-                    </choose>
-                </if>
-            </where>
-        ) WHERE rnum BETWEEN #{pager.startRow} AND #{pager.lastRow}
-    </select>
-
-<!--  페이징된 목록 가져오기 -->
-<!-- 	<select id="selectPagedQnAList" parameterType="Pager" resultType="QnA"> -->
-<!-- 		SELECT -->
-<!-- 		qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt -->
-<!-- 		FROM (SELECT ROWNUM R, Q.* -->
-<!-- 			FROM (SELECT * FROM QNA ORDER BY qna_post_id DESC) Q) -->
-<!-- 		WHERE R BETWEEN	#{startRow} AND #{lastRow} -->
-<!-- 	</select> -->
-
-<!-- 페이징된 목록 가져오기 -->
-<select id="selectPagedQnAList" parameterType="Pager" resultType="QnA">
-    SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time, qna_view_cnt, qna_lock, qna_state
-    FROM (
-        SELECT ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum, qna.*
-        FROM QnA qna
-    )
-    WHERE rnum BETWEEN #{startRow} AND #{lastRow}
-</select>
-
-	<!--  검색된 글의 총 갯수 -->
-	<select id="selectTotalCount" parameterType="QnASearchDto" resultType="Long">
-		SELECT COUNT(qna_post_id) FROM QNA
-        <where>
-            <if test="category != null">
-                <choose>
-                    <when test="category.equals('qt')">
-                        upper(qna_title) like upper('%' || #{keyword} || '%')
-                    </when>
-                    <when test="category.equals('qc')">
-                        upper(qna_content) like upper('%' || #{keyword} || '%')
-                    </when>
-                    <when test="category.equals('qtqc')">
-                        upper(qna_title) like upper('%' || #{keyword} || '%')
-                        or
-                        upper(qna_content) like upper('%' || #{keyword} || '%')
-                    </when>
-                    <when test="category.equals('qu')">
-                        upper(qna_user_id) like upper('%' || #{keyword} || '%')                    
-                    </when>
-                </choose>
-            </if>
-        </where>
+	<!-- qna 테이블 전체 검색. 목록 보기 -->
+	<select id="selectOrderByQnAPostIdDesc" resultType="QnA"> <!-- resultType: typeAliases의 별명. 리턴할 클래스 타입. -->
+		select * from QnA order by qna_post_id desc
 	</select>
-	
+
+	<!-- qna 테이블에서 q_post_id(PK)로 검색. 상세보기. -->
+	<select id="selectByQnAPostId" resultType="QnA">
+		select * from QnA where qna_post_id = #{qnaPostId} <!-- mybatis 에서는 ? 대신 
+			#{} 사용 -->
+	</select>
+
+	<!-- qna 테이블에 행 삽입. 새 글 작성. -->
+	<!-- stmt.setString(1, "-") 와 같음 -->
+	<insert id="insertQnA">
+		insert into QnA (qna_title, qna_content, qna_user_id, qna_lock)
+		values (#{qnaTitle}, #{qnaContent}, #{qnaUserId}, #{qnaLock,
+		jdbcType=INTEGER})
+	</insert>
+
+	<!-- qna 테이블에서 해당 id의 제목, 내용, 수정시간 업데이트 -->
+	<update id="updateQnA">
+		update QnA
+		set qna_title = #{qnaTitle}, qna_content = #{qnaContent}, qna_lock =
+		#{qnaLock, jdbcType=INTEGER}, qna_modified_time = sysdate
+		where qna_post_id = #{qnaPostId}
+	</update>
+
+	<delete id="deleteQnA">
+		delete from QnA where qna_post_id = #{qnaPostId}
+	</delete>
+
+	<!-- qna 상태 업데이트 -->
+	<update id="updateQnaState">
+		update QnA set qna_state = #{qnaState} where qna_post_id = #{qnaPostId}
+	</update>
+
+
+	<!-- qna 테이블에서 제목/내용/작성자로 검색 -->
+	<select id="searchQnA" resultType="QnA" parameterType="map"> <!-- id = dao 메소드아이디 -->
+		<bind name="searchKeyword"
+			value="dto.keyword == null ? '%' : '%' + dto.keyword + '%'" /> <!-- bind: 묶음. 0변수선언. like 검색할 때 % 붙인 것처럼, 검색어에 포함된 것을 찾음 -->
+		select * from (
+		SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time,
+		qna_view_cnt,
+		ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum
+		FROM QNA
+		<where>
+			<if test="dto.category != null">
+				<choose>
+					<when test="dto.category.equals('qt')">
+						upper(qna_title) like upper(#{searchKeyword})
+					</when>
+					<when test="dto.category.equals('qc')">
+						upper(qna_content) like upper(#{searchKeyword})
+					</when>
+					<when test="dto.category.equals('qtqc')">
+						upper(qna_title) like upper(#{searchKeyword})
+						or
+						upper(qna_content) like upper(#{searchKeyword})
+					</when>
+					<when test="dto.category.equals('qu')">
+						upper(qna_user_id) like upper(#{searchKeyword})
+					</when>
+				</choose>
+			</if>
+		</where>
+		) WHERE rnum BETWEEN #{pager.startRow} AND #{pager.lastRow}
+	</select>
+
+	<!-- 페이징된 목록 가져오기 -->
+	<select id="selectPagedQnAList" parameterType="Pager"
+		resultType="QnA">
+		SELECT qna_post_id, qna_title, qna_content, qna_user_id, qna_modified_time,
+		qna_view_cnt, qna_lock, qna_state
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY qna_post_id DESC) AS rnum, qna.*
+		FROM QnA qna
+		)
+		WHERE rnum BETWEEN #{startRow} AND #{lastRow}
+	</select>
+
+	<!-- 검색된 글의 총 갯수 -->
+	<select id="selectTotalCount" parameterType="QnASearchDto"
+		resultType="Long">
+		SELECT COUNT(qna_post_id) FROM QNA
+		<where>
+			<if test="category != null">
+				<choose>
+					<when test="category.equals('qt')">
+						upper(qna_title) like upper('%' || #{keyword} || '%')
+					</when>
+					<when test="category.equals('qc')">
+						upper(qna_content) like upper('%' || #{keyword} || '%')
+					</when>
+					<when test="category.equals('qtqc')">
+						upper(qna_title) like upper('%' || #{keyword} || '%')
+						or
+						upper(qna_content) like upper('%' || #{keyword} || '%')
+					</when>
+					<when test="category.equals('qu')">
+						upper(qna_user_id) like upper('%' || #{keyword} || '%')
+					</when>
+				</choose>
+			</if>
+		</where>
+	</select>
+
 	<!-- 전체 글의 갯수 -->
-    <select id="selectTotalCountAll" resultType="Long">
-        SELECT COUNT(qna_post_id) FROM QNA
-    </select>
-	
-	
+	<select id="selectTotalCountAll" resultType="Long">
+		SELECT COUNT(qna_post_id) FROM QNA
+	</select>
+
 	<!-- 조회수 -->
 	<update id="updateViewCount">
-		UPDATE QNA SET qna_view_cnt = qna_view_cnt + 1 WHERE qna_post_id = #{qnaPostId}
+		UPDATE QNA SET qna_view_cnt = qna_view_cnt + 1 WHERE
+		qna_post_id = #{qnaPostId}
 	</update>
-	
+
 	<!-- userId에 해당하는 qna -->
-    <select id="selectQnAByUserId" resultType="QnA">
-        select * from qna q
-        where qna_user_id = #{userId}
-         
-    </select>
+	<select id="selectQnAByUserId" resultType="QnA">
+		select * from qna q
+		where qna_user_id = #{userId}
+	</select>
 
 </mapper>

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class QnASearchDto {
-	private String category;
-	private String keyword;
+	private String category; // 카테고리
+	private String keyword; // 키워드
 }

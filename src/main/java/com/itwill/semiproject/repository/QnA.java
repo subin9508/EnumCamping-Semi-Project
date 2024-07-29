@@ -13,15 +13,15 @@ import lombok.ToString;
 @Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnA {
-	private Integer qnaPostId;
-	private String qnaTitle;
-	private String qnaContent;
-	private String qnaUserId;
-	private String qnaCreatedTime;
-	private String qnaModifiedTime;
-	private Integer qnaViewCnt;
-	private Integer qnaState;
-	private Integer qnaLock;
+    private Integer qnaPostId; // QnA 게시글 ID
+    private String qnaTitle; // QnA 제목
+    private String qnaContent; // QnA 내용
+    private String qnaUserId; // QnA 작성자 ID
+    private String qnaCreatedTime; // QnA 생성 시간
+    private String qnaModifiedTime; // QnA 수정 시간
+    private Integer qnaViewCnt; // QnA 조회 수
+    private Integer qnaState; // QnA 상태 (답변대기, 답변완료)
+    private Integer qnaLock; // QnA 잠금 상태
 
 	
 }

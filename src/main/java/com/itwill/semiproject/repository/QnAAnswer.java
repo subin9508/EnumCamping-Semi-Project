@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class QnAAnswer {
-    private Integer id;
-    private Integer qnaPostId;
-    private String content;
-    private String userId;
-    private Timestamp createdTime;
-    private Timestamp modifiedTime;
+    private Integer id; // 번호
+    private Integer qnaPostId; // QnA게시글 번호
+    private String content; // 내용
+    private String userId; // 작성자
+    private Timestamp createdTime; // 생성시간
+    private Timestamp modifiedTime; // 수정시간
     
 }

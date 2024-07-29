@@ -4,31 +4,37 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.semiproject.repository.CommentDao"> <!-- dao의 이름과 같아야함. -->
     <!-- id는 dao의 메소드 이름과 일치. resultType는 Comment의 alias 사용. -->
+    <!-- 댓글 조회 쿼리: postId를 기준으로 댓글 목록을 조회 -->
     <select id="selectByPostId" resultType="Comment" > 
         select * from QnAComment
         where qc_post_id = #{qcPostId} <!-- dao의 파라미터 이름 -->
         order by qc_com_id desc 
     </select>
     
+    <!-- 댓글 추가 -->
     <insert id="insertQnAComment">
         insert into QnAComment (qc_post_id, qc_user_id, qc_content)
         values (#{qcPostId}, #{qcUserId}, #{qcContent})
     </insert>
 
+	<!-- 댓글 수정 -->
     <update id="updateQnAComment">
         update QnAComment
         set qc_content =#{qcContent}, qc_modified_time= systimestamp
         where qc_com_id =#{qcComId}
     </update>
     
+    <!-- 댓글 삭제 -->
     <delete id="deleteById">
         delete from QnAComment where qc_com_id = #{qcComId}
     </delete>
     
+    <!-- 게시글에 달린 모든 댓글 삭제 -->
     <delete id="deleteByPostId">
         delete from QnAComment where qc_post_id = #{qcPostId}
     </delete>
     
+    <!--  댓글 수 조회 쿼리 -->
     <!-- resultType="Integer" & "int" 는 이미 만들어져 있는 alias -->
     <select id="selectCommentCount" resultType="Integer">
         select count(*) from QnAComment
@@ -36,6 +42,7 @@
         order by qc_com_id desc
     </select>
     
+    <!--  특정 댓글 조회 -->
     <select id="selectById" resultType="Comment">
         select * from QnAComment
         where qc_com_id = #{qcComId}

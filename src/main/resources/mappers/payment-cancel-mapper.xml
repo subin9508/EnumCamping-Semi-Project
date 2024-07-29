@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itwill.semiproject.repository.PaymentCancelDao">
 
-	<!--  취소 테이블 insert -->
+	<!--  payId에 대해서 결제 취소 정보를 추가. 취소 테이블 insert -->
 	<insert id="insertPaymentCancel">
     INSERT INTO paymentcancel (pay_id, imp_uid, can_amount, can_date, can_role)
     SELECT p.pay_id, p.imp_uid, p.res_total_price, SYSDATE, '구매자'

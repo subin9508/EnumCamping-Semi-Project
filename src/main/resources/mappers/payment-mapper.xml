@@ -44,7 +44,7 @@
         WHERE pay_id = #{payId}
     </update>
 
-
+	<!-- 예약 상태 업데이트: 지정된 resId에 해당하는 예약상태 변경하고 시간 업데이트 -->
 	<update id="updateReservationState">
 		UPDATE reservation_master
 		SET res_state = #{resState},
