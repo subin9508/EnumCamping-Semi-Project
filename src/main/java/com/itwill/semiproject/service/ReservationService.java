@@ -117,7 +117,7 @@ public class ReservationService {
         return reservationDetailDao.selectDetailsByUserId(userId);
     }
     
-    // userId에 해당한느 예약 마스터 정보
+    // userId에 해당하는 예약 마스터 정보
     public ReservationMaster getReservationMasterByUserId(String userId) {
     	return reservationMasterDao.selectMasterByUserId(userId);
     }
