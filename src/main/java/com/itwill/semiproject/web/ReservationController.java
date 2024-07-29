@@ -45,6 +45,7 @@ public class ReservationController {
 	private final ReservationService reservationService; 
 	private final UserService userService;
     
+	// 예약 첫페이지
     @GetMapping("/calendar")
     public String reservationCalendar(Model model, HttpSession session) {
         log.debug("GET : calendar");
@@ -96,6 +97,7 @@ public class ReservationController {
 		}
 	}
 	
+	// 예약확인 페이지
 	@GetMapping("/order")
 	public String showOrderPage(HttpSession session, Model model) {
 	    String userId = (String) session.getAttribute("signedInUser");

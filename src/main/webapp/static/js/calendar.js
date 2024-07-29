@@ -391,6 +391,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
             });
     }
     
+    // handleNextPageClick에서 axios 전 체크사항
     function validateForm(event) {
         var dateSelected = document.getElementById('date').innerText.trim() !== "";
         var areaSelected = document.querySelector('input[name="area"]:checked') !== null;
@@ -405,6 +406,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
 
     }
     
+    // 구역 가격 업데이트
     function updatePrice(year, month, day, selectedArea, selectedNight) {
         const date = `${year}-${month}-${day}`;
         const selectedDateObj = new Date(year, month - 1, day);
@@ -446,6 +448,7 @@ var nowDate = new Date();  // @param 전역 변수, 실제 오늘날짜 고정�
             });
     }
     
+    // 체크아웃 날짜 계산
     function calculateCheckOutDate(checkInDate, nights) {
         
         if (!checkInDate || isNaN(Date.parse(checkInDate))) {
@@ -528,11 +531,12 @@ var selectedItems = [];
         });
     }
     
-   // 예약하기 버튼에 이벤트 리스너 추
+   // 예약하기 버튼에 이벤트 리스너 추가
     function handleNextPageClick(event) {
         console.log('handleNextPageClick');
      event.preventDefault();
-
+	
+	// 라디오박스 및 켈린더 체크 안되어 있는지 확인
     if (!validateForm()) {
         return;
     }
@@ -592,6 +596,7 @@ var selectedItems = [];
     });
 }
 
+// 다음페이지 버튼 이벤트리스너 추가
 function addNextPageEventListeners() {
     console.log('addNextPageEventListeners()');
 
