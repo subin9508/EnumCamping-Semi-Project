@@ -148,61 +148,7 @@ public class PaymentController {
 	    }
 	}
 	
-//	// 결제 검증을 수행하는 메서드
-//	@ResponseBody
-//	@PostMapping("/reservation/verifyIamport/{imp_uid}")
-//	public ResponseEntity<?> paymentByImpUid(
-//	        @PathVariable(value = "imp_uid") String imp_uid,
-//	        @RequestParam("resId") Integer resId
-//	) throws IamportResponseException, IOException, ContextLoadException, ControllerException {
-//	    log.trace("paymentByImpUid({}, {}) invoked.", imp_uid, resId);
-//
-//	    try {
-//	        Payment payment = this.api.paymentByImpUid(imp_uid).getResponse(); // 아임포트 API를 통해 결제 정보를 조회
-//	        
-//	        if ("paid".equals(payment.getStatus())) {
-//	        	// 먼저 예약 상태를 확인
-//	        	Map<String, Object> paymentInfo = this.paymentService.getPaymentInfoByResId(resId);
-//	        	log.debug("---------paymentInfoByResId = {}",paymentInfo);
-//	        	if(paymentInfo != null) {
-//	        		Object resStateObj = paymentInfo.get("resState");
-//	        		log.debug("---------resStateObj = {}",resStateObj);
-//	        			if(resStateObj != null) {
-//	        				int resState = ((Number) resStateObj).intValue();
-//	        				log.debug("-----------resState = {}",resState);
-//	        					if(resState == 1) {
-//	        						// 이미 결제가 완료된 예약이면 오류 반환
-//	        						return ResponseEntity.badRequest().body("이미 결제가 완료된 예약입니다.");
-//	        					}
-//	        			}
-//	        	}
-//	        	
-//	            String result = this.paymentService.savePayment(payment, resId);
-//	            log.info("Payment saved successfully: {}", result);
-//	            
-//	            // 결제 성공 시 예약 상태를 1로 업데이트
-//	            this.paymentService.updateReservationState(resId, 1);
-//	      
-//	            // 결제 정보를 그대로 반환
-//	            return ResponseEntity.ok(Map.of(
-//	                    "status", payment.getStatus(),
-//	                    "merchant_uid", payment.getMerchantUid(),
-//	                    "payment", payment
-//	                ));
-//	        } else if ("failed".equals(payment.getStatus())) { // 결제가 실패한 경우
-//	            return ResponseEntity.badRequest().body("결제 실패: " + payment.getFailReason());
-//	        } else { // 알 수 없는 결제 상태인 경우
-//	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("알 수 없는 결제 상태");
-//	        }
-//	    } catch (IamportResponseException | IOException e) { // 예외 처리
-//	        log.error("결제 검증 중 오류 발생", e);
-//	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("결제 검증 실패: " + e.getMessage());
-//	    } catch (ServiceException e) {
-//	    	log.error("결제 정보 저장 중 오류 발생", e);
-//	        throw new ControllerException(e); // 예외를 다시 던져서 처리
-//	    }
-//	}
-	
+
 	
 	/**
 	 * 결제 성공 페이지를 매핑하는 메서드

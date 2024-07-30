@@ -186,66 +186,82 @@ public class UserController {
 		}
 	}
 
+	// 마이페이지 요청을 처리하는 메서드
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpSession session) {
+	    // 세션에서 로그인한 사용자의 ID를 가져옴
 	    String userId = (String) session.getAttribute("signedInUser");
 	    if (userId != null) {
+	        // 사용자 ID로 사용자 정보를 조회
 	        User user = userService.read(userId);
 	        if (user != null) {
+	            // 사용자 정보를 모델에 추가
 	            model.addAttribute("user", user);
 	            log.debug("마이페이지에 표시될 사용자 정보: {}", user);
 	        } else {
+	            // 사용자 정보가 없으면 로그인 페이지로 리다이렉트
 	            log.warn("세션에 있는 userId에 해당하는 사용자를 찾을 수 없습니다: {}", userId);
-	            return "redirect:/signin"; // 사용자를 찾을 수 없으면 로그인 페이지로 리다이렉트
+	            return "redirect:/signin";
 	        }
 	    } else {
+	        // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
 	        log.warn("세션에 로그인된 사용자 정보가 없습니다.");
-	        return "redirect:/signin"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
+	        return "redirect:/signin";
 	    }
 
+	    // 마이페이지 뷰 반환
 	    return "user/myPage";
 	}
 
+	// 비밀번호 확인 폼을 보여주는 메서드
 	@GetMapping("/password_check")
 	public String showPasswordCheckForm() {
-		return "user/password_check";
+	    return "user/password_check";
 	}
 
+	// 비밀번호 확인 처리 메서드
 	@PostMapping("/password_check")
 	public String passwordCheck(@RequestParam("password") String password, HttpSession session, Model model) {
+	    // 세션에서 사용자 ID 가져옴
 	    String userId = (String) session.getAttribute("signedInUser");
 	    if (userId == null) {
 	        return "redirect:/user/signin";
 	    }
 
+	    // 사용자 정보 조회
 	    User user = userService.read(userId);
 	    if (user == null) {
 	        return "redirect:/user/signin";
 	    }
 
+	    // 비밀번호 확인을 위한 DTO 생성
 	    UserSignInDto dto = new UserSignInDto();
 	    dto.setUserId(user.getUserId());
 	    dto.setUserPassword(password);
 
+	    // 비밀번호 확인
 	    User verifiedUser = userService.read(dto);
 	    if (verifiedUser != null) {
-	        // 비밀번호가 일치하는 경우 user_update 페이지로 리다이렉트
+	        // 비밀번호가 일치하면 사용자 정보 수정 페이지로 리다이렉트
 	        return "redirect:/user/user_update";
 	    } else {
-	        // 비밀번호가 일치하지 않는 경우 에러 메시지와 함께 password_check 페이지로 돌아감
+	        // 비밀번호가 일치하지 않으면 에러 메시지와 함께 비밀번호 확인 페이지로 돌아감
 	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
 	        return "user/password_check";
 	    }
 	}
 
+	// 사용자 정보 수정 폼을 보여주는 메서드
 	@GetMapping("/user_update")
 	public String user_update(HttpSession session, Model model) {
 	    log.debug("user_update");
+	    // 세션에서 사용자 ID 가져옴
 	    String userId = (String) session.getAttribute("signedInUser");
 	    if (userId == null) {
 	        return "redirect:/user/signin";
 	    }
 
+	    // 사용자 정보 조회
 	    User user = userService.read(userId);
 	    log.debug("session user: {}", user);
 
@@ -253,33 +269,16 @@ public class UserController {
 	        return "redirect:/user/signin";
 	    }
 
+	    // 사용자 정보를 모델에 추가
 	    model.addAttribute("user", user);
 
 	    return "user/user_update";
 	}
-	
-	
-	@GetMapping("/images/{filename:.+}")
-	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename, HttpServletRequest request) {
-	    try {
-	        String filePath = request.getServletContext().getRealPath("/static/images/user/");
-	        Path file = Paths.get(filePath).resolve(filename);
-	        Resource resource = new UrlResource(file.toUri());
-	        if (resource.exists() || resource.isReadable()) {
-	            return ResponseEntity.ok().body(resource);
-	        } else {
-	            return ResponseEntity.notFound().build();
-	        }
-	    } catch (IOException e) {
-	        return ResponseEntity.internalServerError().build();
-	    }
-	}
 
+	// 사용자 정보 수정 처리 메서드
 	@PostMapping("/user_update")
 	@ResponseBody
 	public ResponseEntity<?> user_update(@ModelAttribute UserUpdateDto dto,
-	                                     @RequestParam(value = "profileImage", required = false) MultipartFile file,
 	                                     HttpSession session,
 	                                     HttpServletRequest request) throws IllegalStateException, IOException {
 	    log.debug("user_update(dto={})", dto);
@@ -288,7 +287,7 @@ public class UserController {
 
 	    User user = (User) session.getAttribute("user");
 
-	    // 비밀번호 길이 및 형식 검사
+	    // 비밀번호 유효성 검사
 	    if (dto.getUserPassword() != null && !dto.getUserPassword().isEmpty()) {
 	        String password = dto.getUserPassword();
 	        if (password.length() < 8) {
@@ -306,7 +305,7 @@ public class UserController {
 	        }
 	    }
 
-	    // 전화번호 형식 검사
+	    // 전화번호 유효성 검사
 	    if (dto.getUserPhone() != null && !dto.getUserPhone().isEmpty()) {
 	        String phone = dto.getUserPhone();
 	        String phonePattern = "^01[0-9]-\\d{3,4}-\\d{4}$";
@@ -321,27 +320,12 @@ public class UserController {
 	        // 사용자 정보 업데이트
 	        userService.update(dto);
 
-	        // 프로필 이미지 업데이트
-	        if (file != null && !file.isEmpty()) {
-	            // 웹 접근 경로
-	            String webPath = "/static/images/user/";
-
-	            // 실제로 이미지 파일이 저장되어야 하는 서버 컴퓨터 경로
-	            String filePath = request.getServletContext().getRealPath("/") + "static/images/user/";
-
-	            int result = userService.updateProfile(file, webPath, filePath, user);
-	            if (result <= 0) {
-	                response.put("success", false);
-	                response.put("message", "프로필 이미지 업데이트에 실패했습니다.");
-	                return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
-	            }
-	        }
-
 	        // 업데이트된 사용자 정보를 세션에 다시 저장
 	        User updatedUser = userService.read(dto.getUserId());
 	        log.info("updatedUser: {}", updatedUser);
 	        session.setAttribute("user", updatedUser);
 
+	        // 성공 응답 생성
 	        String contextPath = request.getContextPath();
 	        response.put("success", true);
 	        response.put("message", "사용자 정보가 성공적으로 업데이트 되었습니다.");
@@ -349,13 +333,13 @@ public class UserController {
 	        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
 
 	    } catch (Exception e) {
+	        // 오류 처리
 	        log.error("사용자 정보 업데이트 중 오류 발생", e);
 	        response.put("success", false);
 	        response.put("message", "사용자 정보 업데이트에 실패했습니다.");
 	        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body(response);
 	    }
 	}
-
 
 	@GetMapping("/findid")
 	public String findIdForm() {
