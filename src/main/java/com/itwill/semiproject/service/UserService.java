@@ -97,43 +97,7 @@ public class UserService {
 		return userDao.selectByUserid(userId);
 	}
 
-	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, User signedInUser) throws IllegalStateException, IOException {
-	    String originalProfileImage = signedInUser.getProfileImage();
 
-	    if (profileImage != null && !profileImage.isEmpty()) {
-	        String filename = profileImage.getOriginalFilename();
-	        signedInUser.setProfileImage(webPath + filename);
-
-	        int result = userDao.updateProfileImage(signedInUser);
-
-	        if (result > 0) {
-	            // 실제 파일 저장
-	            File targetFile = new File(filePath, filename);
-	            profileImage.transferTo(targetFile);
-
-	            // 이전 프로필 이미지가 있고, 기본 이미지가 아니라면 삭제
-	            if (originalProfileImage != null && !originalProfileImage.endsWith("user.png")) {
-	                new File(filePath, new File(originalProfileImage).getName()).delete();
-	            }
-	        } else {
-	            // 업데이트 실패 시 원래 이미지로 복원
-	            signedInUser.setProfileImage(originalProfileImage);
-	        }
-
-	        return result;
-	    } else {
-	        // 프로필 이미지를 삭제하는 경우
-	        signedInUser.setProfileImage(null);
-	        int result = userDao.updateProfileImage(signedInUser);
-
-	        if (result > 0 && originalProfileImage != null && !originalProfileImage.endsWith("user.png")) {
-	            // 이전 이미지 파일 삭제
-	            new File(filePath, new File(originalProfileImage).getName()).delete();
-	        }
-
-	        return result;
-	    }
-	}
 
 	// 예약내역 read 메서드 추가
     public List<ReservationListDto> readReservationList(String userId) {
