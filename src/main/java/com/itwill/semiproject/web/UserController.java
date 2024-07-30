@@ -379,6 +379,7 @@ public class UserController {
 		}
 	}
 
+	// 마이페이지 - 예약목록
 	@GetMapping("/reservation_list")
 	public String reservationList(@RequestParam(name="userId") String userId, Model model, HttpSession session) {
 		log.debug("reservation_list(userId={})", userId);
@@ -394,6 +395,7 @@ public class UserController {
 	     return "/user/reservation_list"; // 반환할 뷰의 이름
 	}
     
+	// 마이페이지 - 예약 상세
     @GetMapping("/reservation_details")
     public void reservationDetails(@RequestParam(name="resId") int resId, Model model) {
     	log.debug("reservation_details()");
