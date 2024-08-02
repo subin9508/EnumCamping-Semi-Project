@@ -127,17 +127,21 @@ public class UserService {
     	return resDetails;
     }
 
+    //비밀번호를 찾아 리턴하는 메서드
 	public User searchPassword(User user) {
 		log.debug("searchPassword");
 		return user;
 
 	}
 
+	//비밀번호를 변경하는 메서드
 	public User updatePassword(User user) {
 		log.debug("updatePassword");
 		return user;
 	}
 
+	
+	//이름,아이디,이메일을 검색해 비밀번호를 찾는 메서드
 	public String findPasswordByNameAndEmailAndId(String name, String email, String id) {
 		log.debug("findPasswordByNameAndEmailAndId({}{}{})", name, email, id);
 		String user = userDao.findPasswordByNameAndEmailAndId(name, email, id);
@@ -146,7 +150,7 @@ public class UserService {
 		}
 		return null;
 	}
-
+	//이름,이메일을 검색해 아이디를 찾는 메서드
 	public String findIdByNameAndEmail(String name, String email) {
 		log.debug("findIdByNameAndEmail({} {})", name, email);
 		String user = userDao.findIdByNameAndEmail(name, email);
