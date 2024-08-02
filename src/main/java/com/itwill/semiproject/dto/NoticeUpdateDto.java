@@ -17,6 +17,8 @@ public class NoticeUpdateDto {
 	private String notContent;
 	private String notModifiedTime;
 	
+	//update는 createdTime 바꾸지 않음
+	
 	//Notice에 dto 내용 넣기
 	 public Notice toEntity() {
 		 return Notice.builder().notTitle(notTitle).notContent(notContent)
