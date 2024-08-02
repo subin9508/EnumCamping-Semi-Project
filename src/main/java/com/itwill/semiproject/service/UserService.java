@@ -110,7 +110,7 @@ public class UserService {
     // 예약 상세 내역 read 메서드 추가
     public ReservationMaster readReservationMasterDetails(int resId) {
     	log.debug("readReservationMasterDetails({})", resId);
-    	
+    	//resId로 resMaster 찾기
     	ReservationMaster resMaster = reservationMasterDao.selectByResId(resId);
     	log.debug("ReservationMaster = {}", resMaster);
     	
@@ -120,7 +120,7 @@ public class UserService {
     //예약 detail 읽는 메서드
     public List<ReservationDetailListDto> readReservationDetails(int resId) {
     	log.debug("readReservationDetails({})", resId);
-    	
+    	//resId로 resDetail 찾기 - 하나의 resId에 detail이 여러개라 List로 받음
     	List<ReservationDetailListDto> resDetails= reservationDetailDao.selectItemsByResId(resId);
     	log.debug("ReservationDetails = {}", resDetails);
     	

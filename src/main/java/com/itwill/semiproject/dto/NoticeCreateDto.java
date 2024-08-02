@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class NoticeCreateDto {
+	//제목이랑 내용만 있으면 됨. 생성시간은 자동
 	private String notTitle;
 	private String notContent;
 	

@@ -46,6 +46,7 @@
                             <label for="resArea" class="form-label">예약 구역, 금액</label>
                             <c:forEach items="${resDetail}" var="item">
                                 <c:choose>
+                                    <!-- 물품 번호를 기준으로 물품 이름을 알려줌 -->
                                     <c:when test="${item.itemId ge 1 and item.itemId le 4}">
                                         <c:set var="area" value="캠핑존 A-1" />
                                         <c:set var="price" value="${item.itemAmount}" />
@@ -127,6 +128,7 @@
                                     상태</label>
                                 <c:set var="resStateText">
                                     <c:choose>
+                                        <!-- 예약 상태에 따른 상태 표시 -->
                                         <c:when
                                             test="${resMaster.resState == 0}">예약대기</c:when>
                                         <c:when
@@ -141,7 +143,8 @@
                                     value="${resStateText}" readonly />
                             </div>
                     </form>
-
+                    
+                    <!-- 예약 완료 상태일 때만 취소 버튼 보여줌 -->
                     <c:if test="${resMaster.resState == 1}">
                         <div class="card-footer">
                             <button id="btnPayCancel" class="btn btn-danger">예약취소</button>

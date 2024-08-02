@@ -117,7 +117,7 @@ public class ReservationService {
         return reservationDetailDao.selectDetailsByUserId(userId);
     }
     
-    // userId에 해당하는 예약 마스터 정보
+    // userId에 해당하고 예약 대기상태인 예약 마스터 정보
     public ReservationMaster getReservationMasterByUserId(String userId) {
     	return reservationMasterDao.selectMasterByUserId(userId);
     }

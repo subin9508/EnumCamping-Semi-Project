@@ -5,23 +5,27 @@
 
 <mapper namespace="com.itwill.semiproject.repository.NoticeDao">
 
+    <!-- 전체 공지사항 선택 -->
     <select id="selectAllNotice" resultType="Notice">
         select * from notices where not_certify = 0 order by not_post_id desc
     </select>
 
+    <!-- id로 선택한 공지사항의 정보만  -->
     <select id="selectNoticeById" resultType="Notice">
         select * from notices where not_post_id = #{notPostId}
     </select>
-
+    
+    <!-- 공지사항 작성 -->
     <insert id="insertNotice">
         insert into notices (not_title, not_content) values (#{notTitle},#{notContent})
     </insert>
     
+    <!-- 공지사항 수정 -->
     <update id="updateNotice">
         update notices set not_title = #{notTitle}, not_content = #{notContent}, not_modified_time= sysdate where not_post_id = #{notPostId}
     </update>
     
-
+    <!-- 공지사항 삭제 -->
     <delete id="deleteNotice">
         delete from notices where not_post_id = #{notPostId}
     </delete>

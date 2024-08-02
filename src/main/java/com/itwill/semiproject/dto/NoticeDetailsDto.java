@@ -10,7 +10,9 @@ import lombok.Data;
 
 @Data  @Builder @AllArgsConstructor
 public class NoticeDetailsDto {
-
+	
+	
+	//notice table의 certify 부분 제외
 	private Integer notPostId;
 	private String notTitle;
 	private String notContent;
