@@ -48,8 +48,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- 우선 예약 없음(예약 대기일 경우 화면에 나타나는 경우 방지)으로 둠 -->
                                     <c:set var="hasReservations" value="false" />
                                     <c:forEach items="${reservations}" var="r">
+                                        <!-- 예약완료/예약취소 상태이고 예약한 숙소가 있으면 예약있음으로 상태 변경 -->
+                                        <!-- 음...근데 예약 번호 확인은.. 안해도 될 듯? 당시에 sql developer에서 임의로 추가하는 경우 때문에 넣은 것으로 보임 -->
+                                        <!-- 수정 시 없애면 될 것 같음!! -->
                                         <c:if test="${r.resState != 0 && r.itemId <= 20}">
                                             <c:set var="hasReservations" value="true" />
                                             <tr onclick="location.href='${pageContext.request.contextPath}/user/reservation_details?resId=${r.resId}'" 
@@ -57,6 +61,7 @@
                                                 <td>${r.resId}</td>
                                                 <td>
                                                     <c:choose>
+                                                        <!-- 물품 번호를 기준으로 물품 이름을 알려줌 -->
                                                         <c:when test="${r.itemId ge 1 and r.itemId le 4}">
                                                             캠핑존 A-1
                                                         </c:when>
@@ -76,6 +81,7 @@
                                                 </td>
                                                 <td>${r.resCheckIn}</td>
                                                 <td>
+                                                    <!-- 예약 상태에 따른 상태 표시 -->
                                                     <c:if test="${r.resState == 0}">
                                                         <span style="color: green;">예약대기</span>
                                                     </c:if>
@@ -89,6 +95,7 @@
                                             </tr>
                                         </c:if>
                                     </c:forEach>
+                                    <!-- 예약 내역이 없을 때 표시할 내용 -->
                                     <c:if test="${!hasReservations}">
                                         <tr>
                                             <td colspan="4" style="text-align: center;">예약 내역이 없습니다.</td>
