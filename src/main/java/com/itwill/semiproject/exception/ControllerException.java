@@ -1,6 +1,6 @@
 package com.itwill.semiproject.exception;
 
-public class ControllerException extends Exception {	
+public class ControllerException extends Exception {	// 깃 수정 테스트
 	private static final long serialVersionUID = 1L;
 
 	// 부모 클래스(Exception)의 생성자를 호출하여 메시지를 설정
