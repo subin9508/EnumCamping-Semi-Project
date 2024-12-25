@@ -5,7 +5,7 @@ import com.itwill.semiproject.dto.PaymentDto;
 
 public interface PaymentDao {
 	
-	// 결제 아이디로 결제 정보를 조회
+		// 결제 아이디로 결제 정보를 조회
 		Payments selectByPayId(Integer payId);
 		
 		// 예약 아이디로 결제 정보를 조회

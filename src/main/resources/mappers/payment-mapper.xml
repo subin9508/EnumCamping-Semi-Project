@@ -27,7 +27,7 @@
 
 	</insert>
 
-	<!-- pat id 셀렉트 문 작성 -->
+	<!-- pay id 셀렉트 문 작성 -->
 	<select id="selectPayId" parameterType="Payments"
 		resultType="Integer">
 		SELECT pay_id
