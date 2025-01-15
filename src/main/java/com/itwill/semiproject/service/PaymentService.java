@@ -52,7 +52,7 @@ public class PaymentService { // 결제 관련 서비스를 제공해주는 로�
 	
 	public PaymentService() {
 
-        this.iamportClient = new IamportClient("3360178750462177", "xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
+        this.iamportClient = new IamportClient("***********************", "*************************************************************");
 
     }
 

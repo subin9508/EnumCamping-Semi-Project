@@ -56,8 +56,8 @@ public class PaymentController {
 
 	public PaymentController() { // 가맹점 식별키와 비밀키 전달하여 api 인증
 
-		this.api = new IamportClient("3360178750462177",
-				"xzEAGVLFM1F39ck4e1ntRa5506p0RUqQceCLHIkHhLV2Ej4LehiDyotZjjLqfhd117dRVOEux5fsNMgT");
+		this.api = new IamportClient("***********************",
+				"*************************************************************");
 	}
 
 	// 예약 키 값을 받을 페이지를 매 (현재 주석 처리된 상태)
